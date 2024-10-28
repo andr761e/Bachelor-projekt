@@ -8,6 +8,6 @@ import matplotlib.pyplot as plt
 warnings.filterwarnings("ignore")
 
 # Read the dataset into a Pandas DataFrame
-df = pd.read_csv("E0.csv")
+df1 = pd.read_csv("raw_data/03-04.csv")
 
-df.to_excel("engelske_kampe.xlsx", index=False)
+df1.to_excel("engelske_kampe.xlsx", index=False)
