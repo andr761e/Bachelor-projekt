@@ -7,9 +7,12 @@ import matplotlib.pyplot as plt
 # Suppress warning messages
 warnings.filterwarnings("ignore")
 
+# Læs kun første række af CSV-filen for at få kolonnenavne
+headers = pd.read_csv("raw_data/03-04.csv", nrows=0).columns[:57]
+
 # Read the dataset into a Pandas DataFrame
 df1 = pd.read_csv("raw_data/03-04.csv",usecols=range(57)).to_numpy()
-df2 = pd.read_csv("raw_data/04-05.csv",usecols=range(57)).to_numpy()
+df2 = pd.read_csv("raw_data/04-05.csv",usecols=range(57),encoding="utf-8").to_numpy()
 df3 = pd.read_csv("raw_data/05-06.csv",usecols=range(57)).to_numpy()
 df4 = pd.read_csv("raw_data/06-07.csv",usecols=range(57)).to_numpy()
 df5 = pd.read_csv("raw_data/07-08.csv",usecols=range(57)).to_numpy()
@@ -27,6 +30,7 @@ df15 = pd.read_csv("raw_data/17-18.csv",usecols=range(57)).to_numpy()
 stacked_array = np.vstack((df1,df2,df3,df4,df5,df6,df7,df8,df9,df10,df11,df12,df13,df14,df15))
 
 print(stacked_array)
+print(stacked_array.shape)
 
 
-#df1.to_excel("engelske_kampe.xlsx", index=False)
+pd.DataFrame(stacked_array,columns=headers).to_excel("engelske_kampe_raw.xlsx", index=False)

@@ -7,26 +7,6 @@ import matplotlib.pyplot as plt
 # Suppress warning messages
 warnings.filterwarnings("ignore")
 
-# Read the dataset into a Pandas DataFrame
-df = pd.read_csv("games.csv")
-item0 = df.shape[0]
-df = df.drop_duplicates()
-item1 = df.shape[0]
-print(f"There are {item0-item1} duplicates found in the dataset")
-
-# choose only games from Danish Superligaen (DK1)
-competition_code = "DK1"
-df = df[df['competition_id']==competition_code]
-print(df)
-print(df.shape)
-
-df.to_excel("danske_kampe.xlsx", index=False)
-
-# Assuming "date" is already in datetime format
-df = df.sort_values(by="date", ascending=True).reset_index(drop=True)
-df.to_excel("danske_kampe2.xlsx", index=False)
-
-
 def normalize_odds_to_probabilities(odds_matrix):
     """
     Convert an odds matrix to probabilities by taking the inverse of each entry 
@@ -48,9 +28,9 @@ def normalize_odds_to_probabilities(odds_matrix):
 
 
 # Load only column "Q" and rows from Q2 to Q2641
-HomeWinProb = pd.read_excel("DNK.xlsx", usecols="Q", skiprows=0, nrows=2640)
-DrawProb = pd.read_excel("DNK.xlsx", usecols="R", skiprows=0, nrows=2640)
-AwayWinProb = pd.read_excel("DNK.xlsx", usecols="S", skiprows=0, nrows=2640)
+HomeWinProb = pd.read_excel("engelske_kampe_scrapped.xlsx", usecols="AR", skiprows=0, nrows=5701)
+DrawProb = pd.read_excel("engelske_kampe_scrapped.xlsx", usecols="AS", skiprows=0, nrows=5701)
+AwayWinProb = pd.read_excel("engelske_kampe_scrapped.xlsx", usecols="AT", skiprows=0, nrows=5701)
 
 #Concatenate data to matrix
 y = np.hstack((HomeWinProb.to_numpy(), DrawProb.to_numpy(), AwayWinProb.to_numpy()))
