@@ -26,8 +26,17 @@ df12 = pd.read_csv("raw_data/14-15.csv",usecols=range(57)).to_numpy()
 df13 = pd.read_csv("raw_data/15-16.csv",usecols=range(57)).to_numpy()
 df14 = pd.read_csv("raw_data/16-17.csv",usecols=range(57)).to_numpy()
 df15 = pd.read_csv("raw_data/17-18.csv",usecols=range(57)).to_numpy()
+df16 = pd.read_csv("raw_data/18-19.csv",usecols=range(57)).to_numpy()
+# Fjern kolonnen "Time" fra df17 til df21
+df17 = pd.read_csv("raw_data/19-20.csv", usecols=range(58)).drop(columns=["Time"]).to_numpy()
+df18 = pd.read_csv("raw_data/20-21.csv", usecols=range(58)).drop(columns=["Time"]).to_numpy()
+df19 = pd.read_csv("raw_data/21-22.csv", usecols=range(58)).drop(columns=["Time"]).to_numpy()
+df20 = pd.read_csv("raw_data/22-23.csv", usecols=range(58)).drop(columns=["Time"]).to_numpy()
+df21 = pd.read_csv("raw_data/23-24.csv", usecols=range(58)).drop(columns=["Time"]).to_numpy()
 
-stacked_array = np.vstack((df1,df2,df3,df4,df5,df6,df7,df8,df9,df10,df11,df12,df13,df14,df15))
+
+
+stacked_array = np.vstack((df1,df2,df3,df4,df5,df6,df7,df8,df9,df10,df11,df12,df13,df14,df15,df16,df17,df18,df19,df20,df21))
 
 print(stacked_array)
 print(stacked_array.shape)
