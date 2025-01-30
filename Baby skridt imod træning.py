@@ -36,3 +36,7 @@ print(f"Hjemmehold vinder: {Y_pred_proba[0][0]:.2f}, Uafgjort: {Y_pred_proba[0][
 # Evaluér modellen med log-loss
 loss = tf.keras.losses.CategoricalCrossentropy()(Y_test, Y_pred_proba).numpy() 
 print(f"Log-loss: {loss:.4f}")
+print(Y_pred_proba)
+print(Y_test)
+plus = Y_pred_proba[0][0] + Y_pred_proba[0][1] + Y_pred_proba[0][2]
+print(plus)
