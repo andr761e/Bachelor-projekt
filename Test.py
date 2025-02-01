@@ -19,3 +19,4 @@ away_team_encoded = encoder.transform(matches["AwayTeam"])
 print(home_team_encoded)
 print(away_team_encoded)
 print(len(home_team_encoded))
+
