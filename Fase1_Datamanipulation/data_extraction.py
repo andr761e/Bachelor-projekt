@@ -41,12 +41,23 @@ columns_to_use = ["Date", "HomeTeam", "AwayTeam", "FTHG", "FTAG", "FTR", "HTHG",
                   "HTR", "HS", "AS", "HST", "AST", "HF", "AF", "HC", "AC", "HY", "AY", "HR", "AR"]
 matches = pd.read_excel("engelske_kampe_scrapped.xlsx", usecols=columns_to_use)
 
+#Indløs ELO data
+HomeTeamElo = pd.read_excel("team_elo_data.xlsx", usecols="A", skiprows=0, nrows=7981)
+AwayTeamElo = pd.read_excel("team_elo_data.xlsx", usecols="B", skiprows=0, nrows=7981)
+
+#Indlæs encoded team names
+HomeTeamEnc = pd.read_excel("team_names_encoded.xlsx", usecols="A", skiprows=0, nrows=7981)
+AwayTeamEnc = pd.read_excel("team_names_encoded.xlsx", usecols="B", skiprows=0, nrows=7981)
+
+
 # Resultattabel
 form_stats = []
 
 for i, match in matches.iterrows():
     home_team = match["HomeTeam"]
     away_team = match["AwayTeam"]
+
+    #print(HomeTeamElo.iloc[i].item())
 
     # Find de seneste 5 kampe for hjemmeholdet (rækker før nuværende række)
     home_matches = matches.loc[:i - 1]  # Alle tidligere rækker
@@ -117,25 +128,21 @@ for i, match in matches.iterrows():
 
     # Tilføj statistikker til resultatet
     form_stats.append([
-        home_goals, home_points, home_shots, home_shots_on_target, home_fouls, home_corners, home_yellow_cards, home_red_cards,
-        away_goals, away_points, away_shots, away_shots_on_target, away_fouls, away_corners, away_yellow_cards, away_red_cards
+        HomeTeamElo.iloc[i].item(), home_goals, home_points, home_shots, home_shots_on_target, home_fouls, home_corners, home_yellow_cards, home_red_cards,
+        AwayTeamElo.iloc[i].item(), away_goals, away_points, away_shots, away_shots_on_target, away_fouls, away_corners, away_yellow_cards, away_red_cards
     ])
 
 # Konverter resultatet til en DataFrame med kun de specifikke kolonner
 columns = [
-    "HomeGoals5", "HomePoints5", "HomeShots5", "HomeShotsOnTarget5", "HomeFouls5",
+    "HomeTeamELO","HomeGoals5", "HomePoints5", "HomeShots5", "HomeShotsOnTarget5", "HomeFouls5",
     "HomeCorners5", "HomeYellowCards5", "HomeRedCards5",
-    "AwayGoals5", "AwayPoints5", "AwayShots5", "AwayShotsOnTarget5", "AwayFouls5",
+    "AwayTeamELO", "AwayGoals5", "AwayPoints5", "AwayShots5", "AwayShotsOnTarget5", "AwayFouls5",
     "AwayCorners5", "AwayYellowCards5", "AwayRedCards5"
 ]
 form_stats_df = pd.DataFrame(form_stats, columns=columns)
 
 # Debugging: Tjek det endelige datasæt
 print(form_stats_df)
-
-# Tilføj placeholder-kolonner for ELO (da ELO-data mangler)
-#form_stats_df["HomeELO"] = np.nan
-#form_stats_df["AwayELO"] = np.nan
 
 # Find rækker med manglende data (NaN)
 rows_with_nan = form_stats_df[form_stats_df.isna().any(axis=1)].index

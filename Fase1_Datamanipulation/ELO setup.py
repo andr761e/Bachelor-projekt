@@ -1130,8 +1130,6 @@ for index, row in matches.iterrows():
     # Hent holdnavne
     home_team = row["HomeTeam"]
     away_team = row["AwayTeam"]
-    print(home_team)
-    print(away_team)
 
     # Hent ELO for hjemme- og udehold baseret på år
     home_elo = elo_dict[home_team][year]
@@ -1141,10 +1139,25 @@ for index, row in matches.iterrows():
     home_team_elo.append(home_elo)
     away_team_elo.append(away_elo)
 
+#Funktion at at normalisere
+def normalize_elo(elo_values, new_min, new_max):
+    min_elo = min(elo_values)
+    max_elo = max(elo_values)
+    normalized_values = [
+        new_min + (elo - min_elo) / (max_elo - min_elo) * (new_max - new_min)
+        for elo in elo_values
+    ]
+    return normalized_values
+
+#Normaliser ELOs
+home_team_elo_nor = normalize_elo(home_team_elo, 0, 10)
+away_team_elo_nor = normalize_elo(away_team_elo, 0, 10)
+
+
 # Opret en DataFrame med de to lister
 elo_data = pd.DataFrame({
-    "HomeTeamELO": home_team_elo,
-    "AwayTeamELO": away_team_elo
+    "HomeTeamELO": home_team_elo_nor,
+    "AwayTeamELO": away_team_elo_nor
 })
 
 # Gem DataFrame som et Excel-ark

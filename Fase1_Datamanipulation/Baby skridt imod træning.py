@@ -32,6 +32,8 @@ Y_pred_proba = model.predict(X_test)
 # Udskriv sandsynligheder for den første række i testdata
 print("Sandsynligheder for første kamp:")
 print(f"Hjemmehold vinder: {Y_pred_proba[0][0]:.2f}, Uafgjort: {Y_pred_proba[0][1]:.2f}, Udehold vinder: {Y_pred_proba[0][2]:.2f}")
+print(f"Hjemmehold vinder: {Y_test[0][0]:.2f}, Uafgjort: {Y_test[0][1]:.2f}, Udehold vinder: {Y_test[0][2]:.2f}")
+print(X_test[0][1])
 
 # Evaluér modellen med log-loss
 loss = tf.keras.losses.CategoricalCrossentropy()(Y_test, Y_pred_proba).numpy() 
