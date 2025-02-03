@@ -5,7 +5,7 @@ from sklearn.preprocessing import LabelEncoder
 
 # Læs kun relevante kolonner fra Excel-arket
 columns_to_use = ["HomeTeam", "AwayTeam"]
-matches = pd.read_excel("engelske_kampe_scrapped.xlsx", usecols=columns_to_use)
+matches = pd.read_excel("Fase1_Datamanipulation/engelske_kampe_scrapped.xlsx", usecols=columns_to_use)
 
 # Encode holdnavne som heltal
 encoder = LabelEncoder()
@@ -19,4 +19,4 @@ encoded_teams_df = pd.DataFrame({
 })
 
 # Gem DataFrame som et Excel-ark
-encoded_teams_df.to_excel("team_names_encoded.xlsx", index=False)
+encoded_teams_df.to_excel("Fase1_Datamanipulation/team_names_encoded.xlsx", index=False)

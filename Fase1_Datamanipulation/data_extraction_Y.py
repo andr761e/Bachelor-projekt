@@ -28,9 +28,9 @@ def normalize_odds_to_probabilities(odds_matrix):
 
 
 # Load only column "Q" and rows from Q2 to Q2641
-HomeWinProb = pd.read_excel("engelske_kampe_scrapped.xlsx", usecols="AQ", skiprows=0, nrows=7981)
-DrawProb = pd.read_excel("engelske_kampe_scrapped.xlsx", usecols="AR", skiprows=0, nrows=7981)
-AwayWinProb = pd.read_excel("engelske_kampe_scrapped.xlsx", usecols="AS", skiprows=0, nrows=7981)
+HomeWinProb = pd.read_excel("Fase1_Datamanipulation/engelske_kampe_scrapped.xlsx", usecols="AQ", skiprows=0, nrows=7981)
+DrawProb = pd.read_excel("Fase1_Datamanipulation/engelske_kampe_scrapped.xlsx", usecols="AR", skiprows=0, nrows=7981)
+AwayWinProb = pd.read_excel("Fase1_Datamanipulation/engelske_kampe_scrapped.xlsx", usecols="AS", skiprows=0, nrows=7981)
 
 #Concatenate data to matrix
 y = np.hstack((HomeWinProb.to_numpy(), DrawProb.to_numpy(), AwayWinProb.to_numpy()))

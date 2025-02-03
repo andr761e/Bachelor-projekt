@@ -5,7 +5,7 @@ import shap
 import matplotlib.pyplot as plt
 
 # Læs kolonnen med holdnavne fra Excel-filen
-HomeTeams = pd.read_excel("engelske_kampe_scrapped.xlsx", usecols="B", skiprows=0, nrows=7981).to_numpy()
+HomeTeams = pd.read_excel("Fase1_Datamanipulation/engelske_kampe_scrapped.xlsx", usecols="B", skiprows=0, nrows=7981).to_numpy()
 
 # Find unikke værdier og sorter dem alfabetisk
 unique_teams = np.unique(HomeTeams)

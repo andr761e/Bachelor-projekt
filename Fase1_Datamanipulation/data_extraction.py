@@ -26,9 +26,9 @@ def normalize_odds_to_probabilities(odds_matrix):
 
 
 # Load only column "Q" and rows from Q2 to Q2641
-HomeWinProb = pd.read_excel("engelske_kampe_scrapped.xlsx", usecols="AQ", skiprows=0, nrows=7981)
-DrawProb = pd.read_excel("engelske_kampe_scrapped.xlsx", usecols="AR", skiprows=0, nrows=7981)
-AwayWinProb = pd.read_excel("engelske_kampe_scrapped.xlsx", usecols="AS", skiprows=0, nrows=7981)
+HomeWinProb = pd.read_excel("Fase1_Datamanipulation/engelske_kampe_scrapped.xlsx", usecols="AQ", skiprows=0, nrows=7981)
+DrawProb = pd.read_excel("Fase1_Datamanipulation/engelske_kampe_scrapped.xlsx", usecols="AR", skiprows=0, nrows=7981)
+AwayWinProb = pd.read_excel("Fase1_Datamanipulation/engelske_kampe_scrapped.xlsx", usecols="AS", skiprows=0, nrows=7981)
 
 #Concatenate data to matrix
 y = np.hstack((HomeWinProb.to_numpy(), DrawProb.to_numpy(), AwayWinProb.to_numpy()))
@@ -39,16 +39,11 @@ Y = normalize_odds_to_probabilities(y)
 # Læs kun relevante kolonner fra Excel-arket
 columns_to_use = ["Date", "HomeTeam", "AwayTeam", "FTHG", "FTAG", "FTR", "HTHG", "HTAG",
                   "HTR", "HS", "AS", "HST", "AST", "HF", "AF", "HC", "AC", "HY", "AY", "HR", "AR"]
-matches = pd.read_excel("engelske_kampe_scrapped.xlsx", usecols=columns_to_use)
+matches = pd.read_excel("Fase1_Datamanipulation/engelske_kampe_scrapped.xlsx", usecols=columns_to_use)
 
 #Indløs ELO data
-HomeTeamElo = pd.read_excel("team_elo_data.xlsx", usecols="A", skiprows=0, nrows=7981)
-AwayTeamElo = pd.read_excel("team_elo_data.xlsx", usecols="B", skiprows=0, nrows=7981)
-
-#Indlæs encoded team names
-HomeTeamEnc = pd.read_excel("team_names_encoded.xlsx", usecols="A", skiprows=0, nrows=7981)
-AwayTeamEnc = pd.read_excel("team_names_encoded.xlsx", usecols="B", skiprows=0, nrows=7981)
-
+HomeTeamElo = pd.read_excel("Fase1_Datamanipulation/team_elo_data.xlsx", usecols="A", skiprows=0, nrows=7981)
+AwayTeamElo = pd.read_excel("Fase1_Datamanipulation/team_elo_data.xlsx", usecols="B", skiprows=0, nrows=7981)
 
 # Resultattabel
 form_stats = []
@@ -155,7 +150,5 @@ Y_df = pd.DataFrame(Y)
 Y_cleaned = Y_df.drop(index=rows_with_nan)
 
 # Gem det nye datasæt
-form_stats_df_cleaned.to_excel("processed_input_data.xlsx", index=False)
-Y_cleaned.to_excel("processed_output_labels.xlsx", index=False)
-
-#print("Form-statistik er beregnet og gemt som 'processed_input_data.xlsx'.")
+form_stats_df_cleaned.to_excel("Fase1_Datamanipulation/processed_input_data.xlsx", index=False)
+Y_cleaned.to_excel("Fase1_Datamanipulation/processed_output_labels.xlsx", index=False)

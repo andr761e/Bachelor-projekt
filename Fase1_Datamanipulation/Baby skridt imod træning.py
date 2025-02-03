@@ -7,8 +7,8 @@ import pandas as pd
 import numpy as np
 
 # Indlæs input (X) og probabilistiske labels (Y)
-X = pd.read_excel("processed_input_data.xlsx").to_numpy()
-Y = pd.read_excel("processed_output_labels.xlsx").to_numpy()
+X = pd.read_excel("Fase1_Datamanipulation/processed_input_data.xlsx").to_numpy()
+Y = pd.read_excel("Fase1_Datamanipulation/processed_output_labels.xlsx").to_numpy()
 
 # Opdel data i trænings- og testsæt
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=42)

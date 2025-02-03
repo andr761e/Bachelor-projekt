@@ -1115,7 +1115,7 @@ elo_dict["Wolves"] = wolverhampton_elo
 
 # Læs kun relevante kolonner fra Excel-arket
 columns_to_use = ["Date", "HomeTeam", "AwayTeam"]
-matches = pd.read_excel("engelske_kampe_scrapped.xlsx", usecols=columns_to_use)
+matches = pd.read_excel("Fase1_Datamanipulation/engelske_kampe_scrapped.xlsx", usecols=columns_to_use)
 
 # Initialiser lister til hjemme- og udebaneholdenes ELO
 home_team_elo = []
@@ -1150,8 +1150,8 @@ def normalize_elo(elo_values, new_min, new_max):
     return normalized_values
 
 #Normaliser ELOs
-home_team_elo_nor = normalize_elo(home_team_elo, 0, 10)
-away_team_elo_nor = normalize_elo(away_team_elo, 0, 10)
+home_team_elo_nor = normalize_elo(home_team_elo, 0, 5)
+away_team_elo_nor = normalize_elo(away_team_elo, 0, 5)
 
 
 # Opret en DataFrame med de to lister
@@ -1161,4 +1161,4 @@ elo_data = pd.DataFrame({
 })
 
 # Gem DataFrame som et Excel-ark
-elo_data.to_excel("team_elo_data.xlsx", index=False)
+elo_data.to_excel("Fase1_Datamanipulation/team_elo_data.xlsx", index=False)
