@@ -1,63 +1,39 @@
 import numpy as np
 import pandas as pd
-import tensorflow as tf
-from tensorflow import keras
+from lightgbm import LGBMClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import log_loss
 import matplotlib.pyplot as plt
 
-# Indlæs data
+# Indlæs data (ændr stierne hvis nødvendigt)
 X = pd.read_excel("Fase1_Datamanipulation/processed_input_data.xlsx").to_numpy()
 Y = pd.read_excel("Fase1_Datamanipulation/processed_output_labels.xlsx").to_numpy()  # One-hot encoded labels
 
 # Split data i træning og test
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=42)
 
-# Definerer et avanceret neuralt netværk
-model = keras.Sequential([
-    keras.layers.Dense(256, activation="relu", input_shape=(X.shape[1],)),
-    keras.layers.BatchNormalization(),
-    keras.layers.Dropout(0.3),
+# Konverter Y_train til integer-klasser (kræves af LGBMClassifier)
+Y_train_classes = np.argmax(Y_train, axis=1)
 
-    keras.layers.Dense(128, activation="relu"),
-    keras.layers.BatchNormalization(),
-    keras.layers.Dropout(0.3),
+# Initialiser og træn LightGBM-modellen
+model = LGBMClassifier(objective='multiclass', num_class=3, device='gpu', n_estimators=100, learning_rate=0.1, max_depth=6, random_state=42)
+model.fit(X_train, Y_train_classes)
 
-    keras.layers.Dense(64, activation="relu"),
-    keras.layers.BatchNormalization(),
-    keras.layers.Dropout(0.3),
+# Lav forudsigelser (sandsynligheder)
+Y_pred_proba = model.predict_proba(X_test)
 
-    keras.layers.Dense(3, activation="softmax")  # Outputlag med 3 sandsynligheder
-])
+# Manuel beregning af log-loss
+epsilon = 1e-15  # For at undgå log(0)
+Y_pred_proba = np.clip(Y_pred_proba, epsilon, 1 - epsilon)  # Klip sandsynlighederne
+log_loss_manual = -np.mean(np.sum(Y_test * np.log(Y_pred_proba), axis=1))
+print(f"Manuel Log Loss: {log_loss_manual}")
 
-# Kompiler modellen
-model.compile(optimizer=keras.optimizers.Adam(learning_rate=0.001),
-              loss="categorical_crossentropy",
-              metrics=["accuracy"])
+# Eksempel på sandsynlighedsfordelinger
+print("Første 3 rækker af Y_test (originale sandsynlighedsfordelinger):")
+print(pd.DataFrame(Y_test[:3]))
 
-# Callback til early stopping for at undgå overfitting
-early_stopping = keras.callbacks.EarlyStopping(monitor='val_loss', patience=10, restore_best_weights=True)
-
-# Træn modellen
-history = model.fit(X_train, Y_train,
-                    epochs=100,
-                    batch_size=64,
-                    validation_data=(X_test, Y_test),
-                    callbacks=[early_stopping],
-                    verbose=1)
-
-# Lav forudsigelser
-Y_pred_proba = model.predict(X_test)
-print(Y_pred_proba)
-print(Y_test)
-
-# Beregn log loss
-manual_logloss = -np.mean(np.sum(Y_test * np.log(Y_pred_proba + 1e-15), axis=1))
-print(f"Manuel Log Loss: {manual_logloss}")
-
-# Eksempel på output-sandsynligheder
-print("Eksempel på sandsynligheder (3 første rækker):")
-print(Y_pred_proba[:3])
+print("\nFørste 3 rækker af Y_pred_proba (forudsigede sandsynligheder):")
+print(pd.DataFrame(Y_pred_proba[:3]))
 
 
 #PLOTS HERFRA
@@ -72,16 +48,6 @@ plt.figure(figsize=(10, 6))
 for i in range(3):
     plt.hist(Y_pred_proba[:, i], bins=20, alpha=0.5, label=f"Forudsagt: {classes[i]}", color=colors[i])
 plt.title("Fordeling af forudsagte sandsynligheder pr. klasse")
-plt.xlabel("Sandsynlighed")
-plt.ylabel("Antal kampe")
-plt.legend()
-plt.show()
-
-# Plot: Histogram for faktiske sandsynligheder
-plt.figure(figsize=(10, 6))
-for i in range(3):  # Antal klasser (hjemmesejr, uafgjort, udesejr)
-    plt.hist(Y_test[:, i], bins=20, alpha=0.5, label=f"Faktisk: {classes[i]}", color=colors[i])
-plt.title("Fordeling af faktiske sandsynligheder pr. klasse")
 plt.xlabel("Sandsynlighed")
 plt.ylabel("Antal kampe")
 plt.legend()
