@@ -1,35 +1,49 @@
-import numpy as np
 import pandas as pd
-from sklearn.neighbors import KNeighborsClassifier
+import numpy as np
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import log_loss
-from sklearn.preprocessing import MinMaxScaler
+from sklearn.ensemble import VotingClassifier
+from sklearn.neighbors import KNeighborsClassifier
+from xgboost import XGBClassifier
+from sklearn.preprocessing import StandardScaler
 import matplotlib.pyplot as plt
+from sklearn.ensemble import RandomForestClassifier
 
-# Indlæs data (ændr stierne hvis nødvendigt)
+# Indlæs data
 X = pd.read_excel("Fase1_Datamanipulation/processed_input_data.xlsx").to_numpy()
-Y = pd.read_excel("Fase1_Datamanipulation/processed_output_labels.xlsx").to_numpy()  # One-hot encoded labels
+Y = pd.read_excel("Fase1_Datamanipulation/processed_output_labels.xlsx").to_numpy()
 
 # Split data i træning og test
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=42)
 
-# Standardisering af data (anbefales til KNN)
-scaler = MinMaxScaler()
-X_train = scaler.fit_transform(X_train)
-X_test = scaler.transform(X_test)
-
-def custom_weights(distances):
-    return 1 / (distances + 1e-5)  # Omvendt proportionalitet med afstand
-
-# Konverter Y_train til integer-klasser (kræves af KNN)
+# Konverter Y til integer-klasser (kræves af både KNN og XGBClassifier)
 Y_train_classes = np.argmax(Y_train, axis=1)
+Y_test_classes = np.argmax(Y_test, axis=1)
 
-# Initialiser og træn KNN-modellen med vægtning baseret på afstand
-model = KNeighborsClassifier(n_neighbors=600, weights=custom_weights, algorithm='auto')
-model.fit(X_train, Y_train_classes)
+# Skalér data til KNN, men ikke XGB
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
 
-# Lav forudsigelser (sandsynligheder)
-Y_pred_proba = model.predict_proba(X_test)
+# Definér modeller
+model_knn = KNeighborsClassifier(n_neighbors=500, weights='distance', algorithm='auto')
+model_xgb = XGBClassifier(n_estimators=500, learning_rate=0.1, max_depth=4, use_label_encoder=False, eval_metric='mlogloss')
+model_rf = RandomForestClassifier(n_estimators=500, max_depth=10)
+
+# Voting ensemble med skaleret data for KNN
+ensemble_model = VotingClassifier(
+    estimators=[
+        ('knn', model_knn),
+        ('xgb', model_xgb),
+        ('rf', model_rf)
+    ],
+    voting='soft'
+)
+
+# Træn ensemblet
+ensemble_model.fit(X_train_scaled, Y_train_classes) # Brug skaleret data!
+
+# Lav forudsigelser med ensemblet
+Y_pred_proba = ensemble_model.predict_proba(X_test_scaled)
 
 # Manuel beregning af log-loss
 epsilon = 1e-15  # For at undgå log(0)

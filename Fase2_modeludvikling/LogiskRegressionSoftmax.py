@@ -17,7 +17,8 @@ X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_
 Y_train_classes = np.argmax(Y_train, axis=1)
 
 # Initialiser og træn modellen
-model = LogisticRegression(multi_class='multinomial', solver='lbfgs', max_iter=1000)
+class_weights = {0: 1.0, 1: 7.0, 2: 1.0}
+model = LogisticRegression(multi_class='multinomial', solver='lbfgs', max_iter=1000,C=0.01,class_weight=class_weights)
 model.fit(X_train, Y_train_classes)
 
 # Lav forudsigelser (sandsynligheder)

@@ -48,17 +48,17 @@ history = model.fit(X_train, Y_train,
 
 # Lav forudsigelser
 Y_pred_proba = model.predict(X_test)
-print(Y_pred_proba)
-print(Y_test)
 
 # Beregn log loss
 manual_logloss = -np.mean(np.sum(Y_test * np.log(Y_pred_proba + 1e-15), axis=1))
 print(f"Manuel Log Loss: {manual_logloss}")
 
-# Eksempel på output-sandsynligheder
-print("Eksempel på sandsynligheder (3 første rækker):")
-print(Y_pred_proba[:3])
+# Eksempel på sandsynlighedsfordelinger
+print("Første 3 rækker af Y_test (originale sandsynlighedsfordelinger):")
+print(pd.DataFrame(Y_test[:3]))
 
+print("\nFørste 3 rækker af Y_pred_proba (forudsigede sandsynligheder):")
+print(pd.DataFrame(Y_pred_proba[:3]))
 
 #PLOTS HERFRA
 np.random.seed(42)

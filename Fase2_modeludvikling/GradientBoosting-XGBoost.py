@@ -17,7 +17,7 @@ X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_
 Y_train_classes = np.argmax(Y_train, axis=1)
 
 # Initialiser og træn XGBoost-modellen
-model = XGBClassifier(use_label_encoder=False, eval_metric='mlogloss', n_estimators=100, learning_rate=0.1, max_depth=6, random_state=42,tree_method='gpu_hist', predictor='gpu_predictor')
+model = XGBClassifier(use_label_encoder=False, eval_metric='mlogloss', n_estimators=1000, learning_rate=0.01, max_depth=3, random_state=42,tree_method='gpu_hist', predictor='gpu_predictor')
 model.fit(X_train, Y_train_classes)
 
 # Lav forudsigelser (sandsynligheder)

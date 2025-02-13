@@ -16,7 +16,7 @@ X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_
 Y_train_classes = np.argmax(Y_train, axis=1)
 
 # Initialiser og træn LightGBM-modellen
-model = LGBMClassifier(objective='multiclass', num_class=3, device='gpu', n_estimators=100, learning_rate=0.1, max_depth=6, random_state=42)
+model = LGBMClassifier(objective='multiclass', num_class=3, device='gpu', n_estimators=1000, learning_rate=0.01, max_depth=3, random_state=42)
 model.fit(X_train, Y_train_classes)
 
 # Lav forudsigelser (sandsynligheder)

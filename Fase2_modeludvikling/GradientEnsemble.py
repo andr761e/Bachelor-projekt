@@ -1,35 +1,40 @@
-import numpy as np
 import pandas as pd
-from sklearn.neighbors import KNeighborsClassifier
+import numpy as np
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import log_loss
-from sklearn.preprocessing import MinMaxScaler
+from sklearn.ensemble import VotingClassifier
+from xgboost import XGBClassifier
+from lightgbm import LGBMClassifier
+from catboost import CatBoostClassifier
 import matplotlib.pyplot as plt
 
-# Indlæs data (ændr stierne hvis nødvendigt)
+# Indlæs data
 X = pd.read_excel("Fase1_Datamanipulation/processed_input_data.xlsx").to_numpy()
-Y = pd.read_excel("Fase1_Datamanipulation/processed_output_labels.xlsx").to_numpy()  # One-hot encoded labels
+Y = pd.read_excel("Fase1_Datamanipulation/processed_output_labels.xlsx").to_numpy()
 
 # Split data i træning og test
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=42)
 
-# Standardisering af data (anbefales til KNN)
-scaler = MinMaxScaler()
-X_train = scaler.fit_transform(X_train)
-X_test = scaler.transform(X_test)
-
-def custom_weights(distances):
-    return 1 / (distances + 1e-5)  # Omvendt proportionalitet med afstand
-
-# Konverter Y_train til integer-klasser (kræves af KNN)
+# Konverter Y til integer-klasser (kræves af både KNN og XGBClassifier)
 Y_train_classes = np.argmax(Y_train, axis=1)
+Y_test_classes = np.argmax(Y_test, axis=1)
 
-# Initialiser og træn KNN-modellen med vægtning baseret på afstand
-model = KNeighborsClassifier(n_neighbors=600, weights=custom_weights, algorithm='auto')
-model.fit(X_train, Y_train_classes)
+# Definér individuelle modeller
+model_xgb = XGBClassifier(n_estimators=500, learning_rate=0.01, max_depth=4)
+model_lgbm = LGBMClassifier(n_estimators=500, learning_rate=0.01, max_depth=4)
+model_cat = CatBoostClassifier(iterations=500, learning_rate=0.01, depth=4, verbose=0)
 
-# Lav forudsigelser (sandsynligheder)
-Y_pred_proba = model.predict_proba(X_test)
+# Definér ensemble model
+ensemble_model = VotingClassifier(estimators=[
+    ('xgb', model_xgb),
+    ('lgbm', model_lgbm),
+    ('cat', model_cat)],
+    voting='soft')  # Brug soft voting for sandsynligheder
+
+# Træn ensemble-modellen
+ensemble_model.fit(X_train, Y_train_classes)
+
+# Prediction med sandsynligheder
+Y_pred_proba = ensemble_model.predict_proba(X_test)
 
 # Manuel beregning af log-loss
 epsilon = 1e-15  # For at undgå log(0)

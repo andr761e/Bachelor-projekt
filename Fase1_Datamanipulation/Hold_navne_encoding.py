@@ -1,22 +1,23 @@
 import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import OneHotEncoder
 
-# Læs kun relevante kolonner fra Excel-arket
+# Indlæs relevante kolonner fra Excel-arket
 columns_to_use = ["HomeTeam", "AwayTeam"]
 matches = pd.read_excel("Fase1_Datamanipulation/engelske_kampe_scrapped.xlsx", usecols=columns_to_use)
 
-# Encode holdnavne som heltal
-encoder = LabelEncoder()
-home_team_encoded = encoder.fit_transform(matches["HomeTeam"])
-away_team_encoded = encoder.transform(matches["AwayTeam"])
+# Initialiser one-hot-encoderen
+encoder = OneHotEncoder(sparse_output=False, handle_unknown='ignore')  # sparse_output=False sikrer en tæt matrix
 
-# Opret en DataFrame med de to lister
-encoded_teams_df = pd.DataFrame({
-    'Home Team Encoded': home_team_encoded,
-    'Away Team Encoded': away_team_encoded
-})
+# One-hot-encode hjemmeholdene
+home_encoded = encoder.fit_transform(matches[["HomeTeam"]])
+away_encoded = encoder.fit_transform(matches[["AwayTeam"]])
 
-# Gem DataFrame som et Excel-ark
-encoded_teams_df.to_excel("Fase1_Datamanipulation/team_names_encoded.xlsx", index=False)
+# Konverter de encodede arrays til DataFrames
+home_encoded_df = pd.DataFrame(home_encoded)
+away_encoded_df = pd.DataFrame(away_encoded)
+
+# Kombiner de to DataFrames side om side
+combined_df = pd.concat([home_encoded_df, away_encoded_df], axis=1)
+
+# Gem resultatet i et Excel-ark
+combined_df.to_excel("Fase1_Datamanipulation/one_hot_encoded_teams.xlsx", index=False)
