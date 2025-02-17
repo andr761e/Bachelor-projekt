@@ -4,6 +4,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import log_loss
 import matplotlib.pyplot as plt
+from sklearn.preprocessing import StandardScaler
 
 # Indlæs data (ændr stierne hvis nødvendigt)
 X = pd.read_excel("Fase1_Datamanipulation/processed_input_data.xlsx").to_numpy()
@@ -15,12 +16,31 @@ X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_
 # Konverter Y_train til integer-klasser (kræves af RandomForestClassifier)
 Y_train_classes = np.argmax(Y_train, axis=1)
 
-# Initialiser og træn Random Forest modellen
-model = RandomForestClassifier(n_estimators=1000, random_state=42)
-model.fit(X_train, Y_train_classes)
+# Standardisering af data
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+# Initialiser og træn Random Forest modellen med optimerede parametre
+model = RandomForestClassifier(
+    n_estimators=1000,
+    max_depth=10,  # Begrænset dybde for at reducere overfitting
+    min_samples_split=5,
+    min_samples_leaf=2,
+    random_state=42
+)
+
+# Beregn sample weights
+sample_weights = np.ones(len(Y_train_classes))
+sample_weights[Y_train_classes == 1] = 30  # Opjuster uafgjort-klassen
+sample_weights[Y_train_classes == 0] = 0.7  # Nedjuster hjemme-klassen
+sample_weights[Y_train_classes == 2] = 1.1  # Opjuster ude-klassen
+
+# Træn modellen med sample weights
+model.fit(X_train_scaled, Y_train_classes, sample_weight=sample_weights)
 
 # Lav forudsigelser (sandsynligheder)
-Y_pred_proba = model.predict_proba(X_test)
+Y_pred_proba = model.predict_proba(X_test_scaled)
 
 # Manuel beregning af log-loss
 epsilon = 1e-15  # For at undgå log(0)
@@ -35,8 +55,7 @@ print(pd.DataFrame(Y_test[:3]))
 print("\nFørste 3 rækker af Y_pred_proba (forudsigede sandsynligheder):")
 print(pd.DataFrame(Y_pred_proba[:3]))
 
-
-#PLOTS HERFRA
+# PLOTS HERFRA
 np.random.seed(42)
 
 # Classes
