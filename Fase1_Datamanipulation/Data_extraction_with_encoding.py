@@ -173,3 +173,11 @@ Y_cleaned = Y_df.drop(index=rows_with_nan)
 # Gem det nye datasæt
 form_stats_df_cleaned.to_excel("Fase1_Datamanipulation/processed_input_data.xlsx", index=False)
 Y_cleaned.to_excel("Fase1_Datamanipulation/processed_output_labels.xlsx", index=False)
+
+#Lav ark med kampresultater
+# Læs kun relevante kolonner fra Excel-arket
+columns_to_use = ["Date", "HomeTeam", "AwayTeam","FTR"]
+matches = pd.read_excel("Fase1_Datamanipulation/engelske_kampe_scrapped.xlsx", usecols=columns_to_use)
+match_results= pd.concat([matches.drop(index=rows_with_nan), final_df.drop(index=rows_with_nan)], axis=1)
+
+match_results.to_excel("Fase1_Datamanipulation/match_results.xlsx", index=False)

@@ -6,13 +6,17 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import log_loss
 import matplotlib.pyplot as plt
+from Functions.Functions import DataUtils
 
 # Indlæs data (ændr stierne hvis nødvendigt)
 X = pd.read_excel("Fase1_Datamanipulation/processed_input_data.xlsx").to_numpy()
 Y = pd.read_excel("Fase1_Datamanipulation/processed_output_labels.xlsx").to_numpy()  # One-hot encoded labels
+match_results = pd.read_excel("Fase1_Datamanipulation/match_results.xlsx").to_numpy()
 
 # Split data i træning og test
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=42)
+#Split kampresultaterne på samme måde (skal bruges senere)
+_, match_result_split, _, _ = train_test_split(match_results, Y, test_size=0.2, random_state=42)
 
 # Konverter Y_train til integer-klasser (kræves af RandomForestClassifier)
 Y_train_classes = np.argmax(Y_train, axis=1)
@@ -109,3 +113,93 @@ plt.xlabel("Kamp ID")
 plt.ylabel("Log-loss bidrag")
 plt.grid()
 plt.show()
+
+#EXPORT OUTLIERS FROM HERE
+#COLUMNS TO USE
+columns = [
+    "Date", "HomeTeam","AwayTeam","FTR",
+    "HomeTeamELO","HomeGoals5", "HomePoints5", "HomeShots5", "HomeShotsOnTarget5", "HomeFouls5",
+    "HomeCorners5", "HomeYellowCards5", "HomeRedCards5",
+    "AwayTeamELO", "AwayGoals5", "AwayPoints5", "AwayShots5", "AwayShotsOnTarget5", "AwayFouls5",
+    "AwayCorners5", "AwayYellowCards5", "AwayRedCards5",
+    "YpredH", "YpredD","YpredA", "YtrueH", "YtrueD","YtrueA","DiffH", "DiffD","DiffA"
+]
+
+#PERCENTAGE DEVIATION
+# Apply filtering (10, 20, 30, 40 and 50% deviations)
+rows_to_keep1 = DataUtils.get_filtered_rows_percentwise(Y_pred_proba, Y_test, x=0.1)
+rows_to_keep2 = DataUtils.get_filtered_rows_percentwise(Y_pred_proba, Y_test, x=0.2)
+rows_to_keep3 = DataUtils.get_filtered_rows_percentwise(Y_pred_proba, Y_test, x=0.3)
+rows_to_keep4 = DataUtils.get_filtered_rows_percentwise(Y_pred_proba, Y_test, x=0.4)
+rows_to_keep5 = DataUtils.get_filtered_rows_percentwise(Y_pred_proba, Y_test, x=0.5)
+
+# Use the mask to filter rows
+Y_pred_proba_filtered1 = Y_pred_proba[rows_to_keep1]
+Y_test_filtered1 = Y_test[rows_to_keep1]
+Y_pred_proba_filtered2 = Y_pred_proba[rows_to_keep2]
+Y_test_filtered2 = Y_test[rows_to_keep2]
+Y_pred_proba_filtered3 = Y_pred_proba[rows_to_keep3]
+Y_test_filtered3 = Y_test[rows_to_keep3]
+Y_pred_proba_filtered4 = Y_pred_proba[rows_to_keep4]
+Y_test_filtered4 = Y_test[rows_to_keep4]
+Y_pred_proba_filtered5 = Y_pred_proba[rows_to_keep5]
+Y_test_filtered5 = Y_test[rows_to_keep5]
+
+#Make final outlier dataFrames
+result_10_deviate = pd.concat([pd.DataFrame(match_result_split[rows_to_keep1]), pd.concat([pd.DataFrame(Y_pred_proba_filtered1), pd.concat([pd.DataFrame(Y_test_filtered1),pd.DataFrame(Y_pred_proba_filtered1 - Y_test_filtered1)], axis=1)], axis=1)],axis=1)
+result_10_deviate.columns = columns
+result_20_deviate = pd.concat([pd.DataFrame(match_result_split[rows_to_keep2]), pd.concat([pd.DataFrame(Y_pred_proba_filtered2), pd.concat([pd.DataFrame(Y_test_filtered2),pd.DataFrame(Y_pred_proba_filtered2 - Y_test_filtered2)], axis=1)], axis=1)],axis=1)
+result_20_deviate.columns = columns
+result_30_deviate = pd.concat([pd.DataFrame(match_result_split[rows_to_keep3]), pd.concat([pd.DataFrame(Y_pred_proba_filtered3), pd.concat([pd.DataFrame(Y_test_filtered3),pd.DataFrame(Y_pred_proba_filtered3 - Y_test_filtered3)], axis=1)], axis=1)],axis=1)
+result_30_deviate.columns = columns
+result_40_deviate = pd.concat([pd.DataFrame(match_result_split[rows_to_keep4]), pd.concat([pd.DataFrame(Y_pred_proba_filtered4), pd.concat([pd.DataFrame(Y_test_filtered4),pd.DataFrame(Y_pred_proba_filtered4 - Y_test_filtered4)], axis=1)], axis=1)],axis=1)
+result_40_deviate.columns = columns
+result_50_deviate = pd.concat([pd.DataFrame(match_result_split[rows_to_keep5]), pd.concat([pd.DataFrame(Y_pred_proba_filtered5), pd.concat([pd.DataFrame(Y_test_filtered5),pd.DataFrame(Y_pred_proba_filtered5 - Y_test_filtered5)], axis=1)], axis=1)],axis=1)
+result_50_deviate.columns = columns
+
+#Export to excel
+result_10_deviate.to_excel("Fase3_ValueBettingAnalysis/KNN_RFOutliers/PercentageDeviation/10pointDeviationOutliers.xlsx", index=False)
+result_20_deviate.to_excel("Fase3_ValueBettingAnalysis/KNN_RFOutliers/PercentageDeviation/20pointDeviationOutliers.xlsx", index=False)
+result_30_deviate.to_excel("Fase3_ValueBettingAnalysis/KNN_RFOutliers/PercentageDeviation/30pointDeviationOutliers.xlsx", index=False)
+result_40_deviate.to_excel("Fase3_ValueBettingAnalysis/KNN_RFOutliers/PercentageDeviation/40pointDeviationOutliers.xlsx", index=False)
+result_50_deviate.to_excel("Fase3_ValueBettingAnalysis/KNN_RFOutliers/PercentageDeviation/50pointDeviationOutliers.xlsx", index=False)
+
+
+#PERCENTAGE POINT DIFFERENCE
+# Apply filtering (0.1, 0.2, 0.3, 0.4 and 0.5 point differences)
+rows_to_keep1 = DataUtils.get_filtered_rows_percent_point(Y_pred_proba, Y_test, x=0.1)
+rows_to_keep2 = DataUtils.get_filtered_rows_percent_point(Y_pred_proba, Y_test, x=0.2)
+rows_to_keep3 = DataUtils.get_filtered_rows_percent_point(Y_pred_proba, Y_test, x=0.3)
+rows_to_keep4 = DataUtils.get_filtered_rows_percent_point(Y_pred_proba, Y_test, x=0.4)
+rows_to_keep5 = DataUtils.get_filtered_rows_percent_point(Y_pred_proba, Y_test, x=0.5)
+
+# Use the mask to filter rows
+Y_pred_proba_filtered1 = Y_pred_proba[rows_to_keep1]
+Y_test_filtered1 = Y_test[rows_to_keep1]
+Y_pred_proba_filtered2 = Y_pred_proba[rows_to_keep2]
+Y_test_filtered2 = Y_test[rows_to_keep2]
+Y_pred_proba_filtered3 = Y_pred_proba[rows_to_keep3]
+Y_test_filtered3 = Y_test[rows_to_keep3]
+Y_pred_proba_filtered4 = Y_pred_proba[rows_to_keep4]
+Y_test_filtered4 = Y_test[rows_to_keep4]
+Y_pred_proba_filtered5 = Y_pred_proba[rows_to_keep5]
+Y_test_filtered5 = Y_test[rows_to_keep5]
+
+#Make final outlier dataFrames
+result_10_deviate = pd.concat([pd.DataFrame(match_result_split[rows_to_keep1]), pd.concat([pd.DataFrame(Y_pred_proba_filtered1), pd.concat([pd.DataFrame(Y_test_filtered1),pd.DataFrame(Y_pred_proba_filtered1 - Y_test_filtered1)], axis=1)], axis=1)],axis=1)
+result_10_deviate.columns = columns
+result_20_deviate = pd.concat([pd.DataFrame(match_result_split[rows_to_keep2]), pd.concat([pd.DataFrame(Y_pred_proba_filtered2), pd.concat([pd.DataFrame(Y_test_filtered2),pd.DataFrame(Y_pred_proba_filtered2 - Y_test_filtered2)], axis=1)], axis=1)],axis=1)
+result_20_deviate.columns = columns
+result_30_deviate = pd.concat([pd.DataFrame(match_result_split[rows_to_keep3]), pd.concat([pd.DataFrame(Y_pred_proba_filtered3), pd.concat([pd.DataFrame(Y_test_filtered3),pd.DataFrame(Y_pred_proba_filtered3 - Y_test_filtered3)], axis=1)], axis=1)],axis=1)
+result_30_deviate.columns = columns
+result_40_deviate = pd.concat([pd.DataFrame(match_result_split[rows_to_keep4]), pd.concat([pd.DataFrame(Y_pred_proba_filtered4), pd.concat([pd.DataFrame(Y_test_filtered4),pd.DataFrame(Y_pred_proba_filtered4 - Y_test_filtered4)], axis=1)], axis=1)],axis=1)
+result_40_deviate.columns = columns
+result_50_deviate = pd.concat([pd.DataFrame(match_result_split[rows_to_keep5]), pd.concat([pd.DataFrame(Y_pred_proba_filtered5), pd.concat([pd.DataFrame(Y_test_filtered5),pd.DataFrame(Y_pred_proba_filtered5 - Y_test_filtered5)], axis=1)], axis=1)],axis=1)
+result_50_deviate.columns = columns
+
+#Export to excel
+result_10_deviate.to_excel("Fase3_ValueBettingAnalysis/KNN_RFOutliers/PercentagePointDifference/10pointDifferenceOutliers.xlsx", index=False)
+result_20_deviate.to_excel("Fase3_ValueBettingAnalysis/KNN_RFOutliers/PercentagePointDifference/20pointDifferenceOutliers.xlsx", index=False)
+result_30_deviate.to_excel("Fase3_ValueBettingAnalysis/KNN_RFOutliers/PercentagePointDifference/30pointDifferenceOutliers.xlsx", index=False)
+result_40_deviate.to_excel("Fase3_ValueBettingAnalysis/KNN_RFOutliers/PercentagePointDifference/40pointDifferenceOutliers.xlsx", index=False)
+result_50_deviate.to_excel("Fase3_ValueBettingAnalysis/KNN_RFOutliers/PercentagePointDifference/50pointDifferenceOutliers.xlsx", index=False)
