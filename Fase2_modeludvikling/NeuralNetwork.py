@@ -133,7 +133,8 @@ columns = [
     "HomeCorners5", "HomeYellowCards5", "HomeRedCards5",
     "AwayTeamELO", "AwayGoals5", "AwayPoints5", "AwayShots5", "AwayShotsOnTarget5", "AwayFouls5",
     "AwayCorners5", "AwayYellowCards5", "AwayRedCards5",
-    "YpredH", "YpredD","YpredA", "YtrueH", "YtrueD","YtrueA","DiffH", "DiffD","DiffA"
+    "YpredH", "YpredD","YpredA", "YtrueH", "YtrueD","YtrueA","DiffH", "DiffD","DiffA",
+    "%DiffH","%DiffD","%DiffA"
 ]
 
 #PERCENTAGE DEVIATION
@@ -157,15 +158,15 @@ Y_pred_proba_filtered5 = Y_pred_proba[rows_to_keep5]
 Y_test_filtered5 = Y_test[rows_to_keep5]
 
 #Make final outlier dataFrames
-result_10_deviate = pd.concat([pd.DataFrame(match_result_split[rows_to_keep1]), pd.concat([pd.DataFrame(Y_pred_proba_filtered1), pd.concat([pd.DataFrame(Y_test_filtered1),pd.DataFrame(Y_pred_proba_filtered1 - Y_test_filtered1)], axis=1)], axis=1)],axis=1)
+result_10_deviate = pd.concat([pd.DataFrame(match_result_split[rows_to_keep1]), pd.concat([pd.DataFrame(Y_pred_proba_filtered1), pd.concat([pd.DataFrame(Y_test_filtered1),pd.concat([pd.DataFrame(Y_pred_proba_filtered1 - Y_test_filtered1),pd.DataFrame((Y_pred_proba_filtered1 - Y_test_filtered1)/Y_test_filtered1*100)],axis=1)], axis=1)], axis=1)],axis=1)
 result_10_deviate.columns = columns
-result_20_deviate = pd.concat([pd.DataFrame(match_result_split[rows_to_keep2]), pd.concat([pd.DataFrame(Y_pred_proba_filtered2), pd.concat([pd.DataFrame(Y_test_filtered2),pd.DataFrame(Y_pred_proba_filtered2 - Y_test_filtered2)], axis=1)], axis=1)],axis=1)
+result_20_deviate = pd.concat([pd.DataFrame(match_result_split[rows_to_keep2]), pd.concat([pd.DataFrame(Y_pred_proba_filtered2), pd.concat([pd.DataFrame(Y_test_filtered2),pd.concat([pd.DataFrame(Y_pred_proba_filtered2 - Y_test_filtered2),pd.DataFrame((Y_pred_proba_filtered2 - Y_test_filtered2)/Y_test_filtered2*100)],axis=1)], axis=1)], axis=1)],axis=1)
 result_20_deviate.columns = columns
-result_30_deviate = pd.concat([pd.DataFrame(match_result_split[rows_to_keep3]), pd.concat([pd.DataFrame(Y_pred_proba_filtered3), pd.concat([pd.DataFrame(Y_test_filtered3),pd.DataFrame(Y_pred_proba_filtered3 - Y_test_filtered3)], axis=1)], axis=1)],axis=1)
+result_30_deviate = pd.concat([pd.DataFrame(match_result_split[rows_to_keep3]), pd.concat([pd.DataFrame(Y_pred_proba_filtered3), pd.concat([pd.DataFrame(Y_test_filtered3),pd.concat([pd.DataFrame(Y_pred_proba_filtered3 - Y_test_filtered3),pd.DataFrame((Y_pred_proba_filtered3 - Y_test_filtered3)/Y_test_filtered3*100)],axis=1)], axis=1)], axis=1)],axis=1)
 result_30_deviate.columns = columns
-result_40_deviate = pd.concat([pd.DataFrame(match_result_split[rows_to_keep4]), pd.concat([pd.DataFrame(Y_pred_proba_filtered4), pd.concat([pd.DataFrame(Y_test_filtered4),pd.DataFrame(Y_pred_proba_filtered4 - Y_test_filtered4)], axis=1)], axis=1)],axis=1)
+result_40_deviate = pd.concat([pd.DataFrame(match_result_split[rows_to_keep4]), pd.concat([pd.DataFrame(Y_pred_proba_filtered4), pd.concat([pd.DataFrame(Y_test_filtered4),pd.concat([pd.DataFrame(Y_pred_proba_filtered4 - Y_test_filtered4),pd.DataFrame((Y_pred_proba_filtered4 - Y_test_filtered4)/Y_test_filtered4*100)],axis=1)], axis=1)], axis=1)],axis=1)
 result_40_deviate.columns = columns
-result_50_deviate = pd.concat([pd.DataFrame(match_result_split[rows_to_keep5]), pd.concat([pd.DataFrame(Y_pred_proba_filtered5), pd.concat([pd.DataFrame(Y_test_filtered5),pd.DataFrame(Y_pred_proba_filtered5 - Y_test_filtered5)], axis=1)], axis=1)],axis=1)
+result_50_deviate = pd.concat([pd.DataFrame(match_result_split[rows_to_keep5]), pd.concat([pd.DataFrame(Y_pred_proba_filtered5), pd.concat([pd.DataFrame(Y_test_filtered5),pd.concat([pd.DataFrame(Y_pred_proba_filtered5 - Y_test_filtered5),pd.DataFrame((Y_pred_proba_filtered5 - Y_test_filtered5)/Y_test_filtered5*100)],axis=1)], axis=1)], axis=1)],axis=1)
 result_50_deviate.columns = columns
 
 #Export to excel
@@ -197,15 +198,15 @@ Y_pred_proba_filtered5 = Y_pred_proba[rows_to_keep5]
 Y_test_filtered5 = Y_test[rows_to_keep5]
 
 #Make final outlier dataFrames
-result_10_deviate = pd.concat([pd.DataFrame(match_result_split[rows_to_keep1]), pd.concat([pd.DataFrame(Y_pred_proba_filtered1), pd.concat([pd.DataFrame(Y_test_filtered1),pd.DataFrame(Y_pred_proba_filtered1 - Y_test_filtered1)], axis=1)], axis=1)],axis=1)
+result_10_deviate = pd.concat([pd.DataFrame(match_result_split[rows_to_keep1]), pd.concat([pd.DataFrame(Y_pred_proba_filtered1), pd.concat([pd.DataFrame(Y_test_filtered1),pd.concat([pd.DataFrame(Y_pred_proba_filtered1 - Y_test_filtered1),pd.DataFrame((Y_pred_proba_filtered1 - Y_test_filtered1)/Y_test_filtered1*100)],axis=1)], axis=1)], axis=1)],axis=1)
 result_10_deviate.columns = columns
-result_20_deviate = pd.concat([pd.DataFrame(match_result_split[rows_to_keep2]), pd.concat([pd.DataFrame(Y_pred_proba_filtered2), pd.concat([pd.DataFrame(Y_test_filtered2),pd.DataFrame(Y_pred_proba_filtered2 - Y_test_filtered2)], axis=1)], axis=1)],axis=1)
+result_20_deviate = pd.concat([pd.DataFrame(match_result_split[rows_to_keep2]), pd.concat([pd.DataFrame(Y_pred_proba_filtered2), pd.concat([pd.DataFrame(Y_test_filtered2),pd.concat([pd.DataFrame(Y_pred_proba_filtered2 - Y_test_filtered2),pd.DataFrame((Y_pred_proba_filtered2 - Y_test_filtered2)/Y_test_filtered2*100)],axis=1)], axis=1)], axis=1)],axis=1)
 result_20_deviate.columns = columns
-result_30_deviate = pd.concat([pd.DataFrame(match_result_split[rows_to_keep3]), pd.concat([pd.DataFrame(Y_pred_proba_filtered3), pd.concat([pd.DataFrame(Y_test_filtered3),pd.DataFrame(Y_pred_proba_filtered3 - Y_test_filtered3)], axis=1)], axis=1)],axis=1)
+result_30_deviate = pd.concat([pd.DataFrame(match_result_split[rows_to_keep3]), pd.concat([pd.DataFrame(Y_pred_proba_filtered3), pd.concat([pd.DataFrame(Y_test_filtered3),pd.concat([pd.DataFrame(Y_pred_proba_filtered3 - Y_test_filtered3),pd.DataFrame((Y_pred_proba_filtered3 - Y_test_filtered3)/Y_test_filtered3*100)],axis=1)], axis=1)], axis=1)],axis=1)
 result_30_deviate.columns = columns
-result_40_deviate = pd.concat([pd.DataFrame(match_result_split[rows_to_keep4]), pd.concat([pd.DataFrame(Y_pred_proba_filtered4), pd.concat([pd.DataFrame(Y_test_filtered4),pd.DataFrame(Y_pred_proba_filtered4 - Y_test_filtered4)], axis=1)], axis=1)],axis=1)
+result_40_deviate = pd.concat([pd.DataFrame(match_result_split[rows_to_keep4]), pd.concat([pd.DataFrame(Y_pred_proba_filtered4), pd.concat([pd.DataFrame(Y_test_filtered4),pd.concat([pd.DataFrame(Y_pred_proba_filtered4 - Y_test_filtered4),pd.DataFrame((Y_pred_proba_filtered4 - Y_test_filtered4)/Y_test_filtered4*100)],axis=1)], axis=1)], axis=1)],axis=1)
 result_40_deviate.columns = columns
-result_50_deviate = pd.concat([pd.DataFrame(match_result_split[rows_to_keep5]), pd.concat([pd.DataFrame(Y_pred_proba_filtered5), pd.concat([pd.DataFrame(Y_test_filtered5),pd.DataFrame(Y_pred_proba_filtered5 - Y_test_filtered5)], axis=1)], axis=1)],axis=1)
+result_50_deviate = pd.concat([pd.DataFrame(match_result_split[rows_to_keep5]), pd.concat([pd.DataFrame(Y_pred_proba_filtered5), pd.concat([pd.DataFrame(Y_test_filtered5),pd.concat([pd.DataFrame(Y_pred_proba_filtered5 - Y_test_filtered5),pd.DataFrame((Y_pred_proba_filtered5 - Y_test_filtered5)/Y_test_filtered5*100)],axis=1)], axis=1)], axis=1)],axis=1)
 result_50_deviate.columns = columns
 
 #Export to excel
