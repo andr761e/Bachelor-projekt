@@ -22,7 +22,7 @@ When you save the notebook, an HTML file containing the code and output will be 
 The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
 
 ```{r}
-df <- read_excel("NeuralNetworkOutliers/PercentageDeviation/80pointDeviationOutliers.xlsx")
+df <- read_excel("NeuralNetworkOutliersResultsUnfiltered.xlsx")
 head(df)
 ```
 
@@ -151,6 +151,9 @@ compare_with_bookmakers(df, "YpredD", "YtrueD", "%DiffD", "FTR", "D", threshold 
 # 🚌 Udebanesejr (A)
 cat("\n📌 Udebanesejr (A)\n")
 compare_with_bookmakers(df, "YpredA", "YtrueA", "%DiffA", "FTR", "A", threshold = 80)
+
+df2 <- df[df[["%DiffH"]] > 80, ]
+print(df2, n = Inf)
 ```
 
 ```{r}

@@ -9,10 +9,12 @@ import matplotlib.pyplot as plt
 # Indlæs data (ændr stierne hvis nødvendigt)
 X = pd.read_excel("Fase1_Datamanipulation/processed_input_data.xlsx").to_numpy()
 Y = pd.read_excel("Fase1_Datamanipulation/processed_output_labels.xlsx").to_numpy()  # One-hot encoded labels
+print(Y)
 match_results = pd.read_excel("Fase1_Datamanipulation/match_results.xlsx").to_numpy()
 
 # Split data i træning og test
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=42)
+print(Y_test)
 #Split kampresultaterne på samme måde (skal bruges senere)
 _, match_result_split, _, _ = train_test_split(match_results, Y, test_size=0.2, random_state=42)
 
@@ -26,10 +28,13 @@ model.fit(X_train, Y_train_classes)
 
 # Lav forudsigelser (sandsynligheder)
 Y_pred_proba = model.predict_proba(X_test)
+print(Y_pred_proba)
+print(Y_test)
 
 # Manuel beregning af log-loss
 epsilon = 1e-15  # For at undgå log(0)
 Y_pred_proba = np.clip(Y_pred_proba, epsilon, 1 - epsilon)  # Klip sandsynlighederne
+print(Y_pred_proba)
 log_loss_manual = -np.mean(np.sum(Y_test * np.log(Y_pred_proba), axis=1))
 print(f"Manuel Log Loss: {log_loss_manual}")
 
