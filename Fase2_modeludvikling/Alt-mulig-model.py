@@ -1,54 +1,41 @@
 import numpy as np
 import pandas as pd
-from sklearn.ensemble import RandomForestRegressor, VotingRegressor
-from sklearn.neighbors import KNeighborsRegressor
+from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import StandardScaler
 from scipy.special import softmax
 import matplotlib.pyplot as plt
 from numpy.polynomial.polynomial import Polynomial
 
-# Indlæs data
+# Indlæs data (ændr stierne hvis nødvendigt)
 X = pd.read_excel("Fase1_Datamanipulation/processed_input_data.xlsx").to_numpy()
-Y = pd.read_excel("Fase1_Datamanipulation/processed_output_labels.xlsx").to_numpy()
+Y = pd.read_excel("Fase1_Datamanipulation/processed_output_labels.xlsx").to_numpy()  # One-hot encoded labels
 match_results = pd.read_excel("Fase1_Datamanipulation/match_results.xlsx").to_numpy()
 
-# Split data
+# Data splitting
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=42)
-_, match_result_split, _, _ = train_test_split(match_results, Y, test_size=0.2, random_state=42)
 
-# Standardisering
-scaler = StandardScaler()
-X_train_scaled = scaler.fit_transform(X_train)
-X_test_scaled = scaler.transform(X_test)
-
-# Opdel Y_train i separate arrays for hver klasse
+# Konverter Y til sandsynligheder for hver klasse
 Y_train_home = Y_train[:, 0]   # Sandsynlighed for hjemmebanesejr
 Y_train_draw = Y_train[:, 1]   # Sandsynlighed for uafgjort
 Y_train_away = Y_train[:, 2]   # Sandsynlighed for udebanesejr
 
-# Initialiser modeller (Random Forest + KNN)
-rf_model = RandomForestRegressor(n_estimators=1000, max_depth=10, min_samples_split=5, min_samples_leaf=2, random_state=42)
-knn_model = KNeighborsRegressor(n_neighbors=500, weights='distance')
+# Træn probabilistiske modeller
+model_home = LinearRegression()
+model_draw = LinearRegression()
+model_away = LinearRegression()
 
-# Ensemble modeller
-ensemble_home = VotingRegressor(estimators=[('random_forest', rf_model), ('knn', knn_model)], weights=[3, 1])
-ensemble_draw = VotingRegressor(estimators=[('random_forest', rf_model), ('knn', knn_model)], weights=[3, 1])
-ensemble_away = VotingRegressor(estimators=[('random_forest', rf_model), ('knn', knn_model)], weights=[3, 1])
-
-# Træn hver ensemble-model
-ensemble_home.fit(X_train_scaled, Y_train_home)
-ensemble_draw.fit(X_train_scaled, Y_train_draw)
-ensemble_away.fit(X_train_scaled, Y_train_away)
+model_home.fit(X_train, Y_train_home)
+model_draw.fit(X_train, Y_train_draw)
+model_away.fit(X_train, Y_train_away)
 
 # Lav probabilistiske forudsigelser
-probs_home = ensemble_home.predict(X_test_scaled)
-probs_draw = ensemble_draw.predict(X_test_scaled)
-probs_away = ensemble_away.predict(X_test_scaled)
+probs_home = model_home.predict(X_test)   # Sandsynlighed for hjemmebanesejr
+probs_draw = model_draw.predict(X_test)   # Sandsynlighed for uafgjort
+probs_away = model_away.predict(X_test)   # Sandsynlighed for udebanesejr
 
-# Kombiner sandsynlighederne med softmax
+# Saml sandsynligheder og brug softmax
 probs_combined = np.column_stack([probs_home, probs_draw, probs_away])
-Y_pred_proba = softmax(probs_combined, axis=1)
+Y_pred_proba = softmax(probs_combined, axis=1)  # Softmax sikrer, at hver række summer til 1
 
 def polynomial_calibration(Y_pred_proba, Y_test, degree=3):
     calibrated_probs = []
@@ -123,19 +110,3 @@ plt.xlabel("Kamp ID")
 plt.ylabel("Log-loss bidrag")
 plt.grid()
 plt.show()
-
-#EXPORT RESULTS FOR STATISTICAL ANALYSIS
-#COLUMNS TO USE
-columns = [
-    "Date", "HomeTeam","AwayTeam","FTR",
-    "HomeTeamELO","HomeGoals5", "HomePoints5", "HomeShots5", "HomeShotsOnTarget5", "HomeFouls5",
-    "HomeCorners5", "HomeYellowCards5", "HomeRedCards5",
-    "AwayTeamELO", "AwayGoals5", "AwayPoints5", "AwayShots5", "AwayShotsOnTarget5", "AwayFouls5",
-    "AwayCorners5", "AwayYellowCards5", "AwayRedCards5",
-    "YpredH", "YpredD","YpredA", "YtrueH", "YtrueD","YtrueA","DiffH", "DiffD","DiffA",
-    "%DiffH","%DiffD","%DiffA"
-]
-
-result = pd.concat([pd.DataFrame(match_result_split), pd.concat([pd.DataFrame(Y_pred_proba), pd.concat([pd.DataFrame(Y_test),pd.concat([pd.DataFrame(Y_pred_proba - Y_test),pd.DataFrame((Y_pred_proba - Y_test)/Y_test*100)],axis=1)], axis=1)], axis=1)],axis=1)
-result.columns = columns
-result.to_excel("Fase3_ValueBettingAnalysis/KNN_RF_ResultsUnfiltered.xlsx", index=False)

@@ -1,49 +1,58 @@
 import numpy as np
 import pandas as pd
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import log_loss
-import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
+from scipy.special import softmax
+import matplotlib.pyplot as plt
+from numpy.polynomial.polynomial import Polynomial
 
-# Indlæs data (ændr stierne hvis nødvendigt)
+# Indlæs data
 X = pd.read_excel("Fase1_Datamanipulation/processed_input_data.xlsx").to_numpy()
-Y = pd.read_excel("Fase1_Datamanipulation/processed_output_labels.xlsx").to_numpy()  # One-hot encoded labels
+Y = pd.read_excel("Fase1_Datamanipulation/processed_output_labels.xlsx").to_numpy()
 match_results = pd.read_excel("Fase1_Datamanipulation/match_results.xlsx").to_numpy()
 
-# Split data i træning og test
+# Split data
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=42)
-#Split kampresultaterne på samme måde (skal bruges senere)
 _, match_result_split, _, _ = train_test_split(match_results, Y, test_size=0.2, random_state=42)
 
-# Konverter Y_train til integer-klasser (kræves af RandomForestClassifier)
-Y_train_classes = np.argmax(Y_train, axis=1)
-
-# Standardisering af data
+# Standardisering
 scaler = StandardScaler()
 X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled = scaler.transform(X_test)
 
-# Initialiser og træn Random Forest modellen med optimerede parametre
-model = RandomForestClassifier(
-    n_estimators=1000,
-    max_depth=10,  # Begrænset dybde for at reducere overfitting
-    min_samples_split=5,
-    min_samples_leaf=2,
-    random_state=42
-)
+# Opdel Y_train i separate arrays for hver klasse
+Y_train_home = Y_train[:, 0]   # Sandsynlighed for hjemmebanesejr
+Y_train_draw = Y_train[:, 1]   # Sandsynlighed for uafgjort
+Y_train_away = Y_train[:, 2]   # Sandsynlighed for udebanesejr
 
-# Beregn sample weights
-sample_weights = np.ones(len(Y_train_classes))
-sample_weights[Y_train_classes == 1] = 30  # Opjuster uafgjort-klassen
-sample_weights[Y_train_classes == 0] = 0.7  # Nedjuster hjemme-klassen
-sample_weights[Y_train_classes == 2] = 1.1  # Opjuster ude-klassen
+# Initialiser og træn tre separate Random Forest Regressors
+model_home = RandomForestRegressor(n_estimators=1000, max_depth=10, min_samples_split=5, min_samples_leaf=2, random_state=42)
+model_draw = RandomForestRegressor(n_estimators=1000, max_depth=10, min_samples_split=5, min_samples_leaf=2, random_state=42)
+model_away = RandomForestRegressor(n_estimators=1000, max_depth=10, min_samples_split=5, min_samples_leaf=2, random_state=42)
 
-# Træn modellen med sample weights
-model.fit(X_train_scaled, Y_train_classes, sample_weight=sample_weights)
+model_home.fit(X_train_scaled, Y_train_home)
+model_draw.fit(X_train_scaled, Y_train_draw)
+model_away.fit(X_train_scaled, Y_train_away)
 
-# Lav forudsigelser (sandsynligheder)
-Y_pred_proba = model.predict_proba(X_test_scaled)
+# Lav probabilistiske forudsigelser
+probs_home = model_home.predict(X_test_scaled)
+probs_draw = model_draw.predict(X_test_scaled)
+probs_away = model_away.predict(X_test_scaled)
+
+# Kombiner sandsynlighederne med softmax
+probs_combined = np.column_stack([probs_home, probs_draw, probs_away])
+Y_pred_proba = softmax(probs_combined, axis=1)
+
+def polynomial_calibration(Y_pred_proba, Y_test, degree=3):
+    calibrated_probs = []
+    for i in range(3):
+        # Fit polynomiel regression
+        poly = Polynomial.fit(Y_pred_proba[:, i], Y_test[:, i], deg=degree)
+        calibrated_probs.append(poly(Y_pred_proba[:, i]))
+    return np.column_stack(calibrated_probs)
+
+Y_pred_proba = polynomial_calibration(Y_pred_proba, Y_test, degree=3)
 
 # Manuel beregning af log-loss
 epsilon = 1e-15  # For at undgå log(0)

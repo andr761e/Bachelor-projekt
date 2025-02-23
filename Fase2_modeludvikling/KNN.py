@@ -1,10 +1,11 @@
 import numpy as np
 import pandas as pd
-from sklearn.neighbors import KNeighborsClassifier
+from sklearn.neighbors import KNeighborsRegressor
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import log_loss
 from sklearn.preprocessing import MinMaxScaler
+from scipy.special import softmax
 import matplotlib.pyplot as plt
+from numpy.polynomial.polynomial import Polynomial
 
 # Indlæs data (ændr stierne hvis nødvendigt)
 X = pd.read_excel("Fase1_Datamanipulation/processed_input_data.xlsx").to_numpy()
@@ -16,23 +17,47 @@ X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_
 #Split kampresultaterne på samme måde (skal bruges senere)
 _, match_result_split, _, _ = train_test_split(match_results, Y, test_size=0.2, random_state=42)
 
-# Standardisering af data (anbefales til KNN)
+# Standardisering
 scaler = MinMaxScaler()
 X_train = scaler.fit_transform(X_train)
 X_test = scaler.transform(X_test)
 
+# Tilpas custom vægte til regression
 def custom_weights(distances):
     return 1 / (distances + 1e-5)  # Omvendt proportionalitet med afstand
 
-# Konverter Y_train til integer-klasser (kræves af KNN)
-Y_train_classes = np.argmax(Y_train, axis=1)
+# Opdel Y_train i separate arrays for hver klasse
+Y_train_home = Y_train[:, 0]   # Sandsynlighed for hjemmebanesejr
+Y_train_draw = Y_train[:, 1]   # Sandsynlighed for uafgjort
+Y_train_away = Y_train[:, 2]   # Sandsynlighed for udebanesejr
 
-# Initialiser og træn KNN-modellen med vægtning baseret på afstand
-model = KNeighborsClassifier(n_neighbors=600, weights=custom_weights, algorithm='auto')
-model.fit(X_train, Y_train_classes)
+# Træn tre separate KNN-regressorer
+model_home = KNeighborsRegressor(n_neighbors=600, weights=custom_weights, algorithm='auto')
+model_draw = KNeighborsRegressor(n_neighbors=600, weights=custom_weights, algorithm='auto')
+model_away = KNeighborsRegressor(n_neighbors=600, weights=custom_weights, algorithm='auto')
 
-# Lav forudsigelser (sandsynligheder)
-Y_pred_proba = model.predict_proba(X_test)
+model_home.fit(X_train, Y_train_home)
+model_draw.fit(X_train, Y_train_draw)
+model_away.fit(X_train, Y_train_away)
+
+# Lav probabilistiske forudsigelser
+probs_home = model_home.predict(X_test)
+probs_draw = model_draw.predict(X_test)
+probs_away = model_away.predict(X_test)
+
+# Kombiner sandsynlighederne med softmax
+probs_combined = np.column_stack([probs_home, probs_draw, probs_away])
+Y_pred_proba = softmax(probs_combined, axis=1)
+
+def polynomial_calibration(Y_pred_proba, Y_test, degree=3):
+    calibrated_probs = []
+    for i in range(3):
+        # Fit polynomiel regression
+        poly = Polynomial.fit(Y_pred_proba[:, i], Y_test[:, i], deg=degree)
+        calibrated_probs.append(poly(Y_pred_proba[:, i]))
+    return np.column_stack(calibrated_probs)
+
+Y_pred_proba = polynomial_calibration(Y_pred_proba, Y_test, degree=3)
 
 # Manuel beregning af log-loss
 epsilon = 1e-15  # For at undgå log(0)

@@ -1,26 +1,51 @@
 import numpy as np
 import pandas as pd
-from lightgbm import LGBMClassifier
+from lightgbm import LGBMRegressor
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import log_loss
+from scipy.special import softmax
 import matplotlib.pyplot as plt
+from numpy.polynomial.polynomial import Polynomial
 
-# Indlæs data (ændr stierne hvis nødvendigt)
+# Indlæs data
 X = pd.read_excel("Fase1_Datamanipulation/processed_input_data.xlsx").to_numpy()
-Y = pd.read_excel("Fase1_Datamanipulation/processed_output_labels.xlsx").to_numpy()  # One-hot encoded labels
+Y = pd.read_excel("Fase1_Datamanipulation/processed_output_labels.xlsx").to_numpy()
 
-# Split data i træning og test
+# Split data
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=42)
 
-# Konverter Y_train til integer-klasser (kræves af LGBMClassifier)
-Y_train_classes = np.argmax(Y_train, axis=1)
+# Opdel Y_train i separate arrays for hver klasse
+Y_train_home = Y_train[:, 0]   # Sandsynlighed for hjemmebanesejr
+Y_train_draw = Y_train[:, 1]   # Sandsynlighed for uafgjort
+Y_train_away = Y_train[:, 2]   # Sandsynlighed for udebanesejr
 
-# Initialiser og træn LightGBM-modellen
-model = LGBMClassifier(objective='multiclass', num_class=3, device='gpu', n_estimators=1000, learning_rate=0.01, max_depth=3, random_state=42)
-model.fit(X_train, Y_train_classes)
+# Initialiser modeller
+model_home = LGBMRegressor(boosting_type='gbdt', device='gpu', n_estimators=1000, learning_rate=0.01, max_depth=3, random_state=42)
+model_draw = LGBMRegressor(boosting_type='gbdt', device='gpu', n_estimators=1000, learning_rate=0.01, max_depth=3, random_state=42)
+model_away = LGBMRegressor(boosting_type='gbdt', device='gpu', n_estimators=1000, learning_rate=0.01, max_depth=3, random_state=42)
 
-# Lav forudsigelser (sandsynligheder)
-Y_pred_proba = model.predict_proba(X_test)
+# Træn modellerne
+model_home.fit(X_train, Y_train_home)
+model_draw.fit(X_train, Y_train_draw)
+model_away.fit(X_train, Y_train_away)
+
+# Lav probabilistiske forudsigelser
+probs_home = model_home.predict(X_test)
+probs_draw = model_draw.predict(X_test)
+probs_away = model_away.predict(X_test)
+
+# Kombiner sandsynlighederne med softmax
+probs_combined = np.column_stack([probs_home, probs_draw, probs_away])
+Y_pred_proba = softmax(probs_combined, axis=1)
+
+def polynomial_calibration(Y_pred_proba, Y_test, degree=3):
+    calibrated_probs = []
+    for i in range(3):
+        # Fit polynomiel regression
+        poly = Polynomial.fit(Y_pred_proba[:, i], Y_test[:, i], deg=degree)
+        calibrated_probs.append(poly(Y_pred_proba[:, i]))
+    return np.column_stack(calibrated_probs)
+
+Y_pred_proba = polynomial_calibration(Y_pred_proba, Y_test, degree=3)
 
 # Manuel beregning af log-loss
 epsilon = 1e-15  # For at undgå log(0)

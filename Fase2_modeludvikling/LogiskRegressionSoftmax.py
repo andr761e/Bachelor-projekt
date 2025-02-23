@@ -1,40 +1,57 @@
 import numpy as np
 import pandas as pd
-from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import log_loss
+from scipy.special import softmax
 import matplotlib.pyplot as plt
+from numpy.polynomial.polynomial import Polynomial
 
-#LOGISTISK REGRESSION MED SOFTMAX DELEN
 # Indlæs data (ændr stierne hvis nødvendigt)
 X = pd.read_excel("Fase1_Datamanipulation/processed_input_data.xlsx").to_numpy()
 Y = pd.read_excel("Fase1_Datamanipulation/processed_output_labels.xlsx").to_numpy()  # One-hot encoded labels
-print(Y)
 match_results = pd.read_excel("Fase1_Datamanipulation/match_results.xlsx").to_numpy()
 
-# Split data i træning og test
+# Data splitting
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=42)
-print(Y_test)
 #Split kampresultaterne på samme måde (skal bruges senere)
 _, match_result_split, _, _ = train_test_split(match_results, Y, test_size=0.2, random_state=42)
 
-# Konverter kun Y_train til integer-klasser
-Y_train_classes = np.argmax(Y_train, axis=1)
+# Konverter Y til sandsynligheder for hver klasse
+Y_train_home = Y_train[:, 0]   # Sandsynlighed for hjemmebanesejr
+Y_train_draw = Y_train[:, 1]   # Sandsynlighed for uafgjort
+Y_train_away = Y_train[:, 2]   # Sandsynlighed for udebanesejr
 
-# Initialiser og træn modellen
-class_weights = {0: 1.0, 1: 15.0, 2: 1.0}
-model = LogisticRegression(multi_class='multinomial', solver='lbfgs', max_iter=1000,C=0.01,class_weight=class_weights)
-model.fit(X_train, Y_train_classes)
+# Træn probabilistiske modeller
+model_home = LinearRegression()
+model_draw = LinearRegression()
+model_away = LinearRegression()
 
-# Lav forudsigelser (sandsynligheder)
-Y_pred_proba = model.predict_proba(X_test)
-print(Y_pred_proba)
-print(Y_test)
+model_home.fit(X_train, Y_train_home)
+model_draw.fit(X_train, Y_train_draw)
+model_away.fit(X_train, Y_train_away)
+
+# Lav probabilistiske forudsigelser
+probs_home = model_home.predict(X_test)   # Sandsynlighed for hjemmebanesejr
+probs_draw = model_draw.predict(X_test)   # Sandsynlighed for uafgjort
+probs_away = model_away.predict(X_test)   # Sandsynlighed for udebanesejr
+
+# Saml sandsynligheder og brug softmax
+probs_combined = np.column_stack([probs_home, probs_draw, probs_away])
+Y_pred_proba = softmax(probs_combined, axis=1)  # Softmax sikrer, at hver række summer til 1
+
+def polynomial_calibration(Y_pred_proba, Y_test, degree=3):
+    calibrated_probs = []
+    for i in range(3):
+        # Fit polynomiel regression
+        poly = Polynomial.fit(Y_pred_proba[:, i], Y_test[:, i], deg=degree)
+        calibrated_probs.append(poly(Y_pred_proba[:, i]))
+    return np.column_stack(calibrated_probs)
+
+Y_pred_proba = polynomial_calibration(Y_pred_proba, Y_test, degree=3)
 
 # Manuel beregning af log-loss
 epsilon = 1e-15  # For at undgå log(0)
 Y_pred_proba = np.clip(Y_pred_proba, epsilon, 1 - epsilon)  # Klip sandsynlighederne
-print(Y_pred_proba)
 log_loss_manual = -np.mean(np.sum(Y_test * np.log(Y_pred_proba), axis=1))
 print(f"Manuel Log Loss: {log_loss_manual}")
 

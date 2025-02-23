@@ -22,88 +22,64 @@ When you save the notebook, an HTML file containing the code and output will be 
 The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
 
 ```{r}
-df <- read_excel("NeuralNetworkOutliersResultsUnfiltered.xlsx")
-head(df)
+#Indlæs alle dataframes
+SR <- read_excel("SoftmaxRegressionResultsUnfiltered.xlsx")
+KNN <- read_excel("KNNResultsUnfiltered.xlsx")
+RF <- read_excel("RandomForestResultsUnfiltered.xlsx")
+KNN_RF <- read_excel("KNN_RF_ResultsUnfiltered.xlsx")
+NN <- read_excel("NeuralNetworkOutliersResultsUnfiltered.xlsx")
 ```
 
 
 
 ```{r}
-# Funktion til at tælle successer og fejl
-count_predictions <- function(df, pred_col, true_col, result_col, result_char) {
-  df <- df %>%
-    mutate(
-      prediction_higher = ifelse(df[[pred_col]] > df[[true_col]], 1, 0),
-      correct_prediction = ifelse(prediction_higher == 1 & df[[result_col]] == result_char, 1, 0)
-    )
+# Funktion til at sammenligne modelens success rate med bookmakernes gennemsnitlige sandsynlighed
+compare_with_bookmakers <- function(df, pred_col, true_col, diff_col, result_col, result_char, threshold = 0) {
+  # Filtrer kun rækker, hvor forskellen overstiger threshold
+  df <- df[df[[diff_col]] > threshold, ]
   
-  # Tæl antallet af succeser og fejl
-  n11 <- sum(df$correct_prediction == 1)  # Succes
-  n12 <- sum(df$prediction_higher == 1 & df$correct_prediction == 0)  # Fejl
-  n21 <- sum(df$prediction_higher == 0 & df[[result_col]] == result_char)  # Udfald skete, men model forudsagde ikke
-  n22 <- sum(df$prediction_higher == 0 & df[[result_col]] != result_char)  # Ingen forudsigelse, og udfald skete ikke
+  # Hvis der ikke er rækker, afslut
+  if (nrow(df) == 0) {
+    cat("\nIngen rækker opfylder threshold =", threshold, "\n")
+    return()
+  }
   
-  # Returner en kontingenstabel
-  matrix(c(n11, n12, n21, n22), nrow = 2, byrow = TRUE)
-}
-
-# 🔥 Hjemmesejr (H)
-cat("\n📌 Hjemmesejr (H)\n")
-matrix_H <- count_predictions(df, "YpredH", "YtrueH", "FTR", "H")
-print(matrix_H)
-chisq_test_H <- chisq.test(matrix_H)
-print(chisq_test_H)
-
-# 🔥 Uafgjort (D)
-cat("\n📌 Uafgjort (D)\n")
-matrix_D <- count_predictions(df, "YpredD", "YtrueD", "FTR", "D")
-print(matrix_D)
-chisq_test_D <- chisq.test(matrix_D)
-print(chisq_test_D)
-
-# 🔥 Udebanesejr (A)
-cat("\n📌 Udebanesejr (A)\n")
-matrix_A <- count_predictions(df, "YpredA", "YtrueA", "FTR", "A")
-print(matrix_A)
-chisq_test_A <- chisq.test(matrix_A)
-print(chisq_test_A)
-```
-
-
-
-```{r}
-# Funktion til binomial test
-binomial_test <- function(df, pred_col, true_col, result_col, result_char, baseline = 1/3) {
-  # Filtrer kun rækker, hvor modellen vurderer sandsynligheden højere
-  subset_df <- df[df[[pred_col]] > df[[true_col]], ]
+  # Tæl successer (model korrekt forudsigelse) og total antal
+  success <- sum(df[[pred_col]] > df[[true_col]] & df[[result_col]] == result_char)
+  total <- sum(df[[pred_col]] > df[[true_col]])
   
-  # Tæl succeser (korrekt forudsigelse) og total antal forsøg
-  successes <- sum(subset_df[[result_col]] == result_char)
-  total <- nrow(subset_df)
+  # Beregn bookmakernes gennemsnitlige sandsynlighed for det specifikke udfald
+  bookmaker_mean <- mean(df[[true_col]])
   
-  # Udfør binomial test
+  # Udskriv success rate og bookmaker gennemsnit
+  cat("\nThreshold =", threshold, "\n")
+  cat("Antal rækker:", total, "\n")
+  cat("Model Success Rate:", success, "/", total, "=", ifelse(total > 0, success/total, NA), "\n")
+  cat("Bookmakernes Gennemsnitlige Sandsynlighed =", round(bookmaker_mean, 4), "\n")
+  
+  # One-sample binomial test mod bookmaker gennemsnit
   if (total > 0) {
-    test <- binom.test(successes, total, p = baseline, alternative = "greater")
-    return(test)
+    test <- binom.test(success, total, p = bookmaker_mean, alternative = "greater")
+    print(test)
   } else {
-    return("Ingen rækker opfylder betingelsen.")
+    cat("Ingen rækker opfylder threshold.\n")
   }
 }
 
 # 🔥 Hjemmesejr (H)
 cat("\n📌 Hjemmesejr (H)\n")
-test_H <- binomial_test(df, "YpredH", "YtrueH", "FTR", "H")
-print(test_H)
+compare_with_bookmakers(NN, "YpredH", "YtrueH", "%DiffH", "FTR", "H", threshold = 60)
 
 # 🤝 Uafgjort (D)
 cat("\n📌 Uafgjort (D)\n")
-test_D <- binomial_test(df, "YpredD", "YtrueD", "FTR", "D")
-print(test_D)
+compare_with_bookmakers(NN, "YpredD", "YtrueD", "%DiffD", "FTR", "D", threshold = 60)
 
 # 🚌 Udebanesejr (A)
 cat("\n📌 Udebanesejr (A)\n")
-test_A <- binomial_test(df, "YpredA", "YtrueA", "FTR", "A")
-print(test_A)
+compare_with_bookmakers(NN, "YpredA", "YtrueA", "%DiffA", "FTR", "A", threshold = 60)
+
+#df2 <- df[df[["%DiffH"]] > 80, ]
+#print(df2, n = Inf)
 ```
 
 ```{r}
@@ -142,64 +118,18 @@ compare_with_bookmakers <- function(df, pred_col, true_col, diff_col, result_col
 
 # 🔥 Hjemmesejr (H)
 cat("\n📌 Hjemmesejr (H)\n")
-compare_with_bookmakers(df, "YpredH", "YtrueH", "%DiffH", "FTR", "H", threshold = 80)
+compare_with_bookmakers(NN, "YpredH", "YtrueH", "DiffH", "FTR", "H", threshold = 0.05)
 
 # 🤝 Uafgjort (D)
 cat("\n📌 Uafgjort (D)\n")
-compare_with_bookmakers(df, "YpredD", "YtrueD", "%DiffD", "FTR", "D", threshold = 80)
+compare_with_bookmakers(NN, "YpredD", "YtrueD", "DiffD", "FTR", "D", threshold = 0.05)
 
 # 🚌 Udebanesejr (A)
 cat("\n📌 Udebanesejr (A)\n")
-compare_with_bookmakers(df, "YpredA", "YtrueA", "%DiffA", "FTR", "A", threshold = 80)
+compare_with_bookmakers(NN, "YpredA", "YtrueA", "DiffA", "FTR", "A", threshold = 0.05)
 
-df2 <- df[df[["%DiffH"]] > 80, ]
+df2 <- NN[NN[["DiffH"]] > 0.05, ]
 print(df2, n = Inf)
-```
 
-```{r}
-# Funktion til at sammenligne modelens success rate med bookmakernes gennemsnitlige sandsynlighed
-compare_with_bookmakers <- function(df, pred_col, true_col, diff_col, result_col, result_char, threshold = 0) {
-  # Filtrer kun rækker, hvor forskellen overstiger threshold
-  df <- df[df[[diff_col]] > threshold, ]
-  
-  # Hvis der ikke er rækker, afslut
-  if (nrow(df) == 0) {
-    cat("\nIngen rækker opfylder threshold =", threshold, "\n")
-    return()
-  }
-  
-  # Tæl successer (model korrekt forudsigelse) og total antal
-  success <- sum(df[[pred_col]] > df[[true_col]] & df[[result_col]] == result_char)
-  total <- sum(df[[pred_col]] > df[[true_col]])
-  
-  # Beregn bookmakernes gennemsnitlige sandsynlighed for det specifikke udfald
-  bookmaker_mean <- mean(df[[true_col]])
-  
-  # Udskriv success rate og bookmaker gennemsnit
-  cat("\nThreshold =", threshold, "\n")
-  cat("Antal rækker:", total, "\n")
-  cat("Model Success Rate:", success, "/", total, "=", ifelse(total > 0, success/total, NA), "\n")
-  cat("Bookmakernes Gennemsnitlige Sandsynlighed =", round(bookmaker_mean, 4), "\n")
-  
-  # One-sample binomial test mod bookmaker gennemsnit
-  if (total > 0) {
-    test <- binom.test(success, total, p = bookmaker_mean, alternative = "greater")
-    print(test)
-  } else {
-    cat("Ingen rækker opfylder threshold.\n")
-  }
-}
-
-# 🔥 Hjemmesejr (H)
-cat("\n📌 Hjemmesejr (H)\n")
-compare_with_bookmakers(df, "YpredH", "YtrueH", "DiffH", "FTR", "H", threshold = 0.3)
-
-# 🤝 Uafgjort (D)
-cat("\n📌 Uafgjort (D)\n")
-compare_with_bookmakers(df, "YpredD", "YtrueD", "DiffD", "FTR", "D", threshold = 0.3)
-
-# 🚌 Udebanesejr (A)
-cat("\n📌 Udebanesejr (A)\n")
-compare_with_bookmakers(df, "YpredA", "YtrueA", "DiffA", "FTR", "A", threshold = 0.3)
 ```
 

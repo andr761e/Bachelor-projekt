@@ -1,40 +1,59 @@
-import pandas as pd
 import numpy as np
+import pandas as pd
 from sklearn.model_selection import train_test_split
-from sklearn.ensemble import VotingClassifier
-from xgboost import XGBClassifier
-from lightgbm import LGBMClassifier
-from catboost import CatBoostClassifier
+from sklearn.ensemble import VotingRegressor
+from xgboost import XGBRegressor
+from lightgbm import LGBMRegressor
+from catboost import CatBoostRegressor
+from scipy.special import softmax
 import matplotlib.pyplot as plt
+from numpy.polynomial.polynomial import Polynomial
 
 # Indlæs data
 X = pd.read_excel("Fase1_Datamanipulation/processed_input_data.xlsx").to_numpy()
 Y = pd.read_excel("Fase1_Datamanipulation/processed_output_labels.xlsx").to_numpy()
 
-# Split data i træning og test
+# Split data
 X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=42)
 
-# Konverter Y til integer-klasser (kræves af både KNN og XGBClassifier)
-Y_train_classes = np.argmax(Y_train, axis=1)
-Y_test_classes = np.argmax(Y_test, axis=1)
+# Opdel Y_train i separate arrays for hver klasse
+Y_train_home = Y_train[:, 0]   # Sandsynlighed for hjemmebanesejr
+Y_train_draw = Y_train[:, 1]   # Sandsynlighed for uafgjort
+Y_train_away = Y_train[:, 2]   # Sandsynlighed for udebanesejr
 
-# Definér individuelle modeller
-model_xgb = XGBClassifier(n_estimators=500, learning_rate=0.01, max_depth=4)
-model_lgbm = LGBMClassifier(n_estimators=500, learning_rate=0.01, max_depth=4)
-model_cat = CatBoostClassifier(iterations=500, learning_rate=0.01, depth=4, verbose=0)
+# Initialiser modeller (XGBoost + LightGBM + CatBoost)
+model_xgb = XGBRegressor(objective='reg:squarederror', n_estimators=500, learning_rate=0.01, max_depth=4, random_state=42)
+model_lgbm = LGBMRegressor(n_estimators=500, learning_rate=0.01, max_depth=4, random_state=42)
+model_cat = CatBoostRegressor(iterations=500, learning_rate=0.01, depth=4, verbose=0, random_seed=42)
 
-# Definér ensemble model
-ensemble_model = VotingClassifier(estimators=[
-    ('xgb', model_xgb),
-    ('lgbm', model_lgbm),
-    ('cat', model_cat)],
-    voting='soft')  # Brug soft voting for sandsynligheder
+# Ensemble modeller
+ensemble_home = VotingRegressor(estimators=[('xgb', model_xgb), ('lgbm', model_lgbm), ('cat', model_cat)], weights=[3, 2, 1])
+ensemble_draw = VotingRegressor(estimators=[('xgb', model_xgb), ('lgbm', model_lgbm), ('cat', model_cat)], weights=[3, 2, 1])
+ensemble_away = VotingRegressor(estimators=[('xgb', model_xgb), ('lgbm', model_lgbm), ('cat', model_cat)], weights=[3, 2, 1])
 
-# Træn ensemble-modellen
-ensemble_model.fit(X_train, Y_train_classes)
+# Træn hver ensemble-model
+ensemble_home.fit(X_train, Y_train_home)
+ensemble_draw.fit(X_train, Y_train_draw)
+ensemble_away.fit(X_train, Y_train_away)
 
-# Prediction med sandsynligheder
-Y_pred_proba = ensemble_model.predict_proba(X_test)
+# Lav probabilistiske forudsigelser
+probs_home = ensemble_home.predict(X_test)
+probs_draw = ensemble_draw.predict(X_test)
+probs_away = ensemble_away.predict(X_test)
+
+# Kombiner sandsynlighederne med softmax
+probs_combined = np.column_stack([probs_home, probs_draw, probs_away])
+Y_pred_proba = softmax(probs_combined, axis=1)
+
+def polynomial_calibration(Y_pred_proba, Y_test, degree=3):
+    calibrated_probs = []
+    for i in range(3):
+        # Fit polynomiel regression
+        poly = Polynomial.fit(Y_pred_proba[:, i], Y_test[:, i], deg=degree)
+        calibrated_probs.append(poly(Y_pred_proba[:, i]))
+    return np.column_stack(calibrated_probs)
+
+Y_pred_proba = polynomial_calibration(Y_pred_proba, Y_test, degree=3)
 
 # Manuel beregning af log-loss
 epsilon = 1e-15  # For at undgå log(0)
