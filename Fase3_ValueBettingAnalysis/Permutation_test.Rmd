@@ -127,6 +127,7 @@ compare_with_bookmakers(NN, "YpredA", "YtrueA", "%DiffA", "FTR", "A", threshold 
 # 🔥 Hjemmesejr (H)
 cat("\n📌 Hjemmesejr (H)\n")
 compare_with_bookmakers(NN, "YpredH", "YtrueH", "DiffH", "FTR", "H", threshold = 0.025)
+
 # 🤝 Uafgjort (D)
 cat("\n📌 Uafgjort (D)\n")
 compare_with_bookmakers(NN, "YpredD", "YtrueD", "DiffD", "FTR", "D", threshold = 0.025)
