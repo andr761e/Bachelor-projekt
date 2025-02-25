@@ -5,6 +5,7 @@ from tensorflow import keras
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import log_loss
 import matplotlib.pyplot as plt
+from numpy.polynomial.polynomial import Polynomial
 
 # Indlæs data
 X = pd.read_excel("Fase1_Datamanipulation/processed_input_data.xlsx").to_numpy()
