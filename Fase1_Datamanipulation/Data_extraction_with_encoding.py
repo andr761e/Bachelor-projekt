@@ -46,8 +46,8 @@ HomeTeamElo = pd.read_excel("Fase1_Datamanipulation/team_elo_data.xlsx", usecols
 AwayTeamElo = pd.read_excel("Fase1_Datamanipulation/team_elo_data.xlsx", usecols="B", skiprows=0, nrows=7981)
 
 #Indlæs One-Hot-Encoded data
-HomeTeamEncoded = pd.read_excel("Fase1_Datamanipulation/one_hot_encoded_teams.xlsx", usecols=range(0,43), skiprows=0, nrows=7981)
-AwayTeamEncoded = pd.read_excel("Fase1_Datamanipulation/one_hot_encoded_teams.xlsx", usecols=range(43,86), skiprows=0, nrows=7981)
+HomeTeamEncoded = pd.read_excel("Fase1_Datamanipulation/binary_encoded_teams.xlsx", usecols=range(0,64), skiprows=0, nrows=7981)
+AwayTeamEncoded = pd.read_excel("Fase1_Datamanipulation/binary_encoded_teams.xlsx", usecols=range(64,128), skiprows=0, nrows=7981)
 
 
 # Resultattabel
@@ -116,6 +116,13 @@ form_stats_df = pd.DataFrame(form_stats, columns=columns)
 # Opret en kopi af din eksisterende DataFrame
 final_df = form_stats_df.copy()
 
+df1 = form_stats_df.iloc[:, :9]   # Første del (kolonner 1 til 37)
+df2 = form_stats_df.iloc[:, 9:18] # Anden del (kolonner 38 til 83)
+
+# Sammenkæd dem igen med nul-kolonnerne indsat de rigtige steder
+form_stats_df = pd.concat([HomeTeamEncoded, df1, AwayTeamEncoded, df2], axis=1)
+
+"""
 # Tilføj hjemmeholdets encoding foran alle kolonner
 form_stats_df = pd.concat([HomeTeamEncoded, form_stats_df], axis=1)
 
@@ -128,6 +135,7 @@ form_stats_df = pd.concat([
     AwayTeamEncoded,
     form_stats_df.iloc[:, insert_position:]
 ], axis=1)
+"""
 
 # Debugging: Tjek det endelige datasæt
 print(form_stats_df)

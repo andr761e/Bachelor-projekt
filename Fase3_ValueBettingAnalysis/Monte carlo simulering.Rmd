@@ -35,7 +35,7 @@ CB <- read_excel("CatBoostResultsUnfiltered.xlsx")
 LGBM <- read_excel("LightGBMResultsUnfiltered.xlsx")
 XGB <- read_excel("XGBoostResultsUnfiltered.xlsx")
 GE <- read_excel("GradientEnsembleResultsUnfiltered.xlsx")
-NN <- read_excel("NeuralNetworkOutliersResultsUnfiltered.xlsx")
+NN <- read_excel("NeuralNetworkOutliersResultsUnfiltered.xlsx") 
 ```
 
 # Definer funktion
@@ -214,15 +214,6 @@ monte_carlo_simulation2(df = NN, result_char = "H",
                        lower_threshold = 0.05, upper_threshold = 0.07, 
                        bet_amount = 100, simulations = 10000)
 
-```
-
-```{r}
-# 🔥 Hjemmesejr (H) med thresholds 0.05 og 0.07
-monte_carlo_simulation2(df = NN, result_char = "A", 
-                       pred_col = "YpredA", true_col = "YtrueA", 
-                       diff_col = "DiffA", result_col = "FTR", 
-                       lower_threshold = 0.075, upper_threshold = 0.1, 
-                       bet_amount = 100, simulations = 10000)
 ```
 
 ## Logistisk Regression

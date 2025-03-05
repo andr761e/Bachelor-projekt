@@ -13,9 +13,14 @@ X = pd.read_excel("Fase1_Datamanipulation/processed_input_data.xlsx").to_numpy()
 Y = pd.read_excel("Fase1_Datamanipulation/processed_output_labels.xlsx").to_numpy()
 match_results = pd.read_excel("Fase1_Datamanipulation/match_results.xlsx").to_numpy()
 
-# Split data
-X_train, X_test, Y_train, Y_test = train_test_split(X, Y, test_size=0.2, random_state=42)
-_, match_result_split, _, _ = train_test_split(match_results, Y, test_size=0.2, random_state=42)
+#Korrekt tidsafhængig split
+# Definér splitpunktet baseret på antal rækker
+split_point = int(0.8 * len(X))
+# Tidsbaseret split
+X_train, X_test = X[:split_point], X[split_point:]
+Y_train, Y_test = Y[:split_point], Y[split_point:]
+#Split kampresultaterne på samme måde (skal bruges senere)
+match_result_split = match_results[split_point:]
 
 # Standardisering
 scaler = StandardScaler()
