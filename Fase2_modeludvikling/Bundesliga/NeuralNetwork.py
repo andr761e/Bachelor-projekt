@@ -1,15 +1,20 @@
 import numpy as np
 import pandas as pd
-from sklearn.linear_model import LinearRegression
+import tensorflow as tf
+from tensorflow import keras
 from sklearn.model_selection import train_test_split
-from scipy.special import softmax
+from sklearn.metrics import log_loss
+import matplotlib.pyplot as plt
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from Methods import methods
 met = methods()
 
-# Indlæs data (ændr stierne hvis nødvendigt)
-X = pd.read_excel("Fase1_Datamanipulation/processed_input_data.xlsx").to_numpy()
-Y = pd.read_excel("Fase1_Datamanipulation/processed_output_labels.xlsx").to_numpy()  # One-hot encoded labels
-match_results = pd.read_excel("Fase1_Datamanipulation/match_results.xlsx").to_numpy()
+# Indlæs data
+X = pd.read_excel("Fase1_Datamanipulation/Bundesliga/tyske_processed_input_data.xlsx").to_numpy()
+Y = pd.read_excel("Fase1_Datamanipulation/Bundesliga/tyske_processed_output_labels.xlsx").to_numpy() 
+match_results = pd.read_excel("Fase1_Datamanipulation/Bundesliga/tyske_match_results.xlsx").to_numpy()
 
 #Korrekt tidsafhængig split
 # Definér splitpunktet baseret på antal rækker
@@ -20,41 +25,45 @@ Y_train, Y_test = Y[:split_point], Y[split_point:]
 #Split kampresultaterne på samme måde (skal bruges senere)
 match_result_split = match_results[split_point:]
 
-# Konverter Y til sandsynligheder for hver klasse
-Y_train_home = Y_train[:, 0]   # Sandsynlighed for hjemmebanesejr
-Y_train_draw = Y_train[:, 1]   # Sandsynlighed for uafgjort
-Y_train_away = Y_train[:, 2]   # Sandsynlighed for udebanesejr
+# Definerer et avanceret neuralt netværk
+model = keras.Sequential([
+    keras.layers.Dense(256, activation="relu", input_shape=(X.shape[1],)),
+    keras.layers.BatchNormalization(),
+    keras.layers.Dropout(0.3),
 
-# Træn probabilistiske modeller
-model_home = LinearRegression()
-model_draw = LinearRegression()
-model_away = LinearRegression()
+    keras.layers.Dense(128, activation="relu"),
+    keras.layers.BatchNormalization(),
+    keras.layers.Dropout(0.3),
 
-model_home.fit(X_train, Y_train_home)
-model_draw.fit(X_train, Y_train_draw)
-model_away.fit(X_train, Y_train_away)
+    keras.layers.Dense(64, activation="relu"),
+    keras.layers.BatchNormalization(),
+    keras.layers.Dropout(0.3),
 
-# Lav probabilistiske forudsigelser
-probs_home = model_home.predict(X_test)   # Sandsynlighed for hjemmebanesejr
-probs_draw = model_draw.predict(X_test)   # Sandsynlighed for uafgjort
-probs_away = model_away.predict(X_test)   # Sandsynlighed for udebanesejr
+    keras.layers.Dense(3, activation="softmax")  # Outputlag med 3 sandsynligheder
+])
 
-# Saml sandsynligheder
-probs_combined = np.column_stack([probs_home, probs_draw, probs_away])
+# Kompiler modellen
+model.compile(optimizer=keras.optimizers.Adam(learning_rate=0.001),
+              loss="categorical_crossentropy",
+              metrics=["accuracy"])
 
-#Prediction
-Y_pred_proba = met.direct_normalization(probs_combined)
-#Alternativ
-#Y_pred_proba = softmax(probs_combined, axis=1)  # Softmax sikrer, at hver række summer til 1
+# Callback til early stopping for at undgå overfitting
+early_stopping = keras.callbacks.EarlyStopping(monitor='val_loss', patience=10, restore_best_weights=True)
 
-#Kalibrering
-Y_pred_proba = met.polynomial_calibration(Y_pred_proba, Y_test, degree=3)
+# Træn modellen
+history = model.fit(X_train, Y_train,
+                    epochs=100,
+                    batch_size=64,
+                    validation_data=(X_test, Y_test),
+                    callbacks=[early_stopping],
+                    verbose=1)
 
-# Manuel beregning af log-loss
-epsilon = 1e-15  # For at undgå log(0)
-Y_pred_proba = np.clip(Y_pred_proba, epsilon, 1 - epsilon)  # Klip sandsynlighederne
-log_loss_manual = -np.mean(np.sum(Y_test * np.log(Y_pred_proba), axis=1))
-print(f"Manuel Log Loss: {log_loss_manual}")
+# Lav forudsigelser
+Y_pred_proba = model.predict(X_test)
+
+# Beregn log loss
+manual_logloss = -np.mean(np.sum(Y_test * np.log(Y_pred_proba + 1e-15), axis=1))
+print(f"Manuel Log Loss: {manual_logloss}")
 
 # Eksempel på sandsynlighedsfordelinger
 print("Første 3 rækker af Y_test (originale sandsynlighedsfordelinger):")
@@ -68,6 +77,8 @@ np.random.seed(42)
 
 # Plot 1: Histogram for predicted probabilities
 met.plot_histogram(Y_pred_proba, classes=["Hjemmesejr", "Uafgjort", "Udesejr"], colors=["blue", "orange", "green"])
+
+met.plot_histogram(Y_test, classes=["Hjemmesejr", "Uafgjort", "Udesejr"], colors=["blue", "orange", "green"])
 
 # Plot 2: Comparison of actual vs predicted probabilities (first 10 games)
 met.plot_comparison(Y_pred_proba, Y_test, classes=["Hjemmesejr", "Uafgjort", "Udesejr"], colors=["blue", "orange", "green"])
@@ -92,4 +103,4 @@ columns = [
 
 result = pd.concat([pd.DataFrame(match_result_split), pd.concat([pd.DataFrame(Y_pred_proba), pd.concat([pd.DataFrame(Y_test),pd.concat([pd.DataFrame(Y_pred_proba - Y_test),pd.DataFrame((Y_pred_proba - Y_test)/Y_test*100)],axis=1)], axis=1)], axis=1)],axis=1)
 result.columns = columns
-result.to_excel("Fase3_ValueBettingAnalysis/SoftmaxRegressionResultsUnfiltered.xlsx", index=False)
+result.to_excel("Fase3_ValueBettingAnalysis/Bundesliga/NeuralNetworkOutliersResultsUnfiltered.xlsx", index=False)

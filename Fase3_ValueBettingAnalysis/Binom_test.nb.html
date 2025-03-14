@@ -1798,9 +1798,9 @@ run any R code chunks. Instead, the output of the chunk when it was last
 run in the editor is displayed.</p>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI0luZGzDpnMgYWxsZSBkYXRhZnJhbWVzXG5TUiA8LSByZWFkX2V4Y2VsKFwiU29mdG1heFJlZ3Jlc3Npb25SZXN1bHRzVW5maWx0ZXJlZC54bHN4XCIpXG5LTk4gPC0gcmVhZF9leGNlbChcIktOTlJlc3VsdHNVbmZpbHRlcmVkLnhsc3hcIilcblJGIDwtIHJlYWRfZXhjZWwoXCJSYW5kb21Gb3Jlc3RSZXN1bHRzVW5maWx0ZXJlZC54bHN4XCIpXG5LTk5fUkYgPC0gcmVhZF9leGNlbChcIktOTl9SRl9SZXN1bHRzVW5maWx0ZXJlZC54bHN4XCIpXG5DQiA8LSByZWFkX2V4Y2VsKFwiQ2F0Qm9vc3RSZXN1bHRzVW5maWx0ZXJlZC54bHN4XCIpXG5MR0JNIDwtIHJlYWRfZXhjZWwoXCJMaWdodEdCTVJlc3VsdHNVbmZpbHRlcmVkLnhsc3hcIilcblhHQiA8LSByZWFkX2V4Y2VsKFwiWEdCb29zdFJlc3VsdHNVbmZpbHRlcmVkLnhsc3hcIilcbkdFIDwtIHJlYWRfZXhjZWwoXCJHcmFkaWVudEVuc2VtYmxlUmVzdWx0c1VuZmlsdGVyZWQueGxzeFwiKVxuTk4gPC0gcmVhZF9leGNlbChcIk5ldXJhbE5ldHdvcmtPdXRsaWVyc1Jlc3VsdHNVbmZpbHRlcmVkLnhsc3hcIilcbmBgYCJ9 -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuI0luZGzDpnMgYWxsZSBkYXRhZnJhbWVzXG5MUiA8LSByZWFkX2V4Y2VsKFwiTG9naXN0aWNSZWdyZXNzaW9uUmVzdWx0c1VuZmlsdGVyZWQueGxzeFwiKVxuS05OIDwtIHJlYWRfZXhjZWwoXCJLTk5SZXN1bHRzVW5maWx0ZXJlZC54bHN4XCIpXG5SRiA8LSByZWFkX2V4Y2VsKFwiUmFuZG9tRm9yZXN0UmVzdWx0c1VuZmlsdGVyZWQueGxzeFwiKVxuS05OX1JGIDwtIHJlYWRfZXhjZWwoXCJLTk5fUkZfUmVzdWx0c1VuZmlsdGVyZWQueGxzeFwiKVxuQ0IgPC0gcmVhZF9leGNlbChcIkNhdEJvb3N0UmVzdWx0c1VuZmlsdGVyZWQueGxzeFwiKVxuTEdCTSA8LSByZWFkX2V4Y2VsKFwiTGlnaHRHQk1SZXN1bHRzVW5maWx0ZXJlZC54bHN4XCIpXG5YR0IgPC0gcmVhZF9leGNlbChcIlhHQm9vc3RSZXN1bHRzVW5maWx0ZXJlZC54bHN4XCIpXG5HRSA8LSByZWFkX2V4Y2VsKFwiR3JhZGllbnRFbnNlbWJsZVJlc3VsdHNVbmZpbHRlcmVkLnhsc3hcIilcbk5OIDwtIHJlYWRfZXhjZWwoXCJOZXVyYWxOZXR3b3JrT3V0bGllcnNSZXN1bHRzVW5maWx0ZXJlZC54bHN4XCIpXG5cbiNUeXNrZSBvdXRsaWVyc1xuVExSIDwtIHJlYWRfZXhjZWwoXCJCdW5kZXNsaWdhL0xvZ2lzdGljUmVncmVzc2lvblJlc3VsdHNVbmZpbHRlcmVkLnhsc3hcIilcblRDQiA8LSByZWFkX2V4Y2VsKFwiQnVuZGVzbGlnYS9DYXRCb29zdFJlc3VsdHNVbmZpbHRlcmVkLnhsc3hcIilcblROTiA8LSByZWFkX2V4Y2VsKFwiQnVuZGVzbGlnYS9OZXVyYWxOZXR3b3JrT3V0bGllcnNSZXN1bHRzVW5maWx0ZXJlZC54bHN4XCIpIFxuYGBgIn0= -->
 <pre class="r"><code>#Indlæs alle dataframes
-SR &lt;- read_excel(&quot;SoftmaxRegressionResultsUnfiltered.xlsx&quot;)
+LR &lt;- read_excel(&quot;LogisticRegressionResultsUnfiltered.xlsx&quot;)
 KNN &lt;- read_excel(&quot;KNNResultsUnfiltered.xlsx&quot;)
 RF &lt;- read_excel(&quot;RandomForestResultsUnfiltered.xlsx&quot;)
 KNN_RF &lt;- read_excel(&quot;KNN_RF_ResultsUnfiltered.xlsx&quot;)
@@ -1808,7 +1808,12 @@ CB &lt;- read_excel(&quot;CatBoostResultsUnfiltered.xlsx&quot;)
 LGBM &lt;- read_excel(&quot;LightGBMResultsUnfiltered.xlsx&quot;)
 XGB &lt;- read_excel(&quot;XGBoostResultsUnfiltered.xlsx&quot;)
 GE &lt;- read_excel(&quot;GradientEnsembleResultsUnfiltered.xlsx&quot;)
-NN &lt;- read_excel(&quot;NeuralNetworkOutliersResultsUnfiltered.xlsx&quot;)</code></pre>
+NN &lt;- read_excel(&quot;NeuralNetworkOutliersResultsUnfiltered.xlsx&quot;)
+
+#Tyske outliers
+TLR &lt;- read_excel(&quot;Bundesliga/LogisticRegressionResultsUnfiltered.xlsx&quot;)
+TCB &lt;- read_excel(&quot;Bundesliga/CatBoostResultsUnfiltered.xlsx&quot;)
+TNN &lt;- read_excel(&quot;Bundesliga/NeuralNetworkOutliersResultsUnfiltered.xlsx&quot;) </code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
@@ -5931,9 +5936,925 @@ probability of success
 #print(df2, n = Inf)</code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="bundesliga-neuralt-netværk" class="section level1">
+<h1>BUNDESLIGA NEURALT NETVÆRK</h1>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyDwn5SlIEhqZW1tZXNlanIgKEgpXG5jYXQoXCJcXG7wn5OMIEhqZW1tZXNlanIgKEgpXFxuXCIpXG5gYGAifQ== -->
+<pre class="r"><code># 🔥 Hjemmesejr (H)
+cat(&quot;\n📌 Hjemmesejr (H)\n&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG7wn5OMIEhqZW1tZXNlanIgKEgpXG4ifQ== -->
+<pre><code>
+📌 Hjemmesejr (H)</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoVE5OLCBcIllwcmVkSFwiLCBcIll0cnVlSFwiLCBcIkRpZmZIXCIsIFwiRlRSXCIsIFwiSFwiLCB0aHJlc2hvbGQgPSAwLjAyNSlcbmBgYCJ9 -->
+<pre class="r"><code>compare_with_bookmakers(TNN, &quot;YpredH&quot;, &quot;YtrueH&quot;, &quot;DiffH&quot;, &quot;FTR&quot;, &quot;H&quot;, threshold = 0.025)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5UaHJlc2hvbGQgPSAwLjAyNSBcbkFudGFsIHLDpmtrZXI6IDM4OSBcbk1vZGVsIFN1Y2Nlc3MgUmF0ZTogMTY1IC8gMzg5ID0gMC40MjQxNjQ1IFxuQm9va21ha2VybmVzIEdlbm5lbXNuaXRsaWdlIFNhbmRzeW5saWdoZWQgPSAwLjM4MzkgXG5cblx0RXhhY3QgYmlub21pYWwgdGVzdFxuXG5kYXRhOiAgc3VjY2VzcyBhbmQgdG90YWxcbm51bWJlciBvZiBzdWNjZXNzZXMgPSAxNjUsIG51bWJlciBvZiB0cmlhbHMgPSAzODksIHAtdmFsdWUgPSAwLjA1NzM5XG5hbHRlcm5hdGl2ZSBoeXBvdGhlc2lzOiB0cnVlIHByb2JhYmlsaXR5IG9mIHN1Y2Nlc3MgaXMgZ3JlYXRlciB0aGFuIDAuMzgzODU3NFxuOTUgcGVyY2VudCBjb25maWRlbmNlIGludGVydmFsOlxuIDAuMzgyMTk4MyAxLjAwMDAwMDBcbnNhbXBsZSBlc3RpbWF0ZXM6XG5wcm9iYWJpbGl0eSBvZiBzdWNjZXNzIFxuICAgICAgICAgICAgIDAuNDI0MTY0NSBcbiJ9 -->
+<pre><code>
+Threshold = 0.025 
+Antal rækker: 389 
+Model Success Rate: 165 / 389 = 0.4241645 
+Bookmakernes Gennemsnitlige Sandsynlighed = 0.3839 
+
+    Exact binomial test
+
+data:  success and total
+number of successes = 165, number of trials = 389, p-value = 0.05739
+alternative hypothesis: true probability of success is greater than 0.3838574
+95 percent confidence interval:
+ 0.3821983 1.0000000
+sample estimates:
+probability of success 
+             0.4241645 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyDwn6SdIFVhZmdqb3J0IChEKVxuY2F0KFwiXFxu8J+TjCBVYWZnam9ydCAoRClcXG5cIilcbmBgYCJ9 -->
+<pre class="r"><code># 🤝 Uafgjort (D)
+cat(&quot;\n📌 Uafgjort (D)\n&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG7wn5OMIFVhZmdqb3J0IChEKVxuIn0= -->
+<pre><code>
+📌 Uafgjort (D)</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoVE5OLCBcIllwcmVkRFwiLCBcIll0cnVlRFwiLCBcIkRpZmZEXCIsIFwiRlRSXCIsIFwiRFwiLCB0aHJlc2hvbGQgPSAwLjAyNSlcbmBgYCJ9 -->
+<pre class="r"><code>compare_with_bookmakers(TNN, &quot;YpredD&quot;, &quot;YtrueD&quot;, &quot;DiffD&quot;, &quot;FTR&quot;, &quot;D&quot;, threshold = 0.025)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5UaHJlc2hvbGQgPSAwLjAyNSBcbkFudGFsIHLDpmtrZXI6IDIzNCBcbk1vZGVsIFN1Y2Nlc3MgUmF0ZTogNDUgLyAyMzQgPSAwLjE5MjMwNzcgXG5Cb29rbWFrZXJuZXMgR2VubmVtc25pdGxpZ2UgU2FuZHN5bmxpZ2hlZCA9IDAuMTg0MyBcblxuXHRFeGFjdCBiaW5vbWlhbCB0ZXN0XG5cbmRhdGE6ICBzdWNjZXNzIGFuZCB0b3RhbFxubnVtYmVyIG9mIHN1Y2Nlc3NlcyA9IDQ1LCBudW1iZXIgb2YgdHJpYWxzID0gMjM0LCBwLXZhbHVlID0gMC40MDIxXG5hbHRlcm5hdGl2ZSBoeXBvdGhlc2lzOiB0cnVlIHByb2JhYmlsaXR5IG9mIHN1Y2Nlc3MgaXMgZ3JlYXRlciB0aGFuIDAuMTg0MzExNlxuOTUgcGVyY2VudCBjb25maWRlbmNlIGludGVydmFsOlxuIDAuMTUwODk0OCAxLjAwMDAwMDBcbnNhbXBsZSBlc3RpbWF0ZXM6XG5wcm9iYWJpbGl0eSBvZiBzdWNjZXNzIFxuICAgICAgICAgICAgIDAuMTkyMzA3NyBcbiJ9 -->
+<pre><code>
+Threshold = 0.025 
+Antal rækker: 234 
+Model Success Rate: 45 / 234 = 0.1923077 
+Bookmakernes Gennemsnitlige Sandsynlighed = 0.1843 
+
+    Exact binomial test
+
+data:  success and total
+number of successes = 45, number of trials = 234, p-value = 0.4021
+alternative hypothesis: true probability of success is greater than 0.1843116
+95 percent confidence interval:
+ 0.1508948 1.0000000
+sample estimates:
+probability of success 
+             0.1923077 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyDwn5qMIFVkZWJhbmVzZWpyIChBKVxuY2F0KFwiXFxu8J+TjCBVZGViYW5lc2VqciAoQSlcXG5cIilcbmBgYCJ9 -->
+<pre class="r"><code># 🚌 Udebanesejr (A)
+cat(&quot;\n📌 Udebanesejr (A)\n&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG7wn5OMIFVkZWJhbmVzZWpyIChBKVxuIn0= -->
+<pre><code>
+📌 Udebanesejr (A)</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoVE5OLCBcIllwcmVkQVwiLCBcIll0cnVlQVwiLCBcIkRpZmZBXCIsIFwiRlRSXCIsIFwiQVwiLCB0aHJlc2hvbGQgPSAwLjAyNSlcbmBgYCJ9 -->
+<pre class="r"><code>compare_with_bookmakers(TNN, &quot;YpredA&quot;, &quot;YtrueA&quot;, &quot;DiffA&quot;, &quot;FTR&quot;, &quot;A&quot;, threshold = 0.025)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5UaHJlc2hvbGQgPSAwLjAyNSBcbkFudGFsIHLDpmtrZXI6IDMzMyBcbk1vZGVsIFN1Y2Nlc3MgUmF0ZTogODIgLyAzMzMgPSAwLjI0NjI0NjIgXG5Cb29rbWFrZXJuZXMgR2VubmVtc25pdGxpZ2UgU2FuZHN5bmxpZ2hlZCA9IDAuMjY2NSBcblxuXHRFeGFjdCBiaW5vbWlhbCB0ZXN0XG5cbmRhdGE6ICBzdWNjZXNzIGFuZCB0b3RhbFxubnVtYmVyIG9mIHN1Y2Nlc3NlcyA9IDgyLCBudW1iZXIgb2YgdHJpYWxzID0gMzMzLCBwLXZhbHVlID0gMC44MTQ2XG5hbHRlcm5hdGl2ZSBoeXBvdGhlc2lzOiB0cnVlIHByb2JhYmlsaXR5IG9mIHN1Y2Nlc3MgaXMgZ3JlYXRlciB0aGFuIDAuMjY2NDc0M1xuOTUgcGVyY2VudCBjb25maWRlbmNlIGludGVydmFsOlxuIDAuMjA3NzA5MyAxLjAwMDAwMDBcbnNhbXBsZSBlc3RpbWF0ZXM6XG5wcm9iYWJpbGl0eSBvZiBzdWNjZXNzIFxuICAgICAgICAgICAgIDAuMjQ2MjQ2MiBcbiJ9 -->
+<pre><code>
+Threshold = 0.025 
+Antal rækker: 333 
+Model Success Rate: 82 / 333 = 0.2462462 
+Bookmakernes Gennemsnitlige Sandsynlighed = 0.2665 
+
+    Exact binomial test
+
+data:  success and total
+number of successes = 82, number of trials = 333, p-value = 0.8146
+alternative hypothesis: true probability of success is greater than 0.2664743
+95 percent confidence interval:
+ 0.2077093 1.0000000
+sample estimates:
+probability of success 
+             0.2462462 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyDwn5SlIEhqZW1tZXNlanIgKEgpXG5jYXQoXCJcXG7wn5OMIEhqZW1tZXNlanIgKEgpXFxuXCIpXG5gYGAifQ== -->
+<pre class="r"><code># 🔥 Hjemmesejr (H)
+cat(&quot;\n📌 Hjemmesejr (H)\n&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG7wn5OMIEhqZW1tZXNlanIgKEgpXG4ifQ== -->
+<pre><code>
+📌 Hjemmesejr (H)</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoVE5OLCBcIllwcmVkSFwiLCBcIll0cnVlSFwiLCBcIkRpZmZIXCIsIFwiRlRSXCIsIFwiSFwiLCB0aHJlc2hvbGQgPSAwLjA1KVxuYGBgIn0= -->
+<pre class="r"><code>compare_with_bookmakers(TNN, &quot;YpredH&quot;, &quot;YtrueH&quot;, &quot;DiffH&quot;, &quot;FTR&quot;, &quot;H&quot;, threshold = 0.05)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5UaHJlc2hvbGQgPSAwLjA1IFxuQW50YWwgcsOma2tlcjogMjY0IFxuTW9kZWwgU3VjY2VzcyBSYXRlOiAxMjAgLyAyNjQgPSAwLjQ1NDU0NTUgXG5Cb29rbWFrZXJuZXMgR2VubmVtc25pdGxpZ2UgU2FuZHN5bmxpZ2hlZCA9IDAuMzg1MiBcblxuXHRFeGFjdCBiaW5vbWlhbCB0ZXN0XG5cbmRhdGE6ICBzdWNjZXNzIGFuZCB0b3RhbFxubnVtYmVyIG9mIHN1Y2Nlc3NlcyA9IDEyMCwgbnVtYmVyIG9mIHRyaWFscyA9IDI2NCwgcC12YWx1ZSA9IDAuMDEyNjNcbmFsdGVybmF0aXZlIGh5cG90aGVzaXM6IHRydWUgcHJvYmFiaWxpdHkgb2Ygc3VjY2VzcyBpcyBncmVhdGVyIHRoYW4gMC4zODUxNTI3XG45NSBwZXJjZW50IGNvbmZpZGVuY2UgaW50ZXJ2YWw6XG4gMC40MDI4MTg5IDEuMDAwMDAwMFxuc2FtcGxlIGVzdGltYXRlczpcbnByb2JhYmlsaXR5IG9mIHN1Y2Nlc3MgXG4gICAgICAgICAgICAgMC40NTQ1NDU1IFxuIn0= -->
+<pre><code>
+Threshold = 0.05 
+Antal rækker: 264 
+Model Success Rate: 120 / 264 = 0.4545455 
+Bookmakernes Gennemsnitlige Sandsynlighed = 0.3852 
+
+    Exact binomial test
+
+data:  success and total
+number of successes = 120, number of trials = 264, p-value = 0.01263
+alternative hypothesis: true probability of success is greater than 0.3851527
+95 percent confidence interval:
+ 0.4028189 1.0000000
+sample estimates:
+probability of success 
+             0.4545455 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyDwn6SdIFVhZmdqb3J0IChEKVxuY2F0KFwiXFxu8J+TjCBVYWZnam9ydCAoRClcXG5cIilcbmBgYCJ9 -->
+<pre class="r"><code># 🤝 Uafgjort (D)
+cat(&quot;\n📌 Uafgjort (D)\n&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG7wn5OMIFVhZmdqb3J0IChEKVxuIn0= -->
+<pre><code>
+📌 Uafgjort (D)</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoVE5OLCBcIllwcmVkRFwiLCBcIll0cnVlRFwiLCBcIkRpZmZEXCIsIFwiRlRSXCIsIFwiRFwiLCB0aHJlc2hvbGQgPSAwLjA1KVxuYGBgIn0= -->
+<pre class="r"><code>compare_with_bookmakers(TNN, &quot;YpredD&quot;, &quot;YtrueD&quot;, &quot;DiffD&quot;, &quot;FTR&quot;, &quot;D&quot;, threshold = 0.05)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5UaHJlc2hvbGQgPSAwLjA1IFxuQW50YWwgcsOma2tlcjogNTYgXG5Nb2RlbCBTdWNjZXNzIFJhdGU6IDEzIC8gNTYgPSAwLjIzMjE0MjkgXG5Cb29rbWFrZXJuZXMgR2VubmVtc25pdGxpZ2UgU2FuZHN5bmxpZ2hlZCA9IDAuMTY2MyBcblxuXHRFeGFjdCBiaW5vbWlhbCB0ZXN0XG5cbmRhdGE6ICBzdWNjZXNzIGFuZCB0b3RhbFxubnVtYmVyIG9mIHN1Y2Nlc3NlcyA9IDEzLCBudW1iZXIgb2YgdHJpYWxzID0gNTYsIHAtdmFsdWUgPSAwLjEyOFxuYWx0ZXJuYXRpdmUgaHlwb3RoZXNpczogdHJ1ZSBwcm9iYWJpbGl0eSBvZiBzdWNjZXNzIGlzIGdyZWF0ZXIgdGhhbiAwLjE2NjI4NDZcbjk1IHBlcmNlbnQgY29uZmlkZW5jZSBpbnRlcnZhbDpcbiAwLjE0MzEyNTkgMS4wMDAwMDAwXG5zYW1wbGUgZXN0aW1hdGVzOlxucHJvYmFiaWxpdHkgb2Ygc3VjY2VzcyBcbiAgICAgICAgICAgICAwLjIzMjE0MjkgXG4ifQ== -->
+<pre><code>
+Threshold = 0.05 
+Antal rækker: 56 
+Model Success Rate: 13 / 56 = 0.2321429 
+Bookmakernes Gennemsnitlige Sandsynlighed = 0.1663 
+
+    Exact binomial test
+
+data:  success and total
+number of successes = 13, number of trials = 56, p-value = 0.128
+alternative hypothesis: true probability of success is greater than 0.1662846
+95 percent confidence interval:
+ 0.1431259 1.0000000
+sample estimates:
+probability of success 
+             0.2321429 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyDwn5qMIFVkZWJhbmVzZWpyIChBKVxuY2F0KFwiXFxu8J+TjCBVZGViYW5lc2VqciAoQSlcXG5cIilcbmBgYCJ9 -->
+<pre class="r"><code># 🚌 Udebanesejr (A)
+cat(&quot;\n📌 Udebanesejr (A)\n&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG7wn5OMIFVkZWJhbmVzZWpyIChBKVxuIn0= -->
+<pre><code>
+📌 Udebanesejr (A)</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoVE5OLCBcIllwcmVkQVwiLCBcIll0cnVlQVwiLCBcIkRpZmZBXCIsIFwiRlRSXCIsIFwiQVwiLCB0aHJlc2hvbGQgPSAwLjA1KVxuYGBgIn0= -->
+<pre class="r"><code>compare_with_bookmakers(TNN, &quot;YpredA&quot;, &quot;YtrueA&quot;, &quot;DiffA&quot;, &quot;FTR&quot;, &quot;A&quot;, threshold = 0.05)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5UaHJlc2hvbGQgPSAwLjA1IFxuQW50YWwgcsOma2tlcjogMTg4IFxuTW9kZWwgU3VjY2VzcyBSYXRlOiA1MSAvIDE4OCA9IDAuMjcxMjc2NiBcbkJvb2ttYWtlcm5lcyBHZW5uZW1zbml0bGlnZSBTYW5kc3lubGlnaGVkID0gMC4yODE2IFxuXG5cdEV4YWN0IGJpbm9taWFsIHRlc3RcblxuZGF0YTogIHN1Y2Nlc3MgYW5kIHRvdGFsXG5udW1iZXIgb2Ygc3VjY2Vzc2VzID0gNTEsIG51bWJlciBvZiB0cmlhbHMgPSAxODgsIHAtdmFsdWUgPSAwLjY1MDJcbmFsdGVybmF0aXZlIGh5cG90aGVzaXM6IHRydWUgcHJvYmFiaWxpdHkgb2Ygc3VjY2VzcyBpcyBncmVhdGVyIHRoYW4gMC4yODE2MDk0XG45NSBwZXJjZW50IGNvbmZpZGVuY2UgaW50ZXJ2YWw6XG4gMC4yMTgyNzc0IDEuMDAwMDAwMFxuc2FtcGxlIGVzdGltYXRlczpcbnByb2JhYmlsaXR5IG9mIHN1Y2Nlc3MgXG4gICAgICAgICAgICAgMC4yNzEyNzY2IFxuIn0= -->
+<pre><code>
+Threshold = 0.05 
+Antal rækker: 188 
+Model Success Rate: 51 / 188 = 0.2712766 
+Bookmakernes Gennemsnitlige Sandsynlighed = 0.2816 
+
+    Exact binomial test
+
+data:  success and total
+number of successes = 51, number of trials = 188, p-value = 0.6502
+alternative hypothesis: true probability of success is greater than 0.2816094
+95 percent confidence interval:
+ 0.2182774 1.0000000
+sample estimates:
+probability of success 
+             0.2712766 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyDwn5SlIEhqZW1tZXNlanIgKEgpXG5jYXQoXCJcXG7wn5OMIEhqZW1tZXNlanIgKEgpXFxuXCIpXG5gYGAifQ== -->
+<pre class="r"><code># 🔥 Hjemmesejr (H)
+cat(&quot;\n📌 Hjemmesejr (H)\n&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG7wn5OMIEhqZW1tZXNlanIgKEgpXG4ifQ== -->
+<pre><code>
+📌 Hjemmesejr (H)</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoVE5OLCBcIllwcmVkSFwiLCBcIll0cnVlSFwiLCBcIkRpZmZIXCIsIFwiRlRSXCIsIFwiSFwiLCB0aHJlc2hvbGQgPSAwLjA3NSlcbmBgYCJ9 -->
+<pre class="r"><code>compare_with_bookmakers(TNN, &quot;YpredH&quot;, &quot;YtrueH&quot;, &quot;DiffH&quot;, &quot;FTR&quot;, &quot;H&quot;, threshold = 0.075)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5UaHJlc2hvbGQgPSAwLjA3NSBcbkFudGFsIHLDpmtrZXI6IDE2MSBcbk1vZGVsIFN1Y2Nlc3MgUmF0ZTogNzEgLyAxNjEgPSAwLjQ0MDk5MzggXG5Cb29rbWFrZXJuZXMgR2VubmVtc25pdGxpZ2UgU2FuZHN5bmxpZ2hlZCA9IDAuMzcxOSBcblxuXHRFeGFjdCBiaW5vbWlhbCB0ZXN0XG5cbmRhdGE6ICBzdWNjZXNzIGFuZCB0b3RhbFxubnVtYmVyIG9mIHN1Y2Nlc3NlcyA9IDcxLCBudW1iZXIgb2YgdHJpYWxzID0gMTYxLCBwLXZhbHVlID0gMC4wNDI1NVxuYWx0ZXJuYXRpdmUgaHlwb3RoZXNpczogdHJ1ZSBwcm9iYWJpbGl0eSBvZiBzdWNjZXNzIGlzIGdyZWF0ZXIgdGhhbiAwLjM3MTg1NDdcbjk1IHBlcmNlbnQgY29uZmlkZW5jZSBpbnRlcnZhbDpcbiAwLjM3NDc1NjcgMS4wMDAwMDAwXG5zYW1wbGUgZXN0aW1hdGVzOlxucHJvYmFiaWxpdHkgb2Ygc3VjY2VzcyBcbiAgICAgICAgICAgICAwLjQ0MDk5MzggXG4ifQ== -->
+<pre><code>
+Threshold = 0.075 
+Antal rækker: 161 
+Model Success Rate: 71 / 161 = 0.4409938 
+Bookmakernes Gennemsnitlige Sandsynlighed = 0.3719 
+
+    Exact binomial test
+
+data:  success and total
+number of successes = 71, number of trials = 161, p-value = 0.04255
+alternative hypothesis: true probability of success is greater than 0.3718547
+95 percent confidence interval:
+ 0.3747567 1.0000000
+sample estimates:
+probability of success 
+             0.4409938 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyDwn6SdIFVhZmdqb3J0IChEKVxuY2F0KFwiXFxu8J+TjCBVYWZnam9ydCAoRClcXG5cIilcbmBgYCJ9 -->
+<pre class="r"><code># 🤝 Uafgjort (D)
+cat(&quot;\n📌 Uafgjort (D)\n&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG7wn5OMIFVhZmdqb3J0IChEKVxuIn0= -->
+<pre><code>
+📌 Uafgjort (D)</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoVE5OLCBcIllwcmVkRFwiLCBcIll0cnVlRFwiLCBcIkRpZmZEXCIsIFwiRlRSXCIsIFwiRFwiLCB0aHJlc2hvbGQgPSAwLjA3NSlcbmBgYCJ9 -->
+<pre class="r"><code>compare_with_bookmakers(TNN, &quot;YpredD&quot;, &quot;YtrueD&quot;, &quot;DiffD&quot;, &quot;FTR&quot;, &quot;D&quot;, threshold = 0.075)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5UaHJlc2hvbGQgPSAwLjA3NSBcbkFudGFsIHLDpmtrZXI6IDcgXG5Nb2RlbCBTdWNjZXNzIFJhdGU6IDMgLyA3ID0gMC40Mjg1NzE0IFxuQm9va21ha2VybmVzIEdlbm5lbXNuaXRsaWdlIFNhbmRzeW5saWdoZWQgPSAwLjE0MTMgXG5cblx0RXhhY3QgYmlub21pYWwgdGVzdFxuXG5kYXRhOiAgc3VjY2VzcyBhbmQgdG90YWxcbm51bWJlciBvZiBzdWNjZXNzZXMgPSAzLCBudW1iZXIgb2YgdHJpYWxzID0gNywgcC12YWx1ZSA9IDAuMDYzNDRcbmFsdGVybmF0aXZlIGh5cG90aGVzaXM6IHRydWUgcHJvYmFiaWxpdHkgb2Ygc3VjY2VzcyBpcyBncmVhdGVyIHRoYW4gMC4xNDEzMDI1XG45NSBwZXJjZW50IGNvbmZpZGVuY2UgaW50ZXJ2YWw6XG4gMC4xMjg3NTY0IDEuMDAwMDAwMFxuc2FtcGxlIGVzdGltYXRlczpcbnByb2JhYmlsaXR5IG9mIHN1Y2Nlc3MgXG4gICAgICAgICAgICAgMC40Mjg1NzE0IFxuIn0= -->
+<pre><code>
+Threshold = 0.075 
+Antal rækker: 7 
+Model Success Rate: 3 / 7 = 0.4285714 
+Bookmakernes Gennemsnitlige Sandsynlighed = 0.1413 
+
+    Exact binomial test
+
+data:  success and total
+number of successes = 3, number of trials = 7, p-value = 0.06344
+alternative hypothesis: true probability of success is greater than 0.1413025
+95 percent confidence interval:
+ 0.1287564 1.0000000
+sample estimates:
+probability of success 
+             0.4285714 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyDwn5qMIFVkZWJhbmVzZWpyIChBKVxuY2F0KFwiXFxu8J+TjCBVZGViYW5lc2VqciAoQSlcXG5cIilcbmBgYCJ9 -->
+<pre class="r"><code># 🚌 Udebanesejr (A)
+cat(&quot;\n📌 Udebanesejr (A)\n&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG7wn5OMIFVkZWJhbmVzZWpyIChBKVxuIn0= -->
+<pre><code>
+📌 Udebanesejr (A)</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoVE5OLCBcIllwcmVkQVwiLCBcIll0cnVlQVwiLCBcIkRpZmZBXCIsIFwiRlRSXCIsIFwiQVwiLCB0aHJlc2hvbGQgPSAwLjA3NSlcbmBgYCJ9 -->
+<pre class="r"><code>compare_with_bookmakers(TNN, &quot;YpredA&quot;, &quot;YtrueA&quot;, &quot;DiffA&quot;, &quot;FTR&quot;, &quot;A&quot;, threshold = 0.075)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5UaHJlc2hvbGQgPSAwLjA3NSBcbkFudGFsIHLDpmtrZXI6IDk3IFxuTW9kZWwgU3VjY2VzcyBSYXRlOiAyOSAvIDk3ID0gMC4yOTg5NjkxIFxuQm9va21ha2VybmVzIEdlbm5lbXNuaXRsaWdlIFNhbmRzeW5saWdoZWQgPSAwLjI5MTEgXG5cblx0RXhhY3QgYmlub21pYWwgdGVzdFxuXG5kYXRhOiAgc3VjY2VzcyBhbmQgdG90YWxcbm51bWJlciBvZiBzdWNjZXNzZXMgPSAyOSwgbnVtYmVyIG9mIHRyaWFscyA9IDk3LCBwLXZhbHVlID0gMC40NzA2XG5hbHRlcm5hdGl2ZSBoeXBvdGhlc2lzOiB0cnVlIHByb2JhYmlsaXR5IG9mIHN1Y2Nlc3MgaXMgZ3JlYXRlciB0aGFuIDAuMjkxMTIzNVxuOTUgcGVyY2VudCBjb25maWRlbmNlIGludGVydmFsOlxuIDAuMjIyODYwMSAxLjAwMDAwMDBcbnNhbXBsZSBlc3RpbWF0ZXM6XG5wcm9iYWJpbGl0eSBvZiBzdWNjZXNzIFxuICAgICAgICAgICAgIDAuMjk4OTY5MSBcbiJ9 -->
+<pre><code>
+Threshold = 0.075 
+Antal rækker: 97 
+Model Success Rate: 29 / 97 = 0.2989691 
+Bookmakernes Gennemsnitlige Sandsynlighed = 0.2911 
+
+    Exact binomial test
+
+data:  success and total
+number of successes = 29, number of trials = 97, p-value = 0.4706
+alternative hypothesis: true probability of success is greater than 0.2911235
+95 percent confidence interval:
+ 0.2228601 1.0000000
+sample estimates:
+probability of success 
+             0.2989691 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyDwn5SlIEhqZW1tZXNlanIgKEgpXG5jYXQoXCJcXG7wn5OMIEhqZW1tZXNlanIgKEgpXFxuXCIpXG5gYGAifQ== -->
+<pre class="r"><code># 🔥 Hjemmesejr (H)
+cat(&quot;\n📌 Hjemmesejr (H)\n&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG7wn5OMIEhqZW1tZXNlanIgKEgpXG4ifQ== -->
+<pre><code>
+📌 Hjemmesejr (H)</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoVE5OLCBcIllwcmVkSFwiLCBcIll0cnVlSFwiLCBcIkRpZmZIXCIsIFwiRlRSXCIsIFwiSFwiLCB0aHJlc2hvbGQgPSAwLjEpXG5gYGAifQ== -->
+<pre class="r"><code>compare_with_bookmakers(TNN, &quot;YpredH&quot;, &quot;YtrueH&quot;, &quot;DiffH&quot;, &quot;FTR&quot;, &quot;H&quot;, threshold = 0.1)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5UaHJlc2hvbGQgPSAwLjEgXG5BbnRhbCByw6Zra2VyOiA5MiBcbk1vZGVsIFN1Y2Nlc3MgUmF0ZTogNDQgLyA5MiA9IDAuNDc4MjYwOSBcbkJvb2ttYWtlcm5lcyBHZW5uZW1zbml0bGlnZSBTYW5kc3lubGlnaGVkID0gMC4zNjk1IFxuXG5cdEV4YWN0IGJpbm9taWFsIHRlc3RcblxuZGF0YTogIHN1Y2Nlc3MgYW5kIHRvdGFsXG5udW1iZXIgb2Ygc3VjY2Vzc2VzID0gNDQsIG51bWJlciBvZiB0cmlhbHMgPSA5MiwgcC12YWx1ZSA9IDAuMDIxMjFcbmFsdGVybmF0aXZlIGh5cG90aGVzaXM6IHRydWUgcHJvYmFiaWxpdHkgb2Ygc3VjY2VzcyBpcyBncmVhdGVyIHRoYW4gMC4zNjk1MzQyXG45NSBwZXJjZW50IGNvbmZpZGVuY2UgaW50ZXJ2YWw6XG4gMC4zODg2ODM2IDEuMDAwMDAwMFxuc2FtcGxlIGVzdGltYXRlczpcbnByb2JhYmlsaXR5IG9mIHN1Y2Nlc3MgXG4gICAgICAgICAgICAgMC40NzgyNjA5IFxuIn0= -->
+<pre><code>
+Threshold = 0.1 
+Antal rækker: 92 
+Model Success Rate: 44 / 92 = 0.4782609 
+Bookmakernes Gennemsnitlige Sandsynlighed = 0.3695 
+
+    Exact binomial test
+
+data:  success and total
+number of successes = 44, number of trials = 92, p-value = 0.02121
+alternative hypothesis: true probability of success is greater than 0.3695342
+95 percent confidence interval:
+ 0.3886836 1.0000000
+sample estimates:
+probability of success 
+             0.4782609 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyDwn6SdIFVhZmdqb3J0IChEKVxuY2F0KFwiXFxu8J+TjCBVYWZnam9ydCAoRClcXG5cIilcbmBgYCJ9 -->
+<pre class="r"><code># 🤝 Uafgjort (D)
+cat(&quot;\n📌 Uafgjort (D)\n&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG7wn5OMIFVhZmdqb3J0IChEKVxuIn0= -->
+<pre><code>
+📌 Uafgjort (D)</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoVE5OLCBcIllwcmVkRFwiLCBcIll0cnVlRFwiLCBcIkRpZmZEXCIsIFwiRlRSXCIsIFwiRFwiLCB0aHJlc2hvbGQgPSAwLjEpXG5gYGAifQ== -->
+<pre class="r"><code>compare_with_bookmakers(TNN, &quot;YpredD&quot;, &quot;YtrueD&quot;, &quot;DiffD&quot;, &quot;FTR&quot;, &quot;D&quot;, threshold = 0.1)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5JbmdlbiByw6Zra2VyIG9wZnlsZGVyIHRocmVzaG9sZCA9IDAuMSBcbk5VTExcbiJ9 -->
+<pre><code>
+Ingen rækker opfylder threshold = 0.1 
+NULL</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyDwn5qMIFVkZWJhbmVzZWpyIChBKVxuY2F0KFwiXFxu8J+TjCBVZGViYW5lc2VqciAoQSlcXG5cIilcbmBgYCJ9 -->
+<pre class="r"><code># 🚌 Udebanesejr (A)
+cat(&quot;\n📌 Udebanesejr (A)\n&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG7wn5OMIFVkZWJhbmVzZWpyIChBKVxuIn0= -->
+<pre><code>
+📌 Udebanesejr (A)</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoVE5OLCBcIllwcmVkQVwiLCBcIll0cnVlQVwiLCBcIkRpZmZBXCIsIFwiRlRSXCIsIFwiQVwiLCB0aHJlc2hvbGQgPSAwLjEpXG5gYGAifQ== -->
+<pre class="r"><code>compare_with_bookmakers(TNN, &quot;YpredA&quot;, &quot;YtrueA&quot;, &quot;DiffA&quot;, &quot;FTR&quot;, &quot;A&quot;, threshold = 0.1)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5UaHJlc2hvbGQgPSAwLjEgXG5BbnRhbCByw6Zra2VyOiA1NiBcbk1vZGVsIFN1Y2Nlc3MgUmF0ZTogMTYgLyA1NiA9IDAuMjg1NzE0MyBcbkJvb2ttYWtlcm5lcyBHZW5uZW1zbml0bGlnZSBTYW5kc3lubGlnaGVkID0gMC4yOTMzIFxuXG5cdEV4YWN0IGJpbm9taWFsIHRlc3RcblxuZGF0YTogIHN1Y2Nlc3MgYW5kIHRvdGFsXG5udW1iZXIgb2Ygc3VjY2Vzc2VzID0gMTYsIG51bWJlciBvZiB0cmlhbHMgPSA1NiwgcC12YWx1ZSA9IDAuNTk5OFxuYWx0ZXJuYXRpdmUgaHlwb3RoZXNpczogdHJ1ZSBwcm9iYWJpbGl0eSBvZiBzdWNjZXNzIGlzIGdyZWF0ZXIgdGhhbiAwLjI5MzM0NThcbjk1IHBlcmNlbnQgY29uZmlkZW5jZSBpbnRlcnZhbDpcbiAwLjE4ODE0NTQgMS4wMDAwMDAwXG5zYW1wbGUgZXN0aW1hdGVzOlxucHJvYmFiaWxpdHkgb2Ygc3VjY2VzcyBcbiAgICAgICAgICAgICAwLjI4NTcxNDMgXG4ifQ== -->
+<pre><code>
+Threshold = 0.1 
+Antal rækker: 56 
+Model Success Rate: 16 / 56 = 0.2857143 
+Bookmakernes Gennemsnitlige Sandsynlighed = 0.2933 
+
+    Exact binomial test
+
+data:  success and total
+number of successes = 16, number of trials = 56, p-value = 0.5998
+alternative hypothesis: true probability of success is greater than 0.2933458
+95 percent confidence interval:
+ 0.1881454 1.0000000
+sample estimates:
+probability of success 
+             0.2857143 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyDwn5SlIEhqZW1tZXNlanIgKEgpXG5jYXQoXCJcXG7wn5OMIEhqZW1tZXNlanIgKEgpXFxuXCIpXG5gYGAifQ== -->
+<pre class="r"><code># 🔥 Hjemmesejr (H)
+cat(&quot;\n📌 Hjemmesejr (H)\n&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG7wn5OMIEhqZW1tZXNlanIgKEgpXG4ifQ== -->
+<pre><code>
+📌 Hjemmesejr (H)</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoVE5OLCBcIllwcmVkSFwiLCBcIll0cnVlSFwiLCBcIkRpZmZIXCIsIFwiRlRSXCIsIFwiSFwiLCB0aHJlc2hvbGQgPSAwLjEyNSlcbmBgYCJ9 -->
+<pre class="r"><code>compare_with_bookmakers(TNN, &quot;YpredH&quot;, &quot;YtrueH&quot;, &quot;DiffH&quot;, &quot;FTR&quot;, &quot;H&quot;, threshold = 0.125)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5UaHJlc2hvbGQgPSAwLjEyNSBcbkFudGFsIHLDpmtrZXI6IDU0IFxuTW9kZWwgU3VjY2VzcyBSYXRlOiAyOCAvIDU0ID0gMC41MTg1MTg1IFxuQm9va21ha2VybmVzIEdlbm5lbXNuaXRsaWdlIFNhbmRzeW5saWdoZWQgPSAwLjM4MDIgXG5cblx0RXhhY3QgYmlub21pYWwgdGVzdFxuXG5kYXRhOiAgc3VjY2VzcyBhbmQgdG90YWxcbm51bWJlciBvZiBzdWNjZXNzZXMgPSAyOCwgbnVtYmVyIG9mIHRyaWFscyA9IDU0LCBwLXZhbHVlID0gMC4wMjY3NFxuYWx0ZXJuYXRpdmUgaHlwb3RoZXNpczogdHJ1ZSBwcm9iYWJpbGl0eSBvZiBzdWNjZXNzIGlzIGdyZWF0ZXIgdGhhbiAwLjM4MDIzNzhcbjk1IHBlcmNlbnQgY29uZmlkZW5jZSBpbnRlcnZhbDpcbiAwLjM5ODg4ODggMS4wMDAwMDAwXG5zYW1wbGUgZXN0aW1hdGVzOlxucHJvYmFiaWxpdHkgb2Ygc3VjY2VzcyBcbiAgICAgICAgICAgICAwLjUxODUxODUgXG4ifQ== -->
+<pre><code>
+Threshold = 0.125 
+Antal rækker: 54 
+Model Success Rate: 28 / 54 = 0.5185185 
+Bookmakernes Gennemsnitlige Sandsynlighed = 0.3802 
+
+    Exact binomial test
+
+data:  success and total
+number of successes = 28, number of trials = 54, p-value = 0.02674
+alternative hypothesis: true probability of success is greater than 0.3802378
+95 percent confidence interval:
+ 0.3988888 1.0000000
+sample estimates:
+probability of success 
+             0.5185185 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyDwn6SdIFVhZmdqb3J0IChEKVxuY2F0KFwiXFxu8J+TjCBVYWZnam9ydCAoRClcXG5cIilcbmBgYCJ9 -->
+<pre class="r"><code># 🤝 Uafgjort (D)
+cat(&quot;\n📌 Uafgjort (D)\n&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG7wn5OMIFVhZmdqb3J0IChEKVxuIn0= -->
+<pre><code>
+📌 Uafgjort (D)</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoVE5OLCBcIllwcmVkRFwiLCBcIll0cnVlRFwiLCBcIkRpZmZEXCIsIFwiRlRSXCIsIFwiRFwiLCB0aHJlc2hvbGQgPSAwLjEyNSlcbmBgYCJ9 -->
+<pre class="r"><code>compare_with_bookmakers(TNN, &quot;YpredD&quot;, &quot;YtrueD&quot;, &quot;DiffD&quot;, &quot;FTR&quot;, &quot;D&quot;, threshold = 0.125)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5JbmdlbiByw6Zra2VyIG9wZnlsZGVyIHRocmVzaG9sZCA9IDAuMTI1IFxuTlVMTFxuIn0= -->
+<pre><code>
+Ingen rækker opfylder threshold = 0.125 
+NULL</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyDwn5qMIFVkZWJhbmVzZWpyIChBKVxuY2F0KFwiXFxu8J+TjCBVZGViYW5lc2VqciAoQSlcXG5cIilcbmBgYCJ9 -->
+<pre class="r"><code># 🚌 Udebanesejr (A)
+cat(&quot;\n📌 Udebanesejr (A)\n&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG7wn5OMIFVkZWJhbmVzZWpyIChBKVxuIn0= -->
+<pre><code>
+📌 Udebanesejr (A)</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoVE5OLCBcIllwcmVkQVwiLCBcIll0cnVlQVwiLCBcIkRpZmZBXCIsIFwiRlRSXCIsIFwiQVwiLCB0aHJlc2hvbGQgPSAwLjEyNSlcbmBgYCJ9 -->
+<pre class="r"><code>compare_with_bookmakers(TNN, &quot;YpredA&quot;, &quot;YtrueA&quot;, &quot;DiffA&quot;, &quot;FTR&quot;, &quot;A&quot;, threshold = 0.125)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5UaHJlc2hvbGQgPSAwLjEyNSBcbkFudGFsIHLDpmtrZXI6IDI1IFxuTW9kZWwgU3VjY2VzcyBSYXRlOiA4IC8gMjUgPSAwLjMyIFxuQm9va21ha2VybmVzIEdlbm5lbXNuaXRsaWdlIFNhbmRzeW5saWdoZWQgPSAwLjI5OSBcblxuXHRFeGFjdCBiaW5vbWlhbCB0ZXN0XG5cbmRhdGE6ICBzdWNjZXNzIGFuZCB0b3RhbFxubnVtYmVyIG9mIHN1Y2Nlc3NlcyA9IDgsIG51bWJlciBvZiB0cmlhbHMgPSAyNSwgcC12YWx1ZSA9IDAuNDgzOVxuYWx0ZXJuYXRpdmUgaHlwb3RoZXNpczogdHJ1ZSBwcm9iYWJpbGl0eSBvZiBzdWNjZXNzIGlzIGdyZWF0ZXIgdGhhbiAwLjI5OTAyNTFcbjk1IHBlcmNlbnQgY29uZmlkZW5jZSBpbnRlcnZhbDpcbiAwLjE3MDMwMzcgMS4wMDAwMDAwXG5zYW1wbGUgZXN0aW1hdGVzOlxucHJvYmFiaWxpdHkgb2Ygc3VjY2VzcyBcbiAgICAgICAgICAgICAgICAgIDAuMzIgXG4ifQ== -->
+<pre><code>
+Threshold = 0.125 
+Antal rækker: 25 
+Model Success Rate: 8 / 25 = 0.32 
+Bookmakernes Gennemsnitlige Sandsynlighed = 0.299 
+
+    Exact binomial test
+
+data:  success and total
+number of successes = 8, number of trials = 25, p-value = 0.4839
+alternative hypothesis: true probability of success is greater than 0.2990251
+95 percent confidence interval:
+ 0.1703037 1.0000000
+sample estimates:
+probability of success 
+                  0.32 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="bundesliga-logistisk-regression" class="section level1">
+<h1>BUNDESLIGA LOGISTISK REGRESSION</h1>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyDwn5SlIEhqZW1tZXNlanIgKEgpXG5jYXQoXCJcXG7wn5OMIEhqZW1tZXNlanIgKEgpXFxuXCIpXG5gYGAifQ== -->
+<pre class="r"><code># 🔥 Hjemmesejr (H)
+cat(&quot;\n📌 Hjemmesejr (H)\n&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG7wn5OMIEhqZW1tZXNlanIgKEgpXG4ifQ== -->
+<pre><code>
+📌 Hjemmesejr (H)</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoVExSLCBcIllwcmVkSFwiLCBcIll0cnVlSFwiLCBcIkRpZmZIXCIsIFwiRlRSXCIsIFwiSFwiLCB0aHJlc2hvbGQgPSAwLjAyNSlcbmBgYCJ9 -->
+<pre class="r"><code>compare_with_bookmakers(TLR, &quot;YpredH&quot;, &quot;YtrueH&quot;, &quot;DiffH&quot;, &quot;FTR&quot;, &quot;H&quot;, threshold = 0.025)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5UaHJlc2hvbGQgPSAwLjAyNSBcbkFudGFsIHLDpmtrZXI6IDM5OSBcbk1vZGVsIFN1Y2Nlc3MgUmF0ZTogMTY4IC8gMzk5ID0gMC40MjEwNTI2IFxuQm9va21ha2VybmVzIEdlbm5lbXNuaXRsaWdlIFNhbmRzeW5saWdoZWQgPSAwLjM3IFxuXG5cdEV4YWN0IGJpbm9taWFsIHRlc3RcblxuZGF0YTogIHN1Y2Nlc3MgYW5kIHRvdGFsXG5udW1iZXIgb2Ygc3VjY2Vzc2VzID0gMTY4LCBudW1iZXIgb2YgdHJpYWxzID0gMzk5LCBwLXZhbHVlID0gMC4wMjAzXG5hbHRlcm5hdGl2ZSBoeXBvdGhlc2lzOiB0cnVlIHByb2JhYmlsaXR5IG9mIHN1Y2Nlc3MgaXMgZ3JlYXRlciB0aGFuIDAuMzY5OTk2NlxuOTUgcGVyY2VudCBjb25maWRlbmNlIGludGVydmFsOlxuIDAuMzc5NjgwNyAxLjAwMDAwMDBcbnNhbXBsZSBlc3RpbWF0ZXM6XG5wcm9iYWJpbGl0eSBvZiBzdWNjZXNzIFxuICAgICAgICAgICAgIDAuNDIxMDUyNiBcbiJ9 -->
+<pre><code>
+Threshold = 0.025 
+Antal rækker: 399 
+Model Success Rate: 168 / 399 = 0.4210526 
+Bookmakernes Gennemsnitlige Sandsynlighed = 0.37 
+
+    Exact binomial test
+
+data:  success and total
+number of successes = 168, number of trials = 399, p-value = 0.0203
+alternative hypothesis: true probability of success is greater than 0.3699966
+95 percent confidence interval:
+ 0.3796807 1.0000000
+sample estimates:
+probability of success 
+             0.4210526 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyDwn6SdIFVhZmdqb3J0IChEKVxuY2F0KFwiXFxu8J+TjCBVYWZnam9ydCAoRClcXG5cIilcbmBgYCJ9 -->
+<pre class="r"><code># 🤝 Uafgjort (D)
+cat(&quot;\n📌 Uafgjort (D)\n&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG7wn5OMIFVhZmdqb3J0IChEKVxuIn0= -->
+<pre><code>
+📌 Uafgjort (D)</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoVExSLCBcIllwcmVkRFwiLCBcIll0cnVlRFwiLCBcIkRpZmZEXCIsIFwiRlRSXCIsIFwiRFwiLCB0aHJlc2hvbGQgPSAwLjAyNSlcbmBgYCJ9 -->
+<pre class="r"><code>compare_with_bookmakers(TLR, &quot;YpredD&quot;, &quot;YtrueD&quot;, &quot;DiffD&quot;, &quot;FTR&quot;, &quot;D&quot;, threshold = 0.025)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5UaHJlc2hvbGQgPSAwLjAyNSBcbkFudGFsIHLDpmtrZXI6IDIxNCBcbk1vZGVsIFN1Y2Nlc3MgUmF0ZTogMzYgLyAyMTQgPSAwLjE2ODIyNDMgXG5Cb29rbWFrZXJuZXMgR2VubmVtc25pdGxpZ2UgU2FuZHN5bmxpZ2hlZCA9IDAuMTcyMSBcblxuXHRFeGFjdCBiaW5vbWlhbCB0ZXN0XG5cbmRhdGE6ICBzdWNjZXNzIGFuZCB0b3RhbFxubnVtYmVyIG9mIHN1Y2Nlc3NlcyA9IDM2LCBudW1iZXIgb2YgdHJpYWxzID0gMjE0LCBwLXZhbHVlID0gMC41ODczXG5hbHRlcm5hdGl2ZSBoeXBvdGhlc2lzOiB0cnVlIHByb2JhYmlsaXR5IG9mIHN1Y2Nlc3MgaXMgZ3JlYXRlciB0aGFuIDAuMTcyMDY2N1xuOTUgcGVyY2VudCBjb25maWRlbmNlIGludGVydmFsOlxuIDAuMTI3NDc2MiAxLjAwMDAwMDBcbnNhbXBsZSBlc3RpbWF0ZXM6XG5wcm9iYWJpbGl0eSBvZiBzdWNjZXNzIFxuICAgICAgICAgICAgIDAuMTY4MjI0MyBcbiJ9 -->
+<pre><code>
+Threshold = 0.025 
+Antal rækker: 214 
+Model Success Rate: 36 / 214 = 0.1682243 
+Bookmakernes Gennemsnitlige Sandsynlighed = 0.1721 
+
+    Exact binomial test
+
+data:  success and total
+number of successes = 36, number of trials = 214, p-value = 0.5873
+alternative hypothesis: true probability of success is greater than 0.1720667
+95 percent confidence interval:
+ 0.1274762 1.0000000
+sample estimates:
+probability of success 
+             0.1682243 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyDwn5qMIFVkZWJhbmVzZWpyIChBKVxuY2F0KFwiXFxu8J+TjCBVZGViYW5lc2VqciAoQSlcXG5cIilcbmBgYCJ9 -->
+<pre class="r"><code># 🚌 Udebanesejr (A)
+cat(&quot;\n📌 Udebanesejr (A)\n&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG7wn5OMIFVkZWJhbmVzZWpyIChBKVxuIn0= -->
+<pre><code>
+📌 Udebanesejr (A)</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoVExSLCBcIllwcmVkQVwiLCBcIll0cnVlQVwiLCBcIkRpZmZBXCIsIFwiRlRSXCIsIFwiQVwiLCB0aHJlc2hvbGQgPSAwLjAyNSlcbmBgYCJ9 -->
+<pre class="r"><code>compare_with_bookmakers(TLR, &quot;YpredA&quot;, &quot;YtrueA&quot;, &quot;DiffA&quot;, &quot;FTR&quot;, &quot;A&quot;, threshold = 0.025)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5UaHJlc2hvbGQgPSAwLjAyNSBcbkFudGFsIHLDpmtrZXI6IDM3MyBcbk1vZGVsIFN1Y2Nlc3MgUmF0ZTogODMgLyAzNzMgPSAwLjIyMjUyMDEgXG5Cb29rbWFrZXJuZXMgR2VubmVtc25pdGxpZ2UgU2FuZHN5bmxpZ2hlZCA9IDAuMjUxIFxuXG5cdEV4YWN0IGJpbm9taWFsIHRlc3RcblxuZGF0YTogIHN1Y2Nlc3MgYW5kIHRvdGFsXG5udW1iZXIgb2Ygc3VjY2Vzc2VzID0gODMsIG51bWJlciBvZiB0cmlhbHMgPSAzNzMsIHAtdmFsdWUgPSAwLjkwOTFcbmFsdGVybmF0aXZlIGh5cG90aGVzaXM6IHRydWUgcHJvYmFiaWxpdHkgb2Ygc3VjY2VzcyBpcyBncmVhdGVyIHRoYW4gMC4yNTA5Njg4XG45NSBwZXJjZW50IGNvbmZpZGVuY2UgaW50ZXJ2YWw6XG4gMC4xODc0ODg4IDEuMDAwMDAwMFxuc2FtcGxlIGVzdGltYXRlczpcbnByb2JhYmlsaXR5IG9mIHN1Y2Nlc3MgXG4gICAgICAgICAgICAgMC4yMjI1MjAxIFxuIn0= -->
+<pre><code>
+Threshold = 0.025 
+Antal rækker: 373 
+Model Success Rate: 83 / 373 = 0.2225201 
+Bookmakernes Gennemsnitlige Sandsynlighed = 0.251 
+
+    Exact binomial test
+
+data:  success and total
+number of successes = 83, number of trials = 373, p-value = 0.9091
+alternative hypothesis: true probability of success is greater than 0.2509688
+95 percent confidence interval:
+ 0.1874888 1.0000000
+sample estimates:
+probability of success 
+             0.2225201 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyDwn5SlIEhqZW1tZXNlanIgKEgpXG5jYXQoXCJcXG7wn5OMIEhqZW1tZXNlanIgKEgpXFxuXCIpXG5gYGAifQ== -->
+<pre class="r"><code># 🔥 Hjemmesejr (H)
+cat(&quot;\n📌 Hjemmesejr (H)\n&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG7wn5OMIEhqZW1tZXNlanIgKEgpXG4ifQ== -->
+<pre><code>
+📌 Hjemmesejr (H)</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoVExSLCBcIllwcmVkSFwiLCBcIll0cnVlSFwiLCBcIkRpZmZIXCIsIFwiRlRSXCIsIFwiSFwiLCB0aHJlc2hvbGQgPSAwLjA1KVxuYGBgIn0= -->
+<pre class="r"><code>compare_with_bookmakers(TLR, &quot;YpredH&quot;, &quot;YtrueH&quot;, &quot;DiffH&quot;, &quot;FTR&quot;, &quot;H&quot;, threshold = 0.05)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5UaHJlc2hvbGQgPSAwLjA1IFxuQW50YWwgcsOma2tlcjogMjU1IFxuTW9kZWwgU3VjY2VzcyBSYXRlOiAxMDYgLyAyNTUgPSAwLjQxNTY4NjMgXG5Cb29rbWFrZXJuZXMgR2VubmVtc25pdGxpZ2UgU2FuZHN5bmxpZ2hlZCA9IDAuMzU3NCBcblxuXHRFeGFjdCBiaW5vbWlhbCB0ZXN0XG5cbmRhdGE6ICBzdWNjZXNzIGFuZCB0b3RhbFxubnVtYmVyIG9mIHN1Y2Nlc3NlcyA9IDEwNiwgbnVtYmVyIG9mIHRyaWFscyA9IDI1NSwgcC12YWx1ZSA9IDAuMDMxMjhcbmFsdGVybmF0aXZlIGh5cG90aGVzaXM6IHRydWUgcHJvYmFiaWxpdHkgb2Ygc3VjY2VzcyBpcyBncmVhdGVyIHRoYW4gMC4zNTc0MjMyXG45NSBwZXJjZW50IGNvbmZpZGVuY2UgaW50ZXJ2YWw6XG4gMC4zNjM4OTU2IDEuMDAwMDAwMFxuc2FtcGxlIGVzdGltYXRlczpcbnByb2JhYmlsaXR5IG9mIHN1Y2Nlc3MgXG4gICAgICAgICAgICAgMC40MTU2ODYzIFxuIn0= -->
+<pre><code>
+Threshold = 0.05 
+Antal rækker: 255 
+Model Success Rate: 106 / 255 = 0.4156863 
+Bookmakernes Gennemsnitlige Sandsynlighed = 0.3574 
+
+    Exact binomial test
+
+data:  success and total
+number of successes = 106, number of trials = 255, p-value = 0.03128
+alternative hypothesis: true probability of success is greater than 0.3574232
+95 percent confidence interval:
+ 0.3638956 1.0000000
+sample estimates:
+probability of success 
+             0.4156863 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyDwn6SdIFVhZmdqb3J0IChEKVxuY2F0KFwiXFxu8J+TjCBVYWZnam9ydCAoRClcXG5cIilcbmBgYCJ9 -->
+<pre class="r"><code># 🤝 Uafgjort (D)
+cat(&quot;\n📌 Uafgjort (D)\n&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG7wn5OMIFVhZmdqb3J0IChEKVxuIn0= -->
+<pre><code>
+📌 Uafgjort (D)</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoVExSLCBcIllwcmVkRFwiLCBcIll0cnVlRFwiLCBcIkRpZmZEXCIsIFwiRlRSXCIsIFwiRFwiLCB0aHJlc2hvbGQgPSAwLjA1KVxuYGBgIn0= -->
+<pre class="r"><code>compare_with_bookmakers(TLR, &quot;YpredD&quot;, &quot;YtrueD&quot;, &quot;DiffD&quot;, &quot;FTR&quot;, &quot;D&quot;, threshold = 0.05)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5UaHJlc2hvbGQgPSAwLjA1IFxuQW50YWwgcsOma2tlcjogNzggXG5Nb2RlbCBTdWNjZXNzIFJhdGU6IDEyIC8gNzggPSAwLjE1Mzg0NjIgXG5Cb29rbWFrZXJuZXMgR2VubmVtc25pdGxpZ2UgU2FuZHN5bmxpZ2hlZCA9IDAuMTUwNCBcblxuXHRFeGFjdCBiaW5vbWlhbCB0ZXN0XG5cbmRhdGE6ICBzdWNjZXNzIGFuZCB0b3RhbFxubnVtYmVyIG9mIHN1Y2Nlc3NlcyA9IDEyLCBudW1iZXIgb2YgdHJpYWxzID0gNzgsIHAtdmFsdWUgPSAwLjUxMzlcbmFsdGVybmF0aXZlIGh5cG90aGVzaXM6IHRydWUgcHJvYmFiaWxpdHkgb2Ygc3VjY2VzcyBpcyBncmVhdGVyIHRoYW4gMC4xNTAzNTY1XG45NSBwZXJjZW50IGNvbmZpZGVuY2UgaW50ZXJ2YWw6XG4gMC4wOTEyMzg3NCAxLjAwMDAwMDAwXG5zYW1wbGUgZXN0aW1hdGVzOlxucHJvYmFiaWxpdHkgb2Ygc3VjY2VzcyBcbiAgICAgICAgICAgICAwLjE1Mzg0NjIgXG4ifQ== -->
+<pre><code>
+Threshold = 0.05 
+Antal rækker: 78 
+Model Success Rate: 12 / 78 = 0.1538462 
+Bookmakernes Gennemsnitlige Sandsynlighed = 0.1504 
+
+    Exact binomial test
+
+data:  success and total
+number of successes = 12, number of trials = 78, p-value = 0.5139
+alternative hypothesis: true probability of success is greater than 0.1503565
+95 percent confidence interval:
+ 0.09123874 1.00000000
+sample estimates:
+probability of success 
+             0.1538462 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyDwn5qMIFVkZWJhbmVzZWpyIChBKVxuY2F0KFwiXFxu8J+TjCBVZGViYW5lc2VqciAoQSlcXG5cIilcbmBgYCJ9 -->
+<pre class="r"><code># 🚌 Udebanesejr (A)
+cat(&quot;\n📌 Udebanesejr (A)\n&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG7wn5OMIFVkZWJhbmVzZWpyIChBKVxuIn0= -->
+<pre><code>
+📌 Udebanesejr (A)</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoVExSLCBcIllwcmVkQVwiLCBcIll0cnVlQVwiLCBcIkRpZmZBXCIsIFwiRlRSXCIsIFwiQVwiLCB0aHJlc2hvbGQgPSAwLjA1KSBcbmBgYCJ9 -->
+<pre class="r"><code>compare_with_bookmakers(TLR, &quot;YpredA&quot;, &quot;YtrueA&quot;, &quot;DiffA&quot;, &quot;FTR&quot;, &quot;A&quot;, threshold = 0.05) </code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5UaHJlc2hvbGQgPSAwLjA1IFxuQW50YWwgcsOma2tlcjogMjE5IFxuTW9kZWwgU3VjY2VzcyBSYXRlOiA0OSAvIDIxOSA9IDAuMjIzNzQ0MyBcbkJvb2ttYWtlcm5lcyBHZW5uZW1zbml0bGlnZSBTYW5kc3lubGlnaGVkID0gMC4yNjc1IFxuXG5cdEV4YWN0IGJpbm9taWFsIHRlc3RcblxuZGF0YTogIHN1Y2Nlc3MgYW5kIHRvdGFsXG5udW1iZXIgb2Ygc3VjY2Vzc2VzID0gNDksIG51bWJlciBvZiB0cmlhbHMgPSAyMTksIHAtdmFsdWUgPSAwLjk0MDRcbmFsdGVybmF0aXZlIGh5cG90aGVzaXM6IHRydWUgcHJvYmFiaWxpdHkgb2Ygc3VjY2VzcyBpcyBncmVhdGVyIHRoYW4gMC4yNjc1MjI4XG45NSBwZXJjZW50IGNvbmZpZGVuY2UgaW50ZXJ2YWw6XG4gMC4xNzgxNTU4IDEuMDAwMDAwMFxuc2FtcGxlIGVzdGltYXRlczpcbnByb2JhYmlsaXR5IG9mIHN1Y2Nlc3MgXG4gICAgICAgICAgICAgMC4yMjM3NDQzIFxuIn0= -->
+<pre><code>
+Threshold = 0.05 
+Antal rækker: 219 
+Model Success Rate: 49 / 219 = 0.2237443 
+Bookmakernes Gennemsnitlige Sandsynlighed = 0.2675 
+
+    Exact binomial test
+
+data:  success and total
+number of successes = 49, number of trials = 219, p-value = 0.9404
+alternative hypothesis: true probability of success is greater than 0.2675228
+95 percent confidence interval:
+ 0.1781558 1.0000000
+sample estimates:
+probability of success 
+             0.2237443 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyDwn5SlIEhqZW1tZXNlanIgKEgpXG5jYXQoXCJcXG7wn5OMIEhqZW1tZXNlanIgKEgpXFxuXCIpXG5gYGAifQ== -->
+<pre class="r"><code># 🔥 Hjemmesejr (H)
+cat(&quot;\n📌 Hjemmesejr (H)\n&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG7wn5OMIEhqZW1tZXNlanIgKEgpXG4ifQ== -->
+<pre><code>
+📌 Hjemmesejr (H)</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoVExSLCBcIllwcmVkSFwiLCBcIll0cnVlSFwiLCBcIkRpZmZIXCIsIFwiRlRSXCIsIFwiSFwiLCB0aHJlc2hvbGQgPSAwLjA3NSlcbmBgYCJ9 -->
+<pre class="r"><code>compare_with_bookmakers(TLR, &quot;YpredH&quot;, &quot;YtrueH&quot;, &quot;DiffH&quot;, &quot;FTR&quot;, &quot;H&quot;, threshold = 0.075)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5UaHJlc2hvbGQgPSAwLjA3NSBcbkFudGFsIHLDpmtrZXI6IDE1NCBcbk1vZGVsIFN1Y2Nlc3MgUmF0ZTogNjcgLyAxNTQgPSAwLjQzNTA2NDkgXG5Cb29rbWFrZXJuZXMgR2VubmVtc25pdGxpZ2UgU2FuZHN5bmxpZ2hlZCA9IDAuMzYzNCBcblxuXHRFeGFjdCBiaW5vbWlhbCB0ZXN0XG5cbmRhdGE6ICBzdWNjZXNzIGFuZCB0b3RhbFxubnVtYmVyIG9mIHN1Y2Nlc3NlcyA9IDY3LCBudW1iZXIgb2YgdHJpYWxzID0gMTU0LCBwLXZhbHVlID0gMC4wNDAwM1xuYWx0ZXJuYXRpdmUgaHlwb3RoZXNpczogdHJ1ZSBwcm9iYWJpbGl0eSBvZiBzdWNjZXNzIGlzIGdyZWF0ZXIgdGhhbiAwLjM2MzQ0NzRcbjk1IHBlcmNlbnQgY29uZmlkZW5jZSBpbnRlcnZhbDpcbiAwLjM2NzQ5MTEgMS4wMDAwMDAwXG5zYW1wbGUgZXN0aW1hdGVzOlxucHJvYmFiaWxpdHkgb2Ygc3VjY2VzcyBcbiAgICAgICAgICAgICAwLjQzNTA2NDkgXG4ifQ== -->
+<pre><code>
+Threshold = 0.075 
+Antal rækker: 154 
+Model Success Rate: 67 / 154 = 0.4350649 
+Bookmakernes Gennemsnitlige Sandsynlighed = 0.3634 
+
+    Exact binomial test
+
+data:  success and total
+number of successes = 67, number of trials = 154, p-value = 0.04003
+alternative hypothesis: true probability of success is greater than 0.3634474
+95 percent confidence interval:
+ 0.3674911 1.0000000
+sample estimates:
+probability of success 
+             0.4350649 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyDwn6SdIFVhZmdqb3J0IChEKVxuY2F0KFwiXFxu8J+TjCBVYWZnam9ydCAoRClcXG5cIilcbmBgYCJ9 -->
+<pre class="r"><code># 🤝 Uafgjort (D)
+cat(&quot;\n📌 Uafgjort (D)\n&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG7wn5OMIFVhZmdqb3J0IChEKVxuIn0= -->
+<pre><code>
+📌 Uafgjort (D)</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoVExSLCBcIllwcmVkRFwiLCBcIll0cnVlRFwiLCBcIkRpZmZEXCIsIFwiRlRSXCIsIFwiRFwiLCB0aHJlc2hvbGQgPSAwLjA3NSlcbmBgYCJ9 -->
+<pre class="r"><code>compare_with_bookmakers(TLR, &quot;YpredD&quot;, &quot;YtrueD&quot;, &quot;DiffD&quot;, &quot;FTR&quot;, &quot;D&quot;, threshold = 0.075)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5UaHJlc2hvbGQgPSAwLjA3NSBcbkFudGFsIHLDpmtrZXI6IDI1IFxuTW9kZWwgU3VjY2VzcyBSYXRlOiA1IC8gMjUgPSAwLjIgXG5Cb29rbWFrZXJuZXMgR2VubmVtc25pdGxpZ2UgU2FuZHN5bmxpZ2hlZCA9IDAuMTM5NSBcblxuXHRFeGFjdCBiaW5vbWlhbCB0ZXN0XG5cbmRhdGE6ICBzdWNjZXNzIGFuZCB0b3RhbFxubnVtYmVyIG9mIHN1Y2Nlc3NlcyA9IDUsIG51bWJlciBvZiB0cmlhbHMgPSAyNSwgcC12YWx1ZSA9IDAuMjY0MVxuYWx0ZXJuYXRpdmUgaHlwb3RoZXNpczogdHJ1ZSBwcm9iYWJpbGl0eSBvZiBzdWNjZXNzIGlzIGdyZWF0ZXIgdGhhbiAwLjEzOTQ2ODFcbjk1IHBlcmNlbnQgY29uZmlkZW5jZSBpbnRlcnZhbDpcbiAwLjA4MjI5MDkgMS4wMDAwMDAwXG5zYW1wbGUgZXN0aW1hdGVzOlxucHJvYmFiaWxpdHkgb2Ygc3VjY2VzcyBcbiAgICAgICAgICAgICAgICAgICAwLjIgXG4ifQ== -->
+<pre><code>
+Threshold = 0.075 
+Antal rækker: 25 
+Model Success Rate: 5 / 25 = 0.2 
+Bookmakernes Gennemsnitlige Sandsynlighed = 0.1395 
+
+    Exact binomial test
+
+data:  success and total
+number of successes = 5, number of trials = 25, p-value = 0.2641
+alternative hypothesis: true probability of success is greater than 0.1394681
+95 percent confidence interval:
+ 0.0822909 1.0000000
+sample estimates:
+probability of success 
+                   0.2 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyDwn5qMIFVkZWJhbmVzZWpyIChBKVxuY2F0KFwiXFxu8J+TjCBVZGViYW5lc2VqciAoQSlcXG5cIilcbmBgYCJ9 -->
+<pre class="r"><code># 🚌 Udebanesejr (A)
+cat(&quot;\n📌 Udebanesejr (A)\n&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG7wn5OMIFVkZWJhbmVzZWpyIChBKVxuIn0= -->
+<pre><code>
+📌 Udebanesejr (A)</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoVExSLCBcIllwcmVkQVwiLCBcIll0cnVlQVwiLCBcIkRpZmZBXCIsIFwiRlRSXCIsIFwiQVwiLCB0aHJlc2hvbGQgPSAwLjA3NSlcbmBgYCJ9 -->
+<pre class="r"><code>compare_with_bookmakers(TLR, &quot;YpredA&quot;, &quot;YtrueA&quot;, &quot;DiffA&quot;, &quot;FTR&quot;, &quot;A&quot;, threshold = 0.075)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5UaHJlc2hvbGQgPSAwLjA3NSBcbkFudGFsIHLDpmtrZXI6IDEyNiBcbk1vZGVsIFN1Y2Nlc3MgUmF0ZTogMzIgLyAxMjYgPSAwLjI1Mzk2ODMgXG5Cb29rbWFrZXJuZXMgR2VubmVtc25pdGxpZ2UgU2FuZHN5bmxpZ2hlZCA9IDAuMjc2NCBcblxuXHRFeGFjdCBiaW5vbWlhbCB0ZXN0XG5cbmRhdGE6ICBzdWNjZXNzIGFuZCB0b3RhbFxubnVtYmVyIG9mIHN1Y2Nlc3NlcyA9IDMyLCBudW1iZXIgb2YgdHJpYWxzID0gMTI2LCBwLXZhbHVlID0gMC43NDMzXG5hbHRlcm5hdGl2ZSBoeXBvdGhlc2lzOiB0cnVlIHByb2JhYmlsaXR5IG9mIHN1Y2Nlc3MgaXMgZ3JlYXRlciB0aGFuIDAuMjc2Mzc2N1xuOTUgcGVyY2VudCBjb25maWRlbmNlIGludGVydmFsOlxuIDAuMTkxMTIxNCAxLjAwMDAwMDBcbnNhbXBsZSBlc3RpbWF0ZXM6XG5wcm9iYWJpbGl0eSBvZiBzdWNjZXNzIFxuICAgICAgICAgICAgIDAuMjUzOTY4MyBcbiJ9 -->
+<pre><code>
+Threshold = 0.075 
+Antal rækker: 126 
+Model Success Rate: 32 / 126 = 0.2539683 
+Bookmakernes Gennemsnitlige Sandsynlighed = 0.2764 
+
+    Exact binomial test
+
+data:  success and total
+number of successes = 32, number of trials = 126, p-value = 0.7433
+alternative hypothesis: true probability of success is greater than 0.2763767
+95 percent confidence interval:
+ 0.1911214 1.0000000
+sample estimates:
+probability of success 
+             0.2539683 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyDwn5SlIEhqZW1tZXNlanIgKEgpXG5jYXQoXCJcXG7wn5OMIEhqZW1tZXNlanIgKEgpXFxuXCIpXG5gYGAifQ== -->
+<pre class="r"><code># 🔥 Hjemmesejr (H)
+cat(&quot;\n📌 Hjemmesejr (H)\n&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG7wn5OMIEhqZW1tZXNlanIgKEgpXG4ifQ== -->
+<pre><code>
+📌 Hjemmesejr (H)</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoVExSLCBcIllwcmVkSFwiLCBcIll0cnVlSFwiLCBcIkRpZmZIXCIsIFwiRlRSXCIsIFwiSFwiLCB0aHJlc2hvbGQgPSAwLjEpXG5gYGAifQ== -->
+<pre class="r"><code>compare_with_bookmakers(TLR, &quot;YpredH&quot;, &quot;YtrueH&quot;, &quot;DiffH&quot;, &quot;FTR&quot;, &quot;H&quot;, threshold = 0.1)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5UaHJlc2hvbGQgPSAwLjEgXG5BbnRhbCByw6Zra2VyOiA3MyBcbk1vZGVsIFN1Y2Nlc3MgUmF0ZTogMzIgLyA3MyA9IDAuNDM4MzU2MiBcbkJvb2ttYWtlcm5lcyBHZW5uZW1zbml0bGlnZSBTYW5kc3lubGlnaGVkID0gMC4zNTkgXG5cblx0RXhhY3QgYmlub21pYWwgdGVzdFxuXG5kYXRhOiAgc3VjY2VzcyBhbmQgdG90YWxcbm51bWJlciBvZiBzdWNjZXNzZXMgPSAzMiwgbnVtYmVyIG9mIHRyaWFscyA9IDczLCBwLXZhbHVlID0gMC4wOTk0MlxuYWx0ZXJuYXRpdmUgaHlwb3RoZXNpczogdHJ1ZSBwcm9iYWJpbGl0eSBvZiBzdWNjZXNzIGlzIGdyZWF0ZXIgdGhhbiAwLjM1OTAxNzRcbjk1IHBlcmNlbnQgY29uZmlkZW5jZSBpbnRlcnZhbDpcbiAwLjMzOTMwOTUgMS4wMDAwMDAwXG5zYW1wbGUgZXN0aW1hdGVzOlxucHJvYmFiaWxpdHkgb2Ygc3VjY2VzcyBcbiAgICAgICAgICAgICAwLjQzODM1NjIgXG4ifQ== -->
+<pre><code>
+Threshold = 0.1 
+Antal rækker: 73 
+Model Success Rate: 32 / 73 = 0.4383562 
+Bookmakernes Gennemsnitlige Sandsynlighed = 0.359 
+
+    Exact binomial test
+
+data:  success and total
+number of successes = 32, number of trials = 73, p-value = 0.09942
+alternative hypothesis: true probability of success is greater than 0.3590174
+95 percent confidence interval:
+ 0.3393095 1.0000000
+sample estimates:
+probability of success 
+             0.4383562 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyDwn6SdIFVhZmdqb3J0IChEKVxuY2F0KFwiXFxu8J+TjCBVYWZnam9ydCAoRClcXG5cIilcbmBgYCJ9 -->
+<pre class="r"><code># 🤝 Uafgjort (D)
+cat(&quot;\n📌 Uafgjort (D)\n&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG7wn5OMIFVhZmdqb3J0IChEKVxuIn0= -->
+<pre><code>
+📌 Uafgjort (D)</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoVExSLCBcIllwcmVkRFwiLCBcIll0cnVlRFwiLCBcIkRpZmZEXCIsIFwiRlRSXCIsIFwiRFwiLCB0aHJlc2hvbGQgPSAwLjEpXG5gYGAifQ== -->
+<pre class="r"><code>compare_with_bookmakers(TLR, &quot;YpredD&quot;, &quot;YtrueD&quot;, &quot;DiffD&quot;, &quot;FTR&quot;, &quot;D&quot;, threshold = 0.1)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5UaHJlc2hvbGQgPSAwLjEgXG5BbnRhbCByw6Zra2VyOiA3IFxuTW9kZWwgU3VjY2VzcyBSYXRlOiAyIC8gNyA9IDAuMjg1NzE0MyBcbkJvb2ttYWtlcm5lcyBHZW5uZW1zbml0bGlnZSBTYW5kc3lubGlnaGVkID0gMC4xMzAzIFxuXG5cdEV4YWN0IGJpbm9taWFsIHRlc3RcblxuZGF0YTogIHN1Y2Nlc3MgYW5kIHRvdGFsXG5udW1iZXIgb2Ygc3VjY2Vzc2VzID0gMiwgbnVtYmVyIG9mIHRyaWFscyA9IDcsIHAtdmFsdWUgPSAwLjIyODlcbmFsdGVybmF0aXZlIGh5cG90aGVzaXM6IHRydWUgcHJvYmFiaWxpdHkgb2Ygc3VjY2VzcyBpcyBncmVhdGVyIHRoYW4gMC4xMzAyNjc5XG45NSBwZXJjZW50IGNvbmZpZGVuY2UgaW50ZXJ2YWw6XG4gMC4wNTMzNzU1IDEuMDAwMDAwMFxuc2FtcGxlIGVzdGltYXRlczpcbnByb2JhYmlsaXR5IG9mIHN1Y2Nlc3MgXG4gICAgICAgICAgICAgMC4yODU3MTQzIFxuIn0= -->
+<pre><code>
+Threshold = 0.1 
+Antal rækker: 7 
+Model Success Rate: 2 / 7 = 0.2857143 
+Bookmakernes Gennemsnitlige Sandsynlighed = 0.1303 
+
+    Exact binomial test
+
+data:  success and total
+number of successes = 2, number of trials = 7, p-value = 0.2289
+alternative hypothesis: true probability of success is greater than 0.1302679
+95 percent confidence interval:
+ 0.0533755 1.0000000
+sample estimates:
+probability of success 
+             0.2857143 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyDwn5qMIFVkZWJhbmVzZWpyIChBKVxuY2F0KFwiXFxu8J+TjCBVZGViYW5lc2VqciAoQSlcXG5cIilcbmBgYCJ9 -->
+<pre class="r"><code># 🚌 Udebanesejr (A)
+cat(&quot;\n📌 Udebanesejr (A)\n&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG7wn5OMIFVkZWJhbmVzZWpyIChBKVxuIn0= -->
+<pre><code>
+📌 Udebanesejr (A)</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoVExSLCBcIllwcmVkQVwiLCBcIll0cnVlQVwiLCBcIkRpZmZBXCIsIFwiRlRSXCIsIFwiQVwiLCB0aHJlc2hvbGQgPSAwLjEpXG5gYGAifQ== -->
+<pre class="r"><code>compare_with_bookmakers(TLR, &quot;YpredA&quot;, &quot;YtrueA&quot;, &quot;DiffA&quot;, &quot;FTR&quot;, &quot;A&quot;, threshold = 0.1)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5UaHJlc2hvbGQgPSAwLjEgXG5BbnRhbCByw6Zra2VyOiA1NCBcbk1vZGVsIFN1Y2Nlc3MgUmF0ZTogMTUgLyA1NCA9IDAuMjc3Nzc3OCBcbkJvb2ttYWtlcm5lcyBHZW5uZW1zbml0bGlnZSBTYW5kc3lubGlnaGVkID0gMC4yOTcxIFxuXG5cdEV4YWN0IGJpbm9taWFsIHRlc3RcblxuZGF0YTogIHN1Y2Nlc3MgYW5kIHRvdGFsXG5udW1iZXIgb2Ygc3VjY2Vzc2VzID0gMTUsIG51bWJlciBvZiB0cmlhbHMgPSA1NCwgcC12YWx1ZSA9IDAuNjcwOFxuYWx0ZXJuYXRpdmUgaHlwb3RoZXNpczogdHJ1ZSBwcm9iYWJpbGl0eSBvZiBzdWNjZXNzIGlzIGdyZWF0ZXIgdGhhbiAwLjI5NzA1MzRcbjk1IHBlcmNlbnQgY29uZmlkZW5jZSBpbnRlcnZhbDpcbiAwLjE3OTY3ODQgMS4wMDAwMDAwXG5zYW1wbGUgZXN0aW1hdGVzOlxucHJvYmFiaWxpdHkgb2Ygc3VjY2VzcyBcbiAgICAgICAgICAgICAwLjI3Nzc3NzggXG4ifQ== -->
+<pre><code>
+Threshold = 0.1 
+Antal rækker: 54 
+Model Success Rate: 15 / 54 = 0.2777778 
+Bookmakernes Gennemsnitlige Sandsynlighed = 0.2971 
+
+    Exact binomial test
+
+data:  success and total
+number of successes = 15, number of trials = 54, p-value = 0.6708
+alternative hypothesis: true probability of success is greater than 0.2970534
+95 percent confidence interval:
+ 0.1796784 1.0000000
+sample estimates:
+probability of success 
+             0.2777778 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyDwn5SlIEhqZW1tZXNlanIgKEgpXG5jYXQoXCJcXG7wn5OMIEhqZW1tZXNlanIgKEgpXFxuXCIpXG5gYGAifQ== -->
+<pre class="r"><code># 🔥 Hjemmesejr (H)
+cat(&quot;\n📌 Hjemmesejr (H)\n&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG7wn5OMIEhqZW1tZXNlanIgKEgpXG4ifQ== -->
+<pre><code>
+📌 Hjemmesejr (H)</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoVExSLCBcIllwcmVkSFwiLCBcIll0cnVlSFwiLCBcIkRpZmZIXCIsIFwiRlRSXCIsIFwiSFwiLCB0aHJlc2hvbGQgPSAwLjEyNSlcbmBgYCJ9 -->
+<pre class="r"><code>compare_with_bookmakers(TLR, &quot;YpredH&quot;, &quot;YtrueH&quot;, &quot;DiffH&quot;, &quot;FTR&quot;, &quot;H&quot;, threshold = 0.125)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5UaHJlc2hvbGQgPSAwLjEyNSBcbkFudGFsIHLDpmtrZXI6IDM2IFxuTW9kZWwgU3VjY2VzcyBSYXRlOiAxNyAvIDM2ID0gMC40NzIyMjIyIFxuQm9va21ha2VybmVzIEdlbm5lbXNuaXRsaWdlIFNhbmRzeW5saWdoZWQgPSAwLjM1MTkgXG5cblx0RXhhY3QgYmlub21pYWwgdGVzdFxuXG5kYXRhOiAgc3VjY2VzcyBhbmQgdG90YWxcbm51bWJlciBvZiBzdWNjZXNzZXMgPSAxNywgbnVtYmVyIG9mIHRyaWFscyA9IDM2LCBwLXZhbHVlID0gMC4wOTIyM1xuYWx0ZXJuYXRpdmUgaHlwb3RoZXNpczogdHJ1ZSBwcm9iYWJpbGl0eSBvZiBzdWNjZXNzIGlzIGdyZWF0ZXIgdGhhbiAwLjM1MTg4NTRcbjk1IHBlcmNlbnQgY29uZmlkZW5jZSBpbnRlcnZhbDpcbiAwLjMyNzU0MDcgMS4wMDAwMDAwXG5zYW1wbGUgZXN0aW1hdGVzOlxucHJvYmFiaWxpdHkgb2Ygc3VjY2VzcyBcbiAgICAgICAgICAgICAwLjQ3MjIyMjIgXG4ifQ== -->
+<pre><code>
+Threshold = 0.125 
+Antal rækker: 36 
+Model Success Rate: 17 / 36 = 0.4722222 
+Bookmakernes Gennemsnitlige Sandsynlighed = 0.3519 
+
+    Exact binomial test
+
+data:  success and total
+number of successes = 17, number of trials = 36, p-value = 0.09223
+alternative hypothesis: true probability of success is greater than 0.3518854
+95 percent confidence interval:
+ 0.3275407 1.0000000
+sample estimates:
+probability of success 
+             0.4722222 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyDwn6SdIFVhZmdqb3J0IChEKVxuY2F0KFwiXFxu8J+TjCBVYWZnam9ydCAoRClcXG5cIilcbmBgYCJ9 -->
+<pre class="r"><code># 🤝 Uafgjort (D)
+cat(&quot;\n📌 Uafgjort (D)\n&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG7wn5OMIFVhZmdqb3J0IChEKVxuIn0= -->
+<pre><code>
+📌 Uafgjort (D)</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoVExSLCBcIllwcmVkRFwiLCBcIll0cnVlRFwiLCBcIkRpZmZEXCIsIFwiRlRSXCIsIFwiRFwiLCB0aHJlc2hvbGQgPSAwLjEyNSlcbmBgYCJ9 -->
+<pre class="r"><code>compare_with_bookmakers(TLR, &quot;YpredD&quot;, &quot;YtrueD&quot;, &quot;DiffD&quot;, &quot;FTR&quot;, &quot;D&quot;, threshold = 0.125)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5UaHJlc2hvbGQgPSAwLjEyNSBcbkFudGFsIHLDpmtrZXI6IDEgXG5Nb2RlbCBTdWNjZXNzIFJhdGU6IDAgLyAxID0gMCBcbkJvb2ttYWtlcm5lcyBHZW5uZW1zbml0bGlnZSBTYW5kc3lubGlnaGVkID0gMC4wODA0IFxuXG5cdEV4YWN0IGJpbm9taWFsIHRlc3RcblxuZGF0YTogIHN1Y2Nlc3MgYW5kIHRvdGFsXG5udW1iZXIgb2Ygc3VjY2Vzc2VzID0gMCwgbnVtYmVyIG9mIHRyaWFscyA9IDEsIHAtdmFsdWUgPSAxXG5hbHRlcm5hdGl2ZSBoeXBvdGhlc2lzOiB0cnVlIHByb2JhYmlsaXR5IG9mIHN1Y2Nlc3MgaXMgZ3JlYXRlciB0aGFuIDAuMDgwMzk3MjVcbjk1IHBlcmNlbnQgY29uZmlkZW5jZSBpbnRlcnZhbDpcbiAwIDFcbnNhbXBsZSBlc3RpbWF0ZXM6XG5wcm9iYWJpbGl0eSBvZiBzdWNjZXNzIFxuICAgICAgICAgICAgICAgICAgICAgMCBcbiJ9 -->
+<pre><code>
+Threshold = 0.125 
+Antal rækker: 1 
+Model Success Rate: 0 / 1 = 0 
+Bookmakernes Gennemsnitlige Sandsynlighed = 0.0804 
+
+    Exact binomial test
+
+data:  success and total
+number of successes = 0, number of trials = 1, p-value = 1
+alternative hypothesis: true probability of success is greater than 0.08039725
+95 percent confidence interval:
+ 0 1
+sample estimates:
+probability of success 
+                     0 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyDwn5qMIFVkZWJhbmVzZWpyIChBKVxuY2F0KFwiXFxu8J+TjCBVZGViYW5lc2VqciAoQSlcXG5cIilcbmBgYCJ9 -->
+<pre class="r"><code># 🚌 Udebanesejr (A)
+cat(&quot;\n📌 Udebanesejr (A)\n&quot;)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG7wn5OMIFVkZWJhbmVzZWpyIChBKVxuIn0= -->
+<pre><code>
+📌 Udebanesejr (A)</code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoVExSLCBcIllwcmVkQVwiLCBcIll0cnVlQVwiLCBcIkRpZmZBXCIsIFwiRlRSXCIsIFwiQVwiLCB0aHJlc2hvbGQgPSAwLjEyNSlcbmBgYCJ9 -->
+<pre class="r"><code>compare_with_bookmakers(TLR, &quot;YpredA&quot;, &quot;YtrueA&quot;, &quot;DiffA&quot;, &quot;FTR&quot;, &quot;A&quot;, threshold = 0.125)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-output-begin eyJkYXRhIjoiXG5UaHJlc2hvbGQgPSAwLjEyNSBcbkFudGFsIHLDpmtrZXI6IDMwIFxuTW9kZWwgU3VjY2VzcyBSYXRlOiA3IC8gMzAgPSAwLjIzMzMzMzMgXG5Cb29rbWFrZXJuZXMgR2VubmVtc25pdGxpZ2UgU2FuZHN5bmxpZ2hlZCA9IDAuMjgwOSBcblxuXHRFeGFjdCBiaW5vbWlhbCB0ZXN0XG5cbmRhdGE6ICBzdWNjZXNzIGFuZCB0b3RhbFxubnVtYmVyIG9mIHN1Y2Nlc3NlcyA9IDcsIG51bWJlciBvZiB0cmlhbHMgPSAzMCwgcC12YWx1ZSA9IDAuNzc5M1xuYWx0ZXJuYXRpdmUgaHlwb3RoZXNpczogdHJ1ZSBwcm9iYWJpbGl0eSBvZiBzdWNjZXNzIGlzIGdyZWF0ZXIgdGhhbiAwLjI4MDg3Mzlcbjk1IHBlcmNlbnQgY29uZmlkZW5jZSBpbnRlcnZhbDpcbiAwLjExNDk4NjkgMS4wMDAwMDAwXG5zYW1wbGUgZXN0aW1hdGVzOlxucHJvYmFiaWxpdHkgb2Ygc3VjY2VzcyBcbiAgICAgICAgICAgICAwLjIzMzMzMzMgXG4ifQ== -->
+<pre><code>
+Threshold = 0.125 
+Antal rækker: 30 
+Model Success Rate: 7 / 30 = 0.2333333 
+Bookmakernes Gennemsnitlige Sandsynlighed = 0.2809 
+
+    Exact binomial test
+
+data:  success and total
+number of successes = 7, number of trials = 30, p-value = 0.7793
+alternative hypothesis: true probability of success is greater than 0.2808739
+95 percent confidence interval:
+ 0.1149869 1.0000000
+sample estimates:
+probability of success 
+             0.2333333 </code></pre>
+<!-- rnb-output-end -->
+<!-- rnb-chunk-end -->
+<!-- rnb-text-begin -->
+</div>
+<div id="bundesliga-cat-boost" class="section level1">
+<h1>BUNDESLIGA CAT BOOST</h1>
+<!-- rnb-text-end -->
+<!-- rnb-chunk-begin -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyDwn5SlIEhqZW1tZXNlanIgKEgpXG5jYXQoXCJcXG7wn5OMIEhqZW1tZXNlanIgKEgpXFxuXCIpXG5jb21wYXJlX3dpdGhfYm9va21ha2VycyhUQ0IsIFwiWXByZWRIXCIsIFwiWXRydWVIXCIsIFwiRGlmZkhcIiwgXCJGVFJcIiwgXCJIXCIsIHRocmVzaG9sZCA9IDAuMDI1KVxuIyDwn6SdIFVhZmdqb3J0IChEKVxuY2F0KFwiXFxu8J+TjCBVYWZnam9ydCAoRClcXG5cIilcbmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFRDQiwgXCJZcHJlZERcIiwgXCJZdHJ1ZURcIiwgXCJEaWZmRFwiLCBcIkZUUlwiLCBcIkRcIiwgdGhyZXNob2xkID0gMC4wMjUpXG4jIPCfmowgVWRlYmFuZXNlanIgKEEpXG5jYXQoXCJcXG7wn5OMIFVkZWJhbmVzZWpyIChBKVxcblwiKVxuY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoVENCLCBcIllwcmVkQVwiLCBcIll0cnVlQVwiLCBcIkRpZmZBXCIsIFwiRlRSXCIsIFwiQVwiLCB0aHJlc2hvbGQgPSAwLjAyNSlcblxuIyDwn5SlIEhqZW1tZXNlanIgKEgpXG5jYXQoXCJcXG7wn5OMIEhqZW1tZXNlanIgKEgpXFxuXCIpXG5jb21wYXJlX3dpdGhfYm9va21ha2VycyhUQ0IsIFwiWXByZWRIXCIsIFwiWXRydWVIXCIsIFwiRGlmZkhcIiwgXCJGVFJcIiwgXCJIXCIsIHRocmVzaG9sZCA9IDAuMDUpXG4jIPCfpJ0gVWFmZ2pvcnQgKEQpXG5jYXQoXCJcXG7wn5OMIFVhZmdqb3J0IChEKVxcblwiKVxuY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoVENCLCBcIllwcmVkRFwiLCBcIll0cnVlRFwiLCBcIkRpZmZEXCIsIFwiRlRSXCIsIFwiRFwiLCB0aHJlc2hvbGQgPSAwLjA1KVxuIyDwn5qMIFVkZWJhbmVzZWpyIChBKVxuY2F0KFwiXFxu8J+TjCBVZGViYW5lc2VqciAoQSlcXG5cIilcbmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFRDQiwgXCJZcHJlZEFcIiwgXCJZdHJ1ZUFcIiwgXCJEaWZmQVwiLCBcIkZUUlwiLCBcIkFcIiwgdGhyZXNob2xkID0gMC4wNSlcblxuIyDwn5SlIEhqZW1tZXNlanIgKEgpXG5jYXQoXCJcXG7wn5OMIEhqZW1tZXNlanIgKEgpXFxuXCIpXG5jb21wYXJlX3dpdGhfYm9va21ha2VycyhUQ0IsIFwiWXByZWRIXCIsIFwiWXRydWVIXCIsIFwiRGlmZkhcIiwgXCJGVFJcIiwgXCJIXCIsIHRocmVzaG9sZCA9IDAuMDc1KVxuIyDwn6SdIFVhZmdqb3J0IChEKVxuY2F0KFwiXFxu8J+TjCBVYWZnam9ydCAoRClcXG5cIilcbmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFRDQiwgXCJZcHJlZERcIiwgXCJZdHJ1ZURcIiwgXCJEaWZmRFwiLCBcIkZUUlwiLCBcIkRcIiwgdGhyZXNob2xkID0gMC4wNzUpXG4jIPCfmowgVWRlYmFuZXNlanIgKEEpXG5jYXQoXCJcXG7wn5OMIFVkZWJhbmVzZWpyIChBKVxcblwiKVxuY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoVENCLCBcIllwcmVkQVwiLCBcIll0cnVlQVwiLCBcIkRpZmZBXCIsIFwiRlRSXCIsIFwiQVwiLCB0aHJlc2hvbGQgPSAwLjA3NSlcblxuIyDwn5SlIEhqZW1tZXNlanIgKEgpXG5jYXQoXCJcXG7wn5OMIEhqZW1tZXNlanIgKEgpXFxuXCIpXG5jb21wYXJlX3dpdGhfYm9va21ha2VycyhUQ0IsIFwiWXByZWRIXCIsIFwiWXRydWVIXCIsIFwiRGlmZkhcIiwgXCJGVFJcIiwgXCJIXCIsIHRocmVzaG9sZCA9IDAuMSlcbiMg8J+knSBVYWZnam9ydCAoRClcbmNhdChcIlxcbvCfk4wgVWFmZ2pvcnQgKEQpXFxuXCIpXG5jb21wYXJlX3dpdGhfYm9va21ha2VycyhUQ0IsIFwiWXByZWREXCIsIFwiWXRydWVEXCIsIFwiRGlmZkRcIiwgXCJGVFJcIiwgXCJEXCIsIHRocmVzaG9sZCA9IDAuMSlcbiMg8J+ajCBVZGViYW5lc2VqciAoQSlcbmNhdChcIlxcbvCfk4wgVWRlYmFuZXNlanIgKEEpXFxuXCIpXG5jb21wYXJlX3dpdGhfYm9va21ha2VycyhUQ0IsIFwiWXByZWRBXCIsIFwiWXRydWVBXCIsIFwiRGlmZkFcIiwgXCJGVFJcIiwgXCJBXCIsIHRocmVzaG9sZCA9IDAuMSlcblxuIyDwn5SlIEhqZW1tZXNlanIgKEgpXG5jYXQoXCJcXG7wn5OMIEhqZW1tZXNlanIgKEgpXFxuXCIpXG5jb21wYXJlX3dpdGhfYm9va21ha2VycyhUQ0IsIFwiWXByZWRIXCIsIFwiWXRydWVIXCIsIFwiRGlmZkhcIiwgXCJGVFJcIiwgXCJIXCIsIHRocmVzaG9sZCA9IDAuMTI1KVxuIyDwn6SdIFVhZmdqb3J0IChEKVxuY2F0KFwiXFxu8J+TjCBVYWZnam9ydCAoRClcXG5cIilcbmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFRDQiwgXCJZcHJlZERcIiwgXCJZdHJ1ZURcIiwgXCJEaWZmRFwiLCBcIkZUUlwiLCBcIkRcIiwgdGhyZXNob2xkID0gMC4xMjUpXG4jIPCfmowgVWRlYmFuZXNlanIgKEEpXG5jYXQoXCJcXG7wn5OMIFVkZWJhbmVzZWpyIChBKVxcblwiKVxuY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoVENCLCBcIllwcmVkQVwiLCBcIll0cnVlQVwiLCBcIkRpZmZBXCIsIFwiRlRSXCIsIFwiQVwiLCB0aHJlc2hvbGQgPSAwLjEyNSlcbmBgYCJ9 -->
+<pre class="r"><code># 🔥 Hjemmesejr (H)
+cat(&quot;\n📌 Hjemmesejr (H)\n&quot;)
+compare_with_bookmakers(TCB, &quot;YpredH&quot;, &quot;YtrueH&quot;, &quot;DiffH&quot;, &quot;FTR&quot;, &quot;H&quot;, threshold = 0.025)
+# 🤝 Uafgjort (D)
+cat(&quot;\n📌 Uafgjort (D)\n&quot;)
+compare_with_bookmakers(TCB, &quot;YpredD&quot;, &quot;YtrueD&quot;, &quot;DiffD&quot;, &quot;FTR&quot;, &quot;D&quot;, threshold = 0.025)
+# 🚌 Udebanesejr (A)
+cat(&quot;\n📌 Udebanesejr (A)\n&quot;)
+compare_with_bookmakers(TCB, &quot;YpredA&quot;, &quot;YtrueA&quot;, &quot;DiffA&quot;, &quot;FTR&quot;, &quot;A&quot;, threshold = 0.025)
+
+# 🔥 Hjemmesejr (H)
+cat(&quot;\n📌 Hjemmesejr (H)\n&quot;)
+compare_with_bookmakers(TCB, &quot;YpredH&quot;, &quot;YtrueH&quot;, &quot;DiffH&quot;, &quot;FTR&quot;, &quot;H&quot;, threshold = 0.05)
+# 🤝 Uafgjort (D)
+cat(&quot;\n📌 Uafgjort (D)\n&quot;)
+compare_with_bookmakers(TCB, &quot;YpredD&quot;, &quot;YtrueD&quot;, &quot;DiffD&quot;, &quot;FTR&quot;, &quot;D&quot;, threshold = 0.05)
+# 🚌 Udebanesejr (A)
+cat(&quot;\n📌 Udebanesejr (A)\n&quot;)
+compare_with_bookmakers(TCB, &quot;YpredA&quot;, &quot;YtrueA&quot;, &quot;DiffA&quot;, &quot;FTR&quot;, &quot;A&quot;, threshold = 0.05)
+
+# 🔥 Hjemmesejr (H)
+cat(&quot;\n📌 Hjemmesejr (H)\n&quot;)
+compare_with_bookmakers(TCB, &quot;YpredH&quot;, &quot;YtrueH&quot;, &quot;DiffH&quot;, &quot;FTR&quot;, &quot;H&quot;, threshold = 0.075)
+# 🤝 Uafgjort (D)
+cat(&quot;\n📌 Uafgjort (D)\n&quot;)
+compare_with_bookmakers(TCB, &quot;YpredD&quot;, &quot;YtrueD&quot;, &quot;DiffD&quot;, &quot;FTR&quot;, &quot;D&quot;, threshold = 0.075)
+# 🚌 Udebanesejr (A)
+cat(&quot;\n📌 Udebanesejr (A)\n&quot;)
+compare_with_bookmakers(TCB, &quot;YpredA&quot;, &quot;YtrueA&quot;, &quot;DiffA&quot;, &quot;FTR&quot;, &quot;A&quot;, threshold = 0.075)
+
+# 🔥 Hjemmesejr (H)
+cat(&quot;\n📌 Hjemmesejr (H)\n&quot;)
+compare_with_bookmakers(TCB, &quot;YpredH&quot;, &quot;YtrueH&quot;, &quot;DiffH&quot;, &quot;FTR&quot;, &quot;H&quot;, threshold = 0.1)
+# 🤝 Uafgjort (D)
+cat(&quot;\n📌 Uafgjort (D)\n&quot;)
+compare_with_bookmakers(TCB, &quot;YpredD&quot;, &quot;YtrueD&quot;, &quot;DiffD&quot;, &quot;FTR&quot;, &quot;D&quot;, threshold = 0.1)
+# 🚌 Udebanesejr (A)
+cat(&quot;\n📌 Udebanesejr (A)\n&quot;)
+compare_with_bookmakers(TCB, &quot;YpredA&quot;, &quot;YtrueA&quot;, &quot;DiffA&quot;, &quot;FTR&quot;, &quot;A&quot;, threshold = 0.1)
+
+# 🔥 Hjemmesejr (H)
+cat(&quot;\n📌 Hjemmesejr (H)\n&quot;)
+compare_with_bookmakers(TCB, &quot;YpredH&quot;, &quot;YtrueH&quot;, &quot;DiffH&quot;, &quot;FTR&quot;, &quot;H&quot;, threshold = 0.125)
+# 🤝 Uafgjort (D)
+cat(&quot;\n📌 Uafgjort (D)\n&quot;)
+compare_with_bookmakers(TCB, &quot;YpredD&quot;, &quot;YtrueD&quot;, &quot;DiffD&quot;, &quot;FTR&quot;, &quot;D&quot;, threshold = 0.125)
+# 🚌 Udebanesejr (A)
+cat(&quot;\n📌 Udebanesejr (A)\n&quot;)
+compare_with_bookmakers(TCB, &quot;YpredA&quot;, &quot;YtrueA&quot;, &quot;DiffA&quot;, &quot;FTR&quot;, &quot;A&quot;, threshold = 0.125)</code></pre>
+<!-- rnb-source-end -->
+<!-- rnb-chunk-end -->
 </div>
 
-<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQpUaGlzIGlzIGFuIFtSIE1hcmtkb3duXShodHRwOi8vcm1hcmtkb3duLnJzdHVkaW8uY29tKSBOb3RlYm9vay4gV2hlbiB5b3UgZXhlY3V0ZSBjb2RlIHdpdGhpbiB0aGUgbm90ZWJvb2ssIHRoZSByZXN1bHRzIGFwcGVhciBiZW5lYXRoIHRoZSBjb2RlLg0KDQpUcnkgZXhlY3V0aW5nIHRoaXMgY2h1bmsgYnkgY2xpY2tpbmcgdGhlICpSdW4qIGJ1dHRvbiB3aXRoaW4gdGhlIGNodW5rIG9yIGJ5IHBsYWNpbmcgeW91ciBjdXJzb3IgaW5zaWRlIGl0IGFuZCBwcmVzc2luZyAqQ3RybCtTaGlmdCtFbnRlciouDQoNCmBgYHtyfQ0KIyBJbmRsw6ZzIGJpYmxpb3Rla2VyDQpsaWJyYXJ5KGJvb3QpDQpsaWJyYXJ5KHRpZHl2ZXJzZSkNCmxpYnJhcnkocmVhZHhsKQ0KbGlicmFyeShzdGF0cykNCmBgYA0KDQpBZGQgYSBuZXcgY2h1bmsgYnkgY2xpY2tpbmcgdGhlICpJbnNlcnQgQ2h1bmsqIGJ1dHRvbiBvbiB0aGUgdG9vbGJhciBvciBieSBwcmVzc2luZyAqQ3RybCtBbHQrSSouDQoNCldoZW4geW91IHNhdmUgdGhlIG5vdGVib29rLCBhbiBIVE1MIGZpbGUgY29udGFpbmluZyB0aGUgY29kZSBhbmQgb3V0cHV0IHdpbGwgYmUgc2F2ZWQgYWxvbmdzaWRlIGl0IChjbGljayB0aGUgKlByZXZpZXcqIGJ1dHRvbiBvciBwcmVzcyAqQ3RybCtTaGlmdCtLKiB0byBwcmV2aWV3IHRoZSBIVE1MIGZpbGUpLg0KDQpUaGUgcHJldmlldyBzaG93cyB5b3UgYSByZW5kZXJlZCBIVE1MIGNvcHkgb2YgdGhlIGNvbnRlbnRzIG9mIHRoZSBlZGl0b3IuIENvbnNlcXVlbnRseSwgdW5saWtlICpLbml0KiwgKlByZXZpZXcqIGRvZXMgbm90IHJ1biBhbnkgUiBjb2RlIGNodW5rcy4gSW5zdGVhZCwgdGhlIG91dHB1dCBvZiB0aGUgY2h1bmsgd2hlbiBpdCB3YXMgbGFzdCBydW4gaW4gdGhlIGVkaXRvciBpcyBkaXNwbGF5ZWQuDQoNCmBgYHtyfQ0KI0luZGzDpnMgYWxsZSBkYXRhZnJhbWVzDQpTUiA8LSByZWFkX2V4Y2VsKCJTb2Z0bWF4UmVncmVzc2lvblJlc3VsdHNVbmZpbHRlcmVkLnhsc3giKQ0KS05OIDwtIHJlYWRfZXhjZWwoIktOTlJlc3VsdHNVbmZpbHRlcmVkLnhsc3giKQ0KUkYgPC0gcmVhZF9leGNlbCgiUmFuZG9tRm9yZXN0UmVzdWx0c1VuZmlsdGVyZWQueGxzeCIpDQpLTk5fUkYgPC0gcmVhZF9leGNlbCgiS05OX1JGX1Jlc3VsdHNVbmZpbHRlcmVkLnhsc3giKQ0KQ0IgPC0gcmVhZF9leGNlbCgiQ2F0Qm9vc3RSZXN1bHRzVW5maWx0ZXJlZC54bHN4IikNCkxHQk0gPC0gcmVhZF9leGNlbCgiTGlnaHRHQk1SZXN1bHRzVW5maWx0ZXJlZC54bHN4IikNClhHQiA8LSByZWFkX2V4Y2VsKCJYR0Jvb3N0UmVzdWx0c1VuZmlsdGVyZWQueGxzeCIpDQpHRSA8LSByZWFkX2V4Y2VsKCJHcmFkaWVudEVuc2VtYmxlUmVzdWx0c1VuZmlsdGVyZWQueGxzeCIpDQpOTiA8LSByZWFkX2V4Y2VsKCJOZXVyYWxOZXR3b3JrT3V0bGllcnNSZXN1bHRzVW5maWx0ZXJlZC54bHN4IikNCmBgYA0KDQpgYGB7cn0NCiMgRnVua3Rpb24gdGlsIGF0IHNhbW1lbmxpZ25lIG1vZGVsZW5zIHN1Y2Nlc3MgcmF0ZSBtZWQgYm9va21ha2VybmVzIGdlbm5lbXNuaXRsaWdlIHNhbmRzeW5saWdoZWQNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzIDwtIGZ1bmN0aW9uKGRmLCBwcmVkX2NvbCwgdHJ1ZV9jb2wsIGRpZmZfY29sLCByZXN1bHRfY29sLCByZXN1bHRfY2hhciwgdGhyZXNob2xkID0gMCkgew0KICAjIEZpbHRyZXIga3VuIHLDpmtrZXIsIGh2b3IgZm9yc2tlbGxlbiBvdmVyc3RpZ2VyIHRocmVzaG9sZA0KICBkZiA8LSBkZltkZltbZGlmZl9jb2xdXSA+IHRocmVzaG9sZCwgXQ0KICANCiAgIyBIdmlzIGRlciBpa2tlIGVyIHLDpmtrZXIsIGFmc2x1dA0KICBpZiAobnJvdyhkZikgPT0gMCkgew0KICAgIGNhdCgiXG5JbmdlbiByw6Zra2VyIG9wZnlsZGVyIHRocmVzaG9sZCA9IiwgdGhyZXNob2xkLCAiXG4iKQ0KICAgIHJldHVybigpDQogIH0NCiAgDQogICMgVMOmbCBzdWNjZXNzZXIgKG1vZGVsIGtvcnJla3QgZm9ydWRzaWdlbHNlKSBvZyB0b3RhbCBhbnRhbA0KICBzdWNjZXNzIDwtIHN1bShkZltbcHJlZF9jb2xdXSA+IGRmW1t0cnVlX2NvbF1dICYgZGZbW3Jlc3VsdF9jb2xdXSA9PSByZXN1bHRfY2hhcikNCiAgdG90YWwgPC0gc3VtKGRmW1twcmVkX2NvbF1dID4gZGZbW3RydWVfY29sXV0pDQogIA0KICAjIEJlcmVnbiBib29rbWFrZXJuZXMgZ2VubmVtc25pdGxpZ2Ugc2FuZHN5bmxpZ2hlZCBmb3IgZGV0IHNwZWNpZmlra2UgdWRmYWxkDQogIGJvb2ttYWtlcl9tZWFuIDwtIG1lYW4oZGZbW3RydWVfY29sXV0pDQogIA0KICAjIFVkc2tyaXYgc3VjY2VzcyByYXRlIG9nIGJvb2ttYWtlciBnZW5uZW1zbml0DQogIGNhdCgiXG5UaHJlc2hvbGQgPSIsIHRocmVzaG9sZCwgIlxuIikNCiAgY2F0KCJBbnRhbCByw6Zra2VyOiIsIHRvdGFsLCAiXG4iKQ0KICBjYXQoIk1vZGVsIFN1Y2Nlc3MgUmF0ZToiLCBzdWNjZXNzLCAiLyIsIHRvdGFsLCAiPSIsIGlmZWxzZSh0b3RhbCA+IDAsIHN1Y2Nlc3MvdG90YWwsIE5BKSwgIlxuIikNCiAgY2F0KCJCb29rbWFrZXJuZXMgR2VubmVtc25pdGxpZ2UgU2FuZHN5bmxpZ2hlZCA9Iiwgcm91bmQoYm9va21ha2VyX21lYW4sIDQpLCAiXG4iKQ0KICANCiAgIyBPbmUtc2FtcGxlIGJpbm9taWFsIHRlc3QgbW9kIGJvb2ttYWtlciBnZW5uZW1zbml0DQogIGlmICh0b3RhbCA+IDApIHsNCiAgICB0ZXN0IDwtIGJpbm9tLnRlc3Qoc3VjY2VzcywgdG90YWwsIHAgPSBib29rbWFrZXJfbWVhbiwgYWx0ZXJuYXRpdmUgPSAiZ3JlYXRlciIpDQogICAgcHJpbnQodGVzdCkNCiAgfSBlbHNlIHsNCiAgICBjYXQoIkluZ2VuIHLDpmtrZXIgb3BmeWxkZXIgdGhyZXNob2xkLlxuIikNCiAgfQ0KfQ0KDQojIEZ1bmt0aW9uIHRpbCBhdCBzYW1tZW5saWduZSBtb2RlbGxlbnMgc3VjY2VzcyByYXRlIG1lZCBib29rbWFrZXJuZXMgZ2VubmVtc25pdGxpZ2Ugc2FuZHN5bmxpZ2hlZA0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMyIDwtIGZ1bmN0aW9uKGRmLCBwcmVkX2NvbCwgdHJ1ZV9jb2wsIGRpZmZfY29sLCByZXN1bHRfY29sLCByZXN1bHRfY2hhciwgdDEgPSAwLCB0MiA9IEluZikgew0KICAjIEZpbHRyZXIga3VuIHLDpmtrZXIsIGh2b3IgZm9yc2tlbGxlbiBsaWdnZXIgbWVsbGVtIHQxIG9nIHQyDQogIGRmIDwtIGRmW2RmW1tkaWZmX2NvbF1dID4gdDEgJiBkZltbZGlmZl9jb2xdXSA8PSB0MiwgXQ0KICANCiAgIyBIdmlzIGRlciBpa2tlIGVyIHLDpmtrZXIsIGFmc2x1dA0KICBpZiAobnJvdyhkZikgPT0gMCkgew0KICAgIGNhdCgiXG5JbmdlbiByw6Zra2VyIG9wZnlsZGVyIHRocmVzaG9sZCBtZWxsZW0iLCB0MSwgIm9nIiwgdDIsICJcbiIpDQogICAgcmV0dXJuKCkNCiAgfQ0KICANCiAgIyBUw6ZsIHN1Y2Nlc3NlciAobW9kZWwga29ycmVrdCBmb3J1ZHNpZ2Vsc2UpIG9nIHRvdGFsIGFudGFsDQogIHN1Y2Nlc3MgPC0gc3VtKGRmW1twcmVkX2NvbF1dID4gZGZbW3RydWVfY29sXV0gJiBkZltbcmVzdWx0X2NvbF1dID09IHJlc3VsdF9jaGFyKQ0KICB0b3RhbCA8LSBzdW0oZGZbW3ByZWRfY29sXV0gPiBkZltbdHJ1ZV9jb2xdXSkNCiAgDQogICMgQmVyZWduIGJvb2ttYWtlcm5lcyBnZW5uZW1zbml0bGlnZSBzYW5kc3lubGlnaGVkIGZvciBkZXQgc3BlY2lmaWtrZSB1ZGZhbGQNCiAgYm9va21ha2VyX21lYW4gPC0gbWVhbihkZltbdHJ1ZV9jb2xdXSkNCiAgDQogICMgVWRza3JpdiBzdWNjZXNzIHJhdGUgb2cgYm9va21ha2VyIGdlbm5lbXNuaXQNCiAgY2F0KCJcblRocmVzaG9sZCBtZWxsZW0iLCB0MSwgIm9nIiwgdDIsICJcbiIpDQogIGNhdCgiQW50YWwgcsOma2tlcjoiLCB0b3RhbCwgIlxuIikNCiAgY2F0KCJNb2RlbCBTdWNjZXNzIFJhdGU6Iiwgc3VjY2VzcywgIi8iLCB0b3RhbCwgIj0iLCBpZmVsc2UodG90YWwgPiAwLCBzdWNjZXNzL3RvdGFsLCBOQSksICJcbiIpDQogIGNhdCgiQm9va21ha2VybmVzIEdlbm5lbXNuaXRsaWdlIFNhbmRzeW5saWdoZWQgPSIsIHJvdW5kKGJvb2ttYWtlcl9tZWFuLCA0KSwgIlxuIikNCiAgDQogICMgT25lLXNhbXBsZSBiaW5vbWlhbCB0ZXN0IG1vZCBib29rbWFrZXIgZ2VubmVtc25pdA0KICBpZiAodG90YWwgPiAwKSB7DQogICAgdGVzdCA8LSBiaW5vbS50ZXN0KHN1Y2Nlc3MsIHRvdGFsLCBwID0gYm9va21ha2VyX21lYW4sIGFsdGVybmF0aXZlID0gImdyZWF0ZXIiKQ0KICAgIHByaW50KHRlc3QpDQogIH0gZWxzZSB7DQogICAgY2F0KCJJbmdlbiByw6Zra2VyIG9wZnlsZGVyIHRocmVzaG9sZC5cbiIpDQogIH0NCn0NCg0KDQpgYGANCg0KYGBge3J9DQojIPCflKUgSGplbW1lc2VqciAoSCkNCmNhdCgiXG7wn5OMIEhqZW1tZXNlanIgKEgpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoTk4sICJZcHJlZEgiLCAiWXRydWVIIiwgIiVEaWZmSCIsICJGVFIiLCAiSCIsIHRocmVzaG9sZCA9IDQwKQ0KDQojIPCfpJ0gVWFmZ2pvcnQgKEQpDQpjYXQoIlxu8J+TjCBVYWZnam9ydCAoRClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhOTiwgIllwcmVkRCIsICJZdHJ1ZUQiLCAiJURpZmZEIiwgIkZUUiIsICJEIiwgdGhyZXNob2xkID0gNDApDQoNCiMg8J+ajCBVZGViYW5lc2VqciAoQSkNCmNhdCgiXG7wn5OMIFVkZWJhbmVzZWpyIChBKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKE5OLCAiWXByZWRBIiwgIll0cnVlQSIsICIlRGlmZkEiLCAiRlRSIiwgIkEiLCB0aHJlc2hvbGQgPSA0MCkNCg0KI2RmMiA8LSBkZltkZltbIiVEaWZmSCJdXSA+IDgwLCBdDQojcHJpbnQoZGYyLCBuID0gSW5mKQ0KYGBgDQoNCiMgTkVVUkFMVCBORVRWw4ZSSw0KDQpgYGB7cn0NCiMg8J+UpSBIamVtbWVzZWpyIChIKQ0KY2F0KCJcbvCfk4wgSGplbW1lc2VqciAoSClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhOTiwgIllwcmVkSCIsICJZdHJ1ZUgiLCAiRGlmZkgiLCAiRlRSIiwgIkgiLCB0aHJlc2hvbGQgPSAwLjAyNSkNCg0KIyDwn6SdIFVhZmdqb3J0IChEKQ0KY2F0KCJcbvCfk4wgVWFmZ2pvcnQgKEQpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoTk4sICJZcHJlZEQiLCAiWXRydWVEIiwgIkRpZmZEIiwgIkZUUiIsICJEIiwgdGhyZXNob2xkID0gMC4wMjUpDQojIPCfmowgVWRlYmFuZXNlanIgKEEpDQpjYXQoIlxu8J+TjCBVZGViYW5lc2VqciAoQSlcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhOTiwgIllwcmVkQSIsICJZdHJ1ZUEiLCAiRGlmZkEiLCAiRlRSIiwgIkEiLCB0aHJlc2hvbGQgPSAwLjAyNSkNCg0KIyDwn5SlIEhqZW1tZXNlanIgKEgpDQpjYXQoIlxu8J+TjCBIamVtbWVzZWpyIChIKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKE5OLCAiWXByZWRIIiwgIll0cnVlSCIsICJEaWZmSCIsICJGVFIiLCAiSCIsIHRocmVzaG9sZCA9IDAuMDUpDQojIPCfpJ0gVWFmZ2pvcnQgKEQpDQpjYXQoIlxu8J+TjCBVYWZnam9ydCAoRClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhOTiwgIllwcmVkRCIsICJZdHJ1ZUQiLCAiRGlmZkQiLCAiRlRSIiwgIkQiLCB0aHJlc2hvbGQgPSAwLjA1KQ0KIyDwn5qMIFVkZWJhbmVzZWpyIChBKQ0KY2F0KCJcbvCfk4wgVWRlYmFuZXNlanIgKEEpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoTk4sICJZcHJlZEEiLCAiWXRydWVBIiwgIkRpZmZBIiwgIkZUUiIsICJBIiwgdGhyZXNob2xkID0gMC4wNSkNCg0KIyDwn5SlIEhqZW1tZXNlanIgKEgpDQpjYXQoIlxu8J+TjCBIamVtbWVzZWpyIChIKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKE5OLCAiWXByZWRIIiwgIll0cnVlSCIsICJEaWZmSCIsICJGVFIiLCAiSCIsIHRocmVzaG9sZCA9IDAuMDc1KQ0KIyDwn6SdIFVhZmdqb3J0IChEKQ0KY2F0KCJcbvCfk4wgVWFmZ2pvcnQgKEQpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoTk4sICJZcHJlZEQiLCAiWXRydWVEIiwgIkRpZmZEIiwgIkZUUiIsICJEIiwgdGhyZXNob2xkID0gMC4wNzUpDQojIPCfmowgVWRlYmFuZXNlanIgKEEpDQpjYXQoIlxu8J+TjCBVZGViYW5lc2VqciAoQSlcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhOTiwgIllwcmVkQSIsICJZdHJ1ZUEiLCAiRGlmZkEiLCAiRlRSIiwgIkEiLCB0aHJlc2hvbGQgPSAwLjA3NSkNCg0KIyDwn5SlIEhqZW1tZXNlanIgKEgpDQpjYXQoIlxu8J+TjCBIamVtbWVzZWpyIChIKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKE5OLCAiWXByZWRIIiwgIll0cnVlSCIsICJEaWZmSCIsICJGVFIiLCAiSCIsIHRocmVzaG9sZCA9IDAuMSkNCiMg8J+knSBVYWZnam9ydCAoRCkNCmNhdCgiXG7wn5OMIFVhZmdqb3J0IChEKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKE5OLCAiWXByZWREIiwgIll0cnVlRCIsICJEaWZmRCIsICJGVFIiLCAiRCIsIHRocmVzaG9sZCA9IDAuMSkNCiMg8J+ajCBVZGViYW5lc2VqciAoQSkNCmNhdCgiXG7wn5OMIFVkZWJhbmVzZWpyIChBKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKE5OLCAiWXByZWRBIiwgIll0cnVlQSIsICJEaWZmQSIsICJGVFIiLCAiQSIsIHRocmVzaG9sZCA9IDAuMSkNCg0KIyDwn5SlIEhqZW1tZXNlanIgKEgpDQpjYXQoIlxu8J+TjCBIamVtbWVzZWpyIChIKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKE5OLCAiWXByZWRIIiwgIll0cnVlSCIsICJEaWZmSCIsICJGVFIiLCAiSCIsIHRocmVzaG9sZCA9IDAuMTI1KQ0KIyDwn6SdIFVhZmdqb3J0IChEKQ0KY2F0KCJcbvCfk4wgVWFmZ2pvcnQgKEQpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoTk4sICJZcHJlZEQiLCAiWXRydWVEIiwgIkRpZmZEIiwgIkZUUiIsICJEIiwgdGhyZXNob2xkID0gMC4xMjUpDQojIPCfmowgVWRlYmFuZXNlanIgKEEpDQpjYXQoIlxu8J+TjCBVZGViYW5lc2VqciAoQSlcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhOTiwgIllwcmVkQSIsICJZdHJ1ZUEiLCAiRGlmZkEiLCAiRlRSIiwgIkEiLCB0aHJlc2hvbGQgPSAwLjEyNSkNCg0KDQojZGYyIDwtIE5OW05OW1siRGlmZkgiXV0gPiAwLjA1LCBdDQojcHJpbnQoZGYyLCBuID0gSW5mKQ0KDQpgYGANCg0KIyBMb2dpc3Rpc2sgUmVncmVzc2lvbg0KDQpgYGB7cn0NCiMg8J+UpSBIamVtbWVzZWpyIChIKQ0KY2F0KCJcbvCfk4wgSGplbW1lc2VqciAoSClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhTUiwgIllwcmVkSCIsICJZdHJ1ZUgiLCAiRGlmZkgiLCAiRlRSIiwgIkgiLCB0aHJlc2hvbGQgPSAwLjAyNSkNCiMg8J+knSBVYWZnam9ydCAoRCkNCmNhdCgiXG7wn5OMIFVhZmdqb3J0IChEKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFNSLCAiWXByZWREIiwgIll0cnVlRCIsICJEaWZmRCIsICJGVFIiLCAiRCIsIHRocmVzaG9sZCA9IDAuMDI1KQ0KIyDwn5qMIFVkZWJhbmVzZWpyIChBKQ0KY2F0KCJcbvCfk4wgVWRlYmFuZXNlanIgKEEpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoU1IsICJZcHJlZEEiLCAiWXRydWVBIiwgIkRpZmZBIiwgIkZUUiIsICJBIiwgdGhyZXNob2xkID0gMC4wMjUpDQoNCiMg8J+UpSBIamVtbWVzZWpyIChIKQ0KY2F0KCJcbvCfk4wgSGplbW1lc2VqciAoSClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhTUiwgIllwcmVkSCIsICJZdHJ1ZUgiLCAiRGlmZkgiLCAiRlRSIiwgIkgiLCB0aHJlc2hvbGQgPSAwLjA1KQ0KIyDwn6SdIFVhZmdqb3J0IChEKQ0KY2F0KCJcbvCfk4wgVWFmZ2pvcnQgKEQpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoU1IsICJZcHJlZEQiLCAiWXRydWVEIiwgIkRpZmZEIiwgIkZUUiIsICJEIiwgdGhyZXNob2xkID0gMC4wNSkNCiMg8J+ajCBVZGViYW5lc2VqciAoQSkNCmNhdCgiXG7wn5OMIFVkZWJhbmVzZWpyIChBKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFNSLCAiWXByZWRBIiwgIll0cnVlQSIsICJEaWZmQSIsICJGVFIiLCAiQSIsIHRocmVzaG9sZCA9IDAuMDUpIA0KDQojIPCflKUgSGplbW1lc2VqciAoSCkNCmNhdCgiXG7wn5OMIEhqZW1tZXNlanIgKEgpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoU1IsICJZcHJlZEgiLCAiWXRydWVIIiwgIkRpZmZIIiwgIkZUUiIsICJIIiwgdGhyZXNob2xkID0gMC4wNzUpDQojIPCfpJ0gVWFmZ2pvcnQgKEQpDQpjYXQoIlxu8J+TjCBVYWZnam9ydCAoRClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhTUiwgIllwcmVkRCIsICJZdHJ1ZUQiLCAiRGlmZkQiLCAiRlRSIiwgIkQiLCB0aHJlc2hvbGQgPSAwLjA3NSkNCiMg8J+ajCBVZGViYW5lc2VqciAoQSkNCmNhdCgiXG7wn5OMIFVkZWJhbmVzZWpyIChBKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFNSLCAiWXByZWRBIiwgIll0cnVlQSIsICJEaWZmQSIsICJGVFIiLCAiQSIsIHRocmVzaG9sZCA9IDAuMDc1KQ0KDQojIPCflKUgSGplbW1lc2VqciAoSCkNCmNhdCgiXG7wn5OMIEhqZW1tZXNlanIgKEgpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoU1IsICJZcHJlZEgiLCAiWXRydWVIIiwgIkRpZmZIIiwgIkZUUiIsICJIIiwgdGhyZXNob2xkID0gMC4xKQ0KIyDwn6SdIFVhZmdqb3J0IChEKQ0KY2F0KCJcbvCfk4wgVWFmZ2pvcnQgKEQpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoU1IsICJZcHJlZEQiLCAiWXRydWVEIiwgIkRpZmZEIiwgIkZUUiIsICJEIiwgdGhyZXNob2xkID0gMC4xKQ0KIyDwn5qMIFVkZWJhbmVzZWpyIChBKQ0KY2F0KCJcbvCfk4wgVWRlYmFuZXNlanIgKEEpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoU1IsICJZcHJlZEEiLCAiWXRydWVBIiwgIkRpZmZBIiwgIkZUUiIsICJBIiwgdGhyZXNob2xkID0gMC4xKQ0KDQojIPCflKUgSGplbW1lc2VqciAoSCkNCmNhdCgiXG7wn5OMIEhqZW1tZXNlanIgKEgpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoU1IsICJZcHJlZEgiLCAiWXRydWVIIiwgIkRpZmZIIiwgIkZUUiIsICJIIiwgdGhyZXNob2xkID0gMC4xMjUpDQojIPCfpJ0gVWFmZ2pvcnQgKEQpDQpjYXQoIlxu8J+TjCBVYWZnam9ydCAoRClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhTUiwgIllwcmVkRCIsICJZdHJ1ZUQiLCAiRGlmZkQiLCAiRlRSIiwgIkQiLCB0aHJlc2hvbGQgPSAwLjEyNSkNCiMg8J+ajCBVZGViYW5lc2VqciAoQSkNCmNhdCgiXG7wn5OMIFVkZWJhbmVzZWpyIChBKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFNSLCAiWXByZWRBIiwgIll0cnVlQSIsICJEaWZmQSIsICJGVFIiLCAiQSIsIHRocmVzaG9sZCA9IDAuMTI1KQ0KDQojZGYyIDwtIE5OW05OW1siRGlmZkgiXV0gPiAwLjA1LCBdDQojcHJpbnQoZGYyLCBuID0gSW5mKQ0KDQpgYGANCg0KIyBLTk4NCg0KYGBge3J9DQojIPCflKUgSGplbW1lc2VqciAoSCkNCmNhdCgiXG7wn5OMIEhqZW1tZXNlanIgKEgpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoS05OLCAiWXByZWRIIiwgIll0cnVlSCIsICJEaWZmSCIsICJGVFIiLCAiSCIsIHRocmVzaG9sZCA9IDAuMDI1KQ0KIyDwn6SdIFVhZmdqb3J0IChEKQ0KY2F0KCJcbvCfk4wgVWFmZ2pvcnQgKEQpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoS05OLCAiWXByZWREIiwgIll0cnVlRCIsICJEaWZmRCIsICJGVFIiLCAiRCIsIHRocmVzaG9sZCA9IDAuMDI1KQ0KIyDwn5qMIFVkZWJhbmVzZWpyIChBKQ0KY2F0KCJcbvCfk4wgVWRlYmFuZXNlanIgKEEpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoS05OLCAiWXByZWRBIiwgIll0cnVlQSIsICJEaWZmQSIsICJGVFIiLCAiQSIsIHRocmVzaG9sZCA9IDAuMDI1KQ0KDQojIPCflKUgSGplbW1lc2VqciAoSCkNCmNhdCgiXG7wn5OMIEhqZW1tZXNlanIgKEgpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoS05OLCAiWXByZWRIIiwgIll0cnVlSCIsICJEaWZmSCIsICJGVFIiLCAiSCIsIHRocmVzaG9sZCA9IDAuMDUpDQojIPCfpJ0gVWFmZ2pvcnQgKEQpDQpjYXQoIlxu8J+TjCBVYWZnam9ydCAoRClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhLTk4sICJZcHJlZEQiLCAiWXRydWVEIiwgIkRpZmZEIiwgIkZUUiIsICJEIiwgdGhyZXNob2xkID0gMC4wNSkNCiMg8J+ajCBVZGViYW5lc2VqciAoQSkNCmNhdCgiXG7wn5OMIFVkZWJhbmVzZWpyIChBKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKEtOTiwgIllwcmVkQSIsICJZdHJ1ZUEiLCAiRGlmZkEiLCAiRlRSIiwgIkEiLCB0aHJlc2hvbGQgPSAwLjA1KQ0KDQojIPCflKUgSGplbW1lc2VqciAoSCkNCmNhdCgiXG7wn5OMIEhqZW1tZXNlanIgKEgpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoS05OLCAiWXByZWRIIiwgIll0cnVlSCIsICJEaWZmSCIsICJGVFIiLCAiSCIsIHRocmVzaG9sZCA9IDAuMDc1KQ0KIyDwn6SdIFVhZmdqb3J0IChEKQ0KY2F0KCJcbvCfk4wgVWFmZ2pvcnQgKEQpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoS05OLCAiWXByZWREIiwgIll0cnVlRCIsICJEaWZmRCIsICJGVFIiLCAiRCIsIHRocmVzaG9sZCA9IDAuMDc1KQ0KIyDwn5qMIFVkZWJhbmVzZWpyIChBKQ0KY2F0KCJcbvCfk4wgVWRlYmFuZXNlanIgKEEpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoS05OLCAiWXByZWRBIiwgIll0cnVlQSIsICJEaWZmQSIsICJGVFIiLCAiQSIsIHRocmVzaG9sZCA9IDAuMDc1KQ0KDQojIPCflKUgSGplbW1lc2VqciAoSCkNCmNhdCgiXG7wn5OMIEhqZW1tZXNlanIgKEgpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoS05OLCAiWXByZWRIIiwgIll0cnVlSCIsICJEaWZmSCIsICJGVFIiLCAiSCIsIHRocmVzaG9sZCA9IDAuMSkNCiMg8J+knSBVYWZnam9ydCAoRCkNCmNhdCgiXG7wn5OMIFVhZmdqb3J0IChEKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKEtOTiwgIllwcmVkRCIsICJZdHJ1ZUQiLCAiRGlmZkQiLCAiRlRSIiwgIkQiLCB0aHJlc2hvbGQgPSAwLjEpDQojIPCfmowgVWRlYmFuZXNlanIgKEEpDQpjYXQoIlxu8J+TjCBVZGViYW5lc2VqciAoQSlcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhLTk4sICJZcHJlZEEiLCAiWXRydWVBIiwgIkRpZmZBIiwgIkZUUiIsICJBIiwgdGhyZXNob2xkID0gMC4xKQ0KDQojIPCflKUgSGplbW1lc2VqciAoSCkNCmNhdCgiXG7wn5OMIEhqZW1tZXNlanIgKEgpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoS05OLCAiWXByZWRIIiwgIll0cnVlSCIsICJEaWZmSCIsICJGVFIiLCAiSCIsIHRocmVzaG9sZCA9IDAuMTI1KQ0KIyDwn6SdIFVhZmdqb3J0IChEKQ0KY2F0KCJcbvCfk4wgVWFmZ2pvcnQgKEQpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoS05OLCAiWXByZWREIiwgIll0cnVlRCIsICJEaWZmRCIsICJGVFIiLCAiRCIsIHRocmVzaG9sZCA9IDAuMTI1KQ0KIyDwn5qMIFVkZWJhbmVzZWpyIChBKQ0KY2F0KCJcbvCfk4wgVWRlYmFuZXNlanIgKEEpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoS05OLCAiWXByZWRBIiwgIll0cnVlQSIsICJEaWZmQSIsICJGVFIiLCAiQSIsIHRocmVzaG9sZCA9IDAuMTI1KQ0KDQojZGYyIDwtIE5OW05OW1siRGlmZkgiXV0gPiAwLjA1LCBdDQojcHJpbnQoZGYyLCBuID0gSW5mKQ0KYGBgDQoNCiMgUkFORE9NIEZPUkVTVA0KDQpgYGB7cn0NCiMg8J+UpSBIamVtbWVzZWpyIChIKQ0KY2F0KCJcbvCfk4wgSGplbW1lc2VqciAoSClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhSRiwgIllwcmVkSCIsICJZdHJ1ZUgiLCAiRGlmZkgiLCAiRlRSIiwgIkgiLCB0aHJlc2hvbGQgPSAwLjAyNSkNCiMg8J+knSBVYWZnam9ydCAoRCkNCmNhdCgiXG7wn5OMIFVhZmdqb3J0IChEKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFJGLCAiWXByZWREIiwgIll0cnVlRCIsICJEaWZmRCIsICJGVFIiLCAiRCIsIHRocmVzaG9sZCA9IDAuMDI1KQ0KIyDwn5qMIFVkZWJhbmVzZWpyIChBKQ0KY2F0KCJcbvCfk4wgVWRlYmFuZXNlanIgKEEpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoUkYsICJZcHJlZEEiLCAiWXRydWVBIiwgIkRpZmZBIiwgIkZUUiIsICJBIiwgdGhyZXNob2xkID0gMC4wMjUpDQoNCiMg8J+UpSBIamVtbWVzZWpyIChIKQ0KY2F0KCJcbvCfk4wgSGplbW1lc2VqciAoSClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhSRiwgIllwcmVkSCIsICJZdHJ1ZUgiLCAiRGlmZkgiLCAiRlRSIiwgIkgiLCB0aHJlc2hvbGQgPSAwLjA1KQ0KIyDwn6SdIFVhZmdqb3J0IChEKQ0KY2F0KCJcbvCfk4wgVWFmZ2pvcnQgKEQpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoUkYsICJZcHJlZEQiLCAiWXRydWVEIiwgIkRpZmZEIiwgIkZUUiIsICJEIiwgdGhyZXNob2xkID0gMC4wNSkNCiMg8J+ajCBVZGViYW5lc2VqciAoQSkNCmNhdCgiXG7wn5OMIFVkZWJhbmVzZWpyIChBKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFJGLCAiWXByZWRBIiwgIll0cnVlQSIsICJEaWZmQSIsICJGVFIiLCAiQSIsIHRocmVzaG9sZCA9IDAuMDUpDQoNCiMg8J+UpSBIamVtbWVzZWpyIChIKQ0KY2F0KCJcbvCfk4wgSGplbW1lc2VqciAoSClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhSRiwgIllwcmVkSCIsICJZdHJ1ZUgiLCAiRGlmZkgiLCAiRlRSIiwgIkgiLCB0aHJlc2hvbGQgPSAwLjA3NSkNCiMg8J+knSBVYWZnam9ydCAoRCkNCmNhdCgiXG7wn5OMIFVhZmdqb3J0IChEKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFJGLCAiWXByZWREIiwgIll0cnVlRCIsICJEaWZmRCIsICJGVFIiLCAiRCIsIHRocmVzaG9sZCA9IDAuMDc1KQ0KIyDwn5qMIFVkZWJhbmVzZWpyIChBKQ0KY2F0KCJcbvCfk4wgVWRlYmFuZXNlanIgKEEpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoUkYsICJZcHJlZEEiLCAiWXRydWVBIiwgIkRpZmZBIiwgIkZUUiIsICJBIiwgdGhyZXNob2xkID0gMC4wNzUpDQoNCiMg8J+UpSBIamVtbWVzZWpyIChIKQ0KY2F0KCJcbvCfk4wgSGplbW1lc2VqciAoSClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhSRiwgIllwcmVkSCIsICJZdHJ1ZUgiLCAiRGlmZkgiLCAiRlRSIiwgIkgiLCB0aHJlc2hvbGQgPSAwLjEpDQojIPCfpJ0gVWFmZ2pvcnQgKEQpDQpjYXQoIlxu8J+TjCBVYWZnam9ydCAoRClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhSRiwgIllwcmVkRCIsICJZdHJ1ZUQiLCAiRGlmZkQiLCAiRlRSIiwgIkQiLCB0aHJlc2hvbGQgPSAwLjEpDQojIPCfmowgVWRlYmFuZXNlanIgKEEpDQpjYXQoIlxu8J+TjCBVZGViYW5lc2VqciAoQSlcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhSRiwgIllwcmVkQSIsICJZdHJ1ZUEiLCAiRGlmZkEiLCAiRlRSIiwgIkEiLCB0aHJlc2hvbGQgPSAwLjEpDQoNCiMg8J+UpSBIamVtbWVzZWpyIChIKQ0KY2F0KCJcbvCfk4wgSGplbW1lc2VqciAoSClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhSRiwgIllwcmVkSCIsICJZdHJ1ZUgiLCAiRGlmZkgiLCAiRlRSIiwgIkgiLCB0aHJlc2hvbGQgPSAwLjEyNSkNCiMg8J+knSBVYWZnam9ydCAoRCkNCmNhdCgiXG7wn5OMIFVhZmdqb3J0IChEKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFJGLCAiWXByZWREIiwgIll0cnVlRCIsICJEaWZmRCIsICJGVFIiLCAiRCIsIHRocmVzaG9sZCA9IDAuMTI1KQ0KIyDwn5qMIFVkZWJhbmVzZWpyIChBKQ0KY2F0KCJcbvCfk4wgVWRlYmFuZXNlanIgKEEpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoUkYsICJZcHJlZEEiLCAiWXRydWVBIiwgIkRpZmZBIiwgIkZUUiIsICJBIiwgdGhyZXNob2xkID0gMC4xMjUpDQoNCiNkZjIgPC0gTk5bTk5bWyJEaWZmSCJdXSA+IDAuMDUsIF0NCiNwcmludChkZjIsIG4gPSBJbmYpDQoNCmBgYA0KDQojIEtOTi1SRi1FTlNFTUJMRQ0KDQpgYGB7cn0NCiMg8J+UpSBIamVtbWVzZWpyIChIKQ0KY2F0KCJcbvCfk4wgSGplbW1lc2VqciAoSClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhLTk5fUkYsICJZcHJlZEgiLCAiWXRydWVIIiwgIkRpZmZIIiwgIkZUUiIsICJIIiwgdGhyZXNob2xkID0gMC4wMjUpDQojIPCfpJ0gVWFmZ2pvcnQgKEQpDQpjYXQoIlxu8J+TjCBVYWZnam9ydCAoRClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhLTk5fUkYsICJZcHJlZEQiLCAiWXRydWVEIiwgIkRpZmZEIiwgIkZUUiIsICJEIiwgdGhyZXNob2xkID0gMC4wMjUpDQojIPCfmowgVWRlYmFuZXNlanIgKEEpDQpjYXQoIlxu8J+TjCBVZGViYW5lc2VqciAoQSlcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhLTk5fUkYsICJZcHJlZEEiLCAiWXRydWVBIiwgIkRpZmZBIiwgIkZUUiIsICJBIiwgdGhyZXNob2xkID0gMC4wMjUpDQoNCiMg8J+UpSBIamVtbWVzZWpyIChIKQ0KY2F0KCJcbvCfk4wgSGplbW1lc2VqciAoSClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhLTk5fUkYsICJZcHJlZEgiLCAiWXRydWVIIiwgIkRpZmZIIiwgIkZUUiIsICJIIiwgdGhyZXNob2xkID0gMC4wNSkNCiMg8J+knSBVYWZnam9ydCAoRCkNCmNhdCgiXG7wn5OMIFVhZmdqb3J0IChEKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKEtOTl9SRiwgIllwcmVkRCIsICJZdHJ1ZUQiLCAiRGlmZkQiLCAiRlRSIiwgIkQiLCB0aHJlc2hvbGQgPSAwLjA1KQ0KIyDwn5qMIFVkZWJhbmVzZWpyIChBKQ0KY2F0KCJcbvCfk4wgVWRlYmFuZXNlanIgKEEpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoS05OX1JGLCAiWXByZWRBIiwgIll0cnVlQSIsICJEaWZmQSIsICJGVFIiLCAiQSIsIHRocmVzaG9sZCA9IDAuMDUpDQoNCiMg8J+UpSBIamVtbWVzZWpyIChIKQ0KY2F0KCJcbvCfk4wgSGplbW1lc2VqciAoSClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhLTk5fUkYsICJZcHJlZEgiLCAiWXRydWVIIiwgIkRpZmZIIiwgIkZUUiIsICJIIiwgdGhyZXNob2xkID0gMC4wNzUpDQojIPCfpJ0gVWFmZ2pvcnQgKEQpDQpjYXQoIlxu8J+TjCBVYWZnam9ydCAoRClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhLTk5fUkYsICJZcHJlZEQiLCAiWXRydWVEIiwgIkRpZmZEIiwgIkZUUiIsICJEIiwgdGhyZXNob2xkID0gMC4wNzUpDQojIPCfmowgVWRlYmFuZXNlanIgKEEpDQpjYXQoIlxu8J+TjCBVZGViYW5lc2VqciAoQSlcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhLTk5fUkYsICJZcHJlZEEiLCAiWXRydWVBIiwgIkRpZmZBIiwgIkZUUiIsICJBIiwgdGhyZXNob2xkID0gMC4wNzUpDQoNCiMg8J+UpSBIamVtbWVzZWpyIChIKQ0KY2F0KCJcbvCfk4wgSGplbW1lc2VqciAoSClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhLTk5fUkYsICJZcHJlZEgiLCAiWXRydWVIIiwgIkRpZmZIIiwgIkZUUiIsICJIIiwgdGhyZXNob2xkID0gMC4xKQ0KIyDwn6SdIFVhZmdqb3J0IChEKQ0KY2F0KCJcbvCfk4wgVWFmZ2pvcnQgKEQpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoS05OX1JGLCAiWXByZWREIiwgIll0cnVlRCIsICJEaWZmRCIsICJGVFIiLCAiRCIsIHRocmVzaG9sZCA9IDAuMSkNCiMg8J+ajCBVZGViYW5lc2VqciAoQSkNCmNhdCgiXG7wn5OMIFVkZWJhbmVzZWpyIChBKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKEtOTl9SRiwgIllwcmVkQSIsICJZdHJ1ZUEiLCAiRGlmZkEiLCAiRlRSIiwgIkEiLCB0aHJlc2hvbGQgPSAwLjEpDQoNCiMg8J+UpSBIamVtbWVzZWpyIChIKQ0KY2F0KCJcbvCfk4wgSGplbW1lc2VqciAoSClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhLTk5fUkYsICJZcHJlZEgiLCAiWXRydWVIIiwgIkRpZmZIIiwgIkZUUiIsICJIIiwgdGhyZXNob2xkID0gMC4xMjUpDQojIPCfpJ0gVWFmZ2pvcnQgKEQpDQpjYXQoIlxu8J+TjCBVYWZnam9ydCAoRClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhLTk5fUkYsICJZcHJlZEQiLCAiWXRydWVEIiwgIkRpZmZEIiwgIkZUUiIsICJEIiwgdGhyZXNob2xkID0gMC4xMjUpDQojIPCfmowgVWRlYmFuZXNlanIgKEEpDQpjYXQoIlxu8J+TjCBVZGViYW5lc2VqciAoQSlcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhLTk5fUkYsICJZcHJlZEEiLCAiWXRydWVBIiwgIkRpZmZBIiwgIkZUUiIsICJBIiwgdGhyZXNob2xkID0gMC4xMjUpDQoNCiNkZjIgPC0gTk5bTk5bWyJEaWZmSCJdXSA+IDAuMDUsIF0NCiNwcmludChkZjIsIG4gPSBJbmYpDQoNCmBgYA0KDQojIENhdEJvb3N0DQoNCmBgYHtyfQ0KIyDwn5SlIEhqZW1tZXNlanIgKEgpDQpjYXQoIlxu8J+TjCBIamVtbWVzZWpyIChIKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKENCLCAiWXByZWRIIiwgIll0cnVlSCIsICJEaWZmSCIsICJGVFIiLCAiSCIsIHRocmVzaG9sZCA9IDAuMDI1KQ0KIyDwn6SdIFVhZmdqb3J0IChEKQ0KY2F0KCJcbvCfk4wgVWFmZ2pvcnQgKEQpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoQ0IsICJZcHJlZEQiLCAiWXRydWVEIiwgIkRpZmZEIiwgIkZUUiIsICJEIiwgdGhyZXNob2xkID0gMC4wMjUpDQojIPCfmowgVWRlYmFuZXNlanIgKEEpDQpjYXQoIlxu8J+TjCBVZGViYW5lc2VqciAoQSlcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhDQiwgIllwcmVkQSIsICJZdHJ1ZUEiLCAiRGlmZkEiLCAiRlRSIiwgIkEiLCB0aHJlc2hvbGQgPSAwLjAyNSkNCg0KIyDwn5SlIEhqZW1tZXNlanIgKEgpDQpjYXQoIlxu8J+TjCBIamVtbWVzZWpyIChIKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKENCLCAiWXByZWRIIiwgIll0cnVlSCIsICJEaWZmSCIsICJGVFIiLCAiSCIsIHRocmVzaG9sZCA9IDAuMDUpDQojIPCfpJ0gVWFmZ2pvcnQgKEQpDQpjYXQoIlxu8J+TjCBVYWZnam9ydCAoRClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhDQiwgIllwcmVkRCIsICJZdHJ1ZUQiLCAiRGlmZkQiLCAiRlRSIiwgIkQiLCB0aHJlc2hvbGQgPSAwLjA1KQ0KIyDwn5qMIFVkZWJhbmVzZWpyIChBKQ0KY2F0KCJcbvCfk4wgVWRlYmFuZXNlanIgKEEpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoQ0IsICJZcHJlZEEiLCAiWXRydWVBIiwgIkRpZmZBIiwgIkZUUiIsICJBIiwgdGhyZXNob2xkID0gMC4wNSkNCg0KIyDwn5SlIEhqZW1tZXNlanIgKEgpDQpjYXQoIlxu8J+TjCBIamVtbWVzZWpyIChIKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKENCLCAiWXByZWRIIiwgIll0cnVlSCIsICJEaWZmSCIsICJGVFIiLCAiSCIsIHRocmVzaG9sZCA9IDAuMDc1KQ0KIyDwn6SdIFVhZmdqb3J0IChEKQ0KY2F0KCJcbvCfk4wgVWFmZ2pvcnQgKEQpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoQ0IsICJZcHJlZEQiLCAiWXRydWVEIiwgIkRpZmZEIiwgIkZUUiIsICJEIiwgdGhyZXNob2xkID0gMC4wNzUpDQojIPCfmowgVWRlYmFuZXNlanIgKEEpDQpjYXQoIlxu8J+TjCBVZGViYW5lc2VqciAoQSlcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhDQiwgIllwcmVkQSIsICJZdHJ1ZUEiLCAiRGlmZkEiLCAiRlRSIiwgIkEiLCB0aHJlc2hvbGQgPSAwLjA3NSkNCg0KIyDwn5SlIEhqZW1tZXNlanIgKEgpDQpjYXQoIlxu8J+TjCBIamVtbWVzZWpyIChIKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKENCLCAiWXByZWRIIiwgIll0cnVlSCIsICJEaWZmSCIsICJGVFIiLCAiSCIsIHRocmVzaG9sZCA9IDAuMSkNCiMg8J+knSBVYWZnam9ydCAoRCkNCmNhdCgiXG7wn5OMIFVhZmdqb3J0IChEKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKENCLCAiWXByZWREIiwgIll0cnVlRCIsICJEaWZmRCIsICJGVFIiLCAiRCIsIHRocmVzaG9sZCA9IDAuMSkNCiMg8J+ajCBVZGViYW5lc2VqciAoQSkNCmNhdCgiXG7wn5OMIFVkZWJhbmVzZWpyIChBKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKENCLCAiWXByZWRBIiwgIll0cnVlQSIsICJEaWZmQSIsICJGVFIiLCAiQSIsIHRocmVzaG9sZCA9IDAuMSkNCg0KIyDwn5SlIEhqZW1tZXNlanIgKEgpDQpjYXQoIlxu8J+TjCBIamVtbWVzZWpyIChIKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKENCLCAiWXByZWRIIiwgIll0cnVlSCIsICJEaWZmSCIsICJGVFIiLCAiSCIsIHRocmVzaG9sZCA9IDAuMTI1KQ0KIyDwn6SdIFVhZmdqb3J0IChEKQ0KY2F0KCJcbvCfk4wgVWFmZ2pvcnQgKEQpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoQ0IsICJZcHJlZEQiLCAiWXRydWVEIiwgIkRpZmZEIiwgIkZUUiIsICJEIiwgdGhyZXNob2xkID0gMC4xMjUpDQojIPCfmowgVWRlYmFuZXNlanIgKEEpDQpjYXQoIlxu8J+TjCBVZGViYW5lc2VqciAoQSlcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhDQiwgIllwcmVkQSIsICJZdHJ1ZUEiLCAiRGlmZkEiLCAiRlRSIiwgIkEiLCB0aHJlc2hvbGQgPSAwLjEyNSkNCg0KI2RmMiA8LSBOTltOTltbIkRpZmZIIl1dID4gMC4wNSwgXQ0KI3ByaW50KGRmMiwgbiA9IEluZikNCg0KYGBgDQoNCiMgTGlnaHRHQk0NCg0KYGBge3J9DQojIPCflKUgSGplbW1lc2VqciAoSCkNCmNhdCgiXG7wn5OMIEhqZW1tZXNlanIgKEgpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoTEdCTSwgIllwcmVkSCIsICJZdHJ1ZUgiLCAiRGlmZkgiLCAiRlRSIiwgIkgiLCB0aHJlc2hvbGQgPSAwLjAyNSkNCiMg8J+knSBVYWZnam9ydCAoRCkNCmNhdCgiXG7wn5OMIFVhZmdqb3J0IChEKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKExHQk0sICJZcHJlZEQiLCAiWXRydWVEIiwgIkRpZmZEIiwgIkZUUiIsICJEIiwgdGhyZXNob2xkID0gMC4wMjUpDQojIPCfmowgVWRlYmFuZXNlanIgKEEpDQpjYXQoIlxu8J+TjCBVZGViYW5lc2VqciAoQSlcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhMR0JNLCAiWXByZWRBIiwgIll0cnVlQSIsICJEaWZmQSIsICJGVFIiLCAiQSIsIHRocmVzaG9sZCA9IDAuMDI1KQ0KDQojIPCflKUgSGplbW1lc2VqciAoSCkNCmNhdCgiXG7wn5OMIEhqZW1tZXNlanIgKEgpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoTEdCTSwgIllwcmVkSCIsICJZdHJ1ZUgiLCAiRGlmZkgiLCAiRlRSIiwgIkgiLCB0aHJlc2hvbGQgPSAwLjA1KQ0KIyDwn6SdIFVhZmdqb3J0IChEKQ0KY2F0KCJcbvCfk4wgVWFmZ2pvcnQgKEQpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoTEdCTSwgIllwcmVkRCIsICJZdHJ1ZUQiLCAiRGlmZkQiLCAiRlRSIiwgIkQiLCB0aHJlc2hvbGQgPSAwLjA1KQ0KIyDwn5qMIFVkZWJhbmVzZWpyIChBKQ0KY2F0KCJcbvCfk4wgVWRlYmFuZXNlanIgKEEpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoTEdCTSwgIllwcmVkQSIsICJZdHJ1ZUEiLCAiRGlmZkEiLCAiRlRSIiwgIkEiLCB0aHJlc2hvbGQgPSAwLjA1KQ0KDQojIPCflKUgSGplbW1lc2VqciAoSCkNCmNhdCgiXG7wn5OMIEhqZW1tZXNlanIgKEgpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoTEdCTSwgIllwcmVkSCIsICJZdHJ1ZUgiLCAiRGlmZkgiLCAiRlRSIiwgIkgiLCB0aHJlc2hvbGQgPSAwLjA3NSkNCiMg8J+knSBVYWZnam9ydCAoRCkNCmNhdCgiXG7wn5OMIFVhZmdqb3J0IChEKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKExHQk0sICJZcHJlZEQiLCAiWXRydWVEIiwgIkRpZmZEIiwgIkZUUiIsICJEIiwgdGhyZXNob2xkID0gMC4wNzUpDQojIPCfmowgVWRlYmFuZXNlanIgKEEpDQpjYXQoIlxu8J+TjCBVZGViYW5lc2VqciAoQSlcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhMR0JNLCAiWXByZWRBIiwgIll0cnVlQSIsICJEaWZmQSIsICJGVFIiLCAiQSIsIHRocmVzaG9sZCA9IDAuMDc1KQ0KDQojIPCflKUgSGplbW1lc2VqciAoSCkNCmNhdCgiXG7wn5OMIEhqZW1tZXNlanIgKEgpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoTEdCTSwgIllwcmVkSCIsICJZdHJ1ZUgiLCAiRGlmZkgiLCAiRlRSIiwgIkgiLCB0aHJlc2hvbGQgPSAwLjEpDQojIPCfpJ0gVWFmZ2pvcnQgKEQpDQpjYXQoIlxu8J+TjCBVYWZnam9ydCAoRClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhMR0JNLCAiWXByZWREIiwgIll0cnVlRCIsICJEaWZmRCIsICJGVFIiLCAiRCIsIHRocmVzaG9sZCA9IDAuMSkNCiMg8J+ajCBVZGViYW5lc2VqciAoQSkNCmNhdCgiXG7wn5OMIFVkZWJhbmVzZWpyIChBKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKExHQk0sICJZcHJlZEEiLCAiWXRydWVBIiwgIkRpZmZBIiwgIkZUUiIsICJBIiwgdGhyZXNob2xkID0gMC4xKQ0KDQojIPCflKUgSGplbW1lc2VqciAoSCkNCmNhdCgiXG7wn5OMIEhqZW1tZXNlanIgKEgpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoTEdCTSwgIllwcmVkSCIsICJZdHJ1ZUgiLCAiRGlmZkgiLCAiRlRSIiwgIkgiLCB0aHJlc2hvbGQgPSAwLjEyNSkNCiMg8J+knSBVYWZnam9ydCAoRCkNCmNhdCgiXG7wn5OMIFVhZmdqb3J0IChEKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKExHQk0sICJZcHJlZEQiLCAiWXRydWVEIiwgIkRpZmZEIiwgIkZUUiIsICJEIiwgdGhyZXNob2xkID0gMC4xMjUpDQojIPCfmowgVWRlYmFuZXNlanIgKEEpDQpjYXQoIlxu8J+TjCBVZGViYW5lc2VqciAoQSlcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhMR0JNLCAiWXByZWRBIiwgIll0cnVlQSIsICJEaWZmQSIsICJGVFIiLCAiQSIsIHRocmVzaG9sZCA9IDAuMTI1KQ0KDQojZGYyIDwtIE5OW05OW1siRGlmZkgiXV0gPiAwLjA1LCBdDQojcHJpbnQoZGYyLCBuID0gSW5mKQ0KYGBgDQoNCiMgWEdCb29zdA0KDQpgYGB7cn0NCiMg8J+UpSBIamVtbWVzZWpyIChIKQ0KY2F0KCJcbvCfk4wgSGplbW1lc2VqciAoSClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhYR0IsICJZcHJlZEgiLCAiWXRydWVIIiwgIkRpZmZIIiwgIkZUUiIsICJIIiwgdGhyZXNob2xkID0gMC4wMjUpDQojIPCfpJ0gVWFmZ2pvcnQgKEQpDQpjYXQoIlxu8J+TjCBVYWZnam9ydCAoRClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhYR0IsICJZcHJlZEQiLCAiWXRydWVEIiwgIkRpZmZEIiwgIkZUUiIsICJEIiwgdGhyZXNob2xkID0gMC4wMjUpDQojIPCfmowgVWRlYmFuZXNlanIgKEEpDQpjYXQoIlxu8J+TjCBVZGViYW5lc2VqciAoQSlcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhYR0IsICJZcHJlZEEiLCAiWXRydWVBIiwgIkRpZmZBIiwgIkZUUiIsICJBIiwgdGhyZXNob2xkID0gMC4wMjUpDQoNCiMg8J+UpSBIamVtbWVzZWpyIChIKQ0KY2F0KCJcbvCfk4wgSGplbW1lc2VqciAoSClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhYR0IsICJZcHJlZEgiLCAiWXRydWVIIiwgIkRpZmZIIiwgIkZUUiIsICJIIiwgdGhyZXNob2xkID0gMC4wNSkNCiMg8J+knSBVYWZnam9ydCAoRCkNCmNhdCgiXG7wn5OMIFVhZmdqb3J0IChEKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFhHQiwgIllwcmVkRCIsICJZdHJ1ZUQiLCAiRGlmZkQiLCAiRlRSIiwgIkQiLCB0aHJlc2hvbGQgPSAwLjA1KQ0KIyDwn5qMIFVkZWJhbmVzZWpyIChBKQ0KY2F0KCJcbvCfk4wgVWRlYmFuZXNlanIgKEEpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoWEdCLCAiWXByZWRBIiwgIll0cnVlQSIsICJEaWZmQSIsICJGVFIiLCAiQSIsIHRocmVzaG9sZCA9IDAuMDUpDQoNCiMg8J+UpSBIamVtbWVzZWpyIChIKQ0KY2F0KCJcbvCfk4wgSGplbW1lc2VqciAoSClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhYR0IsICJZcHJlZEgiLCAiWXRydWVIIiwgIkRpZmZIIiwgIkZUUiIsICJIIiwgdGhyZXNob2xkID0gMC4wNzUpDQojIPCfpJ0gVWFmZ2pvcnQgKEQpDQpjYXQoIlxu8J+TjCBVYWZnam9ydCAoRClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhYR0IsICJZcHJlZEQiLCAiWXRydWVEIiwgIkRpZmZEIiwgIkZUUiIsICJEIiwgdGhyZXNob2xkID0gMC4wNzUpDQojIPCfmowgVWRlYmFuZXNlanIgKEEpDQpjYXQoIlxu8J+TjCBVZGViYW5lc2VqciAoQSlcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhYR0IsICJZcHJlZEEiLCAiWXRydWVBIiwgIkRpZmZBIiwgIkZUUiIsICJBIiwgdGhyZXNob2xkID0gMC4wNzUpDQoNCiMg8J+UpSBIamVtbWVzZWpyIChIKQ0KY2F0KCJcbvCfk4wgSGplbW1lc2VqciAoSClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhYR0IsICJZcHJlZEgiLCAiWXRydWVIIiwgIkRpZmZIIiwgIkZUUiIsICJIIiwgdGhyZXNob2xkID0gMC4xKQ0KIyDwn6SdIFVhZmdqb3J0IChEKQ0KY2F0KCJcbvCfk4wgVWFmZ2pvcnQgKEQpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoWEdCLCAiWXByZWREIiwgIll0cnVlRCIsICJEaWZmRCIsICJGVFIiLCAiRCIsIHRocmVzaG9sZCA9IDAuMSkNCiMg8J+ajCBVZGViYW5lc2VqciAoQSkNCmNhdCgiXG7wn5OMIFVkZWJhbmVzZWpyIChBKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFhHQiwgIllwcmVkQSIsICJZdHJ1ZUEiLCAiRGlmZkEiLCAiRlRSIiwgIkEiLCB0aHJlc2hvbGQgPSAwLjEpDQoNCiMg8J+UpSBIamVtbWVzZWpyIChIKQ0KY2F0KCJcbvCfk4wgSGplbW1lc2VqciAoSClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhYR0IsICJZcHJlZEgiLCAiWXRydWVIIiwgIkRpZmZIIiwgIkZUUiIsICJIIiwgdGhyZXNob2xkID0gMC4xMjUpDQojIPCfpJ0gVWFmZ2pvcnQgKEQpDQpjYXQoIlxu8J+TjCBVYWZnam9ydCAoRClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhYR0IsICJZcHJlZEQiLCAiWXRydWVEIiwgIkRpZmZEIiwgIkZUUiIsICJEIiwgdGhyZXNob2xkID0gMC4xMjUpDQojIPCfmowgVWRlYmFuZXNlanIgKEEpDQpjYXQoIlxu8J+TjCBVZGViYW5lc2VqciAoQSlcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhYR0IsICJZcHJlZEEiLCAiWXRydWVBIiwgIkRpZmZBIiwgIkZUUiIsICJBIiwgdGhyZXNob2xkID0gMC4xMjUpDQoNCiNkZjIgPC0gTk5bTk5bWyJEaWZmSCJdXSA+IDAuMDUsIF0NCiNwcmludChkZjIsIG4gPSBJbmYpDQpgYGANCg0KIyBHcmFkaWVudCBFbnNlbWJsZQ0KDQpgYGB7cn0NCiMg8J+UpSBIamVtbWVzZWpyIChIKQ0KY2F0KCJcbvCfk4wgSGplbW1lc2VqciAoSClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhHRSwgIllwcmVkSCIsICJZdHJ1ZUgiLCAiRGlmZkgiLCAiRlRSIiwgIkgiLCB0aHJlc2hvbGQgPSAwLjAyNSkNCiMg8J+knSBVYWZnam9ydCAoRCkNCmNhdCgiXG7wn5OMIFVhZmdqb3J0IChEKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKEdFLCAiWXByZWREIiwgIll0cnVlRCIsICJEaWZmRCIsICJGVFIiLCAiRCIsIHRocmVzaG9sZCA9IDAuMDI1KQ0KIyDwn5qMIFVkZWJhbmVzZWpyIChBKQ0KY2F0KCJcbvCfk4wgVWRlYmFuZXNlanIgKEEpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoR0UsICJZcHJlZEEiLCAiWXRydWVBIiwgIkRpZmZBIiwgIkZUUiIsICJBIiwgdGhyZXNob2xkID0gMC4wMjUpDQoNCiMg8J+UpSBIamVtbWVzZWpyIChIKQ0KY2F0KCJcbvCfk4wgSGplbW1lc2VqciAoSClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhHRSwgIllwcmVkSCIsICJZdHJ1ZUgiLCAiRGlmZkgiLCAiRlRSIiwgIkgiLCB0aHJlc2hvbGQgPSAwLjA1KQ0KIyDwn6SdIFVhZmdqb3J0IChEKQ0KY2F0KCJcbvCfk4wgVWFmZ2pvcnQgKEQpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoR0UsICJZcHJlZEQiLCAiWXRydWVEIiwgIkRpZmZEIiwgIkZUUiIsICJEIiwgdGhyZXNob2xkID0gMC4wNSkNCiMg8J+ajCBVZGViYW5lc2VqciAoQSkNCmNhdCgiXG7wn5OMIFVkZWJhbmVzZWpyIChBKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKEdFLCAiWXByZWRBIiwgIll0cnVlQSIsICJEaWZmQSIsICJGVFIiLCAiQSIsIHRocmVzaG9sZCA9IDAuMDUpDQoNCiMg8J+UpSBIamVtbWVzZWpyIChIKQ0KY2F0KCJcbvCfk4wgSGplbW1lc2VqciAoSClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhHRSwgIllwcmVkSCIsICJZdHJ1ZUgiLCAiRGlmZkgiLCAiRlRSIiwgIkgiLCB0aHJlc2hvbGQgPSAwLjA3NSkNCiMg8J+knSBVYWZnam9ydCAoRCkNCmNhdCgiXG7wn5OMIFVhZmdqb3J0IChEKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKEdFLCAiWXByZWREIiwgIll0cnVlRCIsICJEaWZmRCIsICJGVFIiLCAiRCIsIHRocmVzaG9sZCA9IDAuMDc1KQ0KIyDwn5qMIFVkZWJhbmVzZWpyIChBKQ0KY2F0KCJcbvCfk4wgVWRlYmFuZXNlanIgKEEpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoR0UsICJZcHJlZEEiLCAiWXRydWVBIiwgIkRpZmZBIiwgIkZUUiIsICJBIiwgdGhyZXNob2xkID0gMC4wNzUpDQoNCiMg8J+UpSBIamVtbWVzZWpyIChIKQ0KY2F0KCJcbvCfk4wgSGplbW1lc2VqciAoSClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhHRSwgIllwcmVkSCIsICJZdHJ1ZUgiLCAiRGlmZkgiLCAiRlRSIiwgIkgiLCB0aHJlc2hvbGQgPSAwLjEpDQojIPCfpJ0gVWFmZ2pvcnQgKEQpDQpjYXQoIlxu8J+TjCBVYWZnam9ydCAoRClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhHRSwgIllwcmVkRCIsICJZdHJ1ZUQiLCAiRGlmZkQiLCAiRlRSIiwgIkQiLCB0aHJlc2hvbGQgPSAwLjEpDQojIPCfmowgVWRlYmFuZXNlanIgKEEpDQpjYXQoIlxu8J+TjCBVZGViYW5lc2VqciAoQSlcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhHRSwgIllwcmVkQSIsICJZdHJ1ZUEiLCAiRGlmZkEiLCAiRlRSIiwgIkEiLCB0aHJlc2hvbGQgPSAwLjEpDQoNCiMg8J+UpSBIamVtbWVzZWpyIChIKQ0KY2F0KCJcbvCfk4wgSGplbW1lc2VqciAoSClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhHRSwgIllwcmVkSCIsICJZdHJ1ZUgiLCAiRGlmZkgiLCAiRlRSIiwgIkgiLCB0aHJlc2hvbGQgPSAwLjEyNSkNCiMg8J+knSBVYWZnam9ydCAoRCkNCmNhdCgiXG7wn5OMIFVhZmdqb3J0IChEKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKEdFLCAiWXByZWREIiwgIll0cnVlRCIsICJEaWZmRCIsICJGVFIiLCAiRCIsIHRocmVzaG9sZCA9IDAuMTI1KQ0KIyDwn5qMIFVkZWJhbmVzZWpyIChBKQ0KY2F0KCJcbvCfk4wgVWRlYmFuZXNlanIgKEEpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoR0UsICJZcHJlZEEiLCAiWXRydWVBIiwgIkRpZmZBIiwgIkZUUiIsICJBIiwgdGhyZXNob2xkID0gMC4xMjUpDQoNCiNkZjIgPC0gTk5bTk5bWyJEaWZmSCJdXSA+IDAuMDUsIF0NCiNwcmludChkZjIsIG4gPSBJbmYpDQpgYGANCg==</div>
+<div id="rmd-source-code">LS0tDQp0aXRsZTogIlIgTm90ZWJvb2siDQpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sNCi0tLQ0KDQpUaGlzIGlzIGFuIFtSIE1hcmtkb3duXShodHRwOi8vcm1hcmtkb3duLnJzdHVkaW8uY29tKSBOb3RlYm9vay4gV2hlbiB5b3UgZXhlY3V0ZSBjb2RlIHdpdGhpbiB0aGUgbm90ZWJvb2ssIHRoZSByZXN1bHRzIGFwcGVhciBiZW5lYXRoIHRoZSBjb2RlLg0KDQpUcnkgZXhlY3V0aW5nIHRoaXMgY2h1bmsgYnkgY2xpY2tpbmcgdGhlICpSdW4qIGJ1dHRvbiB3aXRoaW4gdGhlIGNodW5rIG9yIGJ5IHBsYWNpbmcgeW91ciBjdXJzb3IgaW5zaWRlIGl0IGFuZCBwcmVzc2luZyAqQ3RybCtTaGlmdCtFbnRlciouDQoNCmBgYHtyfQ0KIyBJbmRsw6ZzIGJpYmxpb3Rla2VyDQpsaWJyYXJ5KGJvb3QpDQpsaWJyYXJ5KHRpZHl2ZXJzZSkNCmxpYnJhcnkocmVhZHhsKQ0KbGlicmFyeShzdGF0cykNCmBgYA0KDQpBZGQgYSBuZXcgY2h1bmsgYnkgY2xpY2tpbmcgdGhlICpJbnNlcnQgQ2h1bmsqIGJ1dHRvbiBvbiB0aGUgdG9vbGJhciBvciBieSBwcmVzc2luZyAqQ3RybCtBbHQrSSouDQoNCldoZW4geW91IHNhdmUgdGhlIG5vdGVib29rLCBhbiBIVE1MIGZpbGUgY29udGFpbmluZyB0aGUgY29kZSBhbmQgb3V0cHV0IHdpbGwgYmUgc2F2ZWQgYWxvbmdzaWRlIGl0IChjbGljayB0aGUgKlByZXZpZXcqIGJ1dHRvbiBvciBwcmVzcyAqQ3RybCtTaGlmdCtLKiB0byBwcmV2aWV3IHRoZSBIVE1MIGZpbGUpLg0KDQpUaGUgcHJldmlldyBzaG93cyB5b3UgYSByZW5kZXJlZCBIVE1MIGNvcHkgb2YgdGhlIGNvbnRlbnRzIG9mIHRoZSBlZGl0b3IuIENvbnNlcXVlbnRseSwgdW5saWtlICpLbml0KiwgKlByZXZpZXcqIGRvZXMgbm90IHJ1biBhbnkgUiBjb2RlIGNodW5rcy4gSW5zdGVhZCwgdGhlIG91dHB1dCBvZiB0aGUgY2h1bmsgd2hlbiBpdCB3YXMgbGFzdCBydW4gaW4gdGhlIGVkaXRvciBpcyBkaXNwbGF5ZWQuDQoNCmBgYHtyfQ0KI0luZGzDpnMgYWxsZSBkYXRhZnJhbWVzDQpMUiA8LSByZWFkX2V4Y2VsKCJMb2dpc3RpY1JlZ3Jlc3Npb25SZXN1bHRzVW5maWx0ZXJlZC54bHN4IikNCktOTiA8LSByZWFkX2V4Y2VsKCJLTk5SZXN1bHRzVW5maWx0ZXJlZC54bHN4IikNClJGIDwtIHJlYWRfZXhjZWwoIlJhbmRvbUZvcmVzdFJlc3VsdHNVbmZpbHRlcmVkLnhsc3giKQ0KS05OX1JGIDwtIHJlYWRfZXhjZWwoIktOTl9SRl9SZXN1bHRzVW5maWx0ZXJlZC54bHN4IikNCkNCIDwtIHJlYWRfZXhjZWwoIkNhdEJvb3N0UmVzdWx0c1VuZmlsdGVyZWQueGxzeCIpDQpMR0JNIDwtIHJlYWRfZXhjZWwoIkxpZ2h0R0JNUmVzdWx0c1VuZmlsdGVyZWQueGxzeCIpDQpYR0IgPC0gcmVhZF9leGNlbCgiWEdCb29zdFJlc3VsdHNVbmZpbHRlcmVkLnhsc3giKQ0KR0UgPC0gcmVhZF9leGNlbCgiR3JhZGllbnRFbnNlbWJsZVJlc3VsdHNVbmZpbHRlcmVkLnhsc3giKQ0KTk4gPC0gcmVhZF9leGNlbCgiTmV1cmFsTmV0d29ya091dGxpZXJzUmVzdWx0c1VuZmlsdGVyZWQueGxzeCIpDQoNCiNUeXNrZSBvdXRsaWVycw0KVExSIDwtIHJlYWRfZXhjZWwoIkJ1bmRlc2xpZ2EvTG9naXN0aWNSZWdyZXNzaW9uUmVzdWx0c1VuZmlsdGVyZWQueGxzeCIpDQpUQ0IgPC0gcmVhZF9leGNlbCgiQnVuZGVzbGlnYS9DYXRCb29zdFJlc3VsdHNVbmZpbHRlcmVkLnhsc3giKQ0KVE5OIDwtIHJlYWRfZXhjZWwoIkJ1bmRlc2xpZ2EvTmV1cmFsTmV0d29ya091dGxpZXJzUmVzdWx0c1VuZmlsdGVyZWQueGxzeCIpIA0KYGBgDQoNCmBgYHtyfQ0KIyBGdW5rdGlvbiB0aWwgYXQgc2FtbWVubGlnbmUgbW9kZWxlbnMgc3VjY2VzcyByYXRlIG1lZCBib29rbWFrZXJuZXMgZ2VubmVtc25pdGxpZ2Ugc2FuZHN5bmxpZ2hlZA0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMgPC0gZnVuY3Rpb24oZGYsIHByZWRfY29sLCB0cnVlX2NvbCwgZGlmZl9jb2wsIHJlc3VsdF9jb2wsIHJlc3VsdF9jaGFyLCB0aHJlc2hvbGQgPSAwKSB7DQogICMgRmlsdHJlciBrdW4gcsOma2tlciwgaHZvciBmb3Jza2VsbGVuIG92ZXJzdGlnZXIgdGhyZXNob2xkDQogIGRmIDwtIGRmW2RmW1tkaWZmX2NvbF1dID4gdGhyZXNob2xkLCBdDQogIA0KICAjIEh2aXMgZGVyIGlra2UgZXIgcsOma2tlciwgYWZzbHV0DQogIGlmIChucm93KGRmKSA9PSAwKSB7DQogICAgY2F0KCJcbkluZ2VuIHLDpmtrZXIgb3BmeWxkZXIgdGhyZXNob2xkID0iLCB0aHJlc2hvbGQsICJcbiIpDQogICAgcmV0dXJuKCkNCiAgfQ0KICANCiAgIyBUw6ZsIHN1Y2Nlc3NlciAobW9kZWwga29ycmVrdCBmb3J1ZHNpZ2Vsc2UpIG9nIHRvdGFsIGFudGFsDQogIHN1Y2Nlc3MgPC0gc3VtKGRmW1twcmVkX2NvbF1dID4gZGZbW3RydWVfY29sXV0gJiBkZltbcmVzdWx0X2NvbF1dID09IHJlc3VsdF9jaGFyKQ0KICB0b3RhbCA8LSBzdW0oZGZbW3ByZWRfY29sXV0gPiBkZltbdHJ1ZV9jb2xdXSkNCiAgDQogICMgQmVyZWduIGJvb2ttYWtlcm5lcyBnZW5uZW1zbml0bGlnZSBzYW5kc3lubGlnaGVkIGZvciBkZXQgc3BlY2lmaWtrZSB1ZGZhbGQNCiAgYm9va21ha2VyX21lYW4gPC0gbWVhbihkZltbdHJ1ZV9jb2xdXSkNCiAgDQogICMgVWRza3JpdiBzdWNjZXNzIHJhdGUgb2cgYm9va21ha2VyIGdlbm5lbXNuaXQNCiAgY2F0KCJcblRocmVzaG9sZCA9IiwgdGhyZXNob2xkLCAiXG4iKQ0KICBjYXQoIkFudGFsIHLDpmtrZXI6IiwgdG90YWwsICJcbiIpDQogIGNhdCgiTW9kZWwgU3VjY2VzcyBSYXRlOiIsIHN1Y2Nlc3MsICIvIiwgdG90YWwsICI9IiwgaWZlbHNlKHRvdGFsID4gMCwgc3VjY2Vzcy90b3RhbCwgTkEpLCAiXG4iKQ0KICBjYXQoIkJvb2ttYWtlcm5lcyBHZW5uZW1zbml0bGlnZSBTYW5kc3lubGlnaGVkID0iLCByb3VuZChib29rbWFrZXJfbWVhbiwgNCksICJcbiIpDQogIA0KICAjIE9uZS1zYW1wbGUgYmlub21pYWwgdGVzdCBtb2QgYm9va21ha2VyIGdlbm5lbXNuaXQNCiAgaWYgKHRvdGFsID4gMCkgew0KICAgIHRlc3QgPC0gYmlub20udGVzdChzdWNjZXNzLCB0b3RhbCwgcCA9IGJvb2ttYWtlcl9tZWFuLCBhbHRlcm5hdGl2ZSA9ICJncmVhdGVyIikNCiAgICBwcmludCh0ZXN0KQ0KICB9IGVsc2Ugew0KICAgIGNhdCgiSW5nZW4gcsOma2tlciBvcGZ5bGRlciB0aHJlc2hvbGQuXG4iKQ0KICB9DQp9DQoNCiMgRnVua3Rpb24gdGlsIGF0IHNhbW1lbmxpZ25lIG1vZGVsbGVucyBzdWNjZXNzIHJhdGUgbWVkIGJvb2ttYWtlcm5lcyBnZW5uZW1zbml0bGlnZSBzYW5kc3lubGlnaGVkDQpjb21wYXJlX3dpdGhfYm9va21ha2VyczIgPC0gZnVuY3Rpb24oZGYsIHByZWRfY29sLCB0cnVlX2NvbCwgZGlmZl9jb2wsIHJlc3VsdF9jb2wsIHJlc3VsdF9jaGFyLCB0MSA9IDAsIHQyID0gSW5mKSB7DQogICMgRmlsdHJlciBrdW4gcsOma2tlciwgaHZvciBmb3Jza2VsbGVuIGxpZ2dlciBtZWxsZW0gdDEgb2cgdDINCiAgZGYgPC0gZGZbZGZbW2RpZmZfY29sXV0gPiB0MSAmIGRmW1tkaWZmX2NvbF1dIDw9IHQyLCBdDQogIA0KICAjIEh2aXMgZGVyIGlra2UgZXIgcsOma2tlciwgYWZzbHV0DQogIGlmIChucm93KGRmKSA9PSAwKSB7DQogICAgY2F0KCJcbkluZ2VuIHLDpmtrZXIgb3BmeWxkZXIgdGhyZXNob2xkIG1lbGxlbSIsIHQxLCAib2ciLCB0MiwgIlxuIikNCiAgICByZXR1cm4oKQ0KICB9DQogIA0KICAjIFTDpmwgc3VjY2Vzc2VyIChtb2RlbCBrb3JyZWt0IGZvcnVkc2lnZWxzZSkgb2cgdG90YWwgYW50YWwNCiAgc3VjY2VzcyA8LSBzdW0oZGZbW3ByZWRfY29sXV0gPiBkZltbdHJ1ZV9jb2xdXSAmIGRmW1tyZXN1bHRfY29sXV0gPT0gcmVzdWx0X2NoYXIpDQogIHRvdGFsIDwtIHN1bShkZltbcHJlZF9jb2xdXSA+IGRmW1t0cnVlX2NvbF1dKQ0KICANCiAgIyBCZXJlZ24gYm9va21ha2VybmVzIGdlbm5lbXNuaXRsaWdlIHNhbmRzeW5saWdoZWQgZm9yIGRldCBzcGVjaWZpa2tlIHVkZmFsZA0KICBib29rbWFrZXJfbWVhbiA8LSBtZWFuKGRmW1t0cnVlX2NvbF1dKQ0KICANCiAgIyBVZHNrcml2IHN1Y2Nlc3MgcmF0ZSBvZyBib29rbWFrZXIgZ2VubmVtc25pdA0KICBjYXQoIlxuVGhyZXNob2xkIG1lbGxlbSIsIHQxLCAib2ciLCB0MiwgIlxuIikNCiAgY2F0KCJBbnRhbCByw6Zra2VyOiIsIHRvdGFsLCAiXG4iKQ0KICBjYXQoIk1vZGVsIFN1Y2Nlc3MgUmF0ZToiLCBzdWNjZXNzLCAiLyIsIHRvdGFsLCAiPSIsIGlmZWxzZSh0b3RhbCA+IDAsIHN1Y2Nlc3MvdG90YWwsIE5BKSwgIlxuIikNCiAgY2F0KCJCb29rbWFrZXJuZXMgR2VubmVtc25pdGxpZ2UgU2FuZHN5bmxpZ2hlZCA9Iiwgcm91bmQoYm9va21ha2VyX21lYW4sIDQpLCAiXG4iKQ0KICANCiAgIyBPbmUtc2FtcGxlIGJpbm9taWFsIHRlc3QgbW9kIGJvb2ttYWtlciBnZW5uZW1zbml0DQogIGlmICh0b3RhbCA+IDApIHsNCiAgICB0ZXN0IDwtIGJpbm9tLnRlc3Qoc3VjY2VzcywgdG90YWwsIHAgPSBib29rbWFrZXJfbWVhbiwgYWx0ZXJuYXRpdmUgPSAiZ3JlYXRlciIpDQogICAgcHJpbnQodGVzdCkNCiAgfSBlbHNlIHsNCiAgICBjYXQoIkluZ2VuIHLDpmtrZXIgb3BmeWxkZXIgdGhyZXNob2xkLlxuIikNCiAgfQ0KfQ0KDQoNCmBgYA0KDQpgYGB7cn0NCiMg8J+UpSBIamVtbWVzZWpyIChIKQ0KY2F0KCJcbvCfk4wgSGplbW1lc2VqciAoSClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhOTiwgIllwcmVkSCIsICJZdHJ1ZUgiLCAiJURpZmZIIiwgIkZUUiIsICJIIiwgdGhyZXNob2xkID0gNDApDQoNCiMg8J+knSBVYWZnam9ydCAoRCkNCmNhdCgiXG7wn5OMIFVhZmdqb3J0IChEKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKE5OLCAiWXByZWREIiwgIll0cnVlRCIsICIlRGlmZkQiLCAiRlRSIiwgIkQiLCB0aHJlc2hvbGQgPSA0MCkNCg0KIyDwn5qMIFVkZWJhbmVzZWpyIChBKQ0KY2F0KCJcbvCfk4wgVWRlYmFuZXNlanIgKEEpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoTk4sICJZcHJlZEEiLCAiWXRydWVBIiwgIiVEaWZmQSIsICJGVFIiLCAiQSIsIHRocmVzaG9sZCA9IDQwKQ0KDQojZGYyIDwtIGRmW2RmW1siJURpZmZIIl1dID4gODAsIF0NCiNwcmludChkZjIsIG4gPSBJbmYpDQpgYGANCg0KIyBORVVSQUxUIE5FVFbDhlJLDQoNCmBgYHtyfQ0KIyDwn5SlIEhqZW1tZXNlanIgKEgpDQpjYXQoIlxu8J+TjCBIamVtbWVzZWpyIChIKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKE5OLCAiWXByZWRIIiwgIll0cnVlSCIsICJEaWZmSCIsICJGVFIiLCAiSCIsIHRocmVzaG9sZCA9IDAuMDI1KQ0KDQojIPCfpJ0gVWFmZ2pvcnQgKEQpDQpjYXQoIlxu8J+TjCBVYWZnam9ydCAoRClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhOTiwgIllwcmVkRCIsICJZdHJ1ZUQiLCAiRGlmZkQiLCAiRlRSIiwgIkQiLCB0aHJlc2hvbGQgPSAwLjAyNSkNCiMg8J+ajCBVZGViYW5lc2VqciAoQSkNCmNhdCgiXG7wn5OMIFVkZWJhbmVzZWpyIChBKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKE5OLCAiWXByZWRBIiwgIll0cnVlQSIsICJEaWZmQSIsICJGVFIiLCAiQSIsIHRocmVzaG9sZCA9IDAuMDI1KQ0KDQojIPCflKUgSGplbW1lc2VqciAoSCkNCmNhdCgiXG7wn5OMIEhqZW1tZXNlanIgKEgpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoTk4sICJZcHJlZEgiLCAiWXRydWVIIiwgIkRpZmZIIiwgIkZUUiIsICJIIiwgdGhyZXNob2xkID0gMC4wNSkNCiMg8J+knSBVYWZnam9ydCAoRCkNCmNhdCgiXG7wn5OMIFVhZmdqb3J0IChEKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKE5OLCAiWXByZWREIiwgIll0cnVlRCIsICJEaWZmRCIsICJGVFIiLCAiRCIsIHRocmVzaG9sZCA9IDAuMDUpDQojIPCfmowgVWRlYmFuZXNlanIgKEEpDQpjYXQoIlxu8J+TjCBVZGViYW5lc2VqciAoQSlcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhOTiwgIllwcmVkQSIsICJZdHJ1ZUEiLCAiRGlmZkEiLCAiRlRSIiwgIkEiLCB0aHJlc2hvbGQgPSAwLjA1KQ0KDQojIPCflKUgSGplbW1lc2VqciAoSCkNCmNhdCgiXG7wn5OMIEhqZW1tZXNlanIgKEgpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoTk4sICJZcHJlZEgiLCAiWXRydWVIIiwgIkRpZmZIIiwgIkZUUiIsICJIIiwgdGhyZXNob2xkID0gMC4wNzUpDQojIPCfpJ0gVWFmZ2pvcnQgKEQpDQpjYXQoIlxu8J+TjCBVYWZnam9ydCAoRClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhOTiwgIllwcmVkRCIsICJZdHJ1ZUQiLCAiRGlmZkQiLCAiRlRSIiwgIkQiLCB0aHJlc2hvbGQgPSAwLjA3NSkNCiMg8J+ajCBVZGViYW5lc2VqciAoQSkNCmNhdCgiXG7wn5OMIFVkZWJhbmVzZWpyIChBKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKE5OLCAiWXByZWRBIiwgIll0cnVlQSIsICJEaWZmQSIsICJGVFIiLCAiQSIsIHRocmVzaG9sZCA9IDAuMDc1KQ0KDQojIPCflKUgSGplbW1lc2VqciAoSCkNCmNhdCgiXG7wn5OMIEhqZW1tZXNlanIgKEgpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoTk4sICJZcHJlZEgiLCAiWXRydWVIIiwgIkRpZmZIIiwgIkZUUiIsICJIIiwgdGhyZXNob2xkID0gMC4xKQ0KIyDwn6SdIFVhZmdqb3J0IChEKQ0KY2F0KCJcbvCfk4wgVWFmZ2pvcnQgKEQpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoTk4sICJZcHJlZEQiLCAiWXRydWVEIiwgIkRpZmZEIiwgIkZUUiIsICJEIiwgdGhyZXNob2xkID0gMC4xKQ0KIyDwn5qMIFVkZWJhbmVzZWpyIChBKQ0KY2F0KCJcbvCfk4wgVWRlYmFuZXNlanIgKEEpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoTk4sICJZcHJlZEEiLCAiWXRydWVBIiwgIkRpZmZBIiwgIkZUUiIsICJBIiwgdGhyZXNob2xkID0gMC4xKQ0KDQojIPCflKUgSGplbW1lc2VqciAoSCkNCmNhdCgiXG7wn5OMIEhqZW1tZXNlanIgKEgpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoTk4sICJZcHJlZEgiLCAiWXRydWVIIiwgIkRpZmZIIiwgIkZUUiIsICJIIiwgdGhyZXNob2xkID0gMC4xMjUpDQojIPCfpJ0gVWFmZ2pvcnQgKEQpDQpjYXQoIlxu8J+TjCBVYWZnam9ydCAoRClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhOTiwgIllwcmVkRCIsICJZdHJ1ZUQiLCAiRGlmZkQiLCAiRlRSIiwgIkQiLCB0aHJlc2hvbGQgPSAwLjEyNSkNCiMg8J+ajCBVZGViYW5lc2VqciAoQSkNCmNhdCgiXG7wn5OMIFVkZWJhbmVzZWpyIChBKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKE5OLCAiWXByZWRBIiwgIll0cnVlQSIsICJEaWZmQSIsICJGVFIiLCAiQSIsIHRocmVzaG9sZCA9IDAuMTI1KQ0KDQoNCiNkZjIgPC0gTk5bTk5bWyJEaWZmSCJdXSA+IDAuMDUsIF0NCiNwcmludChkZjIsIG4gPSBJbmYpDQoNCmBgYA0KDQojIExvZ2lzdGlzayBSZWdyZXNzaW9uDQoNCmBgYHtyfQ0KIyDwn5SlIEhqZW1tZXNlanIgKEgpDQpjYXQoIlxu8J+TjCBIamVtbWVzZWpyIChIKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKExSLCAiWXByZWRIIiwgIll0cnVlSCIsICJEaWZmSCIsICJGVFIiLCAiSCIsIHRocmVzaG9sZCA9IDAuMDI1KQ0KIyDwn6SdIFVhZmdqb3J0IChEKQ0KY2F0KCJcbvCfk4wgVWFmZ2pvcnQgKEQpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoTFIsICJZcHJlZEQiLCAiWXRydWVEIiwgIkRpZmZEIiwgIkZUUiIsICJEIiwgdGhyZXNob2xkID0gMC4wMjUpDQojIPCfmowgVWRlYmFuZXNlanIgKEEpDQpjYXQoIlxu8J+TjCBVZGViYW5lc2VqciAoQSlcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhMUiwgIllwcmVkQSIsICJZdHJ1ZUEiLCAiRGlmZkEiLCAiRlRSIiwgIkEiLCB0aHJlc2hvbGQgPSAwLjAyNSkNCg0KIyDwn5SlIEhqZW1tZXNlanIgKEgpDQpjYXQoIlxu8J+TjCBIamVtbWVzZWpyIChIKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKExSLCAiWXByZWRIIiwgIll0cnVlSCIsICJEaWZmSCIsICJGVFIiLCAiSCIsIHRocmVzaG9sZCA9IDAuMDUpDQojIPCfpJ0gVWFmZ2pvcnQgKEQpDQpjYXQoIlxu8J+TjCBVYWZnam9ydCAoRClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhMUiwgIllwcmVkRCIsICJZdHJ1ZUQiLCAiRGlmZkQiLCAiRlRSIiwgIkQiLCB0aHJlc2hvbGQgPSAwLjA1KQ0KIyDwn5qMIFVkZWJhbmVzZWpyIChBKQ0KY2F0KCJcbvCfk4wgVWRlYmFuZXNlanIgKEEpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoTFIsICJZcHJlZEEiLCAiWXRydWVBIiwgIkRpZmZBIiwgIkZUUiIsICJBIiwgdGhyZXNob2xkID0gMC4wNSkgDQoNCiMg8J+UpSBIamVtbWVzZWpyIChIKQ0KY2F0KCJcbvCfk4wgSGplbW1lc2VqciAoSClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhMUiwgIllwcmVkSCIsICJZdHJ1ZUgiLCAiRGlmZkgiLCAiRlRSIiwgIkgiLCB0aHJlc2hvbGQgPSAwLjA3NSkNCiMg8J+knSBVYWZnam9ydCAoRCkNCmNhdCgiXG7wn5OMIFVhZmdqb3J0IChEKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKExSLCAiWXByZWREIiwgIll0cnVlRCIsICJEaWZmRCIsICJGVFIiLCAiRCIsIHRocmVzaG9sZCA9IDAuMDc1KQ0KIyDwn5qMIFVkZWJhbmVzZWpyIChBKQ0KY2F0KCJcbvCfk4wgVWRlYmFuZXNlanIgKEEpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoTFIsICJZcHJlZEEiLCAiWXRydWVBIiwgIkRpZmZBIiwgIkZUUiIsICJBIiwgdGhyZXNob2xkID0gMC4wNzUpDQoNCiMg8J+UpSBIamVtbWVzZWpyIChIKQ0KY2F0KCJcbvCfk4wgSGplbW1lc2VqciAoSClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhMUiwgIllwcmVkSCIsICJZdHJ1ZUgiLCAiRGlmZkgiLCAiRlRSIiwgIkgiLCB0aHJlc2hvbGQgPSAwLjEpDQojIPCfpJ0gVWFmZ2pvcnQgKEQpDQpjYXQoIlxu8J+TjCBVYWZnam9ydCAoRClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhMUiwgIllwcmVkRCIsICJZdHJ1ZUQiLCAiRGlmZkQiLCAiRlRSIiwgIkQiLCB0aHJlc2hvbGQgPSAwLjEpDQojIPCfmowgVWRlYmFuZXNlanIgKEEpDQpjYXQoIlxu8J+TjCBVZGViYW5lc2VqciAoQSlcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhMUiwgIllwcmVkQSIsICJZdHJ1ZUEiLCAiRGlmZkEiLCAiRlRSIiwgIkEiLCB0aHJlc2hvbGQgPSAwLjEpDQoNCiMg8J+UpSBIamVtbWVzZWpyIChIKQ0KY2F0KCJcbvCfk4wgSGplbW1lc2VqciAoSClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhMUiwgIllwcmVkSCIsICJZdHJ1ZUgiLCAiRGlmZkgiLCAiRlRSIiwgIkgiLCB0aHJlc2hvbGQgPSAwLjEyNSkNCiMg8J+knSBVYWZnam9ydCAoRCkNCmNhdCgiXG7wn5OMIFVhZmdqb3J0IChEKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKExSLCAiWXByZWREIiwgIll0cnVlRCIsICJEaWZmRCIsICJGVFIiLCAiRCIsIHRocmVzaG9sZCA9IDAuMTI1KQ0KIyDwn5qMIFVkZWJhbmVzZWpyIChBKQ0KY2F0KCJcbvCfk4wgVWRlYmFuZXNlanIgKEEpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoTFIsICJZcHJlZEEiLCAiWXRydWVBIiwgIkRpZmZBIiwgIkZUUiIsICJBIiwgdGhyZXNob2xkID0gMC4xMjUpDQoNCiNkZjIgPC0gTk5bTk5bWyJEaWZmSCJdXSA+IDAuMDUsIF0NCiNwcmludChkZjIsIG4gPSBJbmYpDQoNCmBgYA0KDQojIEtOTg0KDQpgYGB7cn0NCiMg8J+UpSBIamVtbWVzZWpyIChIKQ0KY2F0KCJcbvCfk4wgSGplbW1lc2VqciAoSClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhLTk4sICJZcHJlZEgiLCAiWXRydWVIIiwgIkRpZmZIIiwgIkZUUiIsICJIIiwgdGhyZXNob2xkID0gMC4wMjUpDQojIPCfpJ0gVWFmZ2pvcnQgKEQpDQpjYXQoIlxu8J+TjCBVYWZnam9ydCAoRClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhLTk4sICJZcHJlZEQiLCAiWXRydWVEIiwgIkRpZmZEIiwgIkZUUiIsICJEIiwgdGhyZXNob2xkID0gMC4wMjUpDQojIPCfmowgVWRlYmFuZXNlanIgKEEpDQpjYXQoIlxu8J+TjCBVZGViYW5lc2VqciAoQSlcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhLTk4sICJZcHJlZEEiLCAiWXRydWVBIiwgIkRpZmZBIiwgIkZUUiIsICJBIiwgdGhyZXNob2xkID0gMC4wMjUpDQoNCiMg8J+UpSBIamVtbWVzZWpyIChIKQ0KY2F0KCJcbvCfk4wgSGplbW1lc2VqciAoSClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhLTk4sICJZcHJlZEgiLCAiWXRydWVIIiwgIkRpZmZIIiwgIkZUUiIsICJIIiwgdGhyZXNob2xkID0gMC4wNSkNCiMg8J+knSBVYWZnam9ydCAoRCkNCmNhdCgiXG7wn5OMIFVhZmdqb3J0IChEKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKEtOTiwgIllwcmVkRCIsICJZdHJ1ZUQiLCAiRGlmZkQiLCAiRlRSIiwgIkQiLCB0aHJlc2hvbGQgPSAwLjA1KQ0KIyDwn5qMIFVkZWJhbmVzZWpyIChBKQ0KY2F0KCJcbvCfk4wgVWRlYmFuZXNlanIgKEEpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoS05OLCAiWXByZWRBIiwgIll0cnVlQSIsICJEaWZmQSIsICJGVFIiLCAiQSIsIHRocmVzaG9sZCA9IDAuMDUpDQoNCiMg8J+UpSBIamVtbWVzZWpyIChIKQ0KY2F0KCJcbvCfk4wgSGplbW1lc2VqciAoSClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhLTk4sICJZcHJlZEgiLCAiWXRydWVIIiwgIkRpZmZIIiwgIkZUUiIsICJIIiwgdGhyZXNob2xkID0gMC4wNzUpDQojIPCfpJ0gVWFmZ2pvcnQgKEQpDQpjYXQoIlxu8J+TjCBVYWZnam9ydCAoRClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhLTk4sICJZcHJlZEQiLCAiWXRydWVEIiwgIkRpZmZEIiwgIkZUUiIsICJEIiwgdGhyZXNob2xkID0gMC4wNzUpDQojIPCfmowgVWRlYmFuZXNlanIgKEEpDQpjYXQoIlxu8J+TjCBVZGViYW5lc2VqciAoQSlcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhLTk4sICJZcHJlZEEiLCAiWXRydWVBIiwgIkRpZmZBIiwgIkZUUiIsICJBIiwgdGhyZXNob2xkID0gMC4wNzUpDQoNCiMg8J+UpSBIamVtbWVzZWpyIChIKQ0KY2F0KCJcbvCfk4wgSGplbW1lc2VqciAoSClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhLTk4sICJZcHJlZEgiLCAiWXRydWVIIiwgIkRpZmZIIiwgIkZUUiIsICJIIiwgdGhyZXNob2xkID0gMC4xKQ0KIyDwn6SdIFVhZmdqb3J0IChEKQ0KY2F0KCJcbvCfk4wgVWFmZ2pvcnQgKEQpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoS05OLCAiWXByZWREIiwgIll0cnVlRCIsICJEaWZmRCIsICJGVFIiLCAiRCIsIHRocmVzaG9sZCA9IDAuMSkNCiMg8J+ajCBVZGViYW5lc2VqciAoQSkNCmNhdCgiXG7wn5OMIFVkZWJhbmVzZWpyIChBKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKEtOTiwgIllwcmVkQSIsICJZdHJ1ZUEiLCAiRGlmZkEiLCAiRlRSIiwgIkEiLCB0aHJlc2hvbGQgPSAwLjEpDQoNCiMg8J+UpSBIamVtbWVzZWpyIChIKQ0KY2F0KCJcbvCfk4wgSGplbW1lc2VqciAoSClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhLTk4sICJZcHJlZEgiLCAiWXRydWVIIiwgIkRpZmZIIiwgIkZUUiIsICJIIiwgdGhyZXNob2xkID0gMC4xMjUpDQojIPCfpJ0gVWFmZ2pvcnQgKEQpDQpjYXQoIlxu8J+TjCBVYWZnam9ydCAoRClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhLTk4sICJZcHJlZEQiLCAiWXRydWVEIiwgIkRpZmZEIiwgIkZUUiIsICJEIiwgdGhyZXNob2xkID0gMC4xMjUpDQojIPCfmowgVWRlYmFuZXNlanIgKEEpDQpjYXQoIlxu8J+TjCBVZGViYW5lc2VqciAoQSlcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhLTk4sICJZcHJlZEEiLCAiWXRydWVBIiwgIkRpZmZBIiwgIkZUUiIsICJBIiwgdGhyZXNob2xkID0gMC4xMjUpDQoNCiNkZjIgPC0gTk5bTk5bWyJEaWZmSCJdXSA+IDAuMDUsIF0NCiNwcmludChkZjIsIG4gPSBJbmYpDQpgYGANCg0KIyBSQU5ET00gRk9SRVNUDQoNCmBgYHtyfQ0KIyDwn5SlIEhqZW1tZXNlanIgKEgpDQpjYXQoIlxu8J+TjCBIamVtbWVzZWpyIChIKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFJGLCAiWXByZWRIIiwgIll0cnVlSCIsICJEaWZmSCIsICJGVFIiLCAiSCIsIHRocmVzaG9sZCA9IDAuMDI1KQ0KIyDwn6SdIFVhZmdqb3J0IChEKQ0KY2F0KCJcbvCfk4wgVWFmZ2pvcnQgKEQpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoUkYsICJZcHJlZEQiLCAiWXRydWVEIiwgIkRpZmZEIiwgIkZUUiIsICJEIiwgdGhyZXNob2xkID0gMC4wMjUpDQojIPCfmowgVWRlYmFuZXNlanIgKEEpDQpjYXQoIlxu8J+TjCBVZGViYW5lc2VqciAoQSlcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhSRiwgIllwcmVkQSIsICJZdHJ1ZUEiLCAiRGlmZkEiLCAiRlRSIiwgIkEiLCB0aHJlc2hvbGQgPSAwLjAyNSkNCg0KIyDwn5SlIEhqZW1tZXNlanIgKEgpDQpjYXQoIlxu8J+TjCBIamVtbWVzZWpyIChIKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFJGLCAiWXByZWRIIiwgIll0cnVlSCIsICJEaWZmSCIsICJGVFIiLCAiSCIsIHRocmVzaG9sZCA9IDAuMDUpDQojIPCfpJ0gVWFmZ2pvcnQgKEQpDQpjYXQoIlxu8J+TjCBVYWZnam9ydCAoRClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhSRiwgIllwcmVkRCIsICJZdHJ1ZUQiLCAiRGlmZkQiLCAiRlRSIiwgIkQiLCB0aHJlc2hvbGQgPSAwLjA1KQ0KIyDwn5qMIFVkZWJhbmVzZWpyIChBKQ0KY2F0KCJcbvCfk4wgVWRlYmFuZXNlanIgKEEpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoUkYsICJZcHJlZEEiLCAiWXRydWVBIiwgIkRpZmZBIiwgIkZUUiIsICJBIiwgdGhyZXNob2xkID0gMC4wNSkNCg0KIyDwn5SlIEhqZW1tZXNlanIgKEgpDQpjYXQoIlxu8J+TjCBIamVtbWVzZWpyIChIKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFJGLCAiWXByZWRIIiwgIll0cnVlSCIsICJEaWZmSCIsICJGVFIiLCAiSCIsIHRocmVzaG9sZCA9IDAuMDc1KQ0KIyDwn6SdIFVhZmdqb3J0IChEKQ0KY2F0KCJcbvCfk4wgVWFmZ2pvcnQgKEQpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoUkYsICJZcHJlZEQiLCAiWXRydWVEIiwgIkRpZmZEIiwgIkZUUiIsICJEIiwgdGhyZXNob2xkID0gMC4wNzUpDQojIPCfmowgVWRlYmFuZXNlanIgKEEpDQpjYXQoIlxu8J+TjCBVZGViYW5lc2VqciAoQSlcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhSRiwgIllwcmVkQSIsICJZdHJ1ZUEiLCAiRGlmZkEiLCAiRlRSIiwgIkEiLCB0aHJlc2hvbGQgPSAwLjA3NSkNCg0KIyDwn5SlIEhqZW1tZXNlanIgKEgpDQpjYXQoIlxu8J+TjCBIamVtbWVzZWpyIChIKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFJGLCAiWXByZWRIIiwgIll0cnVlSCIsICJEaWZmSCIsICJGVFIiLCAiSCIsIHRocmVzaG9sZCA9IDAuMSkNCiMg8J+knSBVYWZnam9ydCAoRCkNCmNhdCgiXG7wn5OMIFVhZmdqb3J0IChEKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFJGLCAiWXByZWREIiwgIll0cnVlRCIsICJEaWZmRCIsICJGVFIiLCAiRCIsIHRocmVzaG9sZCA9IDAuMSkNCiMg8J+ajCBVZGViYW5lc2VqciAoQSkNCmNhdCgiXG7wn5OMIFVkZWJhbmVzZWpyIChBKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFJGLCAiWXByZWRBIiwgIll0cnVlQSIsICJEaWZmQSIsICJGVFIiLCAiQSIsIHRocmVzaG9sZCA9IDAuMSkNCg0KIyDwn5SlIEhqZW1tZXNlanIgKEgpDQpjYXQoIlxu8J+TjCBIamVtbWVzZWpyIChIKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFJGLCAiWXByZWRIIiwgIll0cnVlSCIsICJEaWZmSCIsICJGVFIiLCAiSCIsIHRocmVzaG9sZCA9IDAuMTI1KQ0KIyDwn6SdIFVhZmdqb3J0IChEKQ0KY2F0KCJcbvCfk4wgVWFmZ2pvcnQgKEQpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoUkYsICJZcHJlZEQiLCAiWXRydWVEIiwgIkRpZmZEIiwgIkZUUiIsICJEIiwgdGhyZXNob2xkID0gMC4xMjUpDQojIPCfmowgVWRlYmFuZXNlanIgKEEpDQpjYXQoIlxu8J+TjCBVZGViYW5lc2VqciAoQSlcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhSRiwgIllwcmVkQSIsICJZdHJ1ZUEiLCAiRGlmZkEiLCAiRlRSIiwgIkEiLCB0aHJlc2hvbGQgPSAwLjEyNSkNCg0KI2RmMiA8LSBOTltOTltbIkRpZmZIIl1dID4gMC4wNSwgXQ0KI3ByaW50KGRmMiwgbiA9IEluZikNCg0KYGBgDQoNCiMgS05OLVJGLUVOU0VNQkxFDQoNCmBgYHtyfQ0KIyDwn5SlIEhqZW1tZXNlanIgKEgpDQpjYXQoIlxu8J+TjCBIamVtbWVzZWpyIChIKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKEtOTl9SRiwgIllwcmVkSCIsICJZdHJ1ZUgiLCAiRGlmZkgiLCAiRlRSIiwgIkgiLCB0aHJlc2hvbGQgPSAwLjAyNSkNCiMg8J+knSBVYWZnam9ydCAoRCkNCmNhdCgiXG7wn5OMIFVhZmdqb3J0IChEKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKEtOTl9SRiwgIllwcmVkRCIsICJZdHJ1ZUQiLCAiRGlmZkQiLCAiRlRSIiwgIkQiLCB0aHJlc2hvbGQgPSAwLjAyNSkNCiMg8J+ajCBVZGViYW5lc2VqciAoQSkNCmNhdCgiXG7wn5OMIFVkZWJhbmVzZWpyIChBKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKEtOTl9SRiwgIllwcmVkQSIsICJZdHJ1ZUEiLCAiRGlmZkEiLCAiRlRSIiwgIkEiLCB0aHJlc2hvbGQgPSAwLjAyNSkNCg0KIyDwn5SlIEhqZW1tZXNlanIgKEgpDQpjYXQoIlxu8J+TjCBIamVtbWVzZWpyIChIKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKEtOTl9SRiwgIllwcmVkSCIsICJZdHJ1ZUgiLCAiRGlmZkgiLCAiRlRSIiwgIkgiLCB0aHJlc2hvbGQgPSAwLjA1KQ0KIyDwn6SdIFVhZmdqb3J0IChEKQ0KY2F0KCJcbvCfk4wgVWFmZ2pvcnQgKEQpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoS05OX1JGLCAiWXByZWREIiwgIll0cnVlRCIsICJEaWZmRCIsICJGVFIiLCAiRCIsIHRocmVzaG9sZCA9IDAuMDUpDQojIPCfmowgVWRlYmFuZXNlanIgKEEpDQpjYXQoIlxu8J+TjCBVZGViYW5lc2VqciAoQSlcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhLTk5fUkYsICJZcHJlZEEiLCAiWXRydWVBIiwgIkRpZmZBIiwgIkZUUiIsICJBIiwgdGhyZXNob2xkID0gMC4wNSkNCg0KIyDwn5SlIEhqZW1tZXNlanIgKEgpDQpjYXQoIlxu8J+TjCBIamVtbWVzZWpyIChIKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKEtOTl9SRiwgIllwcmVkSCIsICJZdHJ1ZUgiLCAiRGlmZkgiLCAiRlRSIiwgIkgiLCB0aHJlc2hvbGQgPSAwLjA3NSkNCiMg8J+knSBVYWZnam9ydCAoRCkNCmNhdCgiXG7wn5OMIFVhZmdqb3J0IChEKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKEtOTl9SRiwgIllwcmVkRCIsICJZdHJ1ZUQiLCAiRGlmZkQiLCAiRlRSIiwgIkQiLCB0aHJlc2hvbGQgPSAwLjA3NSkNCiMg8J+ajCBVZGViYW5lc2VqciAoQSkNCmNhdCgiXG7wn5OMIFVkZWJhbmVzZWpyIChBKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKEtOTl9SRiwgIllwcmVkQSIsICJZdHJ1ZUEiLCAiRGlmZkEiLCAiRlRSIiwgIkEiLCB0aHJlc2hvbGQgPSAwLjA3NSkNCg0KIyDwn5SlIEhqZW1tZXNlanIgKEgpDQpjYXQoIlxu8J+TjCBIamVtbWVzZWpyIChIKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKEtOTl9SRiwgIllwcmVkSCIsICJZdHJ1ZUgiLCAiRGlmZkgiLCAiRlRSIiwgIkgiLCB0aHJlc2hvbGQgPSAwLjEpDQojIPCfpJ0gVWFmZ2pvcnQgKEQpDQpjYXQoIlxu8J+TjCBVYWZnam9ydCAoRClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhLTk5fUkYsICJZcHJlZEQiLCAiWXRydWVEIiwgIkRpZmZEIiwgIkZUUiIsICJEIiwgdGhyZXNob2xkID0gMC4xKQ0KIyDwn5qMIFVkZWJhbmVzZWpyIChBKQ0KY2F0KCJcbvCfk4wgVWRlYmFuZXNlanIgKEEpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoS05OX1JGLCAiWXByZWRBIiwgIll0cnVlQSIsICJEaWZmQSIsICJGVFIiLCAiQSIsIHRocmVzaG9sZCA9IDAuMSkNCg0KIyDwn5SlIEhqZW1tZXNlanIgKEgpDQpjYXQoIlxu8J+TjCBIamVtbWVzZWpyIChIKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKEtOTl9SRiwgIllwcmVkSCIsICJZdHJ1ZUgiLCAiRGlmZkgiLCAiRlRSIiwgIkgiLCB0aHJlc2hvbGQgPSAwLjEyNSkNCiMg8J+knSBVYWZnam9ydCAoRCkNCmNhdCgiXG7wn5OMIFVhZmdqb3J0IChEKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKEtOTl9SRiwgIllwcmVkRCIsICJZdHJ1ZUQiLCAiRGlmZkQiLCAiRlRSIiwgIkQiLCB0aHJlc2hvbGQgPSAwLjEyNSkNCiMg8J+ajCBVZGViYW5lc2VqciAoQSkNCmNhdCgiXG7wn5OMIFVkZWJhbmVzZWpyIChBKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKEtOTl9SRiwgIllwcmVkQSIsICJZdHJ1ZUEiLCAiRGlmZkEiLCAiRlRSIiwgIkEiLCB0aHJlc2hvbGQgPSAwLjEyNSkNCg0KI2RmMiA8LSBOTltOTltbIkRpZmZIIl1dID4gMC4wNSwgXQ0KI3ByaW50KGRmMiwgbiA9IEluZikNCg0KYGBgDQoNCiMgQ2F0Qm9vc3QNCg0KYGBge3J9DQojIPCflKUgSGplbW1lc2VqciAoSCkNCmNhdCgiXG7wn5OMIEhqZW1tZXNlanIgKEgpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoQ0IsICJZcHJlZEgiLCAiWXRydWVIIiwgIkRpZmZIIiwgIkZUUiIsICJIIiwgdGhyZXNob2xkID0gMC4wMjUpDQojIPCfpJ0gVWFmZ2pvcnQgKEQpDQpjYXQoIlxu8J+TjCBVYWZnam9ydCAoRClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhDQiwgIllwcmVkRCIsICJZdHJ1ZUQiLCAiRGlmZkQiLCAiRlRSIiwgIkQiLCB0aHJlc2hvbGQgPSAwLjAyNSkNCiMg8J+ajCBVZGViYW5lc2VqciAoQSkNCmNhdCgiXG7wn5OMIFVkZWJhbmVzZWpyIChBKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKENCLCAiWXByZWRBIiwgIll0cnVlQSIsICJEaWZmQSIsICJGVFIiLCAiQSIsIHRocmVzaG9sZCA9IDAuMDI1KQ0KDQojIPCflKUgSGplbW1lc2VqciAoSCkNCmNhdCgiXG7wn5OMIEhqZW1tZXNlanIgKEgpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoQ0IsICJZcHJlZEgiLCAiWXRydWVIIiwgIkRpZmZIIiwgIkZUUiIsICJIIiwgdGhyZXNob2xkID0gMC4wNSkNCiMg8J+knSBVYWZnam9ydCAoRCkNCmNhdCgiXG7wn5OMIFVhZmdqb3J0IChEKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKENCLCAiWXByZWREIiwgIll0cnVlRCIsICJEaWZmRCIsICJGVFIiLCAiRCIsIHRocmVzaG9sZCA9IDAuMDUpDQojIPCfmowgVWRlYmFuZXNlanIgKEEpDQpjYXQoIlxu8J+TjCBVZGViYW5lc2VqciAoQSlcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhDQiwgIllwcmVkQSIsICJZdHJ1ZUEiLCAiRGlmZkEiLCAiRlRSIiwgIkEiLCB0aHJlc2hvbGQgPSAwLjA1KQ0KDQojIPCflKUgSGplbW1lc2VqciAoSCkNCmNhdCgiXG7wn5OMIEhqZW1tZXNlanIgKEgpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoQ0IsICJZcHJlZEgiLCAiWXRydWVIIiwgIkRpZmZIIiwgIkZUUiIsICJIIiwgdGhyZXNob2xkID0gMC4wNzUpDQojIPCfpJ0gVWFmZ2pvcnQgKEQpDQpjYXQoIlxu8J+TjCBVYWZnam9ydCAoRClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhDQiwgIllwcmVkRCIsICJZdHJ1ZUQiLCAiRGlmZkQiLCAiRlRSIiwgIkQiLCB0aHJlc2hvbGQgPSAwLjA3NSkNCiMg8J+ajCBVZGViYW5lc2VqciAoQSkNCmNhdCgiXG7wn5OMIFVkZWJhbmVzZWpyIChBKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKENCLCAiWXByZWRBIiwgIll0cnVlQSIsICJEaWZmQSIsICJGVFIiLCAiQSIsIHRocmVzaG9sZCA9IDAuMDc1KQ0KDQojIPCflKUgSGplbW1lc2VqciAoSCkNCmNhdCgiXG7wn5OMIEhqZW1tZXNlanIgKEgpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoQ0IsICJZcHJlZEgiLCAiWXRydWVIIiwgIkRpZmZIIiwgIkZUUiIsICJIIiwgdGhyZXNob2xkID0gMC4xKQ0KIyDwn6SdIFVhZmdqb3J0IChEKQ0KY2F0KCJcbvCfk4wgVWFmZ2pvcnQgKEQpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoQ0IsICJZcHJlZEQiLCAiWXRydWVEIiwgIkRpZmZEIiwgIkZUUiIsICJEIiwgdGhyZXNob2xkID0gMC4xKQ0KIyDwn5qMIFVkZWJhbmVzZWpyIChBKQ0KY2F0KCJcbvCfk4wgVWRlYmFuZXNlanIgKEEpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoQ0IsICJZcHJlZEEiLCAiWXRydWVBIiwgIkRpZmZBIiwgIkZUUiIsICJBIiwgdGhyZXNob2xkID0gMC4xKQ0KDQojIPCflKUgSGplbW1lc2VqciAoSCkNCmNhdCgiXG7wn5OMIEhqZW1tZXNlanIgKEgpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoQ0IsICJZcHJlZEgiLCAiWXRydWVIIiwgIkRpZmZIIiwgIkZUUiIsICJIIiwgdGhyZXNob2xkID0gMC4xMjUpDQojIPCfpJ0gVWFmZ2pvcnQgKEQpDQpjYXQoIlxu8J+TjCBVYWZnam9ydCAoRClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhDQiwgIllwcmVkRCIsICJZdHJ1ZUQiLCAiRGlmZkQiLCAiRlRSIiwgIkQiLCB0aHJlc2hvbGQgPSAwLjEyNSkNCiMg8J+ajCBVZGViYW5lc2VqciAoQSkNCmNhdCgiXG7wn5OMIFVkZWJhbmVzZWpyIChBKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKENCLCAiWXByZWRBIiwgIll0cnVlQSIsICJEaWZmQSIsICJGVFIiLCAiQSIsIHRocmVzaG9sZCA9IDAuMTI1KQ0KDQojZGYyIDwtIE5OW05OW1siRGlmZkgiXV0gPiAwLjA1LCBdDQojcHJpbnQoZGYyLCBuID0gSW5mKQ0KDQpgYGANCg0KIyBMaWdodEdCTQ0KDQpgYGB7cn0NCiMg8J+UpSBIamVtbWVzZWpyIChIKQ0KY2F0KCJcbvCfk4wgSGplbW1lc2VqciAoSClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhMR0JNLCAiWXByZWRIIiwgIll0cnVlSCIsICJEaWZmSCIsICJGVFIiLCAiSCIsIHRocmVzaG9sZCA9IDAuMDI1KQ0KIyDwn6SdIFVhZmdqb3J0IChEKQ0KY2F0KCJcbvCfk4wgVWFmZ2pvcnQgKEQpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoTEdCTSwgIllwcmVkRCIsICJZdHJ1ZUQiLCAiRGlmZkQiLCAiRlRSIiwgIkQiLCB0aHJlc2hvbGQgPSAwLjAyNSkNCiMg8J+ajCBVZGViYW5lc2VqciAoQSkNCmNhdCgiXG7wn5OMIFVkZWJhbmVzZWpyIChBKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKExHQk0sICJZcHJlZEEiLCAiWXRydWVBIiwgIkRpZmZBIiwgIkZUUiIsICJBIiwgdGhyZXNob2xkID0gMC4wMjUpDQoNCiMg8J+UpSBIamVtbWVzZWpyIChIKQ0KY2F0KCJcbvCfk4wgSGplbW1lc2VqciAoSClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhMR0JNLCAiWXByZWRIIiwgIll0cnVlSCIsICJEaWZmSCIsICJGVFIiLCAiSCIsIHRocmVzaG9sZCA9IDAuMDUpDQojIPCfpJ0gVWFmZ2pvcnQgKEQpDQpjYXQoIlxu8J+TjCBVYWZnam9ydCAoRClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhMR0JNLCAiWXByZWREIiwgIll0cnVlRCIsICJEaWZmRCIsICJGVFIiLCAiRCIsIHRocmVzaG9sZCA9IDAuMDUpDQojIPCfmowgVWRlYmFuZXNlanIgKEEpDQpjYXQoIlxu8J+TjCBVZGViYW5lc2VqciAoQSlcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhMR0JNLCAiWXByZWRBIiwgIll0cnVlQSIsICJEaWZmQSIsICJGVFIiLCAiQSIsIHRocmVzaG9sZCA9IDAuMDUpDQoNCiMg8J+UpSBIamVtbWVzZWpyIChIKQ0KY2F0KCJcbvCfk4wgSGplbW1lc2VqciAoSClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhMR0JNLCAiWXByZWRIIiwgIll0cnVlSCIsICJEaWZmSCIsICJGVFIiLCAiSCIsIHRocmVzaG9sZCA9IDAuMDc1KQ0KIyDwn6SdIFVhZmdqb3J0IChEKQ0KY2F0KCJcbvCfk4wgVWFmZ2pvcnQgKEQpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoTEdCTSwgIllwcmVkRCIsICJZdHJ1ZUQiLCAiRGlmZkQiLCAiRlRSIiwgIkQiLCB0aHJlc2hvbGQgPSAwLjA3NSkNCiMg8J+ajCBVZGViYW5lc2VqciAoQSkNCmNhdCgiXG7wn5OMIFVkZWJhbmVzZWpyIChBKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKExHQk0sICJZcHJlZEEiLCAiWXRydWVBIiwgIkRpZmZBIiwgIkZUUiIsICJBIiwgdGhyZXNob2xkID0gMC4wNzUpDQoNCiMg8J+UpSBIamVtbWVzZWpyIChIKQ0KY2F0KCJcbvCfk4wgSGplbW1lc2VqciAoSClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhMR0JNLCAiWXByZWRIIiwgIll0cnVlSCIsICJEaWZmSCIsICJGVFIiLCAiSCIsIHRocmVzaG9sZCA9IDAuMSkNCiMg8J+knSBVYWZnam9ydCAoRCkNCmNhdCgiXG7wn5OMIFVhZmdqb3J0IChEKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKExHQk0sICJZcHJlZEQiLCAiWXRydWVEIiwgIkRpZmZEIiwgIkZUUiIsICJEIiwgdGhyZXNob2xkID0gMC4xKQ0KIyDwn5qMIFVkZWJhbmVzZWpyIChBKQ0KY2F0KCJcbvCfk4wgVWRlYmFuZXNlanIgKEEpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoTEdCTSwgIllwcmVkQSIsICJZdHJ1ZUEiLCAiRGlmZkEiLCAiRlRSIiwgIkEiLCB0aHJlc2hvbGQgPSAwLjEpDQoNCiMg8J+UpSBIamVtbWVzZWpyIChIKQ0KY2F0KCJcbvCfk4wgSGplbW1lc2VqciAoSClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhMR0JNLCAiWXByZWRIIiwgIll0cnVlSCIsICJEaWZmSCIsICJGVFIiLCAiSCIsIHRocmVzaG9sZCA9IDAuMTI1KQ0KIyDwn6SdIFVhZmdqb3J0IChEKQ0KY2F0KCJcbvCfk4wgVWFmZ2pvcnQgKEQpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoTEdCTSwgIllwcmVkRCIsICJZdHJ1ZUQiLCAiRGlmZkQiLCAiRlRSIiwgIkQiLCB0aHJlc2hvbGQgPSAwLjEyNSkNCiMg8J+ajCBVZGViYW5lc2VqciAoQSkNCmNhdCgiXG7wn5OMIFVkZWJhbmVzZWpyIChBKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKExHQk0sICJZcHJlZEEiLCAiWXRydWVBIiwgIkRpZmZBIiwgIkZUUiIsICJBIiwgdGhyZXNob2xkID0gMC4xMjUpDQoNCiNkZjIgPC0gTk5bTk5bWyJEaWZmSCJdXSA+IDAuMDUsIF0NCiNwcmludChkZjIsIG4gPSBJbmYpDQpgYGANCg0KIyBYR0Jvb3N0DQoNCmBgYHtyfQ0KIyDwn5SlIEhqZW1tZXNlanIgKEgpDQpjYXQoIlxu8J+TjCBIamVtbWVzZWpyIChIKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFhHQiwgIllwcmVkSCIsICJZdHJ1ZUgiLCAiRGlmZkgiLCAiRlRSIiwgIkgiLCB0aHJlc2hvbGQgPSAwLjAyNSkNCiMg8J+knSBVYWZnam9ydCAoRCkNCmNhdCgiXG7wn5OMIFVhZmdqb3J0IChEKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFhHQiwgIllwcmVkRCIsICJZdHJ1ZUQiLCAiRGlmZkQiLCAiRlRSIiwgIkQiLCB0aHJlc2hvbGQgPSAwLjAyNSkNCiMg8J+ajCBVZGViYW5lc2VqciAoQSkNCmNhdCgiXG7wn5OMIFVkZWJhbmVzZWpyIChBKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFhHQiwgIllwcmVkQSIsICJZdHJ1ZUEiLCAiRGlmZkEiLCAiRlRSIiwgIkEiLCB0aHJlc2hvbGQgPSAwLjAyNSkNCg0KIyDwn5SlIEhqZW1tZXNlanIgKEgpDQpjYXQoIlxu8J+TjCBIamVtbWVzZWpyIChIKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFhHQiwgIllwcmVkSCIsICJZdHJ1ZUgiLCAiRGlmZkgiLCAiRlRSIiwgIkgiLCB0aHJlc2hvbGQgPSAwLjA1KQ0KIyDwn6SdIFVhZmdqb3J0IChEKQ0KY2F0KCJcbvCfk4wgVWFmZ2pvcnQgKEQpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoWEdCLCAiWXByZWREIiwgIll0cnVlRCIsICJEaWZmRCIsICJGVFIiLCAiRCIsIHRocmVzaG9sZCA9IDAuMDUpDQojIPCfmowgVWRlYmFuZXNlanIgKEEpDQpjYXQoIlxu8J+TjCBVZGViYW5lc2VqciAoQSlcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhYR0IsICJZcHJlZEEiLCAiWXRydWVBIiwgIkRpZmZBIiwgIkZUUiIsICJBIiwgdGhyZXNob2xkID0gMC4wNSkNCg0KIyDwn5SlIEhqZW1tZXNlanIgKEgpDQpjYXQoIlxu8J+TjCBIamVtbWVzZWpyIChIKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFhHQiwgIllwcmVkSCIsICJZdHJ1ZUgiLCAiRGlmZkgiLCAiRlRSIiwgIkgiLCB0aHJlc2hvbGQgPSAwLjA3NSkNCiMg8J+knSBVYWZnam9ydCAoRCkNCmNhdCgiXG7wn5OMIFVhZmdqb3J0IChEKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFhHQiwgIllwcmVkRCIsICJZdHJ1ZUQiLCAiRGlmZkQiLCAiRlRSIiwgIkQiLCB0aHJlc2hvbGQgPSAwLjA3NSkNCiMg8J+ajCBVZGViYW5lc2VqciAoQSkNCmNhdCgiXG7wn5OMIFVkZWJhbmVzZWpyIChBKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFhHQiwgIllwcmVkQSIsICJZdHJ1ZUEiLCAiRGlmZkEiLCAiRlRSIiwgIkEiLCB0aHJlc2hvbGQgPSAwLjA3NSkNCg0KIyDwn5SlIEhqZW1tZXNlanIgKEgpDQpjYXQoIlxu8J+TjCBIamVtbWVzZWpyIChIKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFhHQiwgIllwcmVkSCIsICJZdHJ1ZUgiLCAiRGlmZkgiLCAiRlRSIiwgIkgiLCB0aHJlc2hvbGQgPSAwLjEpDQojIPCfpJ0gVWFmZ2pvcnQgKEQpDQpjYXQoIlxu8J+TjCBVYWZnam9ydCAoRClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhYR0IsICJZcHJlZEQiLCAiWXRydWVEIiwgIkRpZmZEIiwgIkZUUiIsICJEIiwgdGhyZXNob2xkID0gMC4xKQ0KIyDwn5qMIFVkZWJhbmVzZWpyIChBKQ0KY2F0KCJcbvCfk4wgVWRlYmFuZXNlanIgKEEpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoWEdCLCAiWXByZWRBIiwgIll0cnVlQSIsICJEaWZmQSIsICJGVFIiLCAiQSIsIHRocmVzaG9sZCA9IDAuMSkNCg0KIyDwn5SlIEhqZW1tZXNlanIgKEgpDQpjYXQoIlxu8J+TjCBIamVtbWVzZWpyIChIKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFhHQiwgIllwcmVkSCIsICJZdHJ1ZUgiLCAiRGlmZkgiLCAiRlRSIiwgIkgiLCB0aHJlc2hvbGQgPSAwLjEyNSkNCiMg8J+knSBVYWZnam9ydCAoRCkNCmNhdCgiXG7wn5OMIFVhZmdqb3J0IChEKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFhHQiwgIllwcmVkRCIsICJZdHJ1ZUQiLCAiRGlmZkQiLCAiRlRSIiwgIkQiLCB0aHJlc2hvbGQgPSAwLjEyNSkNCiMg8J+ajCBVZGViYW5lc2VqciAoQSkNCmNhdCgiXG7wn5OMIFVkZWJhbmVzZWpyIChBKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFhHQiwgIllwcmVkQSIsICJZdHJ1ZUEiLCAiRGlmZkEiLCAiRlRSIiwgIkEiLCB0aHJlc2hvbGQgPSAwLjEyNSkNCg0KI2RmMiA8LSBOTltOTltbIkRpZmZIIl1dID4gMC4wNSwgXQ0KI3ByaW50KGRmMiwgbiA9IEluZikNCmBgYA0KDQojIEdyYWRpZW50IEVuc2VtYmxlDQoNCmBgYHtyfQ0KIyDwn5SlIEhqZW1tZXNlanIgKEgpDQpjYXQoIlxu8J+TjCBIamVtbWVzZWpyIChIKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKEdFLCAiWXByZWRIIiwgIll0cnVlSCIsICJEaWZmSCIsICJGVFIiLCAiSCIsIHRocmVzaG9sZCA9IDAuMDI1KQ0KIyDwn6SdIFVhZmdqb3J0IChEKQ0KY2F0KCJcbvCfk4wgVWFmZ2pvcnQgKEQpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoR0UsICJZcHJlZEQiLCAiWXRydWVEIiwgIkRpZmZEIiwgIkZUUiIsICJEIiwgdGhyZXNob2xkID0gMC4wMjUpDQojIPCfmowgVWRlYmFuZXNlanIgKEEpDQpjYXQoIlxu8J+TjCBVZGViYW5lc2VqciAoQSlcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhHRSwgIllwcmVkQSIsICJZdHJ1ZUEiLCAiRGlmZkEiLCAiRlRSIiwgIkEiLCB0aHJlc2hvbGQgPSAwLjAyNSkNCg0KIyDwn5SlIEhqZW1tZXNlanIgKEgpDQpjYXQoIlxu8J+TjCBIamVtbWVzZWpyIChIKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKEdFLCAiWXByZWRIIiwgIll0cnVlSCIsICJEaWZmSCIsICJGVFIiLCAiSCIsIHRocmVzaG9sZCA9IDAuMDUpDQojIPCfpJ0gVWFmZ2pvcnQgKEQpDQpjYXQoIlxu8J+TjCBVYWZnam9ydCAoRClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhHRSwgIllwcmVkRCIsICJZdHJ1ZUQiLCAiRGlmZkQiLCAiRlRSIiwgIkQiLCB0aHJlc2hvbGQgPSAwLjA1KQ0KIyDwn5qMIFVkZWJhbmVzZWpyIChBKQ0KY2F0KCJcbvCfk4wgVWRlYmFuZXNlanIgKEEpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoR0UsICJZcHJlZEEiLCAiWXRydWVBIiwgIkRpZmZBIiwgIkZUUiIsICJBIiwgdGhyZXNob2xkID0gMC4wNSkNCg0KIyDwn5SlIEhqZW1tZXNlanIgKEgpDQpjYXQoIlxu8J+TjCBIamVtbWVzZWpyIChIKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKEdFLCAiWXByZWRIIiwgIll0cnVlSCIsICJEaWZmSCIsICJGVFIiLCAiSCIsIHRocmVzaG9sZCA9IDAuMDc1KQ0KIyDwn6SdIFVhZmdqb3J0IChEKQ0KY2F0KCJcbvCfk4wgVWFmZ2pvcnQgKEQpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoR0UsICJZcHJlZEQiLCAiWXRydWVEIiwgIkRpZmZEIiwgIkZUUiIsICJEIiwgdGhyZXNob2xkID0gMC4wNzUpDQojIPCfmowgVWRlYmFuZXNlanIgKEEpDQpjYXQoIlxu8J+TjCBVZGViYW5lc2VqciAoQSlcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhHRSwgIllwcmVkQSIsICJZdHJ1ZUEiLCAiRGlmZkEiLCAiRlRSIiwgIkEiLCB0aHJlc2hvbGQgPSAwLjA3NSkNCg0KIyDwn5SlIEhqZW1tZXNlanIgKEgpDQpjYXQoIlxu8J+TjCBIamVtbWVzZWpyIChIKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKEdFLCAiWXByZWRIIiwgIll0cnVlSCIsICJEaWZmSCIsICJGVFIiLCAiSCIsIHRocmVzaG9sZCA9IDAuMSkNCiMg8J+knSBVYWZnam9ydCAoRCkNCmNhdCgiXG7wn5OMIFVhZmdqb3J0IChEKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKEdFLCAiWXByZWREIiwgIll0cnVlRCIsICJEaWZmRCIsICJGVFIiLCAiRCIsIHRocmVzaG9sZCA9IDAuMSkNCiMg8J+ajCBVZGViYW5lc2VqciAoQSkNCmNhdCgiXG7wn5OMIFVkZWJhbmVzZWpyIChBKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKEdFLCAiWXByZWRBIiwgIll0cnVlQSIsICJEaWZmQSIsICJGVFIiLCAiQSIsIHRocmVzaG9sZCA9IDAuMSkNCg0KIyDwn5SlIEhqZW1tZXNlanIgKEgpDQpjYXQoIlxu8J+TjCBIamVtbWVzZWpyIChIKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKEdFLCAiWXByZWRIIiwgIll0cnVlSCIsICJEaWZmSCIsICJGVFIiLCAiSCIsIHRocmVzaG9sZCA9IDAuMTI1KQ0KIyDwn6SdIFVhZmdqb3J0IChEKQ0KY2F0KCJcbvCfk4wgVWFmZ2pvcnQgKEQpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoR0UsICJZcHJlZEQiLCAiWXRydWVEIiwgIkRpZmZEIiwgIkZUUiIsICJEIiwgdGhyZXNob2xkID0gMC4xMjUpDQojIPCfmowgVWRlYmFuZXNlanIgKEEpDQpjYXQoIlxu8J+TjCBVZGViYW5lc2VqciAoQSlcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhHRSwgIllwcmVkQSIsICJZdHJ1ZUEiLCAiRGlmZkEiLCAiRlRSIiwgIkEiLCB0aHJlc2hvbGQgPSAwLjEyNSkNCg0KI2RmMiA8LSBOTltOTltbIkRpZmZIIl1dID4gMC4wNSwgXQ0KI3ByaW50KGRmMiwgbiA9IEluZikNCmBgYA0KDQojIEJVTkRFU0xJR0EgTkVVUkFMVCBORVRWw4ZSSw0KDQpgYGB7cn0NCiMg8J+UpSBIamVtbWVzZWpyIChIKQ0KY2F0KCJcbvCfk4wgSGplbW1lc2VqciAoSClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhUTk4sICJZcHJlZEgiLCAiWXRydWVIIiwgIkRpZmZIIiwgIkZUUiIsICJIIiwgdGhyZXNob2xkID0gMC4wMjUpDQoNCiMg8J+knSBVYWZnam9ydCAoRCkNCmNhdCgiXG7wn5OMIFVhZmdqb3J0IChEKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFROTiwgIllwcmVkRCIsICJZdHJ1ZUQiLCAiRGlmZkQiLCAiRlRSIiwgIkQiLCB0aHJlc2hvbGQgPSAwLjAyNSkNCiMg8J+ajCBVZGViYW5lc2VqciAoQSkNCmNhdCgiXG7wn5OMIFVkZWJhbmVzZWpyIChBKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFROTiwgIllwcmVkQSIsICJZdHJ1ZUEiLCAiRGlmZkEiLCAiRlRSIiwgIkEiLCB0aHJlc2hvbGQgPSAwLjAyNSkNCg0KIyDwn5SlIEhqZW1tZXNlanIgKEgpDQpjYXQoIlxu8J+TjCBIamVtbWVzZWpyIChIKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFROTiwgIllwcmVkSCIsICJZdHJ1ZUgiLCAiRGlmZkgiLCAiRlRSIiwgIkgiLCB0aHJlc2hvbGQgPSAwLjA1KQ0KIyDwn6SdIFVhZmdqb3J0IChEKQ0KY2F0KCJcbvCfk4wgVWFmZ2pvcnQgKEQpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoVE5OLCAiWXByZWREIiwgIll0cnVlRCIsICJEaWZmRCIsICJGVFIiLCAiRCIsIHRocmVzaG9sZCA9IDAuMDUpDQojIPCfmowgVWRlYmFuZXNlanIgKEEpDQpjYXQoIlxu8J+TjCBVZGViYW5lc2VqciAoQSlcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhUTk4sICJZcHJlZEEiLCAiWXRydWVBIiwgIkRpZmZBIiwgIkZUUiIsICJBIiwgdGhyZXNob2xkID0gMC4wNSkNCg0KIyDwn5SlIEhqZW1tZXNlanIgKEgpDQpjYXQoIlxu8J+TjCBIamVtbWVzZWpyIChIKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFROTiwgIllwcmVkSCIsICJZdHJ1ZUgiLCAiRGlmZkgiLCAiRlRSIiwgIkgiLCB0aHJlc2hvbGQgPSAwLjA3NSkNCiMg8J+knSBVYWZnam9ydCAoRCkNCmNhdCgiXG7wn5OMIFVhZmdqb3J0IChEKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFROTiwgIllwcmVkRCIsICJZdHJ1ZUQiLCAiRGlmZkQiLCAiRlRSIiwgIkQiLCB0aHJlc2hvbGQgPSAwLjA3NSkNCiMg8J+ajCBVZGViYW5lc2VqciAoQSkNCmNhdCgiXG7wn5OMIFVkZWJhbmVzZWpyIChBKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFROTiwgIllwcmVkQSIsICJZdHJ1ZUEiLCAiRGlmZkEiLCAiRlRSIiwgIkEiLCB0aHJlc2hvbGQgPSAwLjA3NSkNCg0KIyDwn5SlIEhqZW1tZXNlanIgKEgpDQpjYXQoIlxu8J+TjCBIamVtbWVzZWpyIChIKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFROTiwgIllwcmVkSCIsICJZdHJ1ZUgiLCAiRGlmZkgiLCAiRlRSIiwgIkgiLCB0aHJlc2hvbGQgPSAwLjEpDQojIPCfpJ0gVWFmZ2pvcnQgKEQpDQpjYXQoIlxu8J+TjCBVYWZnam9ydCAoRClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhUTk4sICJZcHJlZEQiLCAiWXRydWVEIiwgIkRpZmZEIiwgIkZUUiIsICJEIiwgdGhyZXNob2xkID0gMC4xKQ0KIyDwn5qMIFVkZWJhbmVzZWpyIChBKQ0KY2F0KCJcbvCfk4wgVWRlYmFuZXNlanIgKEEpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoVE5OLCAiWXByZWRBIiwgIll0cnVlQSIsICJEaWZmQSIsICJGVFIiLCAiQSIsIHRocmVzaG9sZCA9IDAuMSkNCg0KIyDwn5SlIEhqZW1tZXNlanIgKEgpDQpjYXQoIlxu8J+TjCBIamVtbWVzZWpyIChIKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFROTiwgIllwcmVkSCIsICJZdHJ1ZUgiLCAiRGlmZkgiLCAiRlRSIiwgIkgiLCB0aHJlc2hvbGQgPSAwLjEyNSkNCiMg8J+knSBVYWZnam9ydCAoRCkNCmNhdCgiXG7wn5OMIFVhZmdqb3J0IChEKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFROTiwgIllwcmVkRCIsICJZdHJ1ZUQiLCAiRGlmZkQiLCAiRlRSIiwgIkQiLCB0aHJlc2hvbGQgPSAwLjEyNSkNCiMg8J+ajCBVZGViYW5lc2VqciAoQSkNCmNhdCgiXG7wn5OMIFVkZWJhbmVzZWpyIChBKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFROTiwgIllwcmVkQSIsICJZdHJ1ZUEiLCAiRGlmZkEiLCAiRlRSIiwgIkEiLCB0aHJlc2hvbGQgPSAwLjEyNSkNCmBgYA0KDQojIEJVTkRFU0xJR0EgTE9HSVNUSVNLIFJFR1JFU1NJT04NCg0KYGBge3J9DQojIPCflKUgSGplbW1lc2VqciAoSCkNCmNhdCgiXG7wn5OMIEhqZW1tZXNlanIgKEgpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoVExSLCAiWXByZWRIIiwgIll0cnVlSCIsICJEaWZmSCIsICJGVFIiLCAiSCIsIHRocmVzaG9sZCA9IDAuMDI1KQ0KIyDwn6SdIFVhZmdqb3J0IChEKQ0KY2F0KCJcbvCfk4wgVWFmZ2pvcnQgKEQpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoVExSLCAiWXByZWREIiwgIll0cnVlRCIsICJEaWZmRCIsICJGVFIiLCAiRCIsIHRocmVzaG9sZCA9IDAuMDI1KQ0KIyDwn5qMIFVkZWJhbmVzZWpyIChBKQ0KY2F0KCJcbvCfk4wgVWRlYmFuZXNlanIgKEEpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoVExSLCAiWXByZWRBIiwgIll0cnVlQSIsICJEaWZmQSIsICJGVFIiLCAiQSIsIHRocmVzaG9sZCA9IDAuMDI1KQ0KDQojIPCflKUgSGplbW1lc2VqciAoSCkNCmNhdCgiXG7wn5OMIEhqZW1tZXNlanIgKEgpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoVExSLCAiWXByZWRIIiwgIll0cnVlSCIsICJEaWZmSCIsICJGVFIiLCAiSCIsIHRocmVzaG9sZCA9IDAuMDUpDQojIPCfpJ0gVWFmZ2pvcnQgKEQpDQpjYXQoIlxu8J+TjCBVYWZnam9ydCAoRClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhUTFIsICJZcHJlZEQiLCAiWXRydWVEIiwgIkRpZmZEIiwgIkZUUiIsICJEIiwgdGhyZXNob2xkID0gMC4wNSkNCiMg8J+ajCBVZGViYW5lc2VqciAoQSkNCmNhdCgiXG7wn5OMIFVkZWJhbmVzZWpyIChBKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFRMUiwgIllwcmVkQSIsICJZdHJ1ZUEiLCAiRGlmZkEiLCAiRlRSIiwgIkEiLCB0aHJlc2hvbGQgPSAwLjA1KSANCg0KIyDwn5SlIEhqZW1tZXNlanIgKEgpDQpjYXQoIlxu8J+TjCBIamVtbWVzZWpyIChIKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFRMUiwgIllwcmVkSCIsICJZdHJ1ZUgiLCAiRGlmZkgiLCAiRlRSIiwgIkgiLCB0aHJlc2hvbGQgPSAwLjA3NSkNCiMg8J+knSBVYWZnam9ydCAoRCkNCmNhdCgiXG7wn5OMIFVhZmdqb3J0IChEKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFRMUiwgIllwcmVkRCIsICJZdHJ1ZUQiLCAiRGlmZkQiLCAiRlRSIiwgIkQiLCB0aHJlc2hvbGQgPSAwLjA3NSkNCiMg8J+ajCBVZGViYW5lc2VqciAoQSkNCmNhdCgiXG7wn5OMIFVkZWJhbmVzZWpyIChBKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFRMUiwgIllwcmVkQSIsICJZdHJ1ZUEiLCAiRGlmZkEiLCAiRlRSIiwgIkEiLCB0aHJlc2hvbGQgPSAwLjA3NSkNCg0KIyDwn5SlIEhqZW1tZXNlanIgKEgpDQpjYXQoIlxu8J+TjCBIamVtbWVzZWpyIChIKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFRMUiwgIllwcmVkSCIsICJZdHJ1ZUgiLCAiRGlmZkgiLCAiRlRSIiwgIkgiLCB0aHJlc2hvbGQgPSAwLjEpDQojIPCfpJ0gVWFmZ2pvcnQgKEQpDQpjYXQoIlxu8J+TjCBVYWZnam9ydCAoRClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhUTFIsICJZcHJlZEQiLCAiWXRydWVEIiwgIkRpZmZEIiwgIkZUUiIsICJEIiwgdGhyZXNob2xkID0gMC4xKQ0KIyDwn5qMIFVkZWJhbmVzZWpyIChBKQ0KY2F0KCJcbvCfk4wgVWRlYmFuZXNlanIgKEEpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoVExSLCAiWXByZWRBIiwgIll0cnVlQSIsICJEaWZmQSIsICJGVFIiLCAiQSIsIHRocmVzaG9sZCA9IDAuMSkNCg0KIyDwn5SlIEhqZW1tZXNlanIgKEgpDQpjYXQoIlxu8J+TjCBIamVtbWVzZWpyIChIKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFRMUiwgIllwcmVkSCIsICJZdHJ1ZUgiLCAiRGlmZkgiLCAiRlRSIiwgIkgiLCB0aHJlc2hvbGQgPSAwLjEyNSkNCiMg8J+knSBVYWZnam9ydCAoRCkNCmNhdCgiXG7wn5OMIFVhZmdqb3J0IChEKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFRMUiwgIllwcmVkRCIsICJZdHJ1ZUQiLCAiRGlmZkQiLCAiRlRSIiwgIkQiLCB0aHJlc2hvbGQgPSAwLjEyNSkNCiMg8J+ajCBVZGViYW5lc2VqciAoQSkNCmNhdCgiXG7wn5OMIFVkZWJhbmVzZWpyIChBKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFRMUiwgIllwcmVkQSIsICJZdHJ1ZUEiLCAiRGlmZkEiLCAiRlRSIiwgIkEiLCB0aHJlc2hvbGQgPSAwLjEyNSkNCmBgYA0KDQojIEJVTkRFU0xJR0EgQ0FUIEJPT1NUDQoNCmBgYHtyfQ0KIyDwn5SlIEhqZW1tZXNlanIgKEgpDQpjYXQoIlxu8J+TjCBIamVtbWVzZWpyIChIKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFRDQiwgIllwcmVkSCIsICJZdHJ1ZUgiLCAiRGlmZkgiLCAiRlRSIiwgIkgiLCB0aHJlc2hvbGQgPSAwLjAyNSkNCiMg8J+knSBVYWZnam9ydCAoRCkNCmNhdCgiXG7wn5OMIFVhZmdqb3J0IChEKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFRDQiwgIllwcmVkRCIsICJZdHJ1ZUQiLCAiRGlmZkQiLCAiRlRSIiwgIkQiLCB0aHJlc2hvbGQgPSAwLjAyNSkNCiMg8J+ajCBVZGViYW5lc2VqciAoQSkNCmNhdCgiXG7wn5OMIFVkZWJhbmVzZWpyIChBKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFRDQiwgIllwcmVkQSIsICJZdHJ1ZUEiLCAiRGlmZkEiLCAiRlRSIiwgIkEiLCB0aHJlc2hvbGQgPSAwLjAyNSkNCg0KIyDwn5SlIEhqZW1tZXNlanIgKEgpDQpjYXQoIlxu8J+TjCBIamVtbWVzZWpyIChIKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFRDQiwgIllwcmVkSCIsICJZdHJ1ZUgiLCAiRGlmZkgiLCAiRlRSIiwgIkgiLCB0aHJlc2hvbGQgPSAwLjA1KQ0KIyDwn6SdIFVhZmdqb3J0IChEKQ0KY2F0KCJcbvCfk4wgVWFmZ2pvcnQgKEQpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoVENCLCAiWXByZWREIiwgIll0cnVlRCIsICJEaWZmRCIsICJGVFIiLCAiRCIsIHRocmVzaG9sZCA9IDAuMDUpDQojIPCfmowgVWRlYmFuZXNlanIgKEEpDQpjYXQoIlxu8J+TjCBVZGViYW5lc2VqciAoQSlcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhUQ0IsICJZcHJlZEEiLCAiWXRydWVBIiwgIkRpZmZBIiwgIkZUUiIsICJBIiwgdGhyZXNob2xkID0gMC4wNSkNCg0KIyDwn5SlIEhqZW1tZXNlanIgKEgpDQpjYXQoIlxu8J+TjCBIamVtbWVzZWpyIChIKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFRDQiwgIllwcmVkSCIsICJZdHJ1ZUgiLCAiRGlmZkgiLCAiRlRSIiwgIkgiLCB0aHJlc2hvbGQgPSAwLjA3NSkNCiMg8J+knSBVYWZnam9ydCAoRCkNCmNhdCgiXG7wn5OMIFVhZmdqb3J0IChEKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFRDQiwgIllwcmVkRCIsICJZdHJ1ZUQiLCAiRGlmZkQiLCAiRlRSIiwgIkQiLCB0aHJlc2hvbGQgPSAwLjA3NSkNCiMg8J+ajCBVZGViYW5lc2VqciAoQSkNCmNhdCgiXG7wn5OMIFVkZWJhbmVzZWpyIChBKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFRDQiwgIllwcmVkQSIsICJZdHJ1ZUEiLCAiRGlmZkEiLCAiRlRSIiwgIkEiLCB0aHJlc2hvbGQgPSAwLjA3NSkNCg0KIyDwn5SlIEhqZW1tZXNlanIgKEgpDQpjYXQoIlxu8J+TjCBIamVtbWVzZWpyIChIKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFRDQiwgIllwcmVkSCIsICJZdHJ1ZUgiLCAiRGlmZkgiLCAiRlRSIiwgIkgiLCB0aHJlc2hvbGQgPSAwLjEpDQojIPCfpJ0gVWFmZ2pvcnQgKEQpDQpjYXQoIlxu8J+TjCBVYWZnam9ydCAoRClcbiIpDQpjb21wYXJlX3dpdGhfYm9va21ha2VycyhUQ0IsICJZcHJlZEQiLCAiWXRydWVEIiwgIkRpZmZEIiwgIkZUUiIsICJEIiwgdGhyZXNob2xkID0gMC4xKQ0KIyDwn5qMIFVkZWJhbmVzZWpyIChBKQ0KY2F0KCJcbvCfk4wgVWRlYmFuZXNlanIgKEEpXG4iKQ0KY29tcGFyZV93aXRoX2Jvb2ttYWtlcnMoVENCLCAiWXByZWRBIiwgIll0cnVlQSIsICJEaWZmQSIsICJGVFIiLCAiQSIsIHRocmVzaG9sZCA9IDAuMSkNCg0KIyDwn5SlIEhqZW1tZXNlanIgKEgpDQpjYXQoIlxu8J+TjCBIamVtbWVzZWpyIChIKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFRDQiwgIllwcmVkSCIsICJZdHJ1ZUgiLCAiRGlmZkgiLCAiRlRSIiwgIkgiLCB0aHJlc2hvbGQgPSAwLjEyNSkNCiMg8J+knSBVYWZnam9ydCAoRCkNCmNhdCgiXG7wn5OMIFVhZmdqb3J0IChEKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFRDQiwgIllwcmVkRCIsICJZdHJ1ZUQiLCAiRGlmZkQiLCAiRlRSIiwgIkQiLCB0aHJlc2hvbGQgPSAwLjEyNSkNCiMg8J+ajCBVZGViYW5lc2VqciAoQSkNCmNhdCgiXG7wn5OMIFVkZWJhbmVzZWpyIChBKVxuIikNCmNvbXBhcmVfd2l0aF9ib29rbWFrZXJzKFRDQiwgIllwcmVkQSIsICJZdHJ1ZUEiLCAiRGlmZkEiLCAiRlRSIiwgIkEiLCB0aHJlc2hvbGQgPSAwLjEyNSkNCmBgYA0K</div>
 
 
 
