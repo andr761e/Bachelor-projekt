@@ -25,7 +25,7 @@ def normalize_odds_to_probabilities(odds_matrix):
     return probabilities
 
 
-# Load only column "Q" and rows from Q2 to Q2641
+#Indlæs odds
 HomeWinProb = pd.read_excel("Fase1_Datamanipulation/engelske_kampe_scrapped.xlsx", usecols="AQ", skiprows=0, nrows=7981)
 DrawProb = pd.read_excel("Fase1_Datamanipulation/engelske_kampe_scrapped.xlsx", usecols="AR", skiprows=0, nrows=7981)
 AwayWinProb = pd.read_excel("Fase1_Datamanipulation/engelske_kampe_scrapped.xlsx", usecols="AS", skiprows=0, nrows=7981)
@@ -34,6 +34,18 @@ AwayWinProb = pd.read_excel("Fase1_Datamanipulation/engelske_kampe_scrapped.xlsx
 y = np.hstack((HomeWinProb.to_numpy(), DrawProb.to_numpy(), AwayWinProb.to_numpy()))
 Y = normalize_odds_to_probabilities(y)
 
+#I den her korte del finder jeg det største odds på hvert udfald i hver kamp (bruges til monte-carlo simulering)
+HomeOdds = pd.read_excel("Fase1_Datamanipulation/engelske_kampe_scrapped.xlsx", usecols=["B365H","GBH","IWH","LBH","SOH","SBH","WHH"])
+DrawOdds = pd.read_excel("Fase1_Datamanipulation/engelske_kampe_scrapped.xlsx", usecols=["B365D","GBD","IWD","LBD","SOD","SBD","WHD"])
+AwayOdds = pd.read_excel("Fase1_Datamanipulation/engelske_kampe_scrapped.xlsx", usecols=["B365A","GBA","IWA","LBA","SOA","SBA","WHA"])
+
+#Find største værdi i hver række for hver DataFrame
+HomeMax = HomeOdds.max(axis=1)
+DrawMax = DrawOdds.max(axis=1)
+AwayMax = AwayOdds.max(axis=1)
+
+# Sammenlæg alle odds i én DataFrame
+AllOdds = pd.concat([HomeMax, DrawMax, AwayMax], axis=1)
 
 #X DELEN
 # Læs kun relevante kolonner fra Excel-arket
@@ -158,6 +170,6 @@ Y_cleaned.to_excel("Fase1_Datamanipulation/processed_output_labels.xlsx", index=
 # Læs kun relevante kolonner fra Excel-arket
 columns_to_use = ["Date", "HomeTeam", "AwayTeam","FTR"]
 matches = pd.read_excel("Fase1_Datamanipulation/engelske_kampe_scrapped.xlsx", usecols=columns_to_use)
-match_results= pd.concat([matches.drop(index=rows_with_nan), final_df.drop(index=rows_with_nan)], axis=1)
+match_results= pd.concat([matches.drop(index=rows_with_nan), final_df.drop(index=rows_with_nan), AllOdds.drop(index=rows_with_nan)], axis=1)
 
 match_results.to_excel("Fase1_Datamanipulation/match_results.xlsx", index=False)

@@ -28,13 +28,10 @@ library(stats)
 ```{r}
 #Indlæs alle dataframes
 LR <- read_excel("LogisticRegressionResultsUnfiltered.xlsx")
-KNN <- read_excel("KNNResultsUnfiltered.xlsx")
 RF <- read_excel("RandomForestResultsUnfiltered.xlsx")
-KNN_RF <- read_excel("KNN_RF_ResultsUnfiltered.xlsx")
 CB <- read_excel("CatBoostResultsUnfiltered.xlsx")
 LGBM <- read_excel("LightGBMResultsUnfiltered.xlsx")
 XGB <- read_excel("XGBoostResultsUnfiltered.xlsx")
-GE <- read_excel("GradientEnsembleResultsUnfiltered.xlsx")
 NN <- read_excel("NeuralNetworkOutliersResultsUnfiltered.xlsx") 
 
 #Tyske outliers
@@ -46,25 +43,23 @@ TNN <- read_excel("Bundesliga/NeuralNetworkOutliersResultsUnfiltered.xlsx")
 # Definer funktion
 
 ```{r}
-# Monte Carlo-simulering af pure strategy med korrekt sampling af vindere og tabere
-monte_carlo_simulation <- function(df, result_char, pred_col, true_col, diff_col, 
-                                   result_col, threshold = 5, bet_amount = 100, 
-                                   simulations = 10000) {
+# Monte Carlo-simulering af pure strategy
+monte_carlo_simulation <- function(df, result_char, pred_col, odds_col, diff_col, 
+          result_col, threshold = 0.025, bet_amount = 100, simulations = 10000) {
   # Filtrer kampene, hvor forskellen overstiger threshold
   df <- df[df[[diff_col]] >= threshold, ]
   
   # Hvis ingen kampe opfylder threshold, afslut
   if (nrow(df) == 0) {
-    cat("\nIngen kampe opfylder threshold =", threshold, "\n")
+    cat("\n Ingen kampe opfylder threshold =", threshold, "\n")
     return(NULL)
   }
-  
-  # Beregn odds som den inverse af bookmakernes sandsynlighed
-  df$odds <- 1 / df[[true_col]]
   
   # Vektor til at gemme profitten fra hver simulation
   profits <- numeric(simulations)
   
+  #for reproducerbarhed
+  set.seed(42)
   # Monte Carlo-simulering
   for (i in 1:simulations) {
     # Random sampling med tilbagelægning
@@ -72,75 +67,64 @@ monte_carlo_simulation <- function(df, result_char, pred_col, true_col, diff_col
     
     # Beregn profit for hver kamp
     sampled_df$profit <- ifelse(sampled_df[[result_col]] == result_char, 
-                                (sampled_df$odds * bet_amount) - bet_amount, 
-                                -bet_amount)
+                    (sampled_df[[odds_col]] * bet_amount) - bet_amount,-bet_amount)
     
     # Summer profitten fra alle kampe i denne simulation
     profits[i] <- sum(sampled_df$profit)
   }
   
   # Plot histogram over profitfordelingen
-  hist(profits, breaks = 50, main = paste("Monte Carlo Simulation:", result_char, "Pure Strategy"),
-       xlab = "Profit (DKK)", col = "gray", border = "black")
+  hist(profits, breaks = 50, main = paste("Monte Carlo Simulation:", result_char,    "Pure Strategy"), xlab = "Profit (DKK)", col = "gray", border = "black")
   
   # Output af resultater
-  cat("\nResultat:", result_char, "\n")
+  cat("\n Resultat:", result_char, "\n")
   cat("Threshold:", threshold, "\n")
   cat("Antal kampe opfylder threshold:", nrow(df), "\n")
   cat("Gennemsnitlig profit pr. simulation:", mean(profits), "DKK\n")
   cat("Median profit pr. simulation:", median(profits), "DKK\n")
   cat("Varians af profit pr. simulation:", var(profits), "DKK²\n")  
   cat("Andel af simulationer med overskud:", mean(profits > 0) * 100, "%\n")
-}
+  
+  # Hoeffding inequality analyse ----
+  n <- nrow(df)  # antal value bets per simulation
+  mean_profit_total <- mean(profits)
+  mean_profit_per_bet <- mean_profit_total / n
 
-# Monte Carlo-simulering af pure strategy med 2 thresholds
-monte_carlo_simulation2 <- function(df, result_char, pred_col, true_col, diff_col, 
-                                   result_col, lower_threshold = 5, upper_threshold = 20, 
-                                   bet_amount = 100, simulations = 10000) {
-  # Filtrer kampene, hvor forskellen ligger mellem de to thresholds
-  df <- df[df[[diff_col]] >= lower_threshold & df[[diff_col]] <= upper_threshold, ]
-  
-  # Hvis ingen kampe opfylder thresholds, afslut
-  if (nrow(df) == 0) {
-    cat("\nIngen kampe opfylder thresholds mellem", lower_threshold, "og", upper_threshold, "\n")
-    return(NULL)
-  }
-  
-  # Beregn odds som den inverse af bookmakernes sandsynlighed
-  df$odds <- 1 / df[[true_col]]
-  
-  # Vektor til at gemme profitten fra hver simulation
-  profits <- numeric(simulations)
-  
-  # Monte Carlo-simulering
-  for (i in 1:simulations) {
-    # Random sampling med tilbagelægning
-    sampled_df <- df[sample(nrow(df), replace = TRUE), ]
-    
-    # Beregn profit for hver kamp
-    sampled_df$profit <- ifelse(sampled_df[[result_col]] == result_char, 
-                                (sampled_df$odds * bet_amount) - bet_amount, 
-                                -bet_amount)
-    
-    # Summer profitten fra alle kampe i denne simulation
-    profits[i] <- sum(sampled_df$profit)
-  }
-  
-  # Plot histogram over profitfordelingen
-  hist(profits, breaks = 50, main = paste("Monte Carlo Simulation:", result_char, 
-                                           "\nThresholds mellem", lower_threshold, "og", upper_threshold),
-       xlab = "Profit (DKK)", col = "gray", border = "black")
-  
-  # Output af resultater
-  cat("\nResultat:", result_char, "\n")
-  cat("Thresholds mellem", lower_threshold, "og", upper_threshold, "\n")
-  cat("Antal kampe opfylder thresholds:", nrow(df), "\n")
-  cat("Gennemsnitlig profit pr. simulation:", mean(profits), "DKK\n")
-  cat("Median profit pr. simulation:", median(profits), "DKK\n")
-  cat("Varians af profit pr. simulation:", var(profits), "DKK²\n")  
-  cat("Andel af simulationer med overskud:", mean(profits > 0) * 100, "%\n")
-}
+  # Konfidensniveau
+  delta <- 0.05
 
+  # a = -100 kr (tab), b = gennemsnitlig gevinst
+  avg_odds <- mean(df[[odds_col]])
+  a <- -bet_amount
+  b <- (avg_odds * bet_amount) - bet_amount
+
+  # Klassisk Hoeffding epsilon og nedre grænse
+  epsilon <- sqrt(((b - a)^2 * log(1 / delta)) / (2 * n))
+  lower_bound <- mean_profit_per_bet - epsilon
+
+  # Beregn hvilken delta der gør at lower bound = 0
+  # altså: epsilon = mean_profit_per_bet => delta = 2 * exp(-2n * mean^2 / (b-a)^2)
+  if (mean_profit_per_bet > 0) {
+    delta_required <- exp(-2 * n * mean_profit_per_bet^2 / ((b - a)^2))
+    if(delta_required > 1) {
+      delta_required <- 1
+    }
+  } else {
+    delta_required <- 1  # ingen konfidens for profit
+  }
+
+  # ---- UDSKRIV RESULTATER ----
+  cat("\n--- Hoeffding og Binomial Analyse ---\n")
+  cat("Gennemsnitlig profit per kamp:", round(mean_profit_per_bet, 2), "kr\n")
+  
+  cat("\n Vi er 95% sikre på følgende profit eller mere -> \n")
+  cat("Hoeffding epsilon (95%):", round(epsilon, 2), "kr\n")
+  cat("Nedre 95% grænse for forventet profit:", round(lower_bound, 2), "kr\n")
+  
+  cat("\n Med hvilken sandsynlighed får vi profit per bet på 0kr eller mere -> \n")
+  cat("Nødvendig delta for at sikre at μ ≥ 0:", round((1-delta_required)*100, 4),"% \n")
+  cat("-------------------------------------------------------------------")
+}
 ```
 
 # Neuralt Netværk
@@ -148,76 +132,68 @@ monte_carlo_simulation2 <- function(df, result_char, pred_col, true_col, diff_co
 ```{r}
 # 🔥 Hjemmesejr (H)
 monte_carlo_simulation(df = NN, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
+                       pred_col = "YpredH", odds_col = "MaxHodds", 
                        diff_col = "DiffH", result_col = "FTR", 
                        threshold = 0.025, bet_amount = 100, simulations = 10000)
 # 🤝 Uafgjort (D)
 monte_carlo_simulation(df = NN, result_char = "D", 
-                       pred_col = "YpredD", true_col = "YtrueD", 
+                       pred_col = "YpredD", odds_col = "MaxDodds", 
                        diff_col = "DiffD", result_col = "FTR", 
                        threshold = 0.025, bet_amount = 100, simulations = 10000)
 # 🚌 Udebanesejr (A)
 monte_carlo_simulation(df = NN, result_char = "A", 
-                       pred_col = "YpredA", true_col = "YtrueA", 
+                       pred_col = "YpredA", odds_col = "MaxAodds", 
                        diff_col = "DiffA", result_col = "FTR", 
                        threshold = 0.025, bet_amount = 100, simulations = 10000)
 
 
 # 🔥 Hjemmesejr (H)
 monte_carlo_simulation(df = NN, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
+                       pred_col = "YpredH", odds_col = "MaxHodds", 
                        diff_col = "DiffH", result_col = "FTR", 
                        threshold = 0.05, bet_amount = 100, simulations = 10000)
 # 🤝 Uafgjort (D)
 monte_carlo_simulation(df = NN, result_char = "D", 
-                       pred_col = "YpredD", true_col = "YtrueD", 
+                       pred_col = "YpredD", odds_col = "MaxDodds", 
                        diff_col = "DiffD", result_col = "FTR", 
                        threshold = 0.05, bet_amount = 100, simulations = 10000)
 # 🚌 Udebanesejr (A)
 monte_carlo_simulation(df = NN, result_char = "A", 
-                       pred_col = "YpredA", true_col = "YtrueA", 
+                       pred_col = "YpredA", odds_col = "MaxAodds", 
                        diff_col = "DiffA", result_col = "FTR", 
                        threshold = 0.05, bet_amount = 100, simulations = 10000)
 
 # 🔥 Hjemmesejr (H)
 monte_carlo_simulation(df = NN, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
+                       pred_col = "YpredH", odds_col = "MaxHodds", 
                        diff_col = "DiffH", result_col = "FTR", 
                        threshold = 0.075, bet_amount = 100, simulations = 10000)
 # 🤝 Uafgjort (D)
 monte_carlo_simulation(df = NN, result_char = "D", 
-                       pred_col = "YpredD", true_col = "YtrueD", 
+                       pred_col = "YpredD", odds_col = "MaxDodds", 
                        diff_col = "DiffD", result_col = "FTR", 
                        threshold = 0.075, bet_amount = 100, simulations = 10000)
 # 🚌 Udebanesejr (A)
 monte_carlo_simulation(df = NN, result_char = "A", 
-                       pred_col = "YpredA", true_col = "YtrueA", 
+                       pred_col = "YpredA", odds_col = "MaxAodds", 
                        diff_col = "DiffA", result_col = "FTR", 
                        threshold = 0.075, bet_amount = 100, simulations = 10000)
 
 # 🔥 Hjemmesejr (H)
 monte_carlo_simulation(df = NN, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
+                       pred_col = "YpredH", odds_col = "MaxHodds", 
                        diff_col = "DiffH", result_col = "FTR", 
                        threshold = 0.1, bet_amount = 100, simulations = 10000)
 # 🤝 Uafgjort (D)
 monte_carlo_simulation(df = NN, result_char = "D", 
-                       pred_col = "YpredD", true_col = "YtrueD", 
+                       pred_col = "YpredD", odds_col = "MaxDodds", 
                        diff_col = "DiffD", result_col = "FTR", 
                        threshold = 0.1, bet_amount = 100, simulations = 10000)
 # 🚌 Udebanesejr (A)
 monte_carlo_simulation(df = NN, result_char = "A", 
-                       pred_col = "YpredA", true_col = "YtrueA", 
+                       pred_col = "YpredA", odds_col = "MaxAodds", 
                        diff_col = "DiffA", result_col = "FTR", 
                        threshold = 0.1, bet_amount = 100, simulations = 10000)
-
-
-# 🔥 Hjemmesejr (H) med thresholds 0.05 og 0.07
-monte_carlo_simulation2(df = NN, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
-                       diff_col = "DiffH", result_col = "FTR", 
-                       lower_threshold = 0.05, upper_threshold = 0.07, 
-                       bet_amount = 100, simulations = 10000)
 
 ```
 
@@ -226,153 +202,69 @@ monte_carlo_simulation2(df = NN, result_char = "H",
 ```{r}
 # 🔥 Hjemmesejr (H)
 monte_carlo_simulation(df = LR, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
+                       pred_col = "YpredH", odds_col = "MaxHodds", 
                        diff_col = "DiffH", result_col = "FTR", 
                        threshold = 0.025, bet_amount = 100, simulations = 10000)
 # 🤝 Uafgjort (D)
 monte_carlo_simulation(df = LR, result_char = "D", 
-                       pred_col = "YpredD", true_col = "YtrueD", 
+                       pred_col = "YpredD", odds_col = "MaxDodds", 
                        diff_col = "DiffD", result_col = "FTR", 
                        threshold = 0.025, bet_amount = 100, simulations = 10000)
 # 🚌 Udebanesejr (A)
 monte_carlo_simulation(df = LR, result_char = "A", 
-                       pred_col = "YpredA", true_col = "YtrueA", 
+                       pred_col = "YpredA", odds_col = "MaxAodds", 
                        diff_col = "DiffA", result_col = "FTR", 
                        threshold = 0.025, bet_amount = 100, simulations = 10000)
 
 
 # 🔥 Hjemmesejr (H)
 monte_carlo_simulation(df = LR, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
+                       pred_col = "YpredH", odds_col = "MaxHodds", 
                        diff_col = "DiffH", result_col = "FTR", 
                        threshold = 0.05, bet_amount = 100, simulations = 10000)
 # 🤝 Uafgjort (D)
 monte_carlo_simulation(df = LR, result_char = "D", 
-                       pred_col = "YpredD", true_col = "YtrueD", 
+                       pred_col = "YpredD", odds_col = "MaxDodds", 
                        diff_col = "DiffD", result_col = "FTR", 
                        threshold = 0.05, bet_amount = 100, simulations = 10000)
 # 🚌 Udebanesejr (A)
 monte_carlo_simulation(df = LR, result_char = "A", 
-                       pred_col = "YpredA", true_col = "YtrueA", 
+                       pred_col = "YpredA", odds_col = "MaxAodds", 
                        diff_col = "DiffA", result_col = "FTR", 
                        threshold = 0.05, bet_amount = 100, simulations = 10000)
 
 # 🔥 Hjemmesejr (H)
 monte_carlo_simulation(df = LR, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
+                       pred_col = "YpredH", odds_col = "MaxHodds", 
                        diff_col = "DiffH", result_col = "FTR", 
                        threshold = 0.075, bet_amount = 100, simulations = 10000)
 # 🤝 Uafgjort (D)
 monte_carlo_simulation(df = LR, result_char = "D", 
-                       pred_col = "YpredD", true_col = "YtrueD", 
+                       pred_col = "YpredD", odds_col = "MaxDodds", 
                        diff_col = "DiffD", result_col = "FTR", 
                        threshold = 0.075, bet_amount = 100, simulations = 10000)
 # 🚌 Udebanesejr (A)
 monte_carlo_simulation(df = LR, result_char = "A", 
-                       pred_col = "YpredA", true_col = "YtrueA", 
+                       pred_col = "YpredA", odds_col = "MaxAodds", 
                        diff_col = "DiffA", result_col = "FTR", 
                        threshold = 0.075, bet_amount = 100, simulations = 10000)
 
 # 🔥 Hjemmesejr (H)
 monte_carlo_simulation(df = LR, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
+                       pred_col = "YpredH", odds_col = "MaxHodds", 
                        diff_col = "DiffH", result_col = "FTR", 
                        threshold = 0.1, bet_amount = 100, simulations = 10000)
 # 🤝 Uafgjort (D)
 monte_carlo_simulation(df = LR, result_char = "D", 
-                       pred_col = "YpredD", true_col = "YtrueD", 
+                       pred_col = "YpredD", odds_col = "MaxDodds", 
                        diff_col = "DiffD", result_col = "FTR", 
                        threshold = 0.1, bet_amount = 100, simulations = 10000)
 # 🚌 Udebanesejr (A)
 monte_carlo_simulation(df = LR, result_char = "A", 
-                       pred_col = "YpredA", true_col = "YtrueA", 
+                       pred_col = "YpredA", odds_col = "MaxAodds", 
                        diff_col = "DiffA", result_col = "FTR", 
                        threshold = 0.1, bet_amount = 100, simulations = 10000)
 
-
-# 🔥 Hjemmesejr (H) med thresholds 0.05 og 0.07
-monte_carlo_simulation2(df = LR, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
-                       diff_col = "DiffH", result_col = "FTR", 
-                       lower_threshold = 0.05, upper_threshold = 0.07, 
-                       bet_amount = 100, simulations = 10000)
-```
-
-# KNN
-
-```{r}
-# 🔥 Hjemmesejr (H)
-monte_carlo_simulation(df = KNN, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
-                       diff_col = "DiffH", result_col = "FTR", 
-                       threshold = 0.025, bet_amount = 100, simulations = 10000)
-# 🤝 Uafgjort (D)
-monte_carlo_simulation(df = KNN, result_char = "D", 
-                       pred_col = "YpredD", true_col = "YtrueD", 
-                       diff_col = "DiffD", result_col = "FTR", 
-                       threshold = 0.025, bet_amount = 100, simulations = 10000)
-# 🚌 Udebanesejr (A)
-monte_carlo_simulation(df = KNN, result_char = "A", 
-                       pred_col = "YpredA", true_col = "YtrueA", 
-                       diff_col = "DiffA", result_col = "FTR", 
-                       threshold = 0.025, bet_amount = 100, simulations = 10000)
-
-
-# 🔥 Hjemmesejr (H)
-monte_carlo_simulation(df = KNN, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
-                       diff_col = "DiffH", result_col = "FTR", 
-                       threshold = 0.05, bet_amount = 100, simulations = 10000)
-# 🤝 Uafgjort (D)
-monte_carlo_simulation(df = KNN, result_char = "D", 
-                       pred_col = "YpredD", true_col = "YtrueD", 
-                       diff_col = "DiffD", result_col = "FTR", 
-                       threshold = 0.05, bet_amount = 100, simulations = 10000)
-# 🚌 Udebanesejr (A)
-monte_carlo_simulation(df = KNN, result_char = "A", 
-                       pred_col = "YpredA", true_col = "YtrueA", 
-                       diff_col = "DiffA", result_col = "FTR", 
-                       threshold = 0.05, bet_amount = 100, simulations = 10000)
-
-# 🔥 Hjemmesejr (H)
-monte_carlo_simulation(df = KNN, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
-                       diff_col = "DiffH", result_col = "FTR", 
-                       threshold = 0.075, bet_amount = 100, simulations = 10000)
-# 🤝 Uafgjort (D)
-monte_carlo_simulation(df = KNN, result_char = "D", 
-                       pred_col = "YpredD", true_col = "YtrueD", 
-                       diff_col = "DiffD", result_col = "FTR", 
-                       threshold = 0.075, bet_amount = 100, simulations = 10000)
-# 🚌 Udebanesejr (A)
-monte_carlo_simulation(df = KNN, result_char = "A", 
-                       pred_col = "YpredA", true_col = "YtrueA", 
-                       diff_col = "DiffA", result_col = "FTR", 
-                       threshold = 0.075, bet_amount = 100, simulations = 10000)
-
-# 🔥 Hjemmesejr (H)
-monte_carlo_simulation(df = KNN, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
-                       diff_col = "DiffH", result_col = "FTR", 
-                       threshold = 0.1, bet_amount = 100, simulations = 10000)
-# 🤝 Uafgjort (D)
-monte_carlo_simulation(df = KNN, result_char = "D", 
-                       pred_col = "YpredD", true_col = "YtrueD", 
-                       diff_col = "DiffD", result_col = "FTR", 
-                       threshold = 0.1, bet_amount = 100, simulations = 10000)
-# 🚌 Udebanesejr (A)
-monte_carlo_simulation(df = KNN, result_char = "A", 
-                       pred_col = "YpredA", true_col = "YtrueA", 
-                       diff_col = "DiffA", result_col = "FTR", 
-                       threshold = 0.1, bet_amount = 100, simulations = 10000)
-
-
-# 🔥 Hjemmesejr (H) med thresholds 0.05 og 0.07
-monte_carlo_simulation2(df = KNN, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
-                       diff_col = "DiffH", result_col = "FTR", 
-                       lower_threshold = 0.05, upper_threshold = 0.07, 
-                       bet_amount = 100, simulations = 10000)
 ```
 
 # RANDOM FOREST
@@ -380,153 +272,69 @@ monte_carlo_simulation2(df = KNN, result_char = "H",
 ```{r}
 # 🔥 Hjemmesejr (H)
 monte_carlo_simulation(df = RF, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
+                       pred_col = "YpredH", odds_col = "MaxHodds", 
                        diff_col = "DiffH", result_col = "FTR", 
                        threshold = 0.025, bet_amount = 100, simulations = 10000)
 # 🤝 Uafgjort (D)
 monte_carlo_simulation(df = RF, result_char = "D", 
-                       pred_col = "YpredD", true_col = "YtrueD", 
+                       pred_col = "YpredD", odds_col = "MaxDodds", 
                        diff_col = "DiffD", result_col = "FTR", 
                        threshold = 0.025, bet_amount = 100, simulations = 10000)
 # 🚌 Udebanesejr (A)
 monte_carlo_simulation(df = RF, result_char = "A", 
-                       pred_col = "YpredA", true_col = "YtrueA", 
+                       pred_col = "YpredA", odds_col = "MaxAodds", 
                        diff_col = "DiffA", result_col = "FTR", 
                        threshold = 0.025, bet_amount = 100, simulations = 10000)
 
 
 # 🔥 Hjemmesejr (H)
 monte_carlo_simulation(df = RF, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
+                       pred_col = "YpredH", odds_col = "MaxHodds", 
                        diff_col = "DiffH", result_col = "FTR", 
                        threshold = 0.05, bet_amount = 100, simulations = 10000)
 # 🤝 Uafgjort (D)
 monte_carlo_simulation(df = RF, result_char = "D", 
-                       pred_col = "YpredD", true_col = "YtrueD", 
+                       pred_col = "YpredD", odds_col = "MaxDodds", 
                        diff_col = "DiffD", result_col = "FTR", 
                        threshold = 0.05, bet_amount = 100, simulations = 10000)
 # 🚌 Udebanesejr (A)
 monte_carlo_simulation(df = RF, result_char = "A", 
-                       pred_col = "YpredA", true_col = "YtrueA", 
+                       pred_col = "YpredA", odds_col = "MaxAodds", 
                        diff_col = "DiffA", result_col = "FTR", 
                        threshold = 0.05, bet_amount = 100, simulations = 10000)
 
 # 🔥 Hjemmesejr (H)
 monte_carlo_simulation(df = RF, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
+                       pred_col = "YpredH", odds_col = "MaxHodds", 
                        diff_col = "DiffH", result_col = "FTR", 
                        threshold = 0.075, bet_amount = 100, simulations = 10000)
 # 🤝 Uafgjort (D)
 monte_carlo_simulation(df = RF, result_char = "D", 
-                       pred_col = "YpredD", true_col = "YtrueD", 
+                       pred_col = "YpredD", odds_col = "MaxDodds", 
                        diff_col = "DiffD", result_col = "FTR", 
                        threshold = 0.075, bet_amount = 100, simulations = 10000)
 # 🚌 Udebanesejr (A)
 monte_carlo_simulation(df = RF, result_char = "A", 
-                       pred_col = "YpredA", true_col = "YtrueA", 
+                       pred_col = "YpredA", odds_col = "MaxAodds", 
                        diff_col = "DiffA", result_col = "FTR", 
                        threshold = 0.075, bet_amount = 100, simulations = 10000)
 
 # 🔥 Hjemmesejr (H)
 monte_carlo_simulation(df = RF, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
+                       pred_col = "YpredH", odds_col = "MaxHodds", 
                        diff_col = "DiffH", result_col = "FTR", 
                        threshold = 0.1, bet_amount = 100, simulations = 10000)
 # 🤝 Uafgjort (D)
 monte_carlo_simulation(df = RF, result_char = "D", 
-                       pred_col = "YpredD", true_col = "YtrueD", 
+                       pred_col = "YpredD", odds_col = "MaxDodds", 
                        diff_col = "DiffD", result_col = "FTR", 
                        threshold = 0.1, bet_amount = 100, simulations = 10000)
 # 🚌 Udebanesejr (A)
 monte_carlo_simulation(df = RF, result_char = "A", 
-                       pred_col = "YpredA", true_col = "YtrueA", 
+                       pred_col = "YpredA", odds_col = "MaxAodds", 
                        diff_col = "DiffA", result_col = "FTR", 
                        threshold = 0.1, bet_amount = 100, simulations = 10000)
 
-
-# 🔥 Hjemmesejr (H) med thresholds 0.05 og 0.07
-monte_carlo_simulation2(df = RF, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
-                       diff_col = "DiffH", result_col = "FTR", 
-                       lower_threshold = 0.05, upper_threshold = 0.07, 
-                       bet_amount = 100, simulations = 10000)
-```
-
-# KNN-RF
-
-```{r}
-# 🔥 Hjemmesejr (H)
-monte_carlo_simulation(df = KNN_RF, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
-                       diff_col = "DiffH", result_col = "FTR", 
-                       threshold = 0.025, bet_amount = 100, simulations = 10000)
-# 🤝 Uafgjort (D)
-monte_carlo_simulation(df = KNN_RF, result_char = "D", 
-                       pred_col = "YpredD", true_col = "YtrueD", 
-                       diff_col = "DiffD", result_col = "FTR", 
-                       threshold = 0.025, bet_amount = 100, simulations = 10000)
-# 🚌 Udebanesejr (A)
-monte_carlo_simulation(df = KNN_RF, result_char = "A", 
-                       pred_col = "YpredA", true_col = "YtrueA", 
-                       diff_col = "DiffA", result_col = "FTR", 
-                       threshold = 0.025, bet_amount = 100, simulations = 10000)
-
-
-# 🔥 Hjemmesejr (H)
-monte_carlo_simulation(df = KNN_RF, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
-                       diff_col = "DiffH", result_col = "FTR", 
-                       threshold = 0.05, bet_amount = 100, simulations = 10000)
-# 🤝 Uafgjort (D)
-monte_carlo_simulation(df = KNN_RF, result_char = "D", 
-                       pred_col = "YpredD", true_col = "YtrueD", 
-                       diff_col = "DiffD", result_col = "FTR", 
-                       threshold = 0.05, bet_amount = 100, simulations = 10000)
-# 🚌 Udebanesejr (A)
-monte_carlo_simulation(df = KNN_RF, result_char = "A", 
-                       pred_col = "YpredA", true_col = "YtrueA", 
-                       diff_col = "DiffA", result_col = "FTR", 
-                       threshold = 0.05, bet_amount = 100, simulations = 10000)
-
-# 🔥 Hjemmesejr (H)
-monte_carlo_simulation(df = KNN_RF, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
-                       diff_col = "DiffH", result_col = "FTR", 
-                       threshold = 0.075, bet_amount = 100, simulations = 10000)
-# 🤝 Uafgjort (D)
-monte_carlo_simulation(df = KNN_RF, result_char = "D", 
-                       pred_col = "YpredD", true_col = "YtrueD", 
-                       diff_col = "DiffD", result_col = "FTR", 
-                       threshold = 0.075, bet_amount = 100, simulations = 10000)
-# 🚌 Udebanesejr (A)
-monte_carlo_simulation(df = KNN_RF, result_char = "A", 
-                       pred_col = "YpredA", true_col = "YtrueA", 
-                       diff_col = "DiffA", result_col = "FTR", 
-                       threshold = 0.075, bet_amount = 100, simulations = 10000)
-
-# 🔥 Hjemmesejr (H)
-monte_carlo_simulation(df = KNN_RF, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
-                       diff_col = "DiffH", result_col = "FTR", 
-                       threshold = 0.1, bet_amount = 100, simulations = 10000)
-# 🤝 Uafgjort (D)
-monte_carlo_simulation(df = KNN_RF, result_char = "D", 
-                       pred_col = "YpredD", true_col = "YtrueD", 
-                       diff_col = "DiffD", result_col = "FTR", 
-                       threshold = 0.1, bet_amount = 100, simulations = 10000)
-# 🚌 Udebanesejr (A)
-monte_carlo_simulation(df = KNN_RF, result_char = "A", 
-                       pred_col = "YpredA", true_col = "YtrueA", 
-                       diff_col = "DiffA", result_col = "FTR", 
-                       threshold = 0.1, bet_amount = 100, simulations = 10000)
-
-
-# 🔥 Hjemmesejr (H) med thresholds 0.05 og 0.07
-monte_carlo_simulation2(df = KNN_RF, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
-                       diff_col = "DiffH", result_col = "FTR", 
-                       lower_threshold = 0.05, upper_threshold = 0.07, 
-                       bet_amount = 100, simulations = 10000)
 ```
 
 # CatBoost
@@ -534,76 +342,69 @@ monte_carlo_simulation2(df = KNN_RF, result_char = "H",
 ```{r}
 # 🔥 Hjemmesejr (H)
 monte_carlo_simulation(df = CB, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
+                       pred_col = "YpredH", odds_col = "MaxHodds", 
                        diff_col = "DiffH", result_col = "FTR", 
                        threshold = 0.025, bet_amount = 100, simulations = 10000)
 # 🤝 Uafgjort (D)
 monte_carlo_simulation(df = CB, result_char = "D", 
-                       pred_col = "YpredD", true_col = "YtrueD", 
+                       pred_col = "YpredD", odds_col = "MaxDodds", 
                        diff_col = "DiffD", result_col = "FTR", 
                        threshold = 0.025, bet_amount = 100, simulations = 10000)
 # 🚌 Udebanesejr (A)
 monte_carlo_simulation(df = CB, result_char = "A", 
-                       pred_col = "YpredA", true_col = "YtrueA", 
+                       pred_col = "YpredA", odds_col = "MaxAodds", 
                        diff_col = "DiffA", result_col = "FTR", 
                        threshold = 0.025, bet_amount = 100, simulations = 10000)
 
 
 # 🔥 Hjemmesejr (H)
 monte_carlo_simulation(df = CB, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
+                       pred_col = "YpredH", odds_col = "MaxHodds", 
                        diff_col = "DiffH", result_col = "FTR", 
                        threshold = 0.05, bet_amount = 100, simulations = 10000)
 # 🤝 Uafgjort (D)
 monte_carlo_simulation(df = CB, result_char = "D", 
-                       pred_col = "YpredD", true_col = "YtrueD", 
+                       pred_col = "YpredD", odds_col = "MaxDodds", 
                        diff_col = "DiffD", result_col = "FTR", 
                        threshold = 0.05, bet_amount = 100, simulations = 10000)
 # 🚌 Udebanesejr (A)
 monte_carlo_simulation(df = CB, result_char = "A", 
-                       pred_col = "YpredA", true_col = "YtrueA", 
+                       pred_col = "YpredA", odds_col = "MaxAodds", 
                        diff_col = "DiffA", result_col = "FTR", 
                        threshold = 0.05, bet_amount = 100, simulations = 10000)
 
 # 🔥 Hjemmesejr (H)
 monte_carlo_simulation(df = CB, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
+                       pred_col = "YpredH", odds_col = "MaxHodds", 
                        diff_col = "DiffH", result_col = "FTR", 
                        threshold = 0.075, bet_amount = 100, simulations = 10000)
 # 🤝 Uafgjort (D)
 monte_carlo_simulation(df = CB, result_char = "D", 
-                       pred_col = "YpredD", true_col = "YtrueD", 
+                       pred_col = "YpredD", odds_col = "MaxDodds", 
                        diff_col = "DiffD", result_col = "FTR", 
                        threshold = 0.075, bet_amount = 100, simulations = 10000)
 # 🚌 Udebanesejr (A)
 monte_carlo_simulation(df = CB, result_char = "A", 
-                       pred_col = "YpredA", true_col = "YtrueA", 
+                       pred_col = "YpredA", odds_col = "MaxAodds", 
                        diff_col = "DiffA", result_col = "FTR", 
                        threshold = 0.075, bet_amount = 100, simulations = 10000)
 
 # 🔥 Hjemmesejr (H)
 monte_carlo_simulation(df = CB, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
+                       pred_col = "YpredH", odds_col = "MaxHodds", 
                        diff_col = "DiffH", result_col = "FTR", 
                        threshold = 0.1, bet_amount = 100, simulations = 10000)
 # 🤝 Uafgjort (D)
 monte_carlo_simulation(df = CB, result_char = "D", 
-                       pred_col = "YpredD", true_col = "YtrueD", 
+                       pred_col = "YpredD", odds_col = "MaxDodds", 
                        diff_col = "DiffD", result_col = "FTR", 
                        threshold = 0.1, bet_amount = 100, simulations = 10000)
 # 🚌 Udebanesejr (A)
 monte_carlo_simulation(df = CB, result_char = "A", 
-                       pred_col = "YpredA", true_col = "YtrueA", 
+                       pred_col = "YpredA", odds_col = "MaxAodds", 
                        diff_col = "DiffA", result_col = "FTR", 
                        threshold = 0.1, bet_amount = 100, simulations = 10000)
 
-
-# 🔥 Hjemmesejr (H) med thresholds 0.05 og 0.07
-monte_carlo_simulation2(df = CB, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
-                       diff_col = "DiffH", result_col = "FTR", 
-                       lower_threshold = 0.05, upper_threshold = 0.07, 
-                       bet_amount = 100, simulations = 10000)
 ```
 
 # LGBM
@@ -611,76 +412,70 @@ monte_carlo_simulation2(df = CB, result_char = "H",
 ```{r}
 # 🔥 Hjemmesejr (H)
 monte_carlo_simulation(df = LGBM, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
+                       pred_col = "YpredH", odds_col = "MaxHodds", 
                        diff_col = "DiffH", result_col = "FTR", 
                        threshold = 0.025, bet_amount = 100, simulations = 10000)
 # 🤝 Uafgjort (D)
 monte_carlo_simulation(df = LGBM, result_char = "D", 
-                       pred_col = "YpredD", true_col = "YtrueD", 
+                       pred_col = "YpredD", odds_col = "MaxDodds", 
                        diff_col = "DiffD", result_col = "FTR", 
                        threshold = 0.025, bet_amount = 100, simulations = 10000)
 # 🚌 Udebanesejr (A)
 monte_carlo_simulation(df = LGBM, result_char = "A", 
-                       pred_col = "YpredA", true_col = "YtrueA", 
+                       pred_col = "YpredA", odds_col = "MaxAodds", 
                        diff_col = "DiffA", result_col = "FTR", 
                        threshold = 0.025, bet_amount = 100, simulations = 10000)
 
 
 # 🔥 Hjemmesejr (H)
 monte_carlo_simulation(df = LGBM, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
+                       pred_col = "YpredH", odds_col = "MaxHodds", 
                        diff_col = "DiffH", result_col = "FTR", 
                        threshold = 0.05, bet_amount = 100, simulations = 10000)
 # 🤝 Uafgjort (D)
 monte_carlo_simulation(df = LGBM, result_char = "D", 
-                       pred_col = "YpredD", true_col = "YtrueD", 
+                       pred_col = "YpredD", odds_col = "MaxDodds", 
                        diff_col = "DiffD", result_col = "FTR", 
                        threshold = 0.05, bet_amount = 100, simulations = 10000)
 # 🚌 Udebanesejr (A)
 monte_carlo_simulation(df = LGBM, result_char = "A", 
-                       pred_col = "YpredA", true_col = "YtrueA", 
+                       pred_col = "YpredA", odds_col = "MaxAodds", 
                        diff_col = "DiffA", result_col = "FTR", 
                        threshold = 0.05, bet_amount = 100, simulations = 10000)
 
 # 🔥 Hjemmesejr (H)
 monte_carlo_simulation(df = LGBM, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
+                       pred_col = "YpredH", odds_col = "MaxHodds", 
                        diff_col = "DiffH", result_col = "FTR", 
                        threshold = 0.075, bet_amount = 100, simulations = 10000)
 # 🤝 Uafgjort (D)
 monte_carlo_simulation(df = LGBM, result_char = "D", 
-                       pred_col = "YpredD", true_col = "YtrueD", 
+                       pred_col = "YpredD", odds_col = "MaxDodds", 
                        diff_col = "DiffD", result_col = "FTR", 
                        threshold = 0.075, bet_amount = 100, simulations = 10000)
 # 🚌 Udebanesejr (A)
 monte_carlo_simulation(df = LGBM, result_char = "A", 
-                       pred_col = "YpredA", true_col = "YtrueA", 
+                       pred_col = "YpredA", odds_col = "MaxAodds", 
                        diff_col = "DiffA", result_col = "FTR", 
                        threshold = 0.075, bet_amount = 100, simulations = 10000)
 
 # 🔥 Hjemmesejr (H)
 monte_carlo_simulation(df = LGBM, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
+                       pred_col = "YpredH", odds_col = "MaxHodds", 
                        diff_col = "DiffH", result_col = "FTR", 
                        threshold = 0.1, bet_amount = 100, simulations = 10000)
 # 🤝 Uafgjort (D)
 monte_carlo_simulation(df = LGBM, result_char = "D", 
-                       pred_col = "YpredD", true_col = "YtrueD", 
+                       pred_col = "YpredD", odds_col = "MaxDodds", 
                        diff_col = "DiffD", result_col = "FTR", 
                        threshold = 0.1, bet_amount = 100, simulations = 10000)
 # 🚌 Udebanesejr (A)
 monte_carlo_simulation(df = LGBM, result_char = "A", 
-                       pred_col = "YpredA", true_col = "YtrueA", 
+                       pred_col = "YpredA", odds_col = "MaxAodds", 
                        diff_col = "DiffA", result_col = "FTR", 
                        threshold = 0.1, bet_amount = 100, simulations = 10000)
 
 
-# 🔥 Hjemmesejr (H) med thresholds 0.05 og 0.07
-monte_carlo_simulation2(df = LGBM, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
-                       diff_col = "DiffH", result_col = "FTR", 
-                       lower_threshold = 0.05, upper_threshold = 0.07, 
-                       bet_amount = 100, simulations = 10000)
 ```
 
 # XGBoost
@@ -688,153 +483,64 @@ monte_carlo_simulation2(df = LGBM, result_char = "H",
 ```{r}
 # 🔥 Hjemmesejr (H)
 monte_carlo_simulation(df = XGB, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
+                       pred_col = "YpredH", odds_col = "MaxHodds", 
                        diff_col = "DiffH", result_col = "FTR", 
                        threshold = 0.025, bet_amount = 100, simulations = 10000)
 # 🤝 Uafgjort (D)
 monte_carlo_simulation(df = XGB, result_char = "D", 
-                       pred_col = "YpredD", true_col = "YtrueD", 
+                       pred_col = "YpredD", odds_col = "MaxDodds", 
                        diff_col = "DiffD", result_col = "FTR", 
                        threshold = 0.025, bet_amount = 100, simulations = 10000)
 # 🚌 Udebanesejr (A)
 monte_carlo_simulation(df = XGB, result_char = "A", 
-                       pred_col = "YpredA", true_col = "YtrueA", 
+                       pred_col = "YpredA", odds_col = "MaxAodds", 
                        diff_col = "DiffA", result_col = "FTR", 
                        threshold = 0.025, bet_amount = 100, simulations = 10000)
 
 
 # 🔥 Hjemmesejr (H)
 monte_carlo_simulation(df = XGB, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
+                       pred_col = "YpredH", odds_col = "MaxHodds", 
                        diff_col = "DiffH", result_col = "FTR", 
                        threshold = 0.05, bet_amount = 100, simulations = 10000)
 # 🤝 Uafgjort (D)
 monte_carlo_simulation(df = XGB, result_char = "D", 
-                       pred_col = "YpredD", true_col = "YtrueD", 
+                       pred_col = "YpredD", odds_col = "MaxDodds", 
                        diff_col = "DiffD", result_col = "FTR", 
                        threshold = 0.05, bet_amount = 100, simulations = 10000)
 # 🚌 Udebanesejr (A)
 monte_carlo_simulation(df = XGB, result_char = "A", 
-                       pred_col = "YpredA", true_col = "YtrueA", 
+                       pred_col = "YpredA", odds_col = "MaxAodds", 
                        diff_col = "DiffA", result_col = "FTR", 
                        threshold = 0.05, bet_amount = 100, simulations = 10000)
 
 # 🔥 Hjemmesejr (H)
 monte_carlo_simulation(df = XGB, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
+                       pred_col = "YpredH", odds_col = "MaxHodds", 
                        diff_col = "DiffH", result_col = "FTR", 
                        threshold = 0.075, bet_amount = 100, simulations = 10000)
 # 🤝 Uafgjort (D)
 monte_carlo_simulation(df = XGB, result_char = "D", 
-                       pred_col = "YpredD", true_col = "YtrueD", 
+                       pred_col = "YpredD", odds_col = "MaxDodds", 
                        diff_col = "DiffD", result_col = "FTR", 
                        threshold = 0.075, bet_amount = 100, simulations = 10000)
 # 🚌 Udebanesejr (A)
 monte_carlo_simulation(df = XGB, result_char = "A", 
-                       pred_col = "YpredA", true_col = "YtrueA", 
+                       pred_col = "YpredA", odds_col = "MaxAodds", 
                        diff_col = "DiffA", result_col = "FTR", 
                        threshold = 0.075, bet_amount = 100, simulations = 10000)
 
 # 🔥 Hjemmesejr (H)
 monte_carlo_simulation(df = XGB, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
+                       pred_col = "YpredH", odds_col = "MaxHodds", 
                        diff_col = "DiffH", result_col = "FTR", 
                        threshold = 0.1, bet_amount = 100, simulations = 10000)
 # 🤝 Uafgjort (D)
 monte_carlo_simulation(df = XGB, result_char = "D", 
-                       pred_col = "YpredD", true_col = "YtrueD", 
+                       pred_col = "YpredD", odds_col = "MaxDodds", 
                        diff_col = "DiffD", result_col = "FTR", 
                        threshold = 0.1, bet_amount = 100, simulations = 10000)
-# 🚌 Udebanesejr (A)
-monte_carlo_simulation(df = XGB, result_char = "A", 
-                       pred_col = "YpredA", true_col = "YtrueA", 
-                       diff_col = "DiffA", result_col = "FTR", 
-                       threshold = 0.1, bet_amount = 100, simulations = 10000)
 
-
-# 🔥 Hjemmesejr (H) med thresholds 0.05 og 0.07
-monte_carlo_simulation2(df = XGB, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
-                       diff_col = "DiffH", result_col = "FTR", 
-                       lower_threshold = 0.05, upper_threshold = 0.07, 
-                       bet_amount = 100, simulations = 10000)
-```
-
-# Gradient Ensemble
-
-```{r}
-# 🔥 Hjemmesejr (H)
-monte_carlo_simulation(df = GE, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
-                       diff_col = "DiffH", result_col = "FTR", 
-                       threshold = 0.025, bet_amount = 100, simulations = 10000)
-# 🤝 Uafgjort (D)
-monte_carlo_simulation(df = GE, result_char = "D", 
-                       pred_col = "YpredD", true_col = "YtrueD", 
-                       diff_col = "DiffD", result_col = "FTR", 
-                       threshold = 0.025, bet_amount = 100, simulations = 10000)
-# 🚌 Udebanesejr (A)
-monte_carlo_simulation(df = GE, result_char = "A", 
-                       pred_col = "YpredA", true_col = "YtrueA", 
-                       diff_col = "DiffA", result_col = "FTR", 
-                       threshold = 0.025, bet_amount = 100, simulations = 10000)
-
-
-# 🔥 Hjemmesejr (H)
-monte_carlo_simulation(df = GE, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
-                       diff_col = "DiffH", result_col = "FTR", 
-                       threshold = 0.05, bet_amount = 100, simulations = 10000)
-# 🤝 Uafgjort (D)
-monte_carlo_simulation(df = GE, result_char = "D", 
-                       pred_col = "YpredD", true_col = "YtrueD", 
-                       diff_col = "DiffD", result_col = "FTR", 
-                       threshold = 0.05, bet_amount = 100, simulations = 10000)
-# 🚌 Udebanesejr (A)
-monte_carlo_simulation(df = GE, result_char = "A", 
-                       pred_col = "YpredA", true_col = "YtrueA", 
-                       diff_col = "DiffA", result_col = "FTR", 
-                       threshold = 0.05, bet_amount = 100, simulations = 10000)
-
-# 🔥 Hjemmesejr (H)
-monte_carlo_simulation(df = GE, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
-                       diff_col = "DiffH", result_col = "FTR", 
-                       threshold = 0.075, bet_amount = 100, simulations = 10000)
-# 🤝 Uafgjort (D)
-monte_carlo_simulation(df = GE, result_char = "D", 
-                       pred_col = "YpredD", true_col = "YtrueD", 
-                       diff_col = "DiffD", result_col = "FTR", 
-                       threshold = 0.075, bet_amount = 100, simulations = 10000)
-# 🚌 Udebanesejr (A)
-monte_carlo_simulation(df = GE, result_char = "A", 
-                       pred_col = "YpredA", true_col = "YtrueA", 
-                       diff_col = "DiffA", result_col = "FTR", 
-                       threshold = 0.075, bet_amount = 100, simulations = 10000)
-
-# 🔥 Hjemmesejr (H)
-monte_carlo_simulation(df = GE, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
-                       diff_col = "DiffH", result_col = "FTR", 
-                       threshold = 0.1, bet_amount = 100, simulations = 10000)
-# 🤝 Uafgjort (D)
-monte_carlo_simulation(df = GE, result_char = "D", 
-                       pred_col = "YpredD", true_col = "YtrueD", 
-                       diff_col = "DiffD", result_col = "FTR", 
-                       threshold = 0.1, bet_amount = 100, simulations = 10000)
-# 🚌 Udebanesejr (A)
-monte_carlo_simulation(df = GE, result_char = "A", 
-                       pred_col = "YpredA", true_col = "YtrueA", 
-                       diff_col = "DiffA", result_col = "FTR", 
-                       threshold = 0.1, bet_amount = 100, simulations = 10000)
-
-
-# 🔥 Hjemmesejr (H) med thresholds 0.05 og 0.07
-monte_carlo_simulation2(df = GE, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
-                       diff_col = "DiffH", result_col = "FTR", 
-                       lower_threshold = 0.05, upper_threshold = 0.07, 
-                       bet_amount = 100, simulations = 10000)
 ```
 
 # BUNDESLIGA NEURALT NETVÆRK
@@ -842,76 +548,69 @@ monte_carlo_simulation2(df = GE, result_char = "H",
 ```{r}
 # 🔥 Hjemmesejr (H)
 monte_carlo_simulation(df = TNN, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
+                       pred_col = "YpredH", odds_col = "MaxHodds", 
                        diff_col = "DiffH", result_col = "FTR", 
                        threshold = 0.025, bet_amount = 100, simulations = 10000)
 # 🤝 Uafgjort (D)
 monte_carlo_simulation(df = TNN, result_char = "D", 
-                       pred_col = "YpredD", true_col = "YtrueD", 
+                       pred_col = "YpredD", odds_col = "MaxDodds", 
                        diff_col = "DiffD", result_col = "FTR", 
                        threshold = 0.025, bet_amount = 100, simulations = 10000)
 # 🚌 Udebanesejr (A)
 monte_carlo_simulation(df = TNN, result_char = "A", 
-                       pred_col = "YpredA", true_col = "YtrueA", 
+                       pred_col = "YpredA", odds_col = "MaxAodds", 
                        diff_col = "DiffA", result_col = "FTR", 
                        threshold = 0.025, bet_amount = 100, simulations = 10000)
 
 
 # 🔥 Hjemmesejr (H)
 monte_carlo_simulation(df = TNN, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
+                       pred_col = "YpredH", odds_col = "MaxHodds", 
                        diff_col = "DiffH", result_col = "FTR", 
                        threshold = 0.05, bet_amount = 100, simulations = 10000)
 # 🤝 Uafgjort (D)
 monte_carlo_simulation(df = TNN, result_char = "D", 
-                       pred_col = "YpredD", true_col = "YtrueD", 
+                       pred_col = "YpredD", odds_col = "MaxDodds", 
                        diff_col = "DiffD", result_col = "FTR", 
                        threshold = 0.05, bet_amount = 100, simulations = 10000)
 # 🚌 Udebanesejr (A)
 monte_carlo_simulation(df = TNN, result_char = "A", 
-                       pred_col = "YpredA", true_col = "YtrueA", 
+                       pred_col = "YpredA", odds_col = "MaxAodds", 
                        diff_col = "DiffA", result_col = "FTR", 
                        threshold = 0.05, bet_amount = 100, simulations = 10000)
 
 # 🔥 Hjemmesejr (H)
 monte_carlo_simulation(df = TNN, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
+                       pred_col = "YpredH", odds_col = "MaxHodds", 
                        diff_col = "DiffH", result_col = "FTR", 
                        threshold = 0.075, bet_amount = 100, simulations = 10000)
 # 🤝 Uafgjort (D)
 monte_carlo_simulation(df = TNN, result_char = "D", 
-                       pred_col = "YpredD", true_col = "YtrueD", 
+                       pred_col = "YpredD", odds_col = "MaxDodds", 
                        diff_col = "DiffD", result_col = "FTR", 
                        threshold = 0.075, bet_amount = 100, simulations = 10000)
 # 🚌 Udebanesejr (A)
 monte_carlo_simulation(df = TNN, result_char = "A", 
-                       pred_col = "YpredA", true_col = "YtrueA", 
+                       pred_col = "YpredA", odds_col = "MaxAodds", 
                        diff_col = "DiffA", result_col = "FTR", 
                        threshold = 0.075, bet_amount = 100, simulations = 10000)
 
 # 🔥 Hjemmesejr (H)
 monte_carlo_simulation(df = TNN, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
+                       pred_col = "YpredH", odds_col = "MaxHodds", 
                        diff_col = "DiffH", result_col = "FTR", 
                        threshold = 0.1, bet_amount = 100, simulations = 10000)
 # 🤝 Uafgjort (D)
 monte_carlo_simulation(df = TNN, result_char = "D", 
-                       pred_col = "YpredD", true_col = "YtrueD", 
+                       pred_col = "YpredD", odds_col = "MaxDodds", 
                        diff_col = "DiffD", result_col = "FTR", 
                        threshold = 0.1, bet_amount = 100, simulations = 10000)
 # 🚌 Udebanesejr (A)
 monte_carlo_simulation(df = TNN, result_char = "A", 
-                       pred_col = "YpredA", true_col = "YtrueA", 
+                       pred_col = "YpredA", odds_col = "MaxAodds", 
                        diff_col = "DiffA", result_col = "FTR", 
                        threshold = 0.1, bet_amount = 100, simulations = 10000)
 
-
-# 🔥 Hjemmesejr (H) med thresholds 0.05 og 0.07
-monte_carlo_simulation2(df = TNN, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
-                       diff_col = "DiffH", result_col = "FTR", 
-                       lower_threshold = 0.05, upper_threshold = 0.07, 
-                       bet_amount = 100, simulations = 10000)
 ```
 
 # BUNDESLIGA LOGISTISK REGRESSION
@@ -919,76 +618,69 @@ monte_carlo_simulation2(df = TNN, result_char = "H",
 ```{r}
 # 🔥 Hjemmesejr (H)
 monte_carlo_simulation(df = TLR, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
+                       pred_col = "YpredH", odds_col = "MaxHodds", 
                        diff_col = "DiffH", result_col = "FTR", 
                        threshold = 0.025, bet_amount = 100, simulations = 10000)
 # 🤝 Uafgjort (D)
 monte_carlo_simulation(df = TLR, result_char = "D", 
-                       pred_col = "YpredD", true_col = "YtrueD", 
+                       pred_col = "YpredD", odds_col = "MaxDodds", 
                        diff_col = "DiffD", result_col = "FTR", 
                        threshold = 0.025, bet_amount = 100, simulations = 10000)
 # 🚌 Udebanesejr (A)
 monte_carlo_simulation(df = TLR, result_char = "A", 
-                       pred_col = "YpredA", true_col = "YtrueA", 
+                       pred_col = "YpredA", odds_col = "MaxAodds", 
                        diff_col = "DiffA", result_col = "FTR", 
                        threshold = 0.025, bet_amount = 100, simulations = 10000)
 
 
 # 🔥 Hjemmesejr (H)
 monte_carlo_simulation(df = TLR, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
+                       pred_col = "YpredH", odds_col = "MaxHodds", 
                        diff_col = "DiffH", result_col = "FTR", 
                        threshold = 0.05, bet_amount = 100, simulations = 10000)
 # 🤝 Uafgjort (D)
 monte_carlo_simulation(df = TLR, result_char = "D", 
-                       pred_col = "YpredD", true_col = "YtrueD", 
+                       pred_col = "YpredD", odds_col = "MaxDodds", 
                        diff_col = "DiffD", result_col = "FTR", 
                        threshold = 0.05, bet_amount = 100, simulations = 10000)
 # 🚌 Udebanesejr (A)
 monte_carlo_simulation(df = TLR, result_char = "A", 
-                       pred_col = "YpredA", true_col = "YtrueA", 
+                       pred_col = "YpredA", odds_col = "MaxAodds", 
                        diff_col = "DiffA", result_col = "FTR", 
                        threshold = 0.05, bet_amount = 100, simulations = 10000)
 
 # 🔥 Hjemmesejr (H)
 monte_carlo_simulation(df = TLR, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
+                       pred_col = "YpredH", odds_col = "MaxHodds", 
                        diff_col = "DiffH", result_col = "FTR", 
                        threshold = 0.075, bet_amount = 100, simulations = 10000)
 # 🤝 Uafgjort (D)
 monte_carlo_simulation(df = TLR, result_char = "D", 
-                       pred_col = "YpredD", true_col = "YtrueD", 
+                       pred_col = "YpredD", odds_col = "MaxDodds", 
                        diff_col = "DiffD", result_col = "FTR", 
                        threshold = 0.075, bet_amount = 100, simulations = 10000)
 # 🚌 Udebanesejr (A)
 monte_carlo_simulation(df = TLR, result_char = "A", 
-                       pred_col = "YpredA", true_col = "YtrueA", 
+                       pred_col = "YpredA", odds_col = "MaxAodds", 
                        diff_col = "DiffA", result_col = "FTR", 
                        threshold = 0.075, bet_amount = 100, simulations = 10000)
 
 # 🔥 Hjemmesejr (H)
 monte_carlo_simulation(df = TLR, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
+                       pred_col = "YpredH", odds_col = "MaxHodds", 
                        diff_col = "DiffH", result_col = "FTR", 
                        threshold = 0.1, bet_amount = 100, simulations = 10000)
 # 🤝 Uafgjort (D)
 monte_carlo_simulation(df = TLR, result_char = "D", 
-                       pred_col = "YpredD", true_col = "YtrueD", 
+                       pred_col = "YpredD", odds_col = "MaxDodds", 
                        diff_col = "DiffD", result_col = "FTR", 
                        threshold = 0.1, bet_amount = 100, simulations = 10000)
 # 🚌 Udebanesejr (A)
 monte_carlo_simulation(df = TLR, result_char = "A", 
-                       pred_col = "YpredA", true_col = "YtrueA", 
+                       pred_col = "YpredA", odds_col = "MaxAodds", 
                        diff_col = "DiffA", result_col = "FTR", 
                        threshold = 0.1, bet_amount = 100, simulations = 10000)
 
-
-# 🔥 Hjemmesejr (H) med thresholds 0.05 og 0.07
-monte_carlo_simulation2(df = TLR, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
-                       diff_col = "DiffH", result_col = "FTR", 
-                       lower_threshold = 0.05, upper_threshold = 0.07, 
-                       bet_amount = 100, simulations = 10000)
 ```
 
 # BUNDESLIGA CAT BOOST
@@ -996,74 +688,67 @@ monte_carlo_simulation2(df = TLR, result_char = "H",
 ```{r}
 # 🔥 Hjemmesejr (H)
 monte_carlo_simulation(df = TCB, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
+                       pred_col = "YpredH", odds_col = "MaxHodds", 
                        diff_col = "DiffH", result_col = "FTR", 
                        threshold = 0.025, bet_amount = 100, simulations = 10000)
 # 🤝 Uafgjort (D)
 monte_carlo_simulation(df = TCB, result_char = "D", 
-                       pred_col = "YpredD", true_col = "YtrueD", 
+                       pred_col = "YpredD", odds_col = "MaxDodds", 
                        diff_col = "DiffD", result_col = "FTR", 
                        threshold = 0.025, bet_amount = 100, simulations = 10000)
 # 🚌 Udebanesejr (A)
 monte_carlo_simulation(df = TCB, result_char = "A", 
-                       pred_col = "YpredA", true_col = "YtrueA", 
+                       pred_col = "YpredA", odds_col = "MaxAodds", 
                        diff_col = "DiffA", result_col = "FTR", 
                        threshold = 0.025, bet_amount = 100, simulations = 10000)
 
 
 # 🔥 Hjemmesejr (H)
 monte_carlo_simulation(df = TCB, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
+                       pred_col = "YpredH", odds_col = "MaxHodds", 
                        diff_col = "DiffH", result_col = "FTR", 
                        threshold = 0.05, bet_amount = 100, simulations = 10000)
 # 🤝 Uafgjort (D)
 monte_carlo_simulation(df = TCB, result_char = "D", 
-                       pred_col = "YpredD", true_col = "YtrueD", 
+                       pred_col = "YpredD", odds_col = "MaxDodds", 
                        diff_col = "DiffD", result_col = "FTR", 
                        threshold = 0.05, bet_amount = 100, simulations = 10000)
 # 🚌 Udebanesejr (A)
 monte_carlo_simulation(df = TCB, result_char = "A", 
-                       pred_col = "YpredA", true_col = "YtrueA", 
+                       pred_col = "YpredA", odds_col = "MaxAodds", 
                        diff_col = "DiffA", result_col = "FTR", 
                        threshold = 0.05, bet_amount = 100, simulations = 10000)
 
 # 🔥 Hjemmesejr (H)
 monte_carlo_simulation(df = TCB, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
+                       pred_col = "YpredH", odds_col = "MaxHodds", 
                        diff_col = "DiffH", result_col = "FTR", 
                        threshold = 0.075, bet_amount = 100, simulations = 10000)
 # 🤝 Uafgjort (D)
 monte_carlo_simulation(df = TCB, result_char = "D", 
-                       pred_col = "YpredD", true_col = "YtrueD", 
+                       pred_col = "YpredD", odds_col = "MaxDodds", 
                        diff_col = "DiffD", result_col = "FTR", 
                        threshold = 0.075, bet_amount = 100, simulations = 10000)
 # 🚌 Udebanesejr (A)
 monte_carlo_simulation(df = TCB, result_char = "A", 
-                       pred_col = "YpredA", true_col = "YtrueA", 
+                       pred_col = "YpredA", odds_col = "MaxAodds", 
                        diff_col = "DiffA", result_col = "FTR", 
                        threshold = 0.075, bet_amount = 100, simulations = 10000)
 
 # 🔥 Hjemmesejr (H)
 monte_carlo_simulation(df = TCB, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
+                       pred_col = "YpredH", odds_col = "MaxHodds", 
                        diff_col = "DiffH", result_col = "FTR", 
                        threshold = 0.1, bet_amount = 100, simulations = 10000)
 # 🤝 Uafgjort (D)
 monte_carlo_simulation(df = TCB, result_char = "D", 
-                       pred_col = "YpredD", true_col = "YtrueD", 
+                       pred_col = "YpredD", odds_col = "MaxDodds", 
                        diff_col = "DiffD", result_col = "FTR", 
                        threshold = 0.1, bet_amount = 100, simulations = 10000)
 # 🚌 Udebanesejr (A)
 monte_carlo_simulation(df = TCB, result_char = "A", 
-                       pred_col = "YpredA", true_col = "YtrueA", 
+                       pred_col = "YpredA", odds_col = "MaxAodds", 
                        diff_col = "DiffA", result_col = "FTR", 
                        threshold = 0.1, bet_amount = 100, simulations = 10000)
 
-
-# 🔥 Hjemmesejr (H) med thresholds 0.05 og 0.07
-monte_carlo_simulation2(df = TCB, result_char = "H", 
-                       pred_col = "YpredH", true_col = "YtrueH", 
-                       diff_col = "DiffH", result_col = "FTR", 
-                       lower_threshold = 0.05, upper_threshold = 0.07, 
-                       bet_amount = 100, simulations = 10000)
 ```

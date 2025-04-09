@@ -25,6 +25,16 @@ class methods:
         plt.legend()
         plt.show()
 
+    def plot_histogram2(self, Y_pred_proba, classes, colors):
+        plt.figure(figsize=(10, 6))
+        for i, cls in enumerate(classes):
+            plt.hist(Y_pred_proba[:, i], bins=20, alpha=0.5, label=f"Forudsagt: {cls}", color=colors[i])
+        plt.title("Fordeling af faktiske sandsynligheder pr. klasse")
+        plt.xlabel("Sandsynlighed")
+        plt.ylabel("Antal kampe")
+        plt.legend()
+        plt.show()
+
     def plot_comparison(self, Y_pred_proba, Y_test, classes, colors):
         plt.figure(figsize=(12, 6))
         x = np.arange(10)

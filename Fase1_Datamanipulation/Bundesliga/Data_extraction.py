@@ -34,6 +34,18 @@ AwayWinProb = pd.read_excel("Fase1_Datamanipulation/Bundesliga/tyske_kampe_scrap
 y = np.hstack((HomeWinProb.to_numpy(), DrawProb.to_numpy(), AwayWinProb.to_numpy()))
 Y = normalize_odds_to_probabilities(y)
 
+#I den her korte del finder jeg det største odds på hvert udfald i hver kamp (bruges til monte-carlo simulering)
+HomeOdds = pd.read_excel("Fase1_Datamanipulation/Bundesliga/tyske_kampe_scrapped.xlsx", usecols=["B365H","BWH","GBH"])
+DrawOdds = pd.read_excel("Fase1_Datamanipulation/Bundesliga/tyske_kampe_scrapped.xlsx", usecols=["B365D","BWD","GBD"])
+AwayOdds = pd.read_excel("Fase1_Datamanipulation/Bundesliga/tyske_kampe_scrapped.xlsx", usecols=["B365A","BWA","GBA"])
+
+#Find største værdi i hver række for hver DataFrame
+HomeMax = HomeOdds.max(axis=1)
+DrawMax = DrawOdds.max(axis=1)
+AwayMax = AwayOdds.max(axis=1)
+
+# Sammenlæg alle odds i én DataFrame
+AllOdds = pd.concat([HomeMax, DrawMax, AwayMax], axis=1)
 
 #X DELEN
 # Læs kun relevante kolonner fra Excel-arket
@@ -142,6 +154,6 @@ Y_cleaned.to_excel("Fase1_Datamanipulation/Bundesliga/tyske_processed_output_lab
 # Læs kun relevante kolonner fra Excel-arket
 columns_to_use = ["Date", "HomeTeam", "AwayTeam","FTR"]
 matches = pd.read_excel("Fase1_Datamanipulation/Bundesliga/tyske_kampe_scrapped.xlsx", usecols=columns_to_use)
-match_results= pd.concat([matches.drop(index=rows_with_nan), final_df.drop(index=rows_with_nan)], axis=1)
+match_results= pd.concat([matches.drop(index=rows_with_nan), final_df.drop(index=rows_with_nan),  AllOdds.drop(index=rows_with_nan)], axis=1)
 
 match_results.to_excel("Fase1_Datamanipulation/Bundesliga/tyske_match_results.xlsx", index=False)
