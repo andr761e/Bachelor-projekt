@@ -48,8 +48,6 @@ probs_combined = np.column_stack([probs_home, probs_draw, probs_away])
 
 #Prediction
 Y_pred_proba = met.direct_normalization(probs_combined)
-#Alternativ
-#Y_pred_proba = softmax(probs_combined, axis=1)  # Softmax sikrer, at hver række summer til 1
 
 #Kalibrering
 Y_pred_proba = met.polynomial_calibration(Y_pred_proba, Y_test, degree=3)
