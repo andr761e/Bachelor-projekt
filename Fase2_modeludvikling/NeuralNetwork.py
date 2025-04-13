@@ -1,5 +1,7 @@
 import numpy as np
 import pandas as pd
+import os
+import random
 import tensorflow as tf
 from tensorflow import keras
 from sklearn.model_selection import train_test_split
@@ -7,6 +9,15 @@ from sklearn.metrics import log_loss
 import matplotlib.pyplot as plt
 from Methods import methods
 met = methods()
+
+# Sæt seeds for fuld reproducerbarhed
+os.environ['PYTHONHASHSEED'] = str(42)
+random.seed(42)
+np.random.seed(42)
+tf.random.set_seed(42)
+
+# (valgfrit, men godt): Tving determinisme i TensorFlow
+os.environ['TF_DETERMINISTIC_OPS'] = '1'
 
 # Indlæs data
 X = pd.read_excel("Fase1_Datamanipulation/processed_input_data.xlsx").to_numpy()

@@ -1,215 +1,215 @@
  Resultat: H 
 Threshold: 0.025 
-Antal kampe opfylder threshold: 476 
-Gennemsnitlig profit pr. simulation: -191.2339 DKK
-Median profit pr. simulation: -233 DKK
-Varians af profit pr. simulation: 10985055 DKK^2
-Andel af simulationer med overskud: 47.21 %
+Antal kampe opfylder threshold: 514 
+Gennemsnitlig profit pr. simulation: -336.1972 DKK
+Median profit pr. simulation: -372 DKK
+Varians af profit pr. simulation: 12777581 DKK^2
+Andel af simulationer med overskud: 45.69 %
 
 --- Hoeffding og Binomial Analyse ---
-Gennemsnitlig profit per kamp: -0.4 kr
+Gennemsnitlig profit per kamp: -0.65 kr
 
  Vi er 95% sikre på følgende profit eller mere -> 
-Hoeffding epsilon (95%): 21.34 kr
-Nedre 95% grænse for forventet profit: -21.74 kr
+Hoeffding epsilon (95%): 21.62 kr
+Nedre 95% grænse for forventet profit: -22.27 kr
 
  Med hvilken sandsynlighed får vi profit per bet på 0kr eller mere -> 
 Nødvendig delta for at sikre at mu >= 0: 0 % 
 -------------------------------------------------------------------
  Resultat: D 
 Threshold: 0.025 
-Antal kampe opfylder threshold: 436 
-Gennemsnitlig profit pr. simulation: 826.5623 DKK
-Median profit pr. simulation: 750.5 DKK
-Varians af profit pr. simulation: 20363852 DKK^2
-Andel af simulationer med overskud: 56.47 %
+Antal kampe opfylder threshold: 486 
+Gennemsnitlig profit pr. simulation: -1091.297 DKK
+Median profit pr. simulation: -1180.5 DKK
+Varians af profit pr. simulation: 21616525 DKK^2
+Andel af simulationer med overskud: 39.97 %
 
 --- Hoeffding og Binomial Analyse ---
-Gennemsnitlig profit per kamp: 1.9 kr
+Gennemsnitlig profit per kamp: -2.25 kr
 
  Vi er 95% sikre på følgende profit eller mere -> 
-Hoeffding epsilon (95%): 32.71 kr
-Nedre 95% grænse for forventet profit: -30.81 kr
+Hoeffding epsilon (95%): 31.09 kr
+Nedre 95% grænse for forventet profit: -33.34 kr
 
  Med hvilken sandsynlighed får vi profit per bet på 0kr eller mere -> 
-Nødvendig delta for at sikre at mu >= 0: 1.0015 % 
+Nødvendig delta for at sikre at mu >= 0: 0 % 
 -------------------------------------------------------------------
  Resultat: A 
 Threshold: 0.025 
-Antal kampe opfylder threshold: 509 
-Gennemsnitlig profit pr. simulation: 4661.392 DKK
-Median profit pr. simulation: 4618.5 DKK
-Varians af profit pr. simulation: 17801206 DKK^2
-Andel af simulationer med overskud: 86.62 %
+Antal kampe opfylder threshold: 490 
+Gennemsnitlig profit pr. simulation: 4242.161 DKK
+Median profit pr. simulation: 4118 DKK
+Varians af profit pr. simulation: 21243656 DKK^2
+Andel af simulationer med overskud: 82.12 %
 
 --- Hoeffding og Binomial Analyse ---
-Gennemsnitlig profit per kamp: 9.16 kr
+Gennemsnitlig profit per kamp: 8.66 kr
 
  Vi er 95% sikre på følgende profit eller mere -> 
-Hoeffding epsilon (95%): 27.47 kr
-Nedre 95% grænse for forventet profit: -18.31 kr
+Hoeffding epsilon (95%): 32.03 kr
+Nedre 95% grænse for forventet profit: -23.37 kr
 
  Med hvilken sandsynlighed får vi profit per bet på 0kr eller mere -> 
-Nødvendig delta for at sikre at mu >= 0: 28.3182 % 
+Nødvendig delta for at sikre at mu >= 0: 19.6579 % 
 -------------------------------------------------------------------
  Resultat: H 
 Threshold: 0.05 
-Antal kampe opfylder threshold: 324 
-Gennemsnitlig profit pr. simulation: 1730.62 DKK
-Median profit pr. simulation: 1692.5 DKK
-Varians af profit pr. simulation: 7048235 DKK^2
-Andel af simulationer med overskud: 74.18 %
+Antal kampe opfylder threshold: 335 
+Gennemsnitlig profit pr. simulation: 1963.873 DKK
+Median profit pr. simulation: 1927 DKK
+Varians af profit pr. simulation: 8820185 DKK^2
+Andel af simulationer med overskud: 74.31 %
 
 --- Hoeffding og Binomial Analyse ---
-Gennemsnitlig profit per kamp: 5.34 kr
+Gennemsnitlig profit per kamp: 5.86 kr
 
  Vi er 95% sikre på følgende profit eller mere -> 
-Hoeffding epsilon (95%): 23.68 kr
-Nedre 95% grænse for forventet profit: -18.34 kr
+Hoeffding epsilon (95%): 25.45 kr
+Nedre 95% grænse for forventet profit: -19.59 kr
 
  Med hvilken sandsynlighed får vi profit per bet på 0kr eller mere -> 
-Nødvendig delta for at sikre at mu >= 0: 14.1334 % 
+Nødvendig delta for at sikre at mu >= 0: 14.695 % 
 -------------------------------------------------------------------
  Resultat: D 
 Threshold: 0.05 
 Antal kampe opfylder threshold: 129 
-Gennemsnitlig profit pr. simulation: 78.3535 DKK
-Median profit pr. simulation: 14 DKK
-Varians af profit pr. simulation: 6076673 DKK^2
-Andel af simulationer med overskud: 50.21 %
+Gennemsnitlig profit pr. simulation: 3057.652 DKK
+Median profit pr. simulation: 2974 DKK
+Varians af profit pr. simulation: 8248685 DKK^2
+Andel af simulationer med overskud: 85.84 %
 
 --- Hoeffding og Binomial Analyse ---
-Gennemsnitlig profit per kamp: 0.61 kr
+Gennemsnitlig profit per kamp: 23.7 kr
 
  Vi er 95% sikre på følgende profit eller mere -> 
-Hoeffding epsilon (95%): 68.7 kr
-Nedre 95% grænse for forventet profit: -68.09 kr
+Hoeffding epsilon (95%): 71.05 kr
+Nedre 95% grænse for forventet profit: -47.34 kr
 
  Med hvilken sandsynlighed får vi profit per bet på 0kr eller mere -> 
-Nødvendig delta for at sikre at mu >= 0: 0.0234 % 
+Nødvendig delta for at sikre at mu >= 0: 28.3539 % 
 -------------------------------------------------------------------
  Resultat: A 
 Threshold: 0.05 
-Antal kampe opfylder threshold: 329 
-Gennemsnitlig profit pr. simulation: 2919.324 DKK
-Median profit pr. simulation: 2883 DKK
-Varians af profit pr. simulation: 11781162 DKK^2
-Andel af simulationer med overskud: 79.51 %
+Antal kampe opfylder threshold: 296 
+Gennemsnitlig profit pr. simulation: 2264.805 DKK
+Median profit pr. simulation: 2168 DKK
+Varians af profit pr. simulation: 11424542 DKK^2
+Andel af simulationer med overskud: 74.17 %
 
 --- Hoeffding og Binomial Analyse ---
-Gennemsnitlig profit per kamp: 8.87 kr
+Gennemsnitlig profit per kamp: 7.65 kr
 
  Vi er 95% sikre på følgende profit eller mere -> 
-Hoeffding epsilon (95%): 32.9 kr
-Nedre 95% grænse for forventet profit: -24.03 kr
+Hoeffding epsilon (95%): 37.99 kr
+Nedre 95% grænse for forventet profit: -30.34 kr
 
  Med hvilken sandsynlighed får vi profit per bet på 0kr eller mere -> 
-Nødvendig delta for at sikre at mu >= 0: 19.5774 % 
+Nødvendig delta for at sikre at mu >= 0: 11.4421 % 
 -------------------------------------------------------------------
  Resultat: H 
 Threshold: 0.075 
-Antal kampe opfylder threshold: 208 
-Gennemsnitlig profit pr. simulation: -415.4029 DKK
-Median profit pr. simulation: -465.5 DKK
-Varians af profit pr. simulation: 4491546 DKK^2
-Andel af simulationer med overskud: 41.42 %
+Antal kampe opfylder threshold: 206 
+Gennemsnitlig profit pr. simulation: -478.4765 DKK
+Median profit pr. simulation: -507 DKK
+Varians af profit pr. simulation: 4733818 DKK^2
+Andel af simulationer med overskud: 40.58 %
 
 --- Hoeffding og Binomial Analyse ---
-Gennemsnitlig profit per kamp: -2 kr
+Gennemsnitlig profit per kamp: -2.32 kr
 
  Vi er 95% sikre på følgende profit eller mere -> 
-Hoeffding epsilon (95%): 29.46 kr
-Nedre 95% grænse for forventet profit: -31.46 kr
+Hoeffding epsilon (95%): 31.59 kr
+Nedre 95% grænse for forventet profit: -33.91 kr
 
  Med hvilken sandsynlighed får vi profit per bet på 0kr eller mere -> 
 Nødvendig delta for at sikre at mu >= 0: 0 % 
 -------------------------------------------------------------------
  Resultat: D 
 Threshold: 0.075 
-Antal kampe opfylder threshold: 31 
-Gennemsnitlig profit pr. simulation: 711.861 DKK
-Median profit pr. simulation: 660 DKK
-Varians af profit pr. simulation: 1996424 DKK^2
-Andel af simulationer med overskud: 68.56 %
+Antal kampe opfylder threshold: 35 
+Gennemsnitlig profit pr. simulation: -191.6825 DKK
+Median profit pr. simulation: -215 DKK
+Varians af profit pr. simulation: 1893984 DKK^2
+Andel af simulationer med overskud: 39.24 %
 
 --- Hoeffding og Binomial Analyse ---
-Gennemsnitlig profit per kamp: 22.96 kr
+Gennemsnitlig profit per kamp: -5.48 kr
 
  Vi er 95% sikre på følgende profit eller mere -> 
-Hoeffding epsilon (95%): 147.53 kr
-Nedre 95% grænse for forventet profit: -124.57 kr
+Hoeffding epsilon (95%): 148.54 kr
+Nedre 95% grænse for forventet profit: -154.02 kr
 
  Med hvilken sandsynlighed får vi profit per bet på 0kr eller mere -> 
-Nødvendig delta for at sikre at mu >= 0: 7.0007 % 
+Nødvendig delta for at sikre at mu >= 0: 0 % 
 -------------------------------------------------------------------
  Resultat: A 
 Threshold: 0.075 
-Antal kampe opfylder threshold: 186 
-Gennemsnitlig profit pr. simulation: 1309.716 DKK
-Median profit pr. simulation: 1260.5 DKK
-Varians af profit pr. simulation: 6747363 DKK^2
-Andel af simulationer med overskud: 68.78 %
+Antal kampe opfylder threshold: 176 
+Gennemsnitlig profit pr. simulation: 1956.291 DKK
+Median profit pr. simulation: 1895 DKK
+Varians af profit pr. simulation: 7391793 DKK^2
+Andel af simulationer med overskud: 75.81 %
 
 --- Hoeffding og Binomial Analyse ---
-Gennemsnitlig profit per kamp: 7.04 kr
+Gennemsnitlig profit per kamp: 11.12 kr
 
  Vi er 95% sikre på følgende profit eller mere -> 
-Hoeffding epsilon (95%): 41.92 kr
-Nedre 95% grænse for forventet profit: -34.88 kr
+Hoeffding epsilon (95%): 48.87 kr
+Nedre 95% grænse for forventet profit: -37.75 kr
 
  Med hvilken sandsynlighed får vi profit per bet på 0kr eller mere -> 
-Nødvendig delta for at sikre at mu >= 0: 8.1054 % 
+Nødvendig delta for at sikre at mu >= 0: 14.3583 % 
 -------------------------------------------------------------------
  Resultat: H 
 Threshold: 0.1 
-Antal kampe opfylder threshold: 116 
-Gennemsnitlig profit pr. simulation: 629.6344 DKK
-Median profit pr. simulation: 604.5 DKK
-Varians af profit pr. simulation: 2649062 DKK^2
-Andel af simulationer med overskud: 64.21 %
+Antal kampe opfylder threshold: 117 
+Gennemsnitlig profit pr. simulation: 152.3813 DKK
+Median profit pr. simulation: 108.5 DKK
+Varians af profit pr. simulation: 2905607 DKK^2
+Andel af simulationer med overskud: 52.68 %
 
 --- Hoeffding og Binomial Analyse ---
-Gennemsnitlig profit per kamp: 5.43 kr
+Gennemsnitlig profit per kamp: 1.3 kr
 
  Vi er 95% sikre på følgende profit eller mere -> 
-Hoeffding epsilon (95%): 39.31 kr
-Nedre 95% grænse for forventet profit: -33.88 kr
+Hoeffding epsilon (95%): 41.22 kr
+Nedre 95% grænse for forventet profit: -39.92 kr
 
  Med hvilken sandsynlighed får vi profit per bet på 0kr eller mere -> 
-Nødvendig delta for at sikre at mu >= 0: 5.5528 % 
+Nødvendig delta for at sikre at mu >= 0: 0.2986 % 
 -------------------------------------------------------------------
  Resultat: D 
 Threshold: 0.1 
-Antal kampe opfylder threshold: 5 
-Gennemsnitlig profit pr. simulation: 943.594 DKK
-Median profit pr. simulation: 940 DKK
-Varians af profit pr. simulation: 626622.2 DKK^2
-Andel af simulationer med overskud: 92 %
+Antal kampe opfylder threshold: 3 
+Gennemsnitlig profit pr. simulation: 450.656 DKK
+Median profit pr. simulation: 440 DKK
+Varians af profit pr. simulation: 374810.9 DKK^2
+Andel af simulationer med overskud: 70.63 %
 
 --- Hoeffding og Binomial Analyse ---
-Gennemsnitlig profit per kamp: 188.72 kr
+Gennemsnitlig profit per kamp: 150.22 kr
 
  Vi er 95% sikre på følgende profit eller mere -> 
-Hoeffding epsilon (95%): 356.2 kr
-Nedre 95% grænse for forventet profit: -167.49 kr
+Hoeffding epsilon (95%): 455.52 kr
+Nedre 95% grænse for forventet profit: -305.31 kr
 
  Med hvilken sandsynlighed får vi profit per bet på 0kr eller mere -> 
-Nødvendig delta for at sikre at mu >= 0: 56.867 % 
+Nødvendig delta for at sikre at mu >= 0: 27.8038 % 
 -------------------------------------------------------------------
  Resultat: A 
 Threshold: 0.1 
-Antal kampe opfylder threshold: 112 
-Gennemsnitlig profit pr. simulation: 466.6479 DKK
-Median profit pr. simulation: 393 DKK
-Varians af profit pr. simulation: 3987405 DKK^2
-Andel af simulationer med overskud: 57.89 %
+Antal kampe opfylder threshold: 95 
+Gennemsnitlig profit pr. simulation: 836.3849 DKK
+Median profit pr. simulation: 762 DKK
+Varians af profit pr. simulation: 3793915 DKK^2
+Andel af simulationer med overskud: 65.53 %
 
 --- Hoeffding og Binomial Analyse ---
-Gennemsnitlig profit per kamp: 4.17 kr
+Gennemsnitlig profit per kamp: 8.8 kr
 
  Vi er 95% sikre på følgende profit eller mere -> 
-Hoeffding epsilon (95%): 51.67 kr
-Nedre 95% grænse for forventet profit: -47.5 kr
+Hoeffding epsilon (95%): 61.02 kr
+Nedre 95% grænse for forventet profit: -52.22 kr
 
  Med hvilken sandsynlighed får vi profit per bet på 0kr eller mere -> 
-Nødvendig delta for at sikre at mu >= 0: 1.9292 %
+Nødvendig delta for at sikre at mu >= 0: 6.0455 % 

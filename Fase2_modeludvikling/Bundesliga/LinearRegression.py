@@ -93,4 +93,4 @@ columns = [
 
 result = pd.concat([pd.DataFrame(match_result_split), pd.concat([pd.DataFrame(Y_pred_proba), pd.concat([pd.DataFrame(Y_test),pd.concat([pd.DataFrame(Y_pred_proba - Y_test),pd.DataFrame((Y_pred_proba - Y_test)/Y_test*100)],axis=1)], axis=1)], axis=1)],axis=1)
 result.columns = columns
-result.to_excel("Fase3_ValueBettingAnalysis/Bundesliga/LogistiCRegressionResultsUnfiltered.xlsx", index=False)
+result.to_excel("Fase3_ValueBettingAnalysis/Bundesliga/LinearRegressionResultsUnfiltered.xlsx", index=False)

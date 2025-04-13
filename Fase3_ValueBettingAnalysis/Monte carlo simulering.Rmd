@@ -200,7 +200,7 @@ monte_carlo_simulation(df = NN, result_char = "A",
 
 ```
 
-## Logistisk Regression
+# Linear Regression
 
 ```{r}
 # 🔥 Hjemmesejr (H)
@@ -616,7 +616,7 @@ monte_carlo_simulation(df = TNN, result_char = "A",
 
 ```
 
-# BUNDESLIGA LOGISTISK REGRESSION
+# BUNDESLIGA LINEAR REGRESSION
 
 ```{r}
 # 🔥 Hjemmesejr (H)

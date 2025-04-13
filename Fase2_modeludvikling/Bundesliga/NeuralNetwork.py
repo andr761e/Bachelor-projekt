@@ -7,9 +7,19 @@ from sklearn.metrics import log_loss
 import matplotlib.pyplot as plt
 import sys
 import os
+import random
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from Methods import methods
 met = methods()
+
+# Sæt seeds for fuld reproducerbarhed
+os.environ['PYTHONHASHSEED'] = str(42)
+random.seed(42)
+np.random.seed(42)
+tf.random.set_seed(42)
+
+# (valgfrit, men godt): Tving determinisme i TensorFlow
+os.environ['TF_DETERMINISTIC_OPS'] = '1'
 
 # Indlæs data
 X = pd.read_excel("Fase1_Datamanipulation/Bundesliga/tyske_processed_input_data.xlsx").to_numpy()
