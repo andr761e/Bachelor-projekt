@@ -1,0 +1,911 @@
+ Resultat: H 
+Threshold: 0.01 
+Antal kampe opfylder threshold: 511 
+Gennemsnitlig profit pr. simulation: 8050.24 DKK
+Median profit pr. simulation: 7936.5 DKK
+Varians af profit pr. simulation: 17216674 DKK²
+Andel af simulationer med overskud: 97.7 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: 15.75 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: 2.4 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): 2.66 DKK
+-------------------------------------------------------------------
+
+ Resultat: D 
+Threshold: 0.01 
+Antal kampe opfylder threshold: 343 
+Gennemsnitlig profit pr. simulation: 4040.3 DKK
+Median profit pr. simulation: 3953 DKK
+Varians af profit pr. simulation: 16044952 DKK²
+Andel af simulationer med overskud: 84.31 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: 11.78 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: -7.43 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): -7.18 DKK
+-------------------------------------------------------------------
+
+ Resultat: A 
+Threshold: 0.01 
+Antal kampe opfylder threshold: 491 
+Gennemsnitlig profit pr. simulation: -3987.12 DKK
+Median profit pr. simulation: -4220.5 DKK
+Varians af profit pr. simulation: 22733342 DKK²
+Andel af simulationer med overskud: 20.01 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: -8.12 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: -24.09 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): -23.35 DKK
+-------------------------------------------------------------------
+
+ Resultat: H 
+Threshold: 0.015 
+Antal kampe opfylder threshold: 488 
+Gennemsnitlig profit pr. simulation: 8732.98 DKK
+Median profit pr. simulation: 8650 DKK
+Varians af profit pr. simulation: 16722087 DKK²
+Andel af simulationer med overskud: 98.79 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: 17.9 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: 4.11 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): 4.41 DKK
+-------------------------------------------------------------------
+
+ Resultat: D 
+Threshold: 0.015 
+Antal kampe opfylder threshold: 274 
+Gennemsnitlig profit pr. simulation: 1785.92 DKK
+Median profit pr. simulation: 1753 DKK
+Varians af profit pr. simulation: 13481848 DKK²
+Andel af simulationer med overskud: 68.12 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: 6.52 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: -15.53 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): -14.99 DKK
+-------------------------------------------------------------------
+
+ Resultat: A 
+Threshold: 0.015 
+Antal kampe opfylder threshold: 454 
+Gennemsnitlig profit pr. simulation: -3967.4 DKK
+Median profit pr. simulation: -4114.5 DKK
+Varians af profit pr. simulation: 21103742 DKK²
+Andel af simulationer med overskud: 19.21 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: -8.74 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: -25.38 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): -24.56 DKK
+-------------------------------------------------------------------
+
+ Resultat: H 
+Threshold: 0.02 
+Antal kampe opfylder threshold: 458 
+Gennemsnitlig profit pr. simulation: 8606.29 DKK
+Median profit pr. simulation: 8502.5 DKK
+Varians af profit pr. simulation: 16395182 DKK²
+Andel af simulationer med overskud: 98.6 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: 18.79 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: 4.25 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): 4.58 DKK
+-------------------------------------------------------------------
+
+ Resultat: D 
+Threshold: 0.02 
+Antal kampe opfylder threshold: 221 
+Gennemsnitlig profit pr. simulation: 436.61 DKK
+Median profit pr. simulation: 300.5 DKK
+Varians af profit pr. simulation: 11270410 DKK²
+Andel af simulationer med overskud: 53.71 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: 1.98 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: -23.01 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): -22.02 DKK
+-------------------------------------------------------------------
+
+ Resultat: A 
+Threshold: 0.02 
+Antal kampe opfylder threshold: 423 
+Gennemsnitlig profit pr. simulation: -7075.37 DKK
+Median profit pr. simulation: -7129.5 DKK
+Varians af profit pr. simulation: 12270684 DKK²
+Andel af simulationer med overskud: 2.67 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: -16.73 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: -30.35 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): -29.96 DKK
+-------------------------------------------------------------------
+
+ Resultat: H 
+Threshold: 0.025 
+Antal kampe opfylder threshold: 434 
+Gennemsnitlig profit pr. simulation: 7646.87 DKK
+Median profit pr. simulation: 7520.5 DKK
+Varians af profit pr. simulation: 16012956 DKK²
+Andel af simulationer med overskud: 97.87 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: 17.62 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: 2.45 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): 2.92 DKK
+-------------------------------------------------------------------
+
+ Resultat: D 
+Threshold: 0.025 
+Antal kampe opfylder threshold: 182 
+Gennemsnitlig profit pr. simulation: 1188.78 DKK
+Median profit pr. simulation: 1129 DKK
+Varians af profit pr. simulation: 10085697 DKK²
+Andel af simulationer med overskud: 64.15 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: 6.53 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: -22.17 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): -21.42 DKK
+-------------------------------------------------------------------
+
+ Resultat: A 
+Threshold: 0.025 
+Antal kampe opfylder threshold: 388 
+Gennemsnitlig profit pr. simulation: -7314.97 DKK
+Median profit pr. simulation: -7367.5 DKK
+Varians af profit pr. simulation: 11511017 DKK²
+Andel af simulationer med overskud: 1.98 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: -18.85 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: -33.24 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): -32.79 DKK
+-------------------------------------------------------------------
+
+ Resultat: H 
+Threshold: 0.03 
+Antal kampe opfylder threshold: 397 
+Gennemsnitlig profit pr. simulation: 7376.87 DKK
+Median profit pr. simulation: 7251 DKK
+Varians af profit pr. simulation: 15102615 DKK²
+Andel af simulationer med overskud: 97.82 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: 18.58 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: 2.48 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): 2.92 DKK
+-------------------------------------------------------------------
+
+ Resultat: D 
+Threshold: 0.03 
+Antal kampe opfylder threshold: 149 
+Gennemsnitlig profit pr. simulation: 2017.09 DKK
+Median profit pr. simulation: 1945 DKK
+Varians af profit pr. simulation: 8943914 DKK²
+Andel af simulationer med overskud: 74.52 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: 13.54 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: -19.48 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): -18.67 DKK
+-------------------------------------------------------------------
+
+ Resultat: A 
+Threshold: 0.03 
+Antal kampe opfylder threshold: 362 
+Gennemsnitlig profit pr. simulation: -5495.13 DKK
+Median profit pr. simulation: -5595.5 DKK
+Varians af profit pr. simulation: 11020751 DKK²
+Andel af simulationer med overskud: 5.49 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: -15.18 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: -30.27 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): -29.75 DKK
+-------------------------------------------------------------------
+
+ Resultat: H 
+Threshold: 0.035 
+Antal kampe opfylder threshold: 372 
+Gennemsnitlig profit pr. simulation: 7433.56 DKK
+Median profit pr. simulation: 7292.5 DKK
+Varians af profit pr. simulation: 14992966 DKK²
+Andel af simulationer med overskud: 97.94 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: 19.98 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: 2.86 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): 3.7 DKK
+-------------------------------------------------------------------
+
+ Resultat: D 
+Threshold: 0.035 
+Antal kampe opfylder threshold: 120 
+Gennemsnitlig profit pr. simulation: -735.78 DKK
+Median profit pr. simulation: -850 DKK
+Varians af profit pr. simulation: 6957247 DKK²
+Andel af simulationer med overskud: 37.83 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: -6.13 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: -42.29 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): -40.58 DKK
+-------------------------------------------------------------------
+
+ Resultat: A 
+Threshold: 0.035 
+Antal kampe opfylder threshold: 333 
+Gennemsnitlig profit pr. simulation: -4928.7 DKK
+Median profit pr. simulation: -5043.5 DKK
+Varians af profit pr. simulation: 10443232 DKK²
+Andel af simulationer med overskud: 6.71 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: -14.8 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: -30.76 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): -30.29 DKK
+-------------------------------------------------------------------
+
+ Resultat: H 
+Threshold: 0.04 
+Antal kampe opfylder threshold: 341 
+Gennemsnitlig profit pr. simulation: 7955.24 DKK
+Median profit pr. simulation: 7916 DKK
+Varians af profit pr. simulation: 14140454 DKK²
+Andel af simulationer med overskud: 98.44 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: 23.33 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: 5.19 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): 5.69 DKK
+-------------------------------------------------------------------
+
+ Resultat: D 
+Threshold: 0.04 
+Antal kampe opfylder threshold: 92 
+Gennemsnitlig profit pr. simulation: -1193.84 DKK
+Median profit pr. simulation: -1270 DKK
+Varians af profit pr. simulation: 4390209 DKK²
+Andel af simulationer med overskud: 27.74 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: -12.98 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: -50.44 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): -48.86 DKK
+-------------------------------------------------------------------
+
+ Resultat: A 
+Threshold: 0.04 
+Antal kampe opfylder threshold: 314 
+Gennemsnitlig profit pr. simulation: -4625.43 DKK
+Median profit pr. simulation: -4675 DKK
+Varians af profit pr. simulation: 9626183 DKK²
+Andel af simulationer med overskud: 7.11 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: -14.73 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: -30.98 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): -30.71 DKK
+-------------------------------------------------------------------
+
+ Resultat: H 
+Threshold: 0.045 
+Antal kampe opfylder threshold: 317 
+Gennemsnitlig profit pr. simulation: 6751.2 DKK
+Median profit pr. simulation: 6596 DKK
+Varians af profit pr. simulation: 12822326 DKK²
+Andel af simulationer med overskud: 97.98 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: 21.3 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: 2.72 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): 3.71 DKK
+-------------------------------------------------------------------
+
+ Resultat: D 
+Threshold: 0.045 
+Antal kampe opfylder threshold: 71 
+Gennemsnitlig profit pr. simulation: -657.7 DKK
+Median profit pr. simulation: -775 DKK
+Varians af profit pr. simulation: 3724749 DKK²
+Andel af simulationer med overskud: 34.62 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: -9.26 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: -53.98 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): -51.41 DKK
+-------------------------------------------------------------------
+
+ Resultat: A 
+Threshold: 0.045 
+Antal kampe opfylder threshold: 282 
+Gennemsnitlig profit pr. simulation: -2762.74 DKK
+Median profit pr. simulation: -2856 DKK
+Varians af profit pr. simulation: 9334271 DKK²
+Andel af simulationer med overskud: 18.34 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: -9.8 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: -27.62 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): -27.04 DKK
+-------------------------------------------------------------------
+
+ Resultat: H 
+Threshold: 0.05 
+Antal kampe opfylder threshold: 295 
+Gennemsnitlig profit pr. simulation: 7632.23 DKK
+Median profit pr. simulation: 7527.5 DKK
+Varians af profit pr. simulation: 12449050 DKK²
+Andel af simulationer med overskud: 98.94 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: 25.87 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: 6.2 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): 6.67 DKK
+-------------------------------------------------------------------
+
+ Resultat: D 
+Threshold: 0.05 
+Antal kampe opfylder threshold: 56 
+Gennemsnitlig profit pr. simulation: -302.14 DKK
+Median profit pr. simulation: -400 DKK
+Varians af profit pr. simulation: 3048628 DKK²
+Andel af simulationer med overskud: 40.95 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: -5.4 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: -56.69 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): -54.46 DKK
+-------------------------------------------------------------------
+
+ Resultat: A 
+Threshold: 0.05 
+Antal kampe opfylder threshold: 258 
+Gennemsnitlig profit pr. simulation: -4049.82 DKK
+Median profit pr. simulation: -4152.5 DKK
+Varians af profit pr. simulation: 7647406 DKK²
+Andel af simulationer med overskud: 7.28 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: -15.7 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: -33.33 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): -32.62 DKK
+-------------------------------------------------------------------
+
+ Resultat: H 
+Threshold: 0.055 
+Antal kampe opfylder threshold: 272 
+Gennemsnitlig profit pr. simulation: 8012.48 DKK
+Median profit pr. simulation: 7909 DKK
+Varians af profit pr. simulation: 11768537 DKK²
+Andel af simulationer med overskud: 99.45 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: 29.46 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: 8.71 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): 9.33 DKK
+-------------------------------------------------------------------
+
+ Resultat: D 
+Threshold: 0.055 
+Antal kampe opfylder threshold: 45 
+Gennemsnitlig profit pr. simulation: 312.33 DKK
+Median profit pr. simulation: 225 DKK
+Varians af profit pr. simulation: 2811300 DKK²
+Andel af simulationer med overskud: 55.9 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: 6.94 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: -54.35 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): -51.67 DKK
+-------------------------------------------------------------------
+
+ Resultat: A 
+Threshold: 0.055 
+Antal kampe opfylder threshold: 233 
+Gennemsnitlig profit pr. simulation: -3755.81 DKK
+Median profit pr. simulation: -3805.5 DKK
+Varians af profit pr. simulation: 5998376 DKK²
+Andel af simulationer med overskud: 6.77 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: -16.12 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: -33.41 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): -33.15 DKK
+-------------------------------------------------------------------
+
+ Resultat: H 
+Threshold: 0.06 
+Antal kampe opfylder threshold: 251 
+Gennemsnitlig profit pr. simulation: 8849.51 DKK
+Median profit pr. simulation: 8738.5 DKK
+Varians af profit pr. simulation: 11582868 DKK²
+Andel af simulationer med overskud: 99.72 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: 35.26 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: 12.95 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): 13.67 DKK
+-------------------------------------------------------------------
+
+ Resultat: D 
+Threshold: 0.06 
+Antal kampe opfylder threshold: 34 
+Gennemsnitlig profit pr. simulation: 636.4 DKK
+Median profit pr. simulation: 575 DKK
+Varians af profit pr. simulation: 2279984 DKK²
+Andel af simulationer med overskud: 63.68 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: 18.72 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: -54.34 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): -45.59 DKK
+-------------------------------------------------------------------
+
+ Resultat: A 
+Threshold: 0.06 
+Antal kampe opfylder threshold: 212 
+Gennemsnitlig profit pr. simulation: -2667.56 DKK
+Median profit pr. simulation: -2735.5 DKK
+Varians af profit pr. simulation: 5599595 DKK²
+Andel af simulationer med overskud: 12.99 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: -12.58 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: -30.94 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): -30.57 DKK
+-------------------------------------------------------------------
+
+ Resultat: H 
+Threshold: 0.065 
+Antal kampe opfylder threshold: 229 
+Gennemsnitlig profit pr. simulation: 5639.95 DKK
+Median profit pr. simulation: 5555 DKK
+Varians af profit pr. simulation: 8312976 DKK²
+Andel af simulationer med overskud: 97.97 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: 24.63 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: 3.92 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): 4.66 DKK
+-------------------------------------------------------------------
+
+ Resultat: D 
+Threshold: 0.065 
+Antal kampe opfylder threshold: 33 
+Gennemsnitlig profit pr. simulation: 753.48 DKK
+Median profit pr. simulation: 700 DKK
+Varians af profit pr. simulation: 2335709 DKK²
+Andel af simulationer med overskud: 66.86 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: 22.83 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: -53.35 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): -43.18 DKK
+-------------------------------------------------------------------
+
+ Resultat: A 
+Threshold: 0.065 
+Antal kampe opfylder threshold: 195 
+Gennemsnitlig profit pr. simulation: -2281.82 DKK
+Median profit pr. simulation: -2350.5 DKK
+Varians af profit pr. simulation: 5421819 DKK²
+Andel af simulationer med overskud: 16.01 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: -11.7 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: -31.34 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): -30.75 DKK
+-------------------------------------------------------------------
+
+ Resultat: H 
+Threshold: 0.07 
+Antal kampe opfylder threshold: 208 
+Gennemsnitlig profit pr. simulation: 5265.72 DKK
+Median profit pr. simulation: 5156.5 DKK
+Varians af profit pr. simulation: 7351038 DKK²
+Andel af simulationer med overskud: 98 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: 25.32 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: 3.87 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): 4.74 DKK
+-------------------------------------------------------------------
+
+ Resultat: D 
+Threshold: 0.07 
+Antal kampe opfylder threshold: 26 
+Gennemsnitlig profit pr. simulation: 561.16 DKK
+Median profit pr. simulation: 575 DKK
+Varians af profit pr. simulation: 1623496 DKK²
+Andel af simulationer med overskud: 57.49 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: 21.58 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: -59.03 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): -51.92 DKK
+-------------------------------------------------------------------
+
+ Resultat: A 
+Threshold: 0.07 
+Antal kampe opfylder threshold: 176 
+Gennemsnitlig profit pr. simulation: -691.21 DKK
+Median profit pr. simulation: -744.5 DKK
+Varians af profit pr. simulation: 5206277 DKK²
+Andel af simulationer med overskud: 37.09 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: -3.93 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: -25.25 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): -24.62 DKK
+-------------------------------------------------------------------
+
+ Resultat: H 
+Threshold: 0.075 
+Antal kampe opfylder threshold: 180 
+Gennemsnitlig profit pr. simulation: 3586.76 DKK
+Median profit pr. simulation: 3547 DKK
+Varians af profit pr. simulation: 4657810 DKK²
+Andel af simulationer med overskud: 95.51 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: 19.93 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: 0.2 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): 0.59 DKK
+-------------------------------------------------------------------
+
+ Resultat: D 
+Threshold: 0.075 
+Antal kampe opfylder threshold: 18 
+Gennemsnitlig profit pr. simulation: 83.32 DKK
+Median profit pr. simulation: 75 DKK
+Varians af profit pr. simulation: 963312.6 DKK²
+Andel af simulationer med overskud: 59.36 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: 4.63 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: -85.07 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): -66.67 DKK
+-------------------------------------------------------------------
+
+ Resultat: A 
+Threshold: 0.075 
+Antal kampe opfylder threshold: 154 
+Gennemsnitlig profit pr. simulation: -69.22 DKK
+Median profit pr. simulation: -106 DKK
+Varians af profit pr. simulation: 4585903 DKK²
+Andel af simulationer med overskud: 47.98 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: -0.45 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: -23.32 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): -22.99 DKK
+-------------------------------------------------------------------
+
+ Resultat: H 
+Threshold: 0.08 
+Antal kampe opfylder threshold: 158 
+Gennemsnitlig profit pr. simulation: 2778.1 DKK
+Median profit pr. simulation: 2737.5 DKK
+Varians af profit pr. simulation: 3890550 DKK²
+Andel af simulationer med overskud: 92.18 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: 17.58 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: -2.95 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): -2.73 DKK
+-------------------------------------------------------------------
+
+ Resultat: D 
+Threshold: 0.08 
+Antal kampe opfylder threshold: 12 
+Gennemsnitlig profit pr. simulation: 86.53 DKK
+Median profit pr. simulation: 75 DKK
+Varians af profit pr. simulation: 697883.5 DKK²
+Andel af simulationer med overskud: 62.07 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: 7.21 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: -107.31 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): -100 DKK
+-------------------------------------------------------------------
+
+ Resultat: A 
+Threshold: 0.08 
+Antal kampe opfylder threshold: 134 
+Gennemsnitlig profit pr. simulation: -110.8 DKK
+Median profit pr. simulation: -150 DKK
+Varians af profit pr. simulation: 3989732 DKK²
+Andel af simulationer med overskud: 46.75 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: -0.83 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: -25.35 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): -25.09 DKK
+-------------------------------------------------------------------
+
+ Resultat: H 
+Threshold: 0.085 
+Antal kampe opfylder threshold: 146 
+Gennemsnitlig profit pr. simulation: 3003.08 DKK
+Median profit pr. simulation: 2953.5 DKK
+Varians af profit pr. simulation: 3833065 DKK²
+Andel af simulationer med overskud: 94.44 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: 20.57 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: -1.49 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): -0.75 DKK
+-------------------------------------------------------------------
+
+ Resultat: D 
+Threshold: 0.085 
+Antal kampe opfylder threshold: 8 
+Gennemsnitlig profit pr. simulation: -142.66 DKK
+Median profit pr. simulation: -150 DKK
+Varians af profit pr. simulation: 369966.3 DKK²
+Andel af simulationer med overskud: 26.87 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: -17.83 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: -142.9 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): -100 DKK
+-------------------------------------------------------------------
+
+ Resultat: A 
+Threshold: 0.085 
+Antal kampe opfylder threshold: 117 
+Gennemsnitlig profit pr. simulation: -423.07 DKK
+Median profit pr. simulation: -457 DKK
+Varians af profit pr. simulation: 2966884 DKK²
+Andel af simulationer med overskud: 39.75 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: -3.62 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: -27.83 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): -27.35 DKK
+-------------------------------------------------------------------
+
+ Resultat: H 
+Threshold: 0.09 
+Antal kampe opfylder threshold: 130 
+Gennemsnitlig profit pr. simulation: 3529.43 DKK
+Median profit pr. simulation: 3475.5 DKK
+Varians af profit pr. simulation: 3654247 DKK²
+Andel af simulationer med overskud: 97.16 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: 27.15 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: 2.96 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): 3.82 DKK
+-------------------------------------------------------------------
+
+ Resultat: D 
+Threshold: 0.09 
+Antal kampe opfylder threshold: 5 
+Gennemsnitlig profit pr. simulation: 155.33 DKK
+Median profit pr. simulation: 150 DKK
+Varians af profit pr. simulation: 333272.9 DKK²
+Andel af simulationer med overskud: 67.9 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: 31.07 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: -158.87 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): -100 DKK
+-------------------------------------------------------------------
+
+ Resultat: A 
+Threshold: 0.09 
+Antal kampe opfylder threshold: 110 
+Gennemsnitlig profit pr. simulation: -528.73 DKK
+Median profit pr. simulation: -556 DKK
+Varians af profit pr. simulation: 2839913 DKK²
+Andel af simulationer med overskud: 36.99 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: -4.81 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: -30.01 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): -29.17 DKK
+-------------------------------------------------------------------
+
+ Resultat: H 
+Threshold: 0.095 
+Antal kampe opfylder threshold: 107 
+Gennemsnitlig profit pr. simulation: 3216.86 DKK
+Median profit pr. simulation: 3166.5 DKK
+Varians af profit pr. simulation: 3257615 DKK²
+Andel af simulationer med overskud: 96.81 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: 30.06 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: 2.32 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): 3.21 DKK
+-------------------------------------------------------------------
+
+ Resultat: D 
+Threshold: 0.095 
+Antal kampe opfylder threshold: 3 
+Gennemsnitlig profit pr. simulation: 359.36 DKK
+Median profit pr. simulation: 350 DKK
+Varians af profit pr. simulation: 289184.8 DKK²
+Andel af simulationer med overskud: 70.63 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: 119.79 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: -175.08 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): -100 DKK
+-------------------------------------------------------------------
+
+ Resultat: A 
+Threshold: 0.095 
+Antal kampe opfylder threshold: 93 
+Gennemsnitlig profit pr. simulation: -1243.57 DKK
+Median profit pr. simulation: -1293.5 DKK
+Varians af profit pr. simulation: 2109956 DKK²
+Andel af simulationer med overskud: 19.38 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: -13.37 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: -39.07 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): -37.94 DKK
+-------------------------------------------------------------------
+
+ Resultat: H 
+Threshold: 0.1 
+Antal kampe opfylder threshold: 92 
+Gennemsnitlig profit pr. simulation: 2871.63 DKK
+Median profit pr. simulation: 2824 DKK
+Varians af profit pr. simulation: 2917450 DKK²
+Andel af simulationer med overskud: 95.93 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: 31.21 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: 0.67 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): 1.24 DKK
+-------------------------------------------------------------------
+
+ Resultat: D 
+Threshold: 0.1 
+Antal kampe opfylder threshold: 1 
+Gennemsnitlig profit pr. simulation: -100 DKK
+Median profit pr. simulation: -100 DKK
+Varians af profit pr. simulation: 0 DKK²
+Andel af simulationer med overskud: 0 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: -100 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: -100 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): -100 DKK
+-------------------------------------------------------------------
+
+ Resultat: A 
+Threshold: 0.1 
+Antal kampe opfylder threshold: 81 
+Gennemsnitlig profit pr. simulation: -2230.53 DKK
+Median profit pr. simulation: -2286.5 DKK
+Varians af profit pr. simulation: 1671096 DKK²
+Andel af simulationer med overskud: 4.74 %
+
+--- Konfidensanalyse (Normalapproximation) ---
+Gennemsnitlig profit per kamp: -27.54 DKK
+95% normalfordelingsbaseret nedre grænse per kamp: -53.79 DKK
+
+--- 95% empirisk nedre grænse ---
+95% empirisk nedre grænse (per kamp): -52.58 DKK
+-------------------------------------------------------------------
