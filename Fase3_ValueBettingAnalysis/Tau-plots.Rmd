@@ -288,7 +288,7 @@ overskud_home_BLG <- c(96.22, 97.09, 97.75, 97.89, 98.25, 99.13, 98.02, 98.95, 9
 overskud_draw_BLG <- c(52.45, 57.28, 70.73, 86.4, 81.85, 76.32, 61.76, 44.39, 52.55, 59.43, 67.06, 52.61, 67.52, 84.9, 75.01, 75.01, 75.01, 75.01, 0.0)
 overskud_away_BLG <- c(11.83, 12.41, 20.05, 24.24, 17.92, 25.77, 34.06, 6.79, 14.51, 29.49, 45.15, 47.26, 59.34, 64.62, 47.65, 61.38, 76.51, 87.94, 72.45)
 
-plot_tau_vs_overskud(tau, overskud_home_BLG, overskud_draw_BLG, overskud_away_BLG, model_name = "LightGMB")
+plot_tau_vs_overskud(tau, overskud_home_BLG, overskud_draw_BLG, overskud_away_BLG, model_name = "LightGBM")
 ```
 
 ## Linear Regression Bundesliga
